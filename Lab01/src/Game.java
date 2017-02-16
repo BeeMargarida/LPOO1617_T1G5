@@ -1,11 +1,13 @@
 import java.util.*;
 
+//teste
 public class Game {
 	public static void print(char[][] table){
 		for(int i = 0; i <  table.length; i++){
 			System.out.println(table[i]);
 		}
 	}
+	
 
 	public static void openDoors(char[][] table){
 		for(int i = 0; i < table.length; i++){
