@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Game {
 	public static void print(char[][] table){
-		for(int i = 0; i < table.length; i++){
+		for(int i = 0; i <  table.length; i++){
 			System.out.println(table[i]);
 		}
 	}
