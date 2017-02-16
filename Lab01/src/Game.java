@@ -1,5 +1,6 @@
 import java.util.*;
 
+//teste outra vez
 public class Game {
 	public static void print(char[][] table){
 		for(int i = 0; i <  table.length; i++){
