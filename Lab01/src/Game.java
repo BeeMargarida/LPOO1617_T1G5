@@ -62,6 +62,7 @@ public class Game {
         if(table[hero[0]-1][hero[1]] == 'X'){
             return 0;
         }
+        /*
         else if(hero[0] > 1 && table[hero[0]-2][hero[1]] == 'G'){
             table[hero[0]][hero[1]] = ' ';
             table[hero[0]-1][hero[1]] = 'H';
@@ -74,10 +75,18 @@ public class Game {
             hero[0]-=1;
             return -1;
         }
+        */
+        else if(table[hero[0]-1][hero[1]] == 'S'){
+            return 1;
+        }
         else if(table[hero[0]-1][hero[1]] == ' '){
             table[hero[0]][hero[1]] = ' ';
             table[hero[0]-1][hero[1]] = 'H';
             hero[0] -= 1;
+            return 0;
+        }
+        else if(table[hero[0]-1][hero[1]] == 'k'){
+            openDoors(table);
             return 0;
         }
         return 0;
@@ -86,10 +95,17 @@ public class Game {
         if(table[hero[0]+1][hero[1]] == 'X'){
             return 0;
         }
+        else if(table[hero[0]+1][hero[1]] == 'S'){
+            return 1;
+        }
         else if(table[hero[0]+1][hero[1]] == ' '){
             table[hero[0]][hero[1]] = ' ';
             table[hero[0]+1][hero[1]] = 'H';
             hero[0] += 1;
+            return 0;
+        }
+        else if(table[hero[0]+1][hero[1]] == 'k'){
+            openDoors(table);
             return 0;
         }
         return 0;
@@ -108,11 +124,17 @@ public class Game {
         else if(table[hero[0]][hero[1]+1] == 'S'){
             return 1;
         }
+        /*
         else if(table[hero[0]-1][hero[1]+1] == 'G'){
             table[hero[0]][hero[1]] = ' ';
             table[hero[0]][hero[1]+1] = 'H';
             hero[0] += 1;
             return -1;
+        }
+        */
+        else if(table[hero[0]][hero[1]+1] == 'k'){
+            openDoors(table);
+            return 0;
         }
         return 0;
     }
@@ -121,9 +143,9 @@ public class Game {
         movGuard(table,guard,perc,iter);
         Scanner scan = new Scanner(System.in);
         if (scan.hasNext("w")) {
-            if(up(table, hero) == -1){
-                print(table);
-                System.out.println("Game Over");
+            if(up(table, hero) == 1){
+                //print(table);
+                System.out.println("Victory");
                 return -1;
             }
             print(table);
@@ -134,25 +156,34 @@ public class Game {
                 return -1;
             }
             print(table);
-    }
+        }
         if(scan.hasNext("d")){
+        	/*
             int var = right(table,hero);
             if(var == -1){
                 print(table);
                 System.out.println("Game Over");
                 return -1;
             }
-            else if(var == 1){
-                System.out.println("Victory!");
-                return -1;
+            */
+            if(right(table,hero) == 1){
+            	System.out.println("Victory!");
+            	return -1;
             }
             print(table);
         }
         if(scan.hasNext("s")){
-            down(table,hero);
+            if(down(table,hero) == 1){
+            	System.out.println("Victory!");
+               	return -1;
+            }
             print(table);
         }  
         return 0;
+    }
+    
+    public static boolean caught(int[] hero, int[] guard){
+    	return ((hero[0] == guard[0] && hero[1] == guard[1]) || (hero[0]+1 == guard[0] && hero[1] == guard [1]) || (hero[0]-1 == guard[0] && hero[1] == guard [1]) || (hero[1]+1 == guard[1] && hero[0] == guard [0]) || (hero[1]-1 == guard[1] && hero[1] == guard [1]));
     }
  
     public static void main(String[] args){
@@ -160,10 +191,17 @@ public class Game {
         int[] hero = {1,1};
         int[] guard = {1,8};
         int iter = 0;
-        char[] perc={'a','d','s','s','s','a','a','a','a','a','a','a','s','d','d','d','d','d','d','d','d','w','w','w','w','w'};
+        char[] perc={'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
         print(table);
         while(movement(table,hero,guard,perc, iter) != -1){
-           
+        	if(caught(hero, guard)){
+        		//print(table);
+                System.out.println("Game Over");
+                break;
+        	}
+        	iter++;
+        	if(iter == perc.length)
+        		iter = 0;
         }
         return;
     }
