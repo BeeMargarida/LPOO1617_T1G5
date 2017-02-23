@@ -4,7 +4,7 @@ public class DungeonLogic extends Logic {
 	
 	public DungeonLogic() {
 		hero = new Hero('H',1,1);
-		enemy[0] = new Enemy('G',8,);
+		enemy[0] = new Enemy('G',1,8);
 	}
 
 }
