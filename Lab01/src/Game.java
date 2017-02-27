@@ -197,7 +197,7 @@ public class Game {
         	if(caught(hero, guard)){
         		//print(table);
                 System.out.println("Game Over");
-                break;
+                break; 
         	}
         	iter++;
         	if(iter == perc.length)
