@@ -4,8 +4,9 @@ public class DungeonLogic extends Logic {
 	
 	public DungeonLogic() {
 		hero = new Hero('H',1,1);
-		map = new DungeonMap();
-		enemy[0] = new Guard('G',1,8);  
+		//map = new DungeonMap();
+		enemy = new Enemy[0];
+		//enemy[0] = new Enemy('G',1,8);
 	}
 	
 	/*public void movementEnemies() {

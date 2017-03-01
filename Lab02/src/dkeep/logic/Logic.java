@@ -5,20 +5,20 @@ public abstract class Logic {
 	
 	protected Character hero;
 	//protected List<Enemy> enemy;
-	protected Enemy[] enemy;
+	protected Enemy enemy[];
 	protected boolean isOver;
-	protected Map map;
 	
 	public boolean colideEnemy(int x, int y) {
 		for(int i = 0; i < enemy.length/*.size()*/; i++){
 			if(x == enemy[i]/*.get(i)*/.getX() - 1 || x == enemy[i]/*.get(i)*/.getX() + 1 || y == enemy[i]/*.get(i)*/.getY() - 1 || y == enemy[i]/*.get(i)*/.getY() + 1){
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
-	public void movement(char dir) { //hero movement 
+	
+	public void movement(char dir, Map map) { //hero movement 
 		int x = hero.getX();
 		int y = hero.getY();
 		if(dir == 'w'){ //check for enemies 
@@ -44,6 +44,7 @@ public abstract class Logic {
 			}
 		}
 		else if(dir == 'd'){
+			boolean b = colideEnemy(x,y+1);
 			if(colideEnemy(x,y+1)){
 				return;
 			}

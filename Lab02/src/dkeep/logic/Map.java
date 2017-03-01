@@ -6,7 +6,7 @@ public abstract class Map {
 	
 	
 	public char[][] getMap(){
-		return map;
+		return map.clone();
 	}
 	
 	public boolean isFree(int x, int y) {

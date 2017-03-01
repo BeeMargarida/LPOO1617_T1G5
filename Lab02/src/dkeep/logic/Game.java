@@ -20,6 +20,7 @@ public class Game {
 	
 	public void print(){
 		char[][] m = map.getMap();
+		System.out.println(m);
 		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.symbol;
 		for(int i = 0; i < logic.enemy.length/*size()*/; i++){
 			m[logic.enemy[i]/*.get(i)*/.getX()][logic.enemy[i]/*.get(i)*/.getY()] = logic.enemy[i]/*.get(i)*/.symbol;
@@ -30,7 +31,7 @@ public class Game {
 	}
 	
 	public void update(char dir) {
-		logic.movement(dir);
+		logic.movement(dir, map);
 	}
 	
 }
