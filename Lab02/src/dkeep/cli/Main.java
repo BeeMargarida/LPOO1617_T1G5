@@ -34,5 +34,7 @@ public class Main {
 			char dir = askUser();
 			g.update(dir);
 		}
+		System.out.println("End of Game!");
+		return;
 	}
 }
