@@ -6,6 +6,8 @@ public class CrazyOgre extends Ogre {
 		this.symbol = symbol;
 		this.x = x;
 		this.y = y;
+		this.isOverKey = false;
+		this.weapon = new Club('*',2,4);
 	}
 
 	@Override

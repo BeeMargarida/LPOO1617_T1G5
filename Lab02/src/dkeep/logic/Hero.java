@@ -8,6 +8,8 @@ public class Hero extends Character {
 		symbol = s;
 		this.x = x;
 		this.y = y;
+		this.isOverKey = false;
+		this.weapon = null;
 	}
 	
 	public void setDir(char dir) {

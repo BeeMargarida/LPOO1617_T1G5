@@ -5,6 +5,8 @@ public abstract class Character {
 	protected int x;
 	protected int y;
 	protected char symbol;
+	protected boolean isOverKey; //for the enemies
+	protected Weapon weapon;
 	
 	public int getX() {
 		return x;

@@ -5,26 +5,27 @@ import java.util.*;
 public class Game {
 	private Map map;
 	private Logic logic;
-	
-	
+
+
 	public Game(Map startingMap, Logic startingLogic) {
 		map = startingMap;
 		logic = startingLogic;
 	}
-	
+
 	public boolean isGameOver() {
 		return logic.gameOver();
 	}
-	
-	/*public char[][] getGameMap() {
-		return map.getMap();
-	}*/
-	
+
 	public void print(){
 		char[][] m = map.getMap();
 		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.symbol;
 		for(int i = 0; i < logic.enemies.length; i++){
-			m[logic.enemies[i].getX()][logic.enemies[i].getY()] = logic.enemies[i].symbol;
+			if(logic.enemies[i].isOverKey){
+				m[logic.enemies[i].getX()][logic.enemies[i].getY()] = '$';
+			}
+			else{
+				m[logic.enemies[i].getX()][logic.enemies[i].getY()] = logic.enemies[i].symbol;
+			}
 		}
 		for(int i = 0; i < m.length; i++){
 			System.out.println(m[i]);
@@ -34,7 +35,7 @@ public class Game {
 			m[logic.enemies[i].getX()][logic.enemies[i].getY()] = ' ';
 		}
 	}
-	
+
 	public void update(char dir) {
 		logic.gameplay(dir, map);
 		if(logic.getVictory()){
@@ -46,5 +47,5 @@ public class Game {
 			logic = logic.nextLogic();
 		}
 	}
-	
+
 }

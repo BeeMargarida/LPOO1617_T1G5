@@ -1,19 +1,17 @@
 package dkeep.logic;
+
 import java.util.concurrent.ThreadLocalRandom;
 
+public class Club extends Weapon {
 
-public class StandardOgre extends Ogre {
-
-	public StandardOgre(char symbol, int x, int y) {
-		this.symbol = symbol;
+	public Club(char symbol, int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.isOverKey = false;
-		this.weapon = null;
+		this.symbol = symbol;
 	}
 
 	@Override
-	public int[] movement() {
+	public int[] swing(int x, int y) {
 		char[] dirpos = {'w','a','s','d'};
 		int choice = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 		char dir = dirpos[choice];

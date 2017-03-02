@@ -23,7 +23,7 @@ public class DungeonLogic extends Logic {
 		
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
-		if(map.isFree(heromov[0], heromov[1])){ //falta verificar inimigos e alavanca
+		if(map.isFree(heromov[0], heromov[1])){
 			if(((heromov[0] == enemymov[0] && heromov[1] == enemymov[1]) || (heromov[0]+1 == enemymov[0] && heromov[1] == enemymov [1]) || (heromov[0]-1 == enemymov[0] && heromov[1] == enemymov [1]) || (heromov[1]+1 == enemymov[1] && heromov[0] == enemymov [0]) || (heromov[1]-1 == enemymov[1] && heromov[0] == enemymov [0])))
 				isOver = true;
 			if(map.isKey(heromov[0], heromov[1])){
