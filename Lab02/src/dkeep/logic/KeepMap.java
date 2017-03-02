@@ -7,6 +7,10 @@ public class KeepMap extends Map {
 		map = p;
 	}
 	
+	public void openDoor() {
+		map[1][0] = 'S';
+	}
+	
 	public Map nextMap() {
 		return new KeepMap();
 	}

@@ -18,5 +18,7 @@ public abstract class Character {
 	public void setY(int y){
 		this.y = y;
 	}
+	
+	public abstract int[] movement();
 }
 

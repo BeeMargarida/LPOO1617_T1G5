@@ -1,11 +1,9 @@
 package dkeep.logic;
 
-public class Guard extends Enemy {
+public abstract class Guard extends Character {
 	
-	//protected char[] rotine = {'a','s','s','s','s','a','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
-
-	public Guard(char symbol, int x, int y) {
-		super(symbol,x,y);
-	}
+	public abstract int[] movement();
+	
+	public abstract int[] action();
 
 }

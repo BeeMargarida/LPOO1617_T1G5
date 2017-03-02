@@ -16,32 +16,35 @@ public class Game {
 		return logic.gameOver();
 	}
 	
-	public char[][] getGameMap() {
+	/*public char[][] getGameMap() {
 		return map.getMap();
-	}
+	}*/
 	
 	public void print(){
 		char[][] m = map.getMap();
 		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.symbol;
-		for(int i = 0; i < logic.enemy.length; i++){
-			m[logic.enemy[i].getX()][logic.enemy[i].getY()] = logic.enemy[i].symbol;
+		for(int i = 0; i < logic.enemies.length; i++){
+			m[logic.enemies[i].getX()][logic.enemies[i].getY()] = logic.enemies[i].symbol;
 		}
-		/*if(logic.openDoors){ //is it really best this way?
-			for(int i = 0; i < m.length; i++){
-				for(int j = 0; j < m[i].length; j++){
-					if(m[i][j] == 'I')
-						m[i][j] = 'S';
-				}
-			}
-		}*/
 		for(int i = 0; i < m.length; i++){
 			System.out.println(m[i]);
 		}
 		m[logic.hero.getX()][logic.hero.getY()] = ' ';
+		for(int i = 0; i < logic.enemies.length; i++){
+			m[logic.enemies[i].getX()][logic.enemies[i].getY()] = ' ';
+		}
 	}
 	
 	public void update(char dir) {
-		logic.movement(dir, map);
+		logic.gameplay(dir, map);
+		if(logic.getVictory()){
+			if(logic.nextLogic() == null){
+				logic.setGameOver();
+				return;
+			}
+			map = map.nextMap();
+			logic = logic.nextLogic();
+		}
 	}
 	
 }
