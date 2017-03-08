@@ -13,7 +13,7 @@ public class Club extends Weapon {
 	}
 
 	@Override
-	public int[] swing(int x, int y) {
+	public int[] swing(int x, int y) { //x and y are the enemy's coordenates
 		char[] dirpos = {'w','a','s','d'};
 		int choice = ThreadLocalRandom.current().nextInt(0, 3 + 1);
 		char dir = dirpos[choice];
@@ -29,12 +29,8 @@ public class Club extends Weapon {
 			int[] mov = {x,y+1};
 			return mov;
 		}
-		else if(dir == 's'){
-			int[] mov = {x+1,y};
-			return mov;
-		}
 		else {
-			int[] mov = {x,y};
+			int[] mov = {x+1,y};
 			return mov;
 		}
 	}

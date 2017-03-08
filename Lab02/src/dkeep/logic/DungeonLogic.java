@@ -8,6 +8,7 @@ public class DungeonLogic extends Logic {
 		enemies = new Character[1];
 		char[] path = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 		enemies[0] = new RookieGuard('G',1,8, path);
+		weapons = null;
 		isOver = false;
 		victory = false;
 	}

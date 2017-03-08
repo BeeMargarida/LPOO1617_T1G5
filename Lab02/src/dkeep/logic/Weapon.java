@@ -10,6 +10,14 @@ public abstract class Weapon {
 	
 	public abstract int[] swing(int x, int y); //x and y are the coordinates of the enemy
 	
+	public int getX(){
+		return x;
+	}
+	
+	public int getY(){
+		return y;
+	}
+	
 	public void setX(int x){
 		this.x = x;
 	}

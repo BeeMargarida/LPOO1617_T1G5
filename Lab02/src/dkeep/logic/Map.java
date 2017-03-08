@@ -4,10 +4,14 @@ import java.util.*;
 public abstract class Map {
 
 	protected char[][] map;
+	protected int[] key;
 
 
 	public char[][] getMap(){
 		return map;
+	}
+	public int[] getKey(){
+		return key;
 	}
 	public abstract void openDoor();
 
@@ -22,7 +26,7 @@ public abstract class Map {
 	}
 
 	public boolean isKey(int x, int y){
-		if(map[x][y] == 'k')
+		if(x == key[0] && y == key[1])
 			return true;
 		return false;
 	}

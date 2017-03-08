@@ -7,6 +7,7 @@ public abstract class Logic {
 	protected Character enemies[];
 	protected boolean isOver;
 	protected boolean victory;
+	protected Weapon weapons[];
 	
 	public boolean colideEnemy(int x, int y) {
 		for(int i = 0; i < enemies.length; i++){

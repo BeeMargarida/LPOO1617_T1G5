@@ -10,7 +10,7 @@ import java.util.*;
 
 
 public class Main {
-	
+	 
 	
 	public static char askUser() {
 		Scanner s = new Scanner(System.in);
@@ -34,6 +34,7 @@ public class Main {
 			char dir = askUser();
 			g.update(dir);
 		}
+		g.print();
 		System.out.println("End of Game!");
 		return;
 	}
