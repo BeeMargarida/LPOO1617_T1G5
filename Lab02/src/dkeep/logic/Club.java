@@ -4,10 +4,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Club extends Weapon {
 
-	public Club(char symbol, int x, int y) {
+	public Club(char symbol, char secsymbol, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.symbol = symbol;
+		this.secsymbol = secsymbol;
+		this.above = false;
 	}
 
 	@Override

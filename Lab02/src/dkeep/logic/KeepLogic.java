@@ -20,7 +20,19 @@ public class KeepLogic extends Logic {
 			enemies[0].setX(enemymov[0]);
 			enemies[0].setY(enemymov[1]);
 		}
-		if()
+		if(enemies[0].weapon != null){
+			int[] weaponmov = enemies[0].weapon.swing(enemymov[0], enemymov[1]);
+			if(map.isFree(weaponmov[0], weaponmov[1])){
+				enemies[0].weapon.setX(weaponmov[0]);
+				enemies[0].weapon.setY(weaponmov[1]);
+			}
+			if(((hero.getX() == weaponmov[0] && hero.getY() == weaponmov[1]) || (hero.getX()+1 == weaponmov[0] && hero.getY() == weaponmov [1]) || (hero.getX()-1 == weaponmov[0] && hero.getY() == weaponmov [1]) || (hero.getY()+1 == weaponmov[1] && hero.getX() == weaponmov [0]) || (hero.getY()-1 == weaponmov[1] && hero.getX() == weaponmov [0]))){
+				isOver = true;
+			}
+			if(map.isKey(weaponmov[0], weaponmov[1])){
+				
+			}
+		}
 
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
