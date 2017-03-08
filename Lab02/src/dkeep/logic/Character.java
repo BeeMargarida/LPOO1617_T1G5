@@ -21,6 +21,8 @@ public abstract class Character {
 		this.y = y;
 	}
 	
+	public abstract char getSymbol();
+	
 	public abstract int[] movement();
 }
 

@@ -39,4 +39,12 @@ public class StandardOgre extends Ogre {
 		}
 	}
 
+	@Override
+	public char getSymbol() {
+		if(isOverKey)
+			return '$';
+		else
+			return symbol;
+	}
+
 }

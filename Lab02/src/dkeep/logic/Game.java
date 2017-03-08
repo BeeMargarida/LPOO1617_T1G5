@@ -22,13 +22,11 @@ public class Game {
 		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.symbol;
 		//enemies
 		for(int i = 0; i < logic.enemies.length; i++){
-			if(logic.enemies[i].isOverKey){
-				m[logic.enemies[i].getX()][logic.enemies[i].getY()] = '$';
-			}
-			else{
-				m[logic.enemies[i].getX()][logic.enemies[i].getY()] = logic.enemies[i].symbol;
+			m[logic.enemies[i].getX()][logic.enemies[i].getY()] = logic.enemies[i].getSymbol();
+			if(logic.enemies[i].isOverKey == false){
 				m[map.getKey()[0]][map.getKey()[1]] = 'k'; //prints key
 			}
+			logic.enemies[i].isOverKey = false;
 		} 
 		//weapons
 		if(logic.weapons != null){
@@ -38,6 +36,7 @@ public class Game {
 				}
 				else{
 					m[it.getX()][it.getY()] = it.symbol;
+					it.above = false;
 					m[map.getKey()[0]][map.getKey()[1]] = 'k';//prints key
 				}
 			}

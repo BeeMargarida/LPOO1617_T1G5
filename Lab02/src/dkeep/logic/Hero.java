@@ -39,4 +39,9 @@ public class Hero extends Character {
 		}
 	}
 
+	@Override
+	public char getSymbol() {
+		return symbol;
+	}
+
 }

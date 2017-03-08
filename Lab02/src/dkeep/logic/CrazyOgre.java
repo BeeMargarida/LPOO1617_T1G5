@@ -29,13 +29,17 @@ public class CrazyOgre extends Ogre {
 			int[] mov = {x,y+1};
 			return mov;
 		}
-		else if(dir == 's'){
+		else{
 			int[] mov = {x+1,y};
 			return mov;
 		}
-		else {
-			int[] mov = {x,y};
-			return mov;
-		}
+	}
+
+	@Override
+	public char getSymbol() {
+		if(isOverKey)
+			return '$';
+		else
+			return symbol;
 	}
 }

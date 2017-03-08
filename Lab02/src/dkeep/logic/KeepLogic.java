@@ -21,11 +21,11 @@ public class KeepLogic extends Logic {
 			if(map.isKey(enemymov[0],enemymov[1])){
 				enemies[0].isOverKey = true;
 			}
-			else
+			else {
 				enemies[0].isOverKey = false;
+			}
 			enemies[0].setX(enemymov[0]);
-			enemies[0].setY(enemymov[1]);
-			
+			enemies[0].setY(enemymov[1]);		
 		}
 		//weapon
 		if(enemies[0].weapon != null){
@@ -34,13 +34,11 @@ public class KeepLogic extends Logic {
 				if(map.isKey(weaponmov[0], weaponmov[1])){
 					enemies[0].weapon.above = true;
 				} 
-				else
-					enemies[0].weapon.above = false;
 				enemies[0].weapon.setX(weaponmov[0]);
 				enemies[0].weapon.setY(weaponmov[1]);
-				if((hero.getX() == weaponmov[0] && hero.getY() == weaponmov[1]) || (hero.getX()+1 == weaponmov[0] && hero.getY() == weaponmov [1]) || (hero.getX()-1 == weaponmov[0] && hero.getY() == weaponmov[1]) || (hero.getY()+1 == weaponmov[1] && hero.getX() == weaponmov[0]) || (hero.getY()-1 == weaponmov[1] && hero.getX() == weaponmov[0])){
+				/*if((hero.getX() == weaponmov[0] && hero.getY() == weaponmov[1]) || (hero.getX()+1 == weaponmov[0] && hero.getY() == weaponmov [1]) || (hero.getX()-1 == weaponmov[0] && hero.getY() == weaponmov[1]) || (hero.getY()+1 == weaponmov[1] && hero.getX() == weaponmov[0]) || (hero.getY()-1 == weaponmov[1] && hero.getX() == weaponmov[0])){
 					isOver = true;
-				}
+				}*/
 			}
 		}
 		//hero
@@ -49,7 +47,10 @@ public class KeepLogic extends Logic {
 		if(map.isFree(heromov[0], heromov[1])){
 			if(((heromov[0] == enemies[0].getX() && heromov[1] == enemies[0].getY()) || (heromov[0]+1 == enemies[0].getX() && heromov[1] == enemies[0].getY()) || (heromov[0]-1 == enemies[0].getX() && heromov[1] == enemies[0].getY()) || (heromov[1]+1 == enemies[0].getY() && heromov[0] == enemies[0].getX()) || (heromov[1]-1 == enemies[0].getY() && heromov[0] == enemies[0].getX())))
 				isOver = true;
-			if(map.isKey(heromov[0], heromov[1])){
+			else if((hero.getX() == enemies[0].weapon.getX() && hero.getY() == enemies[0].weapon.getY()) || (hero.getX()+1 == enemies[0].weapon.getX() && hero.getY() == enemies[0].weapon.getY()) || (hero.getX()-1 == enemies[0].weapon.getX() && hero.getY() == enemies[0].weapon.getY()) || (hero.getY()+1 == enemies[0].weapon.getY() && hero.getX() == enemies[0].weapon.getX()) || (hero.getY()-1 == enemies[0].weapon.getY() && hero.getX() == enemies[0].weapon.getX())){
+				isOver = true;
+			}
+			else if(map.isKey(heromov[0], heromov[1])){
 				map.openDoor();
 				return;
 			}

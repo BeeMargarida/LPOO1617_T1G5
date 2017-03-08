@@ -2,10 +2,8 @@ package dkeep.logic;
 
 public class RookieGuard extends Guard {
 
-	private char[] path;
-	private int i;
 
-	public RookieGuard( char symbol, int x, int y, char[] path) {
+	public RookieGuard(char symbol, int x, int y, char[] path) {
 		this.x = x;
 		this.y = y;
 		this.symbol = symbol;
@@ -14,29 +12,15 @@ public class RookieGuard extends Guard {
 	}
 
 	public int[] movement(){
-		i++;
-		if(i == path.length){
-			i = 0;
-		}
-		if(path[i] == 'w'){ 
-			int[] mov = {x-1,y};
-			return mov;
-		}
-		else if(path[i] == 'a') {
-			int[] mov = {x,y-1};
-			return mov;
-		}
-		else if(path[i] == 'd'){
-			int[] mov = {x,y+1};
-			return mov;
-		}
-		else{
-			int[] mov = {x+1,y};
-			return mov;
-		}
+		return normalMovement();
 	}
 	
 	public int[] action() {
 		return null;
+	}
+
+	@Override
+	public char getSymbol() {
+		return symbol;
 	}
 }

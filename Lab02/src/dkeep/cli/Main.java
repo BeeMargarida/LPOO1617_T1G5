@@ -16,7 +16,7 @@ public class Main {
 		Scanner s = new Scanner(System.in);
 		return s.next().charAt(0); //retorna o primeiro char do input
 		
-	}
+	} 
 	
 	/*public static void print(char[][] map){
 		for(int i = 0; i < map.length; i++){
