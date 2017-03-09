@@ -1,21 +1,24 @@
 package dkeep.logic;
 
 public class Hero extends Character {
-	
+
 	private char dir;
-	
-	public Hero(char s, int x, int y) {
+	private boolean hasKey;
+
+	public Hero(char s, int x, int y, Weapon weapon) {
 		symbol = s;
 		this.x = x;
 		this.y = y;
 		this.isOverKey = false;
-		this.weapon = null;
+		this.stunned = false;
+		this.weapon = weapon;
+		hasKey = false;
 	}
-	
+
 	public void setDir(char dir) {
 		this.dir = dir;
 	}
-	
+
 	public int[] movement(){
 		if(dir == 'w'){ 
 			int[] mov = {x-1,y};
@@ -39,9 +42,20 @@ public class Hero extends Character {
 		}
 	}
 
+	public boolean hasKey(){
+		return hasKey;
+	}
+
+	public void setKeyTrue(){
+		hasKey = true;
+	}
+
 	@Override
 	public char getSymbol() {
-		return symbol;
+		if(hasKey)
+			return 'K';
+		else
+			return symbol;
 	}
 
 }

@@ -4,12 +4,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class CrazyOgre extends Ogre {
 
-	public CrazyOgre(char symbol, int x, int y) {
+	public CrazyOgre(char symbol, int x, int y, Weapon weapon) {
 		this.symbol = symbol;
 		this.x = x;
 		this.y = y;
 		this.isOverKey = false;
-		this.weapon = new Club('*','$',2,4);
+		this.overlap = false;
+		this.weapon = weapon;
 	}
 
 	@Override
@@ -39,6 +40,8 @@ public class CrazyOgre extends Ogre {
 	public char getSymbol() {
 		if(isOverKey)
 			return '$';
+		else if(stunned)
+			return '8';
 		else
 			return symbol;
 	}

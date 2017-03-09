@@ -18,28 +18,22 @@ public class Game {
 
 	public void print(){
 		char[][] m = map.getMap();
+		m[map.getKey()[0]][map.getKey()[1]] = 'k';
 		//hero
-		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.symbol;
+		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.getSymbol();
 		//enemies
-		for(int i = 0; i < logic.enemies.length; i++){
-			m[logic.enemies[i].getX()][logic.enemies[i].getY()] = logic.enemies[i].getSymbol();
-			if(logic.enemies[i].isOverKey == false){
-				m[map.getKey()[0]][map.getKey()[1]] = 'k'; //prints key
-			}
-			logic.enemies[i].isOverKey = false;
+		for(int i = 0; i < logic.enemies.size(); i++){
+			m[logic.enemies.get(i).getX()][logic.enemies.get(i).getY()] = logic.enemies.get(i).getSymbol();
 		} 
 		//weapons
-		if(logic.weapons != null){
-			for(Weapon it : logic.weapons){
-				if(it.above){
-					m[it.getX()][it.getY()] = it.secsymbol;
-				}
-				else{
-					m[it.getX()][it.getY()] = it.symbol;
-					it.above = false;
-					m[map.getKey()[0]][map.getKey()[1]] = 'k';//prints key
-				}
+		ArrayList<Weapon> weapons = logic.getWeapons();
+		if(weapons.size() != 0){
+			for(Weapon it : weapons){
+				m[it.getX()][it.getY()] = it.getSymbol();
 			}
+		}
+		if(logic.hero.weapon != null){
+			m[logic.hero.weapon.getX()][logic.hero.weapon.getY()] = logic.hero.weapon.getSymbol();
 		}
 		//PRINT
 		for(int i = 0; i < m.length; i++){
@@ -47,13 +41,16 @@ public class Game {
 		}
 		//ERASE
 		m[logic.hero.getX()][logic.hero.getY()] = ' ';
-		for(int i = 0; i < logic.enemies.length; i++){
-			m[logic.enemies[i].getX()][logic.enemies[i].getY()] = ' ';
+		for(int i = 0; i < logic.enemies.size(); i++){
+			m[logic.enemies.get(i).getX()][logic.enemies.get(i).getY()] = ' ';
 		}
-		if(logic.weapons!= null){
-			for(Weapon it : logic.weapons){
+		if(weapons.size() != 0){
+			for(Weapon it : weapons){
 				m[it.getX()][it.getY()] = ' ';
 			}
+		}
+		if(logic.hero.weapon != null){
+			m[logic.hero.weapon.getX()][logic.hero.weapon.getY()] = ' ';
 		}
 		m[map.getKey()[0]][map.getKey()[1]] = ' ';//erases key
 	}

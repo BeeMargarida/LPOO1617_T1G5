@@ -1,14 +1,28 @@
 package dkeep.logic;
 
+import java.util.ArrayList;
+
 public class KeepLogic extends Logic {
 
 	public KeepLogic() {
-		hero = new Hero('H',7,1);
-		enemies = new Character[1];
-		weapons = new Weapon[1];
-		//enemies[0] = new StandardOgre('O',1,4);
-		enemies[0] = new CrazyOgre('O',1,4);
-		weapons[0] = enemies[0].weapon;
+		/*HERO NOT ARMED*/
+		//Weapon weapon = null;
+		//hero = new Hero('H',7,1, weapon);
+		//enemies.add(new CrazyOgre('O',1,4, weapon)); //OGRE WITHOUT WEAPON
+
+		Weapon weaponH = new Club('*','$',7,2);
+		hero = new Hero('A',7,1, weaponH);
+		enemies = new ArrayList<Character>();
+
+		/*OGRE WITH WEAPON*/
+		//Weapon weaponE = new Club('*','$',2,4);
+		//enemies.add(new CrazyOgre('O',1,4, weaponE));
+
+		/*SEVERAL OGRES*/
+		Weapon weaponE = new Club('*','$',2,4);
+		for(int i = 0; i < 2; i++) {
+			enemies.add(new CrazyOgre('O',1,4,weaponE));
+		}
 		isOver = false;
 		victory = false;
 	}
@@ -16,49 +30,83 @@ public class KeepLogic extends Logic {
 	@Override
 	public void gameplay(char dir, Map map) {
 		//enemy
-		int[] enemymov = enemies[0].movement();
-		if(map.isFree(enemymov[0],enemymov[1])){
-			if(map.isKey(enemymov[0],enemymov[1])){
-				enemies[0].isOverKey = true;
+		for(int i = 0; i < enemies.size(); i++){
+			int[] enemymov = enemies.get(i).movement();
+			if(map.isFree(enemymov[0],enemymov[1])){
+				if(map.isKey(enemymov[0],enemymov[1])){
+					enemies.get(i).isOverKey = true;
+				}
+				else {
+					enemies.get(i).isOverKey = false;
+				}
+				enemies.get(i).setX(enemymov[0]);
+				enemies.get(i).setY(enemymov[1]);		
 			}
-			else {
-				enemies[0].isOverKey = false;
-			}
-			enemies[0].setX(enemymov[0]);
-			enemies[0].setY(enemymov[1]);		
 		}
 		//weapon
-		if(enemies[0].weapon != null){
-			int[] weaponmov = enemies[0].weapon.swing(enemies[0].getX(), enemies[0].getY());
-			if(map.isFree(weaponmov[0], weaponmov[1])){
-				if(map.isKey(weaponmov[0], weaponmov[1])){
-					enemies[0].weapon.above = true;
-				} 
-				enemies[0].weapon.setX(weaponmov[0]);
-				enemies[0].weapon.setY(weaponmov[1]);
-				/*if((hero.getX() == weaponmov[0] && hero.getY() == weaponmov[1]) || (hero.getX()+1 == weaponmov[0] && hero.getY() == weaponmov [1]) || (hero.getX()-1 == weaponmov[0] && hero.getY() == weaponmov[1]) || (hero.getY()+1 == weaponmov[1] && hero.getX() == weaponmov[0]) || (hero.getY()-1 == weaponmov[1] && hero.getX() == weaponmov[0])){
-					isOver = true;
-				}*/
+		for(int i = 0; i < enemies.size(); i++){
+			boolean set = false;
+			if(enemies.get(i).weapon != null){
+				while(set == false){
+					int[] weaponmov = enemies.get(i).weapon.swing(enemies.get(i).getX(), enemies.get(i).getY());
+					if(map.isFree(weaponmov[0], weaponmov[1])){
+						set = true;
+						if(map.isKey(weaponmov[0], weaponmov[1])){
+							enemies.get(i).weapon.above = true;
+						} 
+						else
+							enemies.get(i).weapon.above = false;
+						enemies.get(i).weapon.setX(weaponmov[0]);
+						enemies.get(i).weapon.setY(weaponmov[1]);
+					}
+				}
 			}
 		}
 		//hero
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
 		if(map.isFree(heromov[0], heromov[1])){
-			if(((heromov[0] == enemies[0].getX() && heromov[1] == enemies[0].getY()) || (heromov[0]+1 == enemies[0].getX() && heromov[1] == enemies[0].getY()) || (heromov[0]-1 == enemies[0].getX() && heromov[1] == enemies[0].getY()) || (heromov[1]+1 == enemies[0].getY() && heromov[0] == enemies[0].getX()) || (heromov[1]-1 == enemies[0].getY() && heromov[0] == enemies[0].getX())))
-				isOver = true;
-			else if((hero.getX() == enemies[0].weapon.getX() && hero.getY() == enemies[0].weapon.getY()) || (hero.getX()+1 == enemies[0].weapon.getX() && hero.getY() == enemies[0].weapon.getY()) || (hero.getX()-1 == enemies[0].weapon.getX() && hero.getY() == enemies[0].weapon.getY()) || (hero.getY()+1 == enemies[0].weapon.getY() && hero.getX() == enemies[0].weapon.getX()) || (hero.getY()-1 == enemies[0].weapon.getY() && hero.getX() == enemies[0].weapon.getX())){
+			if(colideEnemy(heromov[0],heromov[1],enemies)){	
 				isOver = true;
 			}
-			else if(map.isKey(heromov[0], heromov[1])){
+			if(this.getWeapons().size() != 0){
+				if(colideWeapon(hero.getX(), hero.getY(), this.getWeapons())){	
+					isOver = true;
+				}
+			}
+			if(map.isKey(heromov[0], heromov[1])){
 				map.openDoor();
+				hero.setKeyTrue();
 				return;
 			}
-			if(map.isS(heromov[0], heromov[1])){
+			else if(map.isS(heromov[0], heromov[1])){
 				victory = true;
 			}
 			hero.setX(heromov[0]);
 			hero.setY(heromov[1]);
+		}
+		if(colideEnemy(heromov[0],heromov[1],enemies)){	
+			isOver = true;
+		}
+		if(this.getWeapons().size() != 0){
+			if(colideWeapon(hero.getX(),hero.getY(),this.getWeapons())){	
+				isOver = true;
+			}
+		}
+		//hero weapon
+		int[] weaponmov = hero.weapon.swing(hero.getX(), hero.getY());
+		boolean set = false;
+		while(set == false){
+			if(map.isFree(weaponmov[0], weaponmov[1])){
+				set = true;
+				if(map.isKey(weaponmov[0], weaponmov[1])){
+					hero.weapon.above = true;
+				} 
+				else
+					hero.weapon.above = false;
+				hero.weapon.setX(weaponmov[0]);
+				hero.weapon.setY(weaponmov[1]);
+			}
 		}
 	}
 

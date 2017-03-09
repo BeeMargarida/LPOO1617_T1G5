@@ -31,7 +31,7 @@ public abstract class Guard extends Character {
 	
 	public int[] reverseMovement(){
 		int[] mov;
-		if(i <= 0){
+		if(i < 0){
 			i = path.length - 1; 
 		}
 		//i--;

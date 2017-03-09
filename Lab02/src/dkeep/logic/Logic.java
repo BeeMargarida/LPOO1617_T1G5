@@ -1,34 +1,53 @@
 package dkeep.logic;
-import java.util.*;
- 
+import java.util.ArrayList;
+
 public abstract class Logic {
-	
+
 	protected Hero hero;
-	protected Character enemies[];
+	protected ArrayList<Character> enemies;
 	protected boolean isOver;
 	protected boolean victory;
-	protected Weapon weapons[];
-	
-	public boolean colideEnemy(int x, int y) {
-		for(int i = 0; i < enemies.length; i++){
-			if(x == enemies[i].getX() - 1 || x == enemies[i].getX() + 1 || y == enemies[i].getY() - 1 || y == enemies[i].getY() + 1){
+
+	//REUTILIZAR?
+
+	public boolean colideEnemy(int x, int y, ArrayList<Character> vector) {
+		for(int i = 0; i < vector.size(); i++){
+			if((x == vector.get(i).getX() && y == vector.get(i).getY()) || (x+1 == vector.get(i).getX() && y == vector.get(i).getY()) || (x-1 == vector.get(i).getX() && y == vector.get(i).getY()) || (y+1 == vector.get(i).getY() && x == vector.get(i).getX()) || (y-1 == vector.get(i).getY() && x == vector.get(i).getX())){
 				return true;
 			}
 		}
 		return false;
 	}
-	
+	public boolean colideWeapon(int x, int y, ArrayList<Weapon> vector) {
+		for(int i = 0; i < vector.size(); i++){
+			if((x == vector.get(i).getX() && y == vector.get(i).getY()) || (x+1 == vector.get(i).getX() && y == vector.get(i).getY()) || (x-1 == vector.get(i).getX() && y == vector.get(i).getY()) || (y+1 == vector.get(i).getY() && x == vector.get(i).getX()) || (y-1 == vector.get(i).getY() && x == vector.get(i).getX())){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void setGameOver(){
 		isOver = true;
 	}
+
+	public ArrayList<Weapon> getWeapons(){
+		ArrayList<Weapon> res = new ArrayList<Weapon>();
+		for(int i = 0; i < enemies.size(); i++){
+			if(enemies.get(i).weapon != null)
+				res.add(enemies.get(i).weapon);
+		}
+		return res;
+	}
+
 	public abstract void gameplay(char dir, Map map);
-	
+
 	public abstract Logic nextLogic();
-	
+
 	public boolean gameOver() {
 		return isOver;
 	}
-	
+
 	public abstract boolean getVictory();
 
 }

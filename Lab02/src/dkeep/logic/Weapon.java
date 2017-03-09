@@ -8,7 +8,7 @@ public abstract class Weapon {
 	protected char secsymbol;
 	protected boolean above;
 	
-	public abstract int[] swing(int x, int y); //x and y are the coordinates of the enemy
+	public abstract int[] swing(int x, int y); //x and y are the coordinates of the enemy or hero
 	
 	public int getX(){
 		return x;
@@ -23,5 +23,12 @@ public abstract class Weapon {
 	}
 	public void setY(int y){
 		this.y = y;
+	}
+	
+	public char getSymbol(){
+		if(above)
+			return secsymbol;
+		else
+			return symbol;
 	}
 }

@@ -14,7 +14,7 @@ public class SuspiciousGuard extends Guard {
 
 	@Override
 	public int[] movement() {
-		char[] behaviour = {'n','s'};
+		char[] behaviour = {'n','s'}; //n - normal, s - reverse
 		int choice = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		char beh = behaviour[choice];
 		if(beh == 'n'){

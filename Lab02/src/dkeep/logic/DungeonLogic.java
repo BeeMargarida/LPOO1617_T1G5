@@ -1,38 +1,38 @@
 package dkeep.logic;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DungeonLogic extends Logic {
 
 	public DungeonLogic() {
-		hero = new Hero('H',1,1);
-		//map = new DungeonMap();
-		enemies = new Character[1];
+		Weapon weapon = null;
+		hero = new Hero('H',1,1,weapon);
+		enemies = new ArrayList<Character>();
 		char[] path = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 		//Choosing one of 3 guards
 		char[] possibleEnemies = {'r','d','s'};
 		int choice = ThreadLocalRandom.current().nextInt(0, 2 + 1);
 		char pos = possibleEnemies[choice];
 		if(pos == 'r')
-			enemies[0] = new RookieGuard('G',1,8, path);
+			enemies.add(new RookieGuard('G',1,8, path));
 		else if(pos == 'd')
-			enemies[0] = new DrunkenGuard('D',1,8,path);
+			enemies.add(new DrunkenGuard('D',1,8,path));
 		else if(pos == 's')
-			enemies[0] = new SuspiciousGuard('S',1,8,path);
-		weapons = null;
+			enemies.add(new SuspiciousGuard('U',1,8,path));
 		isOver = false;
 		victory = false;
 	}
 
 	public void gameplay(char dir, Map map) {
-		int[] enemymov = enemies[0].movement();
-		enemies[0].setX(enemymov[0]);
-		enemies[0].setY(enemymov[1]);
+		int[] enemymov = enemies.get(0).movement();
+		enemies.get(0).setX(enemymov[0]);
+		enemies.get(0).setY(enemymov[1]);
 
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
 		if(map.isFree(heromov[0], heromov[1])){
-			if((enemies[0].getSymbol() != 'g') && ((heromov[0] == enemymov[0] && heromov[1] == enemymov[1]) || (heromov[0]+1 == enemymov[0] && heromov[1] == enemymov [1]) || (heromov[0]-1 == enemymov[0] && heromov[1] == enemymov [1]) || (heromov[1]+1 == enemymov[1] && heromov[0] == enemymov [0]) || (heromov[1]-1 == enemymov[1] && heromov[0] == enemymov [0])))
+			if((enemies.get(0).getSymbol() != 'g') && colideEnemy(heromov[0],heromov[1],enemies))	
 				isOver = true; 
 			if(map.isKey(heromov[0], heromov[1])){
 				map.openDoor();
