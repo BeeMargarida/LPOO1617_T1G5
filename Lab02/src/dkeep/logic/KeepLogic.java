@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class KeepLogic extends Logic {
 
 	public KeepLogic() {
-		/*HERO NOT ARMED*/
+		/*HERO NOT ARMED*/ 
 		//Weapon weapon = null;
 		//hero = new Hero('H',7,1, weapon);
 		//enemies.add(new CrazyOgre('O',1,4, weapon)); //OGRE WITHOUT WEAPON
@@ -17,9 +17,9 @@ public class KeepLogic extends Logic {
 		/*OGRE WITH WEAPON*/
 		//Weapon weaponE = new Club('*','$',2,4);
 		//enemies.add(new CrazyOgre('O',1,4, weaponE));
-
+ 
 		/*SEVERAL OGRES*/
-		Weapon weaponE = new Club('*','$',2,4);
+		Weapon weaponE = new Club('*','$',2,4); 
 		for(int i = 0; i < 2; i++) {
 			enemies.add(new CrazyOgre('O',1,4,weaponE));
 		}

@@ -9,7 +9,7 @@ import dkeep.logic.DungeonLogic;
 import java.util.*;
 
 
-public class Main {
+public class Main { 
 	 
 	
 	public static char askUser() {

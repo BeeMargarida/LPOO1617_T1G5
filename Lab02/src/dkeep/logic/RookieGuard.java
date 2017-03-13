@@ -9,7 +9,7 @@ public class RookieGuard extends Guard {
 		this.symbol = symbol;
 		this.path = path; //double check this
 		i = -1;
-	}
+	} 
 
 	public int[] movement(){
 		return normalMovement();

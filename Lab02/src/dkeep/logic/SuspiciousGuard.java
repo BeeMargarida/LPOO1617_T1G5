@@ -1,6 +1,6 @@
 package dkeep.logic;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.ThreadLocalRandom; 
 
 public class SuspiciousGuard extends Guard {
 	

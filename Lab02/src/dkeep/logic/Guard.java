@@ -1,5 +1,5 @@
 package dkeep.logic;
-
+ 
 public abstract class Guard extends Character {
 	
 	protected char[] path;

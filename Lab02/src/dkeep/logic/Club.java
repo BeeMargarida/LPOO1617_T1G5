@@ -1,5 +1,5 @@
 package dkeep.logic;
-
+ 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Club extends Weapon {

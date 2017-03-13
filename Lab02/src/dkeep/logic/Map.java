@@ -1,6 +1,6 @@
 package dkeep.logic;
 import java.util.*;
-
+ 
 public abstract class Map {
 
 	protected char[][] map;

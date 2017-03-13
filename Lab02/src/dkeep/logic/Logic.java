@@ -1,5 +1,5 @@
 package dkeep.logic;
-import java.util.ArrayList;
+import java.util.ArrayList; 
 
 public abstract class Logic {
 

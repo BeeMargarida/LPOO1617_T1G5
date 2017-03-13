@@ -1,4 +1,4 @@
-package dkeep.logic;
+package dkeep.logic;  
 
 public abstract class Weapon {
 	
