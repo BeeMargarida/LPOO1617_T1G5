@@ -9,6 +9,10 @@ public class SuspiciousGuard extends Guard {
 		this.y = y;
 		this.symbol = symbol;
 		this.path = path; //double check this
+		this.isOverKey = false;
+		this.stunned = false;
+		this.turns = 0;
+		this.weapon = null;
 		i = -1;
 	}
 

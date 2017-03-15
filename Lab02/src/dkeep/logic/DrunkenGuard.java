@@ -12,6 +12,10 @@ public class DrunkenGuard extends Guard {
 		this.y = y;
 		this.symbol = symbol;
 		this.path = path;
+		this.isOverKey = false;
+		this.stunned = false;
+		this.turns = 0;
+		this.weapon = null;
 		i = -1;
 		asleep = false;
 		asleepChar = 'g';

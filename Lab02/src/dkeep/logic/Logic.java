@@ -8,11 +8,10 @@ public abstract class Logic {
 	protected boolean isOver;
 	protected boolean victory;
 
-	//REUTILIZAR?
 
 	public boolean colideEnemy(int x, int y, ArrayList<Character> vector) {
 		for(int i = 0; i < vector.size(); i++){
-			if((x == vector.get(i).getX() && y == vector.get(i).getY()) || (x+1 == vector.get(i).getX() && y == vector.get(i).getY()) || (x-1 == vector.get(i).getX() && y == vector.get(i).getY()) || (y+1 == vector.get(i).getY() && x == vector.get(i).getX()) || (y-1 == vector.get(i).getY() && x == vector.get(i).getX())){
+			if((vector.get(i).stunned == false) && ((x == vector.get(i).getX() && y == vector.get(i).getY()) || (x+1 == vector.get(i).getX() && y == vector.get(i).getY()) || (x-1 == vector.get(i).getX() && y == vector.get(i).getY()) || (y+1 == vector.get(i).getY() && x == vector.get(i).getX()) || (y-1 == vector.get(i).getY() && x == vector.get(i).getX()))){
 				return true;
 			}
 		}

@@ -11,6 +11,8 @@ public class CrazyOgre extends Ogre {
 		this.isOverKey = false;
 		this.overlap = false;
 		this.weapon = weapon;
+		this.stunned = false;
+		this.turns = 0;
 	}
 
 	@Override

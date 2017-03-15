@@ -8,8 +8,9 @@ public abstract class Character {
 	protected int x;
 	protected int y;
 	protected char symbol;
-	protected boolean isOverKey; //for the enemies
+	protected boolean isOverKey; 
 	protected boolean stunned;
+	protected int turns;
 	protected Weapon weapon;
 	
 	public int getX() {
@@ -23,6 +24,13 @@ public abstract class Character {
 	}
 	public void setY(int y){
 		this.y = y;
+	}
+	public void gotStunned(){
+		stunned = true;
+		turns = 2;
+	}
+	public void backToNormal(){
+		stunned = false;
 	}
 	
 	public abstract char getSymbol();
