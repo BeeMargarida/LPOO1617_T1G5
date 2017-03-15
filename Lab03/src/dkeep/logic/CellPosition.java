@@ -18,8 +18,8 @@ public class CellPosition {
 		return y;
 	}
 	
-	public boolean equals(CellPosition c) {
-		if(this.x == c.getX() && this.y == c.getY())
+	public boolean equals(Object c) {
+		if(this.x == ((CellPosition) c).getX() && this.y == ((CellPosition) c).getY())
 			return true;
 		return false;
 	}

@@ -22,6 +22,18 @@ public class Logic {
 		CellPosition c = new CellPosition(hero.getX(),hero.getY());
 		return c;
 	}
+	
+	public char getHeroSymbol(){
+		return hero.getSymbol();
+	}
+	
+	public char getEnemySymbol(){
+		return enemies.get(0).getSymbol();
+	}
+	
+	public char getEnemyWeaponSymbol(){
+		return enemies.get(0).getWeaponSymbol();
+	}
 
 
 	public boolean colideEnemy(int x, int y, ArrayList<Character> vector) {
@@ -53,12 +65,17 @@ public class Logic {
 		}
 		return res;
 	}
+	
+	
+	public void moveHero(char dir, Map map){
+		
+	}
 
 	public void gameplay(char dir, Map map){
 		
 	}
 
-	public Logic nextLogic() {
+	public Logic nextLogic(Map map) {
 		return null;
 	}
 
@@ -69,5 +86,4 @@ public class Logic {
 	public boolean getVictory(){
 		return victory;
 	}
-
 }

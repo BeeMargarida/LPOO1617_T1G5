@@ -7,5 +7,4 @@ public abstract class Ogre extends Character {
 	protected boolean overlap;
 	
 	public abstract int[] movement();
-
 }

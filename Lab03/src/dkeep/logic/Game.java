@@ -15,6 +15,10 @@ public class Game {
 	public boolean isGameOver() {
 		return logic.gameOver();
 	}
+	
+	public boolean victory(){
+		return logic.getVictory();
+	}
 
 	public void print(){
 		char[][] m = map.getMap();
@@ -54,16 +58,20 @@ public class Game {
 		}
 		m[map.getKey()[0]][map.getKey()[1]] = ' ';//erases key
 	}
+	
+	public void moveHero(char dir){
+		logic.moveHero(dir, map);
+	}
 
 	public void update(char dir) {
 		logic.gameplay(dir, map);
 		if(logic.getVictory()){
-			if(logic.nextLogic() == null){
+			if(logic.nextLogic(map) == null){
 				logic.setGameOver();
 				return;
 			}
 			map = map.nextMap();
-			logic = logic.nextLogic();
+			logic = logic.nextLogic(map);
 		}
 	}
 

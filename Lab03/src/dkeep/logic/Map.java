@@ -18,6 +18,48 @@ public class Map {
 		return key;
 	}
 	
+	public int[] getHeroPos(){
+		int[] pos = new int[2];
+		for(int i = 0; i < map.length; i++){
+			for(int j = 0; j < map[i].length; j++){
+				if(map[i][j] == 'H'){
+					pos[0] = i;
+					pos[1] = j;
+					return pos;
+				}
+			}
+		}
+		return pos;
+	}
+	
+	public int[] getGuardPos(){
+		int[] pos = new int[2];
+		for(int i = 0; i < map.length; i++){
+			for(int j = 0; j < map[i].length; j++){
+				if(map[i][j] == 'G'){
+					pos[0] = i;
+					pos[1] = j;
+					return pos;
+				}
+			}
+		}
+		return pos;
+	}
+	
+	public int[] getOgrePos(){
+		int[] pos = new int[2];
+		for(int i = 0; i < map.length; i++){
+			for(int j = 0; j < map[i].length; j++){
+				if(map[i][j] == 'O'){
+					pos[0] = i;
+					pos[1] = j;
+					return pos;
+				}
+			}
+		}
+		return pos;
+	}
+	
 	public void openDoor() {
 		for(int i = 0; i < map.length; i++){
 			for(int j = 0; j < map[i].length; j++){
@@ -25,6 +67,16 @@ public class Map {
                     map[i][j] = 'S';
             }
 		}
+	}
+	
+	public boolean areDoorsOpen(){
+		for(int i = 0; i < map.length; i++){
+			for(int j = 0; j < map[i].length; j++){
+                if(map[i][j] == 'S')
+                    return true;
+            }
+		}
+		return false;
 	}
 
 	public boolean isFree(int x, int y) { 

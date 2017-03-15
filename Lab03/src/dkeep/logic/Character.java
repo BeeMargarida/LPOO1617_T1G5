@@ -35,6 +35,13 @@ public abstract class Character {
 	
 	public abstract char getSymbol();
 	
+	public char getWeaponSymbol(){
+		if(weapon == null)
+			return ' ';
+		else
+			return weapon.getSymbol();
+	}
+	
 	public abstract int[] movement();
 }
 

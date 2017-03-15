@@ -4,24 +4,31 @@ import java.util.ArrayList;
 
 public class KeepLogic extends Logic {
 
-	public KeepLogic() {
+	public KeepLogic(Map map, int[] heropos) {
 		/*HERO NOT ARMED*/ 
-		//Weapon weapon = null;
-		//hero = new Hero('H',7,1, weapon);
-		//enemies.add(new CrazyOgre('O',1,4, weapon)); //OGRE WITHOUT WEAPON
-
-		super(new Hero('A',7,1,new Club('*','$',7,2)));
+		super(new Hero('H', heropos[0], heropos[1], null));   //7,1  //testes
+		
+		/*HERO ARMED*/
+		//super(new Hero('A',7,1,new Club('*','$',7,2)));  //
+		
 		enemies = new ArrayList<Character>();
+		
+		/*OGRE WITHOUT WEAPON*/
+		int[] ogrePos = map.getOgrePos();
+		//enemies.add(new CrazyOgre('O',ogrePos[0], ogrePos[1], null));   //1,4  //testes
 
 		/*OGRE WITH WEAPON*/
-		//Weapon weaponE = new Club('*','$',2,4);
-		//enemies.add(new CrazyOgre('O',1,4, weaponE));
+		Weapon weaponE = new Club('*','$',2,4);
+		//enemies.add(new CrazyOgre('O', 1, 4, weaponE));
+		enemies.add(new CrazyOgre('O', ogrePos[0], ogrePos[1], weaponE));   //1,4  //testes
 
 		/*SEVERAL OGRES*/
+		/*
 		for(int i = 0; i < 2; i++) {
 			Weapon weaponE = new Club('*','$',2,4); 
 			enemies.add(new CrazyOgre('O',1,4,weaponE));
 		}
+		*/
 		isOver = false;
 		victory = false;
 	}
@@ -72,7 +79,7 @@ public class KeepLogic extends Logic {
 		}
 	}
 
-	public void heroMovement(char dir, Map map) {
+	public void moveHero(char dir, Map map) {
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
 		if(map.isFree(heromov[0], heromov[1])){
@@ -87,10 +94,10 @@ public class KeepLogic extends Logic {
 			if(map.isKey(heromov[0], heromov[1])){
 				map.openDoor();
 				hero.setKeyTrue();
-				return;
 			}
 			else if(map.isS(heromov[0], heromov[1])){
 				victory = true;
+				return;
 			}
 			hero.setX(heromov[0]);
 			hero.setY(heromov[1]);
@@ -98,6 +105,8 @@ public class KeepLogic extends Logic {
 	}
 
 	public void heroWeaponMovement(char dir, Map map){
+		if(hero.weapon == null)
+			return;
 		boolean set = false;
 		while(!set){
 			int[] weaponmov = hero.weapon.swing(hero.getX(), hero.getY());
@@ -127,15 +136,19 @@ public class KeepLogic extends Logic {
 	public void gameplay(char dir, Map map) {
 		//enemy movement
 		enemyMovement(dir,map);
+		//System.out.println("chegou aqui");
 		//enemy weapon
 		enemyWeaponMovement(dir,map);
+		//System.out.println("chegou aqui2");
 		//hero movement
-		heroMovement(dir,map);
+		moveHero(dir,map);
+		//System.out.println("chegou aqui3");
 		//hero weapon
 		heroWeaponMovement(dir,map);
+		//System.out.println("chegou aqui4");
 	}
 
-	public Logic nextLogic() {
+	public Logic nextLogic(Map map) {
 		return null;
 	}
 
