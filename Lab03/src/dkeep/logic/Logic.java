@@ -1,12 +1,22 @@
 package dkeep.logic;
 import java.util.ArrayList; 
 
-public abstract class Logic {
+public class Logic {
 
 	protected Hero hero;
 	protected ArrayList<Character> enemies;
 	protected boolean isOver;
 	protected boolean victory;
+	
+	public Logic(Hero hero) {
+		this.hero = hero;
+		isOver = false;
+		victory = false;
+	}
+	
+	public void addEnemy(Character enemy) {
+		enemies.add(enemy);
+	}
 	
 	public CellPosition getHeroPosition(){
 		CellPosition c = new CellPosition(hero.getX(),hero.getY());
@@ -44,14 +54,20 @@ public abstract class Logic {
 		return res;
 	}
 
-	public abstract void gameplay(char dir, Map map);
+	public void gameplay(char dir, Map map){
+		
+	}
 
-	public abstract Logic nextLogic();
+	public Logic nextLogic() {
+		return null;
+	}
 
 	public boolean gameOver() {
 		return isOver;
 	}
 
-	public abstract boolean getVictory();
+	public boolean getVictory(){
+		return victory;
+	}
 
 }

@@ -6,8 +6,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DungeonLogic extends Logic {
 
 	public DungeonLogic() {
-		Weapon weapon = null;
-		hero = new Hero('H',1,1,weapon);
+		super(new Hero('H',1,1,null));
+		
 		enemies = new ArrayList<Character>();
 		char[] path = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 		//Choosing one of 3 guards
@@ -46,9 +46,6 @@ public class DungeonLogic extends Logic {
 		}
 	}
 
-	public boolean getVictory(){
-		return victory; 
-	}
 
 	public Logic nextLogic(){
 		return new KeepLogic();

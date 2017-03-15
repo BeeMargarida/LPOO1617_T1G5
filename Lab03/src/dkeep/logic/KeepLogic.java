@@ -10,8 +10,7 @@ public class KeepLogic extends Logic {
 		//hero = new Hero('H',7,1, weapon);
 		//enemies.add(new CrazyOgre('O',1,4, weapon)); //OGRE WITHOUT WEAPON
 
-		Weapon weaponH = new Club('*','$',7,2);
-		hero = new Hero('A',7,1, weaponH);
+		super(new Hero('A',7,1,new Club('*','$',7,2)));
 		enemies = new ArrayList<Character>();
 
 		/*OGRE WITH WEAPON*/
@@ -125,7 +124,6 @@ public class KeepLogic extends Logic {
 		}	
 	}
 
-	@Override
 	public void gameplay(char dir, Map map) {
 		//enemy movement
 		enemyMovement(dir,map);
@@ -137,12 +135,10 @@ public class KeepLogic extends Logic {
 		heroWeaponMovement(dir,map);
 	}
 
-	@Override
 	public Logic nextLogic() {
 		return null;
 	}
 
-	@Override
 	public boolean getVictory() {
 		return victory;
 	}

@@ -11,9 +11,10 @@ import dkeep.logic.KeepMap;
 import dkeep.logic.CellPosition;
 import dkeep.logic.DungeonLogic;
 import dkeep.logic.KeepMap;
+import dkeep.logic.Hero;
 
 public class TestDungeonGameLogic  {
-//	char[][] map = {{'X','X','X','X','X','X','X','X','X','X'},
+//	char[][] m = {{'X','X','X','X','X','X','X','X','X','X'},
 //			{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
 //			{'X','X','X',' ','X','X','X',' ',' ','X'},
 //			{'X',' ','I',' ','I',' ','X',' ',' ','X'},
@@ -33,7 +34,9 @@ public class TestDungeonGameLogic  {
 	@Test
 	public void testMoveHeroIntoFreeCell() {
 		Map map = new Map(m,new int[] {3,1});
-		Logic logic = new DungeonLogic();
+		Hero hero = new Hero('H',1,1,null);
+		Logic logic = new Logic(hero);
+		logic.addEnemy(new Guard('G'));      ///ESTAVA A FAZER ISTO
 		Game game = new Game(map, logic);
 		assertEquals(new CellPosition(1,1),logic.getHeroPosition());
 		game.update('s');
@@ -45,7 +48,7 @@ public class TestDungeonGameLogic  {
 		Logic logic = new DungeonLogic();
 		Game game = new Game(map, logic);
 		assertFalse(logic.gameOver());
-		//acabar
+		
 	}
 
 }
