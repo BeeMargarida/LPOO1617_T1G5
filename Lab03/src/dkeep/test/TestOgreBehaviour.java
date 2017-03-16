@@ -30,10 +30,8 @@ public class TestOgreBehaviour {
 
 		while(!clubsymbol || !ogresymbol){
 			game.update('a');
-			//System.out.println(logic.getEnemySymbol());
 			if(logic.getEnemySymbol() == '$')
 				ogresymbol = true;
-			//System.out.println(logic.getEnemyWeaponSymbol());
 			if(logic.getEnemyWeaponSymbol() == '$')
 				clubsymbol = true;
 		}
@@ -49,8 +47,7 @@ public class TestOgreBehaviour {
 		boolean clubsymbol = false;
 		game.moveHero('s');
 		while(!clubsymbol){
-			game.update('a');
-			//System.out.println(logic.getEnemyWeaponSymbol());
+			logic.heroWeaponMovement('s', map);
 			if(logic.getHeroWeaponSymbol() == '$')
 				clubsymbol = true;
 		}	

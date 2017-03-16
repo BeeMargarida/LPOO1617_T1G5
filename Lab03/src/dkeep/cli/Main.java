@@ -23,9 +23,7 @@ public class Main {
 
 	public static void main(String[] args){
 		Map map = new DungeonMap();
-		int[] heropos = map.getHeroPos();
-		System.out.println(heropos[0]);
-		System.out.println(heropos[1]);
+		int[] heropos = map.getHeroPos(); 
 		Logic logic = new DungeonLogic(map, heropos);
 		Game g = new Game(map, logic);
 		while(!g.isGameOver()){

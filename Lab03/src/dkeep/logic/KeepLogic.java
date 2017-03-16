@@ -120,7 +120,7 @@ public class KeepLogic extends Logic {
 					hero.weapon.above = false;
 				hero.weapon.setX(weaponmov[0]);
 				hero.weapon.setY(weaponmov[1]);
-
+				
 				//hero weapon collision with enemies
 				ArrayList<Weapon> heroweapon = new ArrayList<Weapon>();
 				heroweapon.add(hero.weapon);

@@ -101,7 +101,6 @@ public class TestDungeonGameLogic  {
 		Game game = new Game(map, logic);
 		game.moveHero('s');
 		game.moveHero('s');
-		System.out.println(logic.getVictory());
 		game.moveHero('a');
 		assertTrue(game.victory());
 	}

@@ -38,6 +38,9 @@ public class Logic {
 	public char getEnemyWeaponSymbol(){
 		return enemies.get(0).getWeaponSymbol();
 	}
+	
+	public void enemyWeaponMovement(char dir, Map map){} 
+	public void heroWeaponMovement(char dir, Map map){}
 
 
 	public boolean colideEnemy(int x, int y, ArrayList<Character> vector) {
