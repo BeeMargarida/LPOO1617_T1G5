@@ -15,14 +15,16 @@ public class Game {
 	public boolean isGameOver() {
 		return logic.gameOver();
 	}
-	
+
 	public boolean victory(){
 		return logic.getVictory();
 	}
 
 	public void print(){
 		char[][] m = map.getMap();
-		m[map.getKey()[0]][map.getKey()[1]] = 'k';
+		if(!logic.hero.hasKey()){
+			m[map.getKey()[0]][map.getKey()[1]] = 'k';
+		}
 		//hero
 		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.getSymbol();
 		//enemies
@@ -58,7 +60,7 @@ public class Game {
 		}
 		m[map.getKey()[0]][map.getKey()[1]] = ' ';//erases key
 	}
-	
+
 	public void moveHero(char dir){
 		logic.moveHero(dir, map);
 	}

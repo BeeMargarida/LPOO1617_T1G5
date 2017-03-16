@@ -22,6 +22,9 @@ public abstract class Map {
 		else if(map[x][y] == 'I'){
 			return false;
 		}
+		else if(map[x][y] == 'S'){
+			return false;
+		}
 		return true;
 	}
 
@@ -33,6 +36,12 @@ public abstract class Map {
 	
 	public boolean isS(int x, int y){
 		if(map[x][y] == 'S')
+			return true;
+		return false;
+	}
+	
+	public boolean isI(int x, int y){
+		if(map[x][y] == 'I')
 			return true;
 		return false;
 	}

@@ -38,9 +38,14 @@ public class DungeonLogic extends Logic {
 				map.openDoor();
 				return;
 			}
-			else if(map.isS(heromov[0], heromov[1])){
+			if(map.isS(heromov[0], heromov[1])){
 				victory = true;
 			}
+			hero.setX(heromov[0]);
+			hero.setY(heromov[1]);
+		}
+		if(map.isS(heromov[0], heromov[1])){
+			victory = true;
 			hero.setX(heromov[0]);
 			hero.setY(heromov[1]);
 		}

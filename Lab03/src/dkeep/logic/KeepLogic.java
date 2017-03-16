@@ -28,8 +28,6 @@ public class KeepLogic extends Logic {
 			enemies.add(new CrazyOgre('O',1,4,weaponE));
 		}
 		 */
-		isOver = false;
-		victory = false;
 	}
 
 	public void enemyMovement(char dir, Map map) {
@@ -91,16 +89,21 @@ public class KeepLogic extends Logic {
 				}
 			}
 			if(map.isKey(heromov[0], heromov[1])){
-				map.openDoor();
 				hero.setKeyTrue();
-			}
-			else if(map.isS(heromov[0], heromov[1])){
-				victory = true;
-				return;
 			}
 			hero.setX(heromov[0]);
 			hero.setY(heromov[1]);
 		}	
+		if(map.isI(heromov[0],heromov[1])){
+			map.openDoor();
+			return;
+		}
+		if(map.isS(heromov[0], heromov[1])){
+			victory = true;
+			hero.setX(heromov[0]);
+			hero.setY(heromov[1]);
+			return;
+		}
 	}
 
 	public void heroWeaponMovement(char dir, Map map){
@@ -110,7 +113,7 @@ public class KeepLogic extends Logic {
 		while(!set){
 			int[] weaponmov = hero.weapon.swing(hero.getX(), hero.getY());
 			if(map.isFree(weaponmov[0], weaponmov[1])){
-				if(map.isKey(weaponmov[0], weaponmov[1])){
+				if(map.isKey(weaponmov[0], weaponmov[1]) && !hero.hasKey()){
 					hero.weapon.above = true;
 				} 
 				else

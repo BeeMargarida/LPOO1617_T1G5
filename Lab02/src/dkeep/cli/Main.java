@@ -28,10 +28,8 @@ public class Main {
 	}*/
 	
 	public static void main(String[] args){
-//		Map map = new DungeonMap();
-//		Logic logic = new DungeonLogic();
-		Map map = new KeepMap();
-		Logic logic = new KeepLogic();
+		Map map = new DungeonMap();
+		Logic logic = new DungeonLogic();
 		Game g = new Game(map, logic);
 		while(!g.isGameOver()){
 			g.print();

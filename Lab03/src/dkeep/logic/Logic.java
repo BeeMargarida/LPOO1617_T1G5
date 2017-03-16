@@ -14,9 +14,9 @@ public class Logic {
 		victory = false;
 	}
 	
-	public void addEnemy(Character enemy) {
-		enemies.add(enemy);
-	}
+//	public void addEnemy(Character enemy) {
+//		enemies.add(enemy);
+//	}
 	
 	public CellPosition getHeroPosition(){
 		CellPosition c = new CellPosition(hero.getX(),hero.getY());

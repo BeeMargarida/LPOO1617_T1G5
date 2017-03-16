@@ -25,8 +25,6 @@ public class DungeonLogic extends Logic {
 		int[] guardPos = map.getGuardPos();
 		enemies.add(new RookieGuard('G',guardPos[0],guardPos[1], path));  //para testes //1,8
 		//enemies.add(new RookieGuard('G', 1, 8, path));
-		isOver = false;
-		victory = false;
 	}
 
 	public void moveHero(char dir, Map map){
@@ -41,12 +39,14 @@ public class DungeonLogic extends Logic {
 				map.openDoor();
 				return;
 			}
-			else if(map.isS(heromov[0], heromov[1])){
-				victory = true;
-				return;
-			}
 			hero.setX(heromov[0]);
 			hero.setY(heromov[1]);
+		}
+		if(map.isS(heromov[0], heromov[1])){
+			victory = true;
+			hero.setX(heromov[0]);
+			hero.setY(heromov[1]);
+			return;
 		}
 	}
 	
@@ -57,26 +57,6 @@ public class DungeonLogic extends Logic {
 		enemies.get(0).setY(enemymov[1]);
 		
 		moveHero(dir, map);
-		/*
-		hero.setDir(dir);
-		int[] heromov = hero.movement();
-		if(map.isFree(heromov[0], heromov[1])){
-			if((enemies.get(0).getSymbol() != 'g') && colideEnemy(heromov[0],heromov[1],enemies)){	
-				System.out.println("I was caught");
-				isOver = true; 
-			}
-			if(map.isKey(heromov[0], heromov[1])){
-				map.openDoor();
-				return;
-			}
-			else if(map.isS(heromov[0], heromov[1])){
-				System.out.println("You won!");
-				victory = true;
-			}
-			hero.setX(heromov[0]);
-			hero.setY(heromov[1]);
-		}
-		*/
 	}
 
 

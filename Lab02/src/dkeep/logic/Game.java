@@ -18,7 +18,9 @@ public class Game {
 
 	public void print(){
 		char[][] m = map.getMap();
-		m[map.getKey()[0]][map.getKey()[1]] = 'k';
+		if(!logic.hero.hasKey()){
+			m[map.getKey()[0]][map.getKey()[1]] = 'k';
+		}
 		//hero
 		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.getSymbol();
 		//enemies

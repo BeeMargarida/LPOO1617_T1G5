@@ -36,7 +36,7 @@ public class TestDungeonGameLogic  {
 		Map map = new Map(m,new int[] {3,1});
 		//Hero hero = new Hero('H',1,1,null);
 		int[] heropos = {1,1};
-		Logic logic = new DungeonLogic(map,heropos);     ///ESTAVA A FAZER ISTO
+		Logic logic = new DungeonLogic(map,heropos);
 		Game game = new Game(map, logic);
 		assertEquals(new CellPosition(1,1),logic.getHeroPosition());
 		game.moveHero('s');
