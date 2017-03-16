@@ -4,15 +4,14 @@ import java.util.ArrayList;
 
 public class KeepLogic extends Logic {
 
-	public KeepLogic(Map map, int[] heropos) {
+	public KeepLogic(Map map, int[] heropos, boolean armedHero) {
 		/*HERO NOT ARMED*/ 
 		super(new Hero('H', heropos[0], heropos[1], null));   //7,1  //testes
-		
-		/*HERO ARMED*/
-		//super(new Hero('A',7,1,new Club('*','$',7,2)));  //
-		
+		if(armedHero){
+			hero.weapon = new Club('*','$',7,2);
+		}
 		enemies = new ArrayList<Character>();
-		
+
 		/*OGRE WITHOUT WEAPON*/
 		int[] ogrePos = map.getOgrePos();
 		//enemies.add(new CrazyOgre('O',ogrePos[0], ogrePos[1], null));   //1,4  //testes
@@ -28,7 +27,7 @@ public class KeepLogic extends Logic {
 			Weapon weaponE = new Club('*','$',2,4); 
 			enemies.add(new CrazyOgre('O',1,4,weaponE));
 		}
-		*/
+		 */
 		isOver = false;
 		victory = false;
 	}

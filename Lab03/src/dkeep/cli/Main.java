@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Main { 
 	 
-	
+	 
 	public static char askUser() {
 		Scanner s = new Scanner(System.in);
 		return s.next().charAt(0); //retorna o primeiro char do input

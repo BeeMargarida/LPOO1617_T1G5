@@ -27,6 +27,10 @@ public class Logic {
 		return hero.getSymbol();
 	}
 	
+	public char getHeroWeaponSymbol(){
+		return hero.getWeaponSymbol();
+	}
+	
 	public char getEnemySymbol(){
 		return enemies.get(0).getSymbol();
 	}

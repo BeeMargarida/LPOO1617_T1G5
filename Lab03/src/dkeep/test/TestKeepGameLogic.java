@@ -24,7 +24,7 @@ public class TestKeepGameLogic {
 	public void testHeroIsCapturedByOgre() {
 		Map map = new Map(m,new int[] {3,1});
 		int[] heropos = {1,1};
-		Logic logic = new KeepLogic(map,heropos);
+		Logic logic = new KeepLogic(map,heropos,false);
 		Game game = new Game(map, logic);
 		assertEquals(new CellPosition(1,1),logic.getHeroPosition());
 		game.moveHero('d');
@@ -36,7 +36,7 @@ public class TestKeepGameLogic {
 	public void testOgreChangesSymbolWhenOnKey() {
 		Map map = new Map(m,new int[] {3,1});
 		int[] heropos = {1,1};
-		Logic logic = new KeepLogic(map,heropos);
+		Logic logic = new KeepLogic(map,heropos,false);
 		Game game = new Game(map, logic);
 		game.moveHero('s');
 		game.moveHero('s');
@@ -47,7 +47,7 @@ public class TestKeepGameLogic {
 	public void testMoveHeroIntoClosedDoors() {
 		Map map = new Map(m,new int[] {3,1});
 		int[] heropos = {1,1};
-		Logic logic = new KeepLogic(map,heropos);
+		Logic logic = new KeepLogic(map,heropos,false);
 		Game game = new Game(map, logic);
 		game.moveHero('s');
 		game.moveHero('a');
@@ -59,7 +59,7 @@ public class TestKeepGameLogic {
 	public void testMoveHeroOpensDoorsWithKey(){
 		Map map = new Map(m,new int[] {3,1});
 		int[] heropos = {1,1};
-		Logic logic = new KeepLogic(map,heropos);
+		Logic logic = new KeepLogic(map,heropos,false);
 		Game game = new Game(map, logic);
 		game.moveHero('s');
 		game.moveHero('s');
@@ -74,7 +74,7 @@ public class TestKeepGameLogic {
 	public void testMoveHeroOpensDoorsandEscapes(){
 		Map map = new Map(m,new int[] {3,1});
 		int[] heropos = {1,1};
-		Logic logic = new KeepLogic(map,heropos);
+		Logic logic = new KeepLogic(map,heropos,false);
 		Game game = new Game(map, logic);
 		game.moveHero('s');
 		game.moveHero('s');

@@ -82,7 +82,7 @@ public class DungeonLogic extends Logic {
 
 	public Logic nextLogic(Map map){
 		int[] heropos = map.getHeroPos();
-		return new KeepLogic(map, heropos);
+		return new KeepLogic(map, heropos,false);
 	}
 
 }
