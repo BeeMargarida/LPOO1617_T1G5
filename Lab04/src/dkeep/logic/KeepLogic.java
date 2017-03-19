@@ -82,6 +82,9 @@ public class KeepLogic extends Logic {
 			else if(this.getWeapons().size() != 0){
 				if(colideWeapon(hero.getX(), hero.getY(), this.getWeapons())){	
 					isOver = true;
+					hero.setX(heromov[0]);
+					hero.setY(heromov[1]);
+					return;
 				}
 			}
 			if(map.isKey(heromov[0], heromov[1])){
@@ -90,7 +93,7 @@ public class KeepLogic extends Logic {
 			hero.setX(heromov[0]);
 			hero.setY(heromov[1]);
 		}	
-		if(map.isI(heromov[0],heromov[1])){
+		if(map.isI(heromov[0],heromov[1]) && hero.hasKey()){
 			map.openDoor();
 			return;
 		}

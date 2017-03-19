@@ -157,28 +157,12 @@ public class Frame {
 				}
 				int OgreNumber = Integer.parseInt(txtNumberOfOgres.getText());
 				if(OgreNumber < 1 || OgreNumber > 5 ){
-					 lblYouCanStart.setText("Invalid Number of Ogres");
+					lblYouCanStart.setText("Invalid Number of Ogres");
 					return;
 				}
 				int[] numEnemy = {comboBox.getSelectedIndex()+1, OgreNumber};
 				logic = new DungeonLogic(map, heropos, numEnemy[0]);
 				
-				//int[] statusEnemy = new int[] {};
-				
-				//int i = comboBox.getSelectedIndex();
-				//statusEnemy[0] = 0; //number of enemies
-				//statusEnemy[1] = i; //behaviour of enemies
-				
-				/*
-				String numOgres = txtNumberOfOgres.getText();
-				int num = Integer.parseInt(numOgres);
-				statusEnemy[1] = num;
-				
-				//				for(int i = 0; i < num; i++){
-				//					int[] ogrePos = map.getOgrePos();
-				//					logic.addEnemy(new CrazyOgre('O', ogrePos[0], ogrePos[1], new Club('*','$',2,4)));
-				//				}
-				 */
 				g = new Game(map, logic,numEnemy);
 				textArea.setText(g.print());
 				

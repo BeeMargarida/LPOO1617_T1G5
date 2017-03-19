@@ -13,6 +13,8 @@ public class DungeonLogic extends Logic {
 		//Choosing one of 3 guards
 		
 		int[] guardPos = map.getGuardPos();
+		System.out.println(guardPos[0]);
+		System.out.println(guardPos[1]);
 		
 		if(option == 1)
 			enemies.add(new RookieGuard('G',guardPos[0],guardPos[1], path));
@@ -20,6 +22,7 @@ public class DungeonLogic extends Logic {
 			enemies.add(new DrunkenGuard('D',guardPos[0],guardPos[1],path));
 		else if(option == 3)
 			enemies.add(new SuspiciousGuard('U',guardPos[0],guardPos[1],path));
+		
 	}
 
 	public void moveHero(char dir, Map map){

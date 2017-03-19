@@ -29,6 +29,8 @@ public class Map {
 				}
 			}
 		}
+		pos[0] = 5;
+		pos[1] = 5;
 		return pos;
 	}
 	
