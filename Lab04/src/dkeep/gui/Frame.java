@@ -24,10 +24,26 @@ import java.awt.Font;
 
 public class Frame {
 	private static JTextField txtNumberOfOgres;
+	private static JButton btnUp, btnDown, btnLeft, btnRight;
+	private static JTextArea textArea;
+	private static JLabel lblYouCanStart;
 	private static Game g;
 	private static Map map;
 	private static Logic logic;
+	private static String InGameText = "You can play now.";
+	private static String GameOverText = "Game Over Press the New Game button to play again";
 
+	public static void updateGameState(){
+		textArea.setText(g.print());
+		if(g.isGameOver()){
+			textArea.setText(g.print() + "\n\n\nEnd of Game!");
+			lblYouCanStart.setText(GameOverText);
+			btnUp.setEnabled(false);
+			btnRight.setEnabled(false);
+			btnLeft.setEnabled(false);
+			btnDown.setEnabled(false);
+		}
+	}
 
 	public static void main(String[] args){
 
@@ -67,18 +83,24 @@ public class Frame {
 		frame.getContentPane().add(comboBox);
 
 		//PANEL
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		textArea.setBounds(10, 103, 426, 317);
 		frame.getContentPane().add(textArea);
+		
+		//FOOTER
+		lblYouCanStart = new JLabel("You can start a new game");
+		lblYouCanStart.setBounds(20, 431, 249, 14);
+		frame.getContentPane().add(lblYouCanStart);
+		frame.setVisible(true);
 
 		//UP
-		JButton btnUp = new JButton("Up");
+		btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				g.update('w');
-				textArea.setText(g.print());
+				updateGameState();
 			}
 		});
 		btnUp.setEnabled(false);
@@ -86,11 +108,11 @@ public class Frame {
 		frame.getContentPane().add(btnUp);
 
 		//LEFT
-		JButton btnLeft = new JButton("Left");
+		btnLeft = new JButton("Left");
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				g.update('a');
-				textArea.setText(g.print());
+				updateGameState();
 			}
 		});
 		btnLeft.setEnabled(false);
@@ -98,11 +120,11 @@ public class Frame {
 		frame.getContentPane().add(btnLeft);
 
 		//RIGHT
-		JButton btnRight = new JButton("Right");
+		btnRight = new JButton("Right");
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				g.update('d');
-				textArea.setText(g.print());
+				updateGameState();
 			}
 		});
 		btnRight.setEnabled(false);
@@ -110,11 +132,11 @@ public class Frame {
 		frame.getContentPane().add(btnRight);
 
 		//DOWN
-		JButton btnDown = new JButton("Down");
+		btnDown = new JButton("Down");
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				g.update('s');
-				textArea.setText(g.print());
+				updateGameState();
 			}
 		});
 		btnDown.setEnabled(false);
@@ -127,14 +149,27 @@ public class Frame {
 			public void actionPerformed(ActionEvent e) {
 				map = new DungeonMap();
 				int[] heropos = map.getHeroPos();
-				logic = new DungeonLogic(map, heropos);
+				System.out.println(heropos[0]);
+				System.out.println(heropos[1]);
+				if(txtNumberOfOgres.getText().equals("")){
+					lblYouCanStart.setText("Must Input Number of Ogres");
+					return;
+				}
+				int OgreNumber = Integer.parseInt(txtNumberOfOgres.getText());
+				if(OgreNumber < 1 || OgreNumber > 5 ){
+					 lblYouCanStart.setText("Invalid Number of Ogres");
+					return;
+				}
+				int[] numEnemy = {comboBox.getSelectedIndex()+1, OgreNumber};
+				logic = new DungeonLogic(map, heropos, numEnemy[0]);
 				
-				int[] statusEnemy = new int[] {};
+				//int[] statusEnemy = new int[] {};
 				
-				int i = comboBox.getSelectedIndex();
-				statusEnemy[0] = 0; //number of enemies
-				statusEnemy[1] = i; //behaviour of enemies
+				//int i = comboBox.getSelectedIndex();
+				//statusEnemy[0] = 0; //number of enemies
+				//statusEnemy[1] = i; //behaviour of enemies
 				
+				/*
 				String numOgres = txtNumberOfOgres.getText();
 				int num = Integer.parseInt(numOgres);
 				statusEnemy[1] = num;
@@ -143,9 +178,11 @@ public class Frame {
 				//					int[] ogrePos = map.getOgrePos();
 				//					logic.addEnemy(new CrazyOgre('O', ogrePos[0], ogrePos[1], new Club('*','$',2,4)));
 				//				}
-				g = new Game(map, logic,statusEnemy);
+				 */
+				g = new Game(map, logic,numEnemy);
 				textArea.setText(g.print());
-
+				
+				lblYouCanStart.setText(InGameText); 
 				btnUp.setEnabled(true);
 				btnRight.setEnabled(true);
 				btnLeft.setEnabled(true);
@@ -164,11 +201,5 @@ public class Frame {
 		});
 		btnExit.setBounds(526, 385, 89, 23);
 		frame.getContentPane().add(btnExit);
-
-		//FOOTER
-		JLabel lblYouCanStart = new JLabel("You can start a new game");
-		lblYouCanStart.setBounds(20, 431, 249, 14);
-		frame.getContentPane().add(lblYouCanStart);
-		frame.setVisible(true);
 	}
 }

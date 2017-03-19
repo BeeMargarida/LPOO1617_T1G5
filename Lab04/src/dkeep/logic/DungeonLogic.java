@@ -5,36 +5,27 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class DungeonLogic extends Logic {
 
-	public DungeonLogic(Map map, int[] heropos) {
+	public DungeonLogic(Map map, int[] heropos, int option) {
 		super(new Hero('H',heropos[0],heropos[1],null));
 		
 		enemies = new ArrayList<Character>();
 		char[] path = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
 		//Choosing one of 3 guards
-		/*
-		char[] possibleEnemies = {'r','d','s'};
-		int choice = ThreadLocalRandom.current().nextInt(0, 2 + 1);
-		char pos = possibleEnemies[choice];
-		if(pos == 'r')
-			enemies.add(new RookieGuard('G',guardPos[0],guardPos[1], path));
-		else if(pos == 'd')
-			enemies.add(new DrunkenGuard('D',guardPos[0],guardPos[1],path));
-		else if(pos == 's')
-			enemies.add(new SuspiciousGuard('U',guardPos[0],guardPos[1],path));
-		 */
+		
 		int[] guardPos = map.getGuardPos();
-		enemies.add(new RookieGuard('G',guardPos[0],guardPos[1], path));  //para testes //1,8
-		//enemies.add(new RookieGuard('G', 1, 8, path));
+		
+		if(option == 1)
+			enemies.add(new RookieGuard('G',guardPos[0],guardPos[1], path));
+		else if(option == 2)
+			enemies.add(new DrunkenGuard('D',guardPos[0],guardPos[1],path));
+		else if(option == 3)
+			enemies.add(new SuspiciousGuard('U',guardPos[0],guardPos[1],path));
 	}
 
 	public void moveHero(char dir, Map map){
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
 		if(map.isFree(heromov[0], heromov[1])){
-			if((enemies.get(0).getSymbol() != 'g') && colideEnemy(heromov[0],heromov[1],enemies)){	
-				System.out.println("I was caught");
-				isOver = true; 
-			}
 			if(map.isKey(heromov[0], heromov[1])){
 				map.openDoor();
 				return;
@@ -46,8 +37,10 @@ public class DungeonLogic extends Logic {
 			victory = true;
 			hero.setX(heromov[0]);
 			hero.setY(heromov[1]);
-			return;
 		}
+		
+		if(colideEnemy(hero.getX(),hero.getY(),enemies))
+			isOver = true; 
 	}
 	
 	public void gameplay(char dir, Map map) {
@@ -60,9 +53,9 @@ public class DungeonLogic extends Logic {
 	}
 
 
-	public Logic nextLogic(Map map){
+	public Logic nextLogic(Map map, int option){
 		int[] heropos = map.getHeroPos();
-		return new KeepLogic(map, heropos, true);
+		return new KeepLogic(map, heropos, true, option);
 	}
 
 }

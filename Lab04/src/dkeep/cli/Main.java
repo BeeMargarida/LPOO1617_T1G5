@@ -21,9 +21,10 @@ public class Main {
 	public static void main(String[] args){
 		
 		Map map = new DungeonMap();
+		int[] numEnemy = {1,1};
 		int[] heropos = map.getHeroPos();
-		Logic logic = new DungeonLogic(map, heropos); //ACABAR
-		Game g = new Game(map, logic);
+		Logic logic = new DungeonLogic(map, heropos, numEnemy[0]); //ACABAR
+		Game g = new Game(map, logic, numEnemy);
 		while(!g.isGameOver()){
 			g.print();
 			char dir = askUser();

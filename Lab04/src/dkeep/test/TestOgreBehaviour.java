@@ -22,9 +22,10 @@ public class TestOgreBehaviour {
 	@Test(timeout=1000)
 	public void testOgreBehaviourChangeSymbol() {    //verifica se a arma e o ogre mudam o seu simbolo quando estao em cima da chave
 		Map map = new Map(m,new int[] {3,1});
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new KeepLogic(map,heropos,false);
-		Game game = new Game(map, logic);
+		Logic logic = new KeepLogic(map,heropos,false,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 
 		boolean clubsymbol = false, ogresymbol = false;
 
@@ -42,9 +43,10 @@ public class TestOgreBehaviour {
 	@Test(timeout=1000)
 	public void testHeroWeapon() {
 		Map map = new Map(m,new int[] {3,1});
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new KeepLogic(map,heropos,true);
-		Game game = new Game(map, logic);
+		Logic logic = new KeepLogic(map,heropos,true,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 
 		boolean clubsymbol = false;
 		game.moveHero('s');
@@ -59,9 +61,10 @@ public class TestOgreBehaviour {
 	@Test(timeout=1000)
 	public void testHeroWeaponDamage() {
 		Map map = new Map(m,new int[] {3,1});
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new KeepLogic(map,heropos,true);
-		Game game = new Game(map, logic);
+		Logic logic = new KeepLogic(map,heropos,true,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 
 		boolean enemysymbol = false;
 		game.moveHero('d');

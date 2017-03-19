@@ -35,9 +35,10 @@ public class TestDungeonGameLogic  {
 	public void testMoveHeroIntoFreeCell() {
 		Map map = new Map(m,new int[] {3,1});
 		//Hero hero = new Hero('H',1,1,null);
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new DungeonLogic(map,heropos);
-		Game game = new Game(map, logic);
+		Logic logic = new DungeonLogic(map,heropos, numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 		assertEquals(new CellPosition(1,1),logic.getHeroPosition());
 		game.moveHero('s');
 		assertEquals(new CellPosition(2,1),logic.getHeroPosition());
@@ -46,9 +47,10 @@ public class TestDungeonGameLogic  {
 	@Test
 	public void testHeroIsCapturedByGuard() {
 		Map map = new Map(m, new int[] {3,1});
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new DungeonLogic(map,heropos);
-		Game game = new Game(map, logic);
+		Logic logic = new DungeonLogic(map,heropos, numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 		assertFalse(game.isGameOver());
 		game.moveHero('d');
 		/*
@@ -62,9 +64,10 @@ public class TestDungeonGameLogic  {
 	@Test
 	public void testMoveHeroIntoWall(){
 		Map map = new Map(m, new int[] {3,1});
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new DungeonLogic(map,heropos);
-		Game game = new Game(map, logic);
+		Logic logic = new DungeonLogic(map,heropos, numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 		assertEquals(new CellPosition(1,1),logic.getHeroPosition());
 		game.update('w');
 		assertEquals(new CellPosition(1,1),logic.getHeroPosition());
@@ -73,9 +76,10 @@ public class TestDungeonGameLogic  {
 	@Test
 	public void testMoveHeroIntoClosedDoors(){
 		Map map = new Map(m, new int[] {3,1});
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new DungeonLogic(map,heropos);
-		Game game = new Game(map, logic);
+		Logic logic = new DungeonLogic(map,heropos, numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 		game.moveHero('s');
 		game.moveHero('a');
 		assertEquals(new CellPosition(2,1),logic.getHeroPosition());
@@ -85,9 +89,10 @@ public class TestDungeonGameLogic  {
 	@Test
 	public void testMoveHeroPullsLeverandOpensDoors(){
 		Map map = new Map(m, new int[] {3,1});
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new DungeonLogic(map,heropos);
-		Game game = new Game(map, logic);
+		Logic logic = new DungeonLogic(map,heropos,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 		game.moveHero('s');
 		game.moveHero('s');
 		assertTrue(map.areDoorsOpen());
@@ -96,9 +101,10 @@ public class TestDungeonGameLogic  {
 	@Test
 	public void testMoveHeroOpensDoorsandEscapes(){
 		Map map = new Map(m, new int[] {3,1});
+		int[] numEnemy = {1};
 		int[] heropos = {1,1};
-		Logic logic = new DungeonLogic(map,heropos);
-		Game game = new Game(map, logic);
+		Logic logic = new DungeonLogic(map,heropos,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
 		game.moveHero('s');
 		game.moveHero('s');
 		System.out.println(logic.getVictory());

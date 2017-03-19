@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class KeepLogic extends Logic {
 
-	public KeepLogic(Map map, int[] heropos, boolean armedHero) {
+	public KeepLogic(Map map, int[] heropos, boolean armedHero, int option) {
 		/*HERO NOT ARMED*/ 
 		super(new Hero('A', heropos[0], heropos[1], null));   //7,1  //testes
 		if(armedHero){
@@ -14,20 +14,16 @@ public class KeepLogic extends Logic {
 
 		/*OGRE WITHOUT WEAPON*/
 		int[] ogrePos = map.getOgrePos();
-		//enemies.add(new CrazyOgre('O',ogrePos[0], ogrePos[1], null));   //1,4  //testes
 
 		/*OGRE WITH WEAPON*/
-		Weapon weaponE = new Club('*','$',2,4);
-		//enemies.add(new CrazyOgre('O', 1, 4, weaponE));
-		enemies.add(new CrazyOgre('O', ogrePos[0], ogrePos[1], weaponE));   //1,4  //testes
+		//Weapon weaponE = new Club('*','$',2,4);
+		//enemies.add(new CrazyOgre('O', ogrePos[0], ogrePos[1], weaponE));   //1,4  //testes
 
 		/*SEVERAL OGRES*/
-		/*
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < option; i++) {
 			Weapon weaponE = new Club('*','$',2,4); 
-			enemies.add(new CrazyOgre('O',1,4,weaponE));
+			enemies.add(new CrazyOgre('O',ogrePos[0], ogrePos[1], weaponE));
 		}
-		 */
 	}
 
 	public void enemyMovement(char dir, Map map) {
@@ -112,6 +108,8 @@ public class KeepLogic extends Logic {
 		boolean set = false;
 		while(!set){
 			int[] weaponmov = hero.weapon.swing(hero.getX(), hero.getY());
+			if(weaponmov[0] < 0 || weaponmov[1] < 0)                       //verify if new position is in-bounds
+				continue;
 			if(map.isFree(weaponmov[0], weaponmov[1])){
 				if(map.isKey(weaponmov[0], weaponmov[1]) && !hero.hasKey()){
 					hero.weapon.above = true;
@@ -150,7 +148,7 @@ public class KeepLogic extends Logic {
 		//System.out.println("chegou aqui4");
 	}
 
-	public Logic nextLogic(Map map) {
+	public Logic nextLogic(Map map, int option) {
 		return null;
 	}
 

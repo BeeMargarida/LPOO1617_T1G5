@@ -71,15 +71,11 @@ public class Logic {
 	}
 	
 	
-	public void moveHero(char dir, Map map){
-		
-	}
+	public void moveHero(char dir, Map map){}
 
-	public void gameplay(char dir, Map map){
-		
-	}
+	public void gameplay(char dir, Map map){}
 
-	public Logic nextLogic(Map map) {
+	public Logic nextLogic(Map map, int option) {
 		return null;
 	}
 

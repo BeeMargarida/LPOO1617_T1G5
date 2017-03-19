@@ -6,12 +6,14 @@ public class Game {
 	private Map map;
 	private Logic logic;
 	private int[] numEnemy;
+	private int level;
 
 
 	public Game(Map startingMap, Logic startingLogic, int[] numEnemy) {
 		map = startingMap;
 		logic = startingLogic;
 		this.numEnemy = numEnemy;
+		level = 0;
 	}
 
 	public boolean isGameOver() {
@@ -76,12 +78,16 @@ public class Game {
 	public void update(char dir) {
 		logic.gameplay(dir, map);
 		if(logic.getVictory()){
-			if(logic.nextLogic(map) == null){
+			if(level < numEnemy.length-1){
+				System.out.println("new lvl");
+				level++;
+			}
+			if(logic.nextLogic(map, numEnemy[level]) == null){
 				logic.setGameOver();
 				return;
 			}
 			map = map.nextMap();
-			logic = logic.nextLogic(map);
+			logic = logic.nextLogic(map, numEnemy[level]);
 		}
 	}
 
