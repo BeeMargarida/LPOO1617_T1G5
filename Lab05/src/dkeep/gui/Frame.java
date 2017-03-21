@@ -92,7 +92,8 @@ public class Frame {
 				}
 				int[] numEnemy = {comboBox.getSelectedIndex()+1, OgreNumber};
 				
-				JPanel gameframe = new GameFrame(numEnemy);
+				//JPanel gameframe = new GameFrame(numEnemy);
+				JPanel gameframe = new GameFrame(1,10,10);
 				gframe.getContentPane().add(gameframe);
 				gframe.pack(); 
 				gframe.setVisible(true);
