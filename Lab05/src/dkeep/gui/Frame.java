@@ -113,6 +113,15 @@ public class Frame {
 		btnExit.setBounds(50, 170, 89, 23);
 		frame.getContentPane().add(btnExit);
 		
+		JButton btnCreateMap = new JButton("Create Map");
+		btnCreateMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JPanel buildframe = new BuildFrame();
+			}
+		});
+		btnCreateMap.setBounds(50, 134, 89, 23);
+		frame.getContentPane().add(btnCreateMap);
+		
 		frame.setVisible(true);
 
 		//GAMEFRAME

@@ -24,12 +24,13 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 	private int level = 0;
 	private int mapHeight, mapWidth;
 	private char[][] m; 
-	
+	boolean found = false;
+
 	//EDITOR
 	private char[] tiles = {'X', 'I', 'k', 'O', 'H', ' '};
 	private char selected = ' ';
 	private int bx = 0, by = 0;
-	
+
 	public GameFrame(int[] EnemyOptions) {
 		map = new DungeonMap();
 		int[] heropos = map.getHeroPos();
@@ -43,12 +44,22 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 						  {'I','k',' ',' ','X'},
 						  {'X','X','X','X','X'}};
 
+			mapHeight = m.length;
+            mapWidth = m[0].length;
+
+            int[][] aux = new int[mapHeight][mapWidth];
+            for(int i= 0; i < mapHeight; i++){
+                for(int j = 0; j < mapWidth; j++){
+                    aux[i][j] = 0;
+                }
+            }
+
 		boolean res = verifyPath(1,1,'k');
 		System.out.println(res);
-		*/
+		 */
 		mapHeight = m.length;
 		mapWidth = m[0].length;
-		
+
 		try{
 			btile = ImageIO.read(new File("imgs/Tile.png"));
 			wall = ImageIO.read(new File("imgs/Wall.png"));
@@ -70,10 +81,10 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 			System.out.println("Error loading images");
 			System.exit(1);
 		}
-		
+
 		addKeyListener(this); 
 	}
-	
+
 	public GameFrame(int OgreNumber, int height, int width){
 		make = true;
 		m = new char[height][width];
@@ -87,7 +98,7 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 					else
 						m[i][j] = ' ';
 				}
-				 
+
 			}
 		}
 		mapHeight = height;
@@ -95,7 +106,7 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 		selected = ' ';
 		by = (height+1)*tileheight;
 		level = 1;
-		
+
 		try{
 			btile = ImageIO.read(new File("imgs/Tile.png"));
 			wall = ImageIO.read(new File("imgs/Wall.png"));
@@ -120,32 +131,66 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 		addMouseListener(this);
 		addKeyListener(this); 
 	}
-	
-	private boolean verifyPath(int x, int y, char target){   //A FAZER
+
+	private boolean verifyPath(int x, int y, char target,int[][] aux){
 		System.out.println(x);
 		System.out.println(y);
-		int[][] aux = new int[mapHeight][mapWidth];
-		for(int i= 0; i < mapHeight; i++){
-			for(int j = 0; j < mapWidth; j++){
-				aux[i][j] = 0;
-			}
-		}
-		
-		if(m[x][y] == target)
+
+		if(found)
 			return true;
-		
-		if(m[x+1][y] != 'X' && m[x+1][y] != 'I')
-			verifyPath(x+1, y, target);
-		if(m[x-1][y] != 'X' && m[x-1][y] != 'I')
-			verifyPath(x-1, y, target);
-		if(m[x][y+1] != 'X' && m[x][y+1] != 'I')
-			verifyPath(x, y+1, target);
-		if(m[x][y-1] != 'X' && m[x][y-1] != 'I')
-			verifyPath(x, y-1, target);
-		
+
+		if(aux[x+1][y] != 1 && m[x+1][y] != 'X' && m[x+1][y] != 'I'){
+			System.out.println("a");
+			if(m[x+1][y] == target){
+				found = true;
+				return true;
+			}
+			aux[x+1][y] = 1;
+			verifyPath(x+1,y,target,aux);
+		}
+
+		if(found)
+			return true;
+
+		if(aux[x-1][y] != 1 && m[x-1][y] != 'X' && m[x-1][y] != 'I'){
+			System.out.println("b");
+			if(m[x-1][y] == target){
+				found = true;
+				return true;
+			}
+			aux[x-1][y] = 1;
+			verifyPath(x-1,y,target,aux);
+		}
+
+		if(found)
+			return true;
+
+		if(aux[x][y+1] != 1 && m[x][y+1] != 'X' && m[x][y+1] != 'I'){
+			System.out.println("c");
+			if(m[x][y+1] == target){
+				found = true;
+				return true;
+			}
+			aux[x][y+1] = 1;
+			verifyPath(x,y+1,target,aux);
+		}
+
+		if(found)
+			return true;
+
+		if(aux[x][y-1] != 1 && m[x][y-1] != 'X' && m[x][y-1] != 'I'){
+			System.out.println("d");
+			if(m[x][y-1] == target){
+				found = true;
+				return true;
+			}
+			aux[x][y-1] = 1;
+			verifyPath(x,y-1,target,aux);
+		}
+
 		return false;
 	}
-	
+
 	private void printTile(Graphics g, char tile, int dx, int dy){
 		if(tile == 'X')
 			g.drawImage(wall, dx, dy, tilewidth, tileheight, this);
@@ -176,7 +221,7 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 		else if(make && tile == ' ')
 			g.drawImage(btile, dx, dy, tilewidth, tileheight, this);
 	}
-	
+
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if(!make)
@@ -188,34 +233,34 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 				printTile(g, m[i][j], dx, dy);
 			}
 		}
-		
+
 		if(!make){
 			if(game.isGameOver())
 				g.drawImage(gameover, x+(mapWidth*tilewidth-200)/2, y+mapHeight*tileheight+30, 200, 80, this);
 		}
-		
+
 		if(make){
 			g.drawString("Tiles:", 0, by+20);
-			
+
 			for(int i = 0; i < tiles.length; i++){
 				int dx = bx+50+i*2*tilewidth;
-				
+
 				printTile(g, tiles[i], dx, by);
 			}
-			
+
 			g.drawString("Selected:", bx+50+tiles.length*2*tilewidth+20, by+20);
 			printTile(g, selected, bx+50+tiles.length*2*tilewidth+100, by);
 		}
 	}
-	
+
 	public void mouseClicked(MouseEvent e) {
-		
+
 		//verificar se foi no map
 		int dx = e.getX()-x;
 		int dy = e.getY()-y;
 		if(dx >= 0 && dx <= mapWidth*tilewidth && dy >= 0 && dy <= mapHeight*tileheight)
 			m[dy/tileheight][dx/tilewidth] = selected;
-		
+
 		//verificar se foi no editor
 		dx = e.getX()-bx-50;
 		dy = e.getY()-by;
@@ -223,18 +268,18 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 			if(dx/tilewidth%2 == 0)
 				selected = tiles[(dx/tilewidth)/2];
 		}
-		
+
 		repaint();
 	}
-	
+
 	public void keyPressed(KeyEvent e) {
 		if(make)
 			return;
-		
+
 		if(game.isGameOver())
 			return;
-		
-		
+
+
 		switch(e.getKeyCode()){ 
 		case KeyEvent.VK_LEFT: game.update('a'); repaint(); break; 
 		case KeyEvent.VK_RIGHT: game.update('d'); repaint(); break;  
@@ -246,7 +291,7 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 		mapWidth = m[0].length;
 		level = game.getLevel();
 	} 
-	
+
 	public void keyReleased(KeyEvent e) {} 
 	public void keyTyped(KeyEvent e) {} 
 	public void mouseReleased(MouseEvent e) {}
