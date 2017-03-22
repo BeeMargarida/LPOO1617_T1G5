@@ -94,9 +94,8 @@ public class Game {
 			}
 		}
 		if(logic.hero.weapon != null){
-			System.out.println(logic.hero.weapon.getValid());
+			//System.out.println(logic.hero.weapon.getValid());
 			if(logic.hero.weapon.getValid()){
-				System.out.println("passou");
 				m[logic.hero.weapon.getX()][logic.hero.weapon.getY()] = logic.hero.weapon.getSymbol();
 			}
 		}

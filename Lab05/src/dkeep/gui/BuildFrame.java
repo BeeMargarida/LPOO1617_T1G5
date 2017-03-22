@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +19,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BuildFrame extends JPanel implements MouseListener{
+
+public class BuildFrame extends JPanel implements MouseListener, MouseMotionListener{
 
 	private BufferedImage btile, wall, hero, herok, rguard, dguard, sguard, ogre, weapon, lever, key, door, opendoor, background, gameover;
 	private int x = 50, y = 0, tileheight = 30, tilewidth = 30;
@@ -27,6 +29,7 @@ public class BuildFrame extends JPanel implements MouseListener{
 	private int bx = 0, by = 0;
 	private int mapHeight, mapWidth;
 	private char[][] m; 
+	private boolean drag = false;
 	
 	public BuildFrame(int OgreNumber, char[][] userMap){
 		m = userMap;
@@ -47,6 +50,7 @@ public class BuildFrame extends JPanel implements MouseListener{
 		mapWidth = userMap[0].length;
 		selected = ' ';
 		by = (mapHeight+1)*tileheight;
+		//drag = false;
 
 		try{
 			btile = ImageIO.read(new File("imgs/Tile.png"));
@@ -70,6 +74,7 @@ public class BuildFrame extends JPanel implements MouseListener{
 			System.exit(1);
 		}
 		addMouseListener(this);
+		addMouseMotionListener(this);
 		setLayout(null);
 		
 	}
@@ -124,6 +129,7 @@ public class BuildFrame extends JPanel implements MouseListener{
 	}
 
 	public void mousePressed(MouseEvent e) {
+		drag = true;
 
 		//verificar se foi no map
 		int dx = e.getX()-x;
@@ -141,8 +147,23 @@ public class BuildFrame extends JPanel implements MouseListener{
 
 		repaint();
 	}
+	
+	public void mouseReleased(MouseEvent e) {
+		drag = false;
+	}
+	
+	public void mouseDragged(MouseEvent e) {
+		if(drag){
+			int dx = e.getX()-x;
+			int dy = e.getY()-y;
+			if(dx >= 0 && dx <= mapWidth*tilewidth && dy >= 0 && dy <= mapHeight*tileheight)
+				m[dy/tileheight][dx/tilewidth] = selected;
+			repaint();
+		}
+	}
+	
 	public void mouseClicked(MouseEvent e) {}
-	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {} 
 	public void mouseExited(MouseEvent e) {} 
+	public void mouseMoved(MouseEvent e) { }
 }

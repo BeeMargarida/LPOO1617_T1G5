@@ -10,6 +10,7 @@ import dkeep.logic.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JFileChooser;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -19,10 +20,12 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.event.*;
 import javax.swing.JPanel;
 
 public class Frame {
@@ -47,17 +50,53 @@ public class Frame {
 	private static String GameOverText = "Game Over Press the New Game button to play again";
 	 */
 
-	boolean found = false;
-
-	private boolean verifyPath(int x, int y, char target,int[][] aux, char[][] m){
+	static boolean found = false;
+	
+	
+	
+	private static boolean verifyBorders(){
+		for(int i = 0; i < userMap.length; i++){
+			for(int j = 0; j < userMap[i].length;j++){
+				if(i == 0 || i == userMap.length-1){
+					if(userMap[i][j] != 'I' && userMap[i][j] != 'X')
+						return false;
+				}
+				else if(j == 0 || j == userMap[i].length-1){
+					if(userMap[i][j] != 'I' && userMap[i][j] != 'X')
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	private static boolean verifyAllElements(){
+		boolean door = false , hero = false, ogre = false, key=false;
+		for(int i = 0; i < userMap.length; i++){
+			for(int j = 0; j < userMap[i].length;j++){
+				if(userMap[i][j] == 'I')
+					door = true;
+				if(userMap[i][j] == 'H')
+					hero = true;
+				if(userMap[i][j] == 'O')
+					ogre = true;
+				if(userMap[i][j] == 'k')
+					key = true;
+			}
+		}
+		return (door && hero && ogre && key);
+	}
+	private static boolean verifyPath(int x, int y, char target,int[][] aux, char[][] m){
+		/*
 		System.out.println(x);
 		System.out.println(y);
+		*/
 
 		if(found)
 			return true;
 
 		if(aux[x+1][y] != 1 && m[x+1][y] != 'X' && m[x+1][y] != 'I'){
-			System.out.println("a");
+			//System.out.println("a");
 			if(m[x+1][y] == target){
 				found = true;
 				return true;
@@ -70,7 +109,7 @@ public class Frame {
 			return true;
 
 		if(aux[x-1][y] != 1 && m[x-1][y] != 'X' && m[x-1][y] != 'I'){
-			System.out.println("b");
+			//System.out.println("b");
 			if(m[x-1][y] == target){
 				found = true;
 				return true;
@@ -83,7 +122,7 @@ public class Frame {
 			return true;
 
 		if(aux[x][y+1] != 1 && m[x][y+1] != 'X' && m[x][y+1] != 'I'){
-			System.out.println("c");
+			//System.out.println("c");
 			if(m[x][y+1] == target){
 				found = true;
 				return true;
@@ -96,7 +135,7 @@ public class Frame {
 			return true;
 
 		if(aux[x][y-1] != 1 && m[x][y-1] != 'X' && m[x][y-1] != 'I'){
-			System.out.println("d");
+			//System.out.println("d");
 			if(m[x][y-1] == target){
 				found = true;
 				return true;
@@ -106,6 +145,47 @@ public class Frame {
 		}
 
 		return false;
+	}
+	
+	
+	
+	private static boolean verifyMap(){
+		if(!verifyBorders())
+			return false;
+			
+		System.out.println("1");
+		
+		if(!verifyAllElements())
+			return false;
+		System.out.println("2");
+		
+		int[] pos = new int[2];
+		for(int i = 0; i < userMap.length; i++){
+			for(int j = 0; j < userMap[i].length; j++){
+				if(userMap[i][j] == 'H'){
+					pos[0] = i;
+					pos[1] = j;
+				}
+			}
+		}
+		
+		if(!verifyPath(pos[0],pos[1],'k',new int[userMap.length][userMap[0].length],userMap))
+			return false;
+		
+		found = false;
+		
+		System.out.println("3");
+	
+		/*//Verifica a parede  
+		if(!verifyPath(pos[0],pos[1],'I',new int[userMap.length][userMap[0].length],userMap))
+			return false;
+		
+		found = false;
+		
+		System.out.println("4");
+		*/
+		
+		return true;
 	}
 
 	public static void main(String[] args){
@@ -195,7 +275,15 @@ public class Frame {
 
 		//GAMEFRAME
 		gframe = new JFrame("Game");
-		gframe.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		//gframe.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		gframe.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+            	gframe.setVisible(false);
+            	bframe.setVisible(true);
+            }
+        });
 		gframe.setPreferredSize(new Dimension(500, 500)); 
 
 		//BUILDFRAME
@@ -205,7 +293,16 @@ public class Frame {
 
 		//EDITOR FRAME
 		mframe = new JFrame("Editor");
-		mframe.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		mframe.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+            	gframe.setVisible(false);
+				bframe.setVisible(false);
+				mframe.setVisible(false);
+				frame.setVisible(true);
+            }
+        });
 		mframe.setSize(new Dimension(500,500));
 		mframe.getContentPane().setLayout(null);
 		mframe.setVisible(false);
@@ -233,17 +330,9 @@ public class Frame {
 		JButton btnMake = new JButton("Make");
 		btnMake.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//if(gframe != null)
 				gframe.setVisible(false);
-				bframe.setVisible(true);
-				//bframe.dispose();
-				/*
-				if(buildframe != null)
-					bframe.getContentPane().remove(buildframe);
-					*/
 				bframe.getContentPane().removeAll();
-				char[][] tmp = new char[Integer.parseInt(txtHeight.getText())][Integer.parseInt(txtWidth.getText())];
-				userMap = tmp;
+				userMap = new char[Integer.parseInt(txtHeight.getText())][Integer.parseInt(txtWidth.getText())];
 				buildframe = new BuildFrame(1,userMap);
 				bframe.getContentPane().add(buildframe);
 				bframe.pack();
@@ -260,9 +349,9 @@ public class Frame {
 			public void actionPerformed(ActionEvent e) {
 				if(userMap == null)
 					return;
-				//gframe.getContentPane().removeAll();
-				for(int i = 0; i < userMap.length ;i++)
-					System.out.println(userMap[i]);
+				if(!verifyMap())
+					return;
+				gframe.getContentPane().removeAll();
 				bframe.setVisible(false);
 				gameframe = new GameFrame(Integer.parseInt(txtNumberOfOgres.getText()), userMap);
 				gframe.remove(buildframe);
@@ -280,15 +369,32 @@ public class Frame {
 		JButton btnExit2 = new JButton("Exit");
 		btnExit2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//if(gframe != null)
-				gframe.dispose();
-				//if(bframe != null)
-				bframe.dispose();
+				gframe.setVisible(false);
+				bframe.setVisible(false);
 				mframe.setVisible(false);
 				frame.setVisible(true);
 			}
 		});
 		btnExit2.setBounds(48, 209, 89, 23);
 		mframe.getContentPane().add(btnExit2);
+		
+		btnPlay.setBounds(48, 165, 89, 23);
+		mframe.getContentPane().add(btnPlay);
+
+		JButton btnSave2 = new JButton("Save");
+		btnSave2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame frametmp = new JFrame("Save");
+				frametmp.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frametmp.setPreferredSize(new Dimension(500,500));
+				frametmp.pack();
+				JFileChooser fc = new JFileChooser();
+				fc.setDialogType(JFileChooser.SAVE_DIALOG);
+				int returnVal = fc.showOpenDialog(frametmp);
+				System.out.println(returnVal);
+			}
+		});
+		btnSave2.setBounds(150, 209, 89, 23);
+		mframe.getContentPane().add(btnSave2);
 	}
 }

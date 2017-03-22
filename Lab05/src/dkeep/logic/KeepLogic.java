@@ -110,7 +110,7 @@ public class KeepLogic extends Logic {
 		if(hero.weapon == null)
 			return;
 		int[] weaponmov = hero.weapon.swing(hero.getX(), hero.getY());
-		if(weaponmov[0] < 0 || weaponmov[1] < 0 || weaponmov[0] > map.getHeight() || weaponmov[1] > map.getWidth()){
+		if(weaponmov[0] < 0 || weaponmov[1] < 0 || weaponmov[0] >= map.getHeight() || weaponmov[1] >= map.getWidth()){
 			hero.weapon.setNotValid();
 			return;
 		}
