@@ -10,6 +10,7 @@ public class Club extends Weapon {
 		this.symbol = symbol;
 		this.secsymbol = secsymbol;
 		this.above = false;
+		this.valid = false;
 	}
 
 	@Override

@@ -15,6 +15,10 @@ public class Map {
 		return map;
 	}
 	
+	public void setMap(char[][] map){
+		this.map = map;
+	}
+	 
 
 	public int getWidth(){
 		if(map != null)
@@ -32,6 +36,7 @@ public class Map {
 		return key;
 	}
 	
+	
 	public int[] getHeroPos(){
 		int[] pos = new int[2];
 		for(int i = 0; i < map.length; i++){
@@ -43,8 +48,6 @@ public class Map {
 				}
 			}
 		}
-		pos[0] = 5;
-		pos[1] = 5;
 		return pos;
 	}
 	

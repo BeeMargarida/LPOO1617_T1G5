@@ -84,8 +84,59 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 
 		addKeyListener(this); 
 	}
+	
+	public GameFrame(int ogreNumber, char[][] userMap){
+		level = 1;
+		int[] pos = new int[2];
+		for(int i = 0; i < userMap.length; i++){
+			for(int j = 0; j < userMap[i].length; j++){
+				if(userMap[i][j] == 'k'){
+					pos[0] = i;
+					pos[1] = j;
+				}
+			}
+		}
+		char[][] tmp = new char[userMap.length][userMap[0].length];
+		for(int i = 0; i < userMap.length; i++){
+			tmp[i] = userMap[i].clone();
+		}
+		map = new Map(tmp, pos);
+		int[] heropos = map.getHeroPos();
+		int[] enemyOptions = new int[] {0,ogreNumber};
+		logic = new KeepLogic(map, heropos, true, enemyOptions[1]);
+		game = new Game(map, logic, enemyOptions);
+		game.setLevel(1);
+		m = game.getBoard(); 
+		
+		mapHeight = m.length;
+		mapWidth = m[0].length;
 
-	public GameFrame(int OgreNumber, int height, int width){
+		try{
+			btile = ImageIO.read(new File("imgs/Tile.png"));
+			wall = ImageIO.read(new File("imgs/Wall.png"));
+			hero = ImageIO.read(new File("imgs/Link.png"));
+			herok = ImageIO.read(new File("imgs/LinkK.png"));
+			rguard = ImageIO.read(new File("imgs/Guard.png"));
+			dguard = ImageIO.read(new File("imgs/DGuard.png"));
+			sguard = ImageIO.read(new File("imgs/SGuard.png"));
+			ogre =  ImageIO.read(new File("imgs/Ogre.png"));
+			weapon = ImageIO.read(new File("imgs/Weapon.png"));
+			lever = ImageIO.read(new File("imgs/LeverO.png"));
+			key = ImageIO.read(new File("imgs/Key.png"));
+			door = ImageIO.read(new File("imgs/Door.png"));
+			opendoor = ImageIO.read(new File("imgs/ODoor.png"));
+			background = ImageIO.read(new File("imgs/BG.png"));
+			gameover = ImageIO.read(new File("imgs/Game_Over.png"));
+		}
+		catch(IOException e){
+			System.out.println("Error loading images");
+			System.exit(1);
+		}
+
+		addKeyListener(this); 
+	}
+
+/*	public GameFrame(int OgreNumber, int height, int width){
 		make = true;
 		m = new char[height][width];
 		for(int i = 0; i < height; i++){
@@ -130,66 +181,8 @@ public class GameFrame extends JPanel implements MouseListener, KeyListener {
 		}
 		addMouseListener(this);
 		addKeyListener(this); 
-	}
+	}*/
 
-	private boolean verifyPath(int x, int y, char target,int[][] aux){
-		System.out.println(x);
-		System.out.println(y);
-
-		if(found)
-			return true;
-
-		if(aux[x+1][y] != 1 && m[x+1][y] != 'X' && m[x+1][y] != 'I'){
-			System.out.println("a");
-			if(m[x+1][y] == target){
-				found = true;
-				return true;
-			}
-			aux[x+1][y] = 1;
-			verifyPath(x+1,y,target,aux);
-		}
-
-		if(found)
-			return true;
-
-		if(aux[x-1][y] != 1 && m[x-1][y] != 'X' && m[x-1][y] != 'I'){
-			System.out.println("b");
-			if(m[x-1][y] == target){
-				found = true;
-				return true;
-			}
-			aux[x-1][y] = 1;
-			verifyPath(x-1,y,target,aux);
-		}
-
-		if(found)
-			return true;
-
-		if(aux[x][y+1] != 1 && m[x][y+1] != 'X' && m[x][y+1] != 'I'){
-			System.out.println("c");
-			if(m[x][y+1] == target){
-				found = true;
-				return true;
-			}
-			aux[x][y+1] = 1;
-			verifyPath(x,y+1,target,aux);
-		}
-
-		if(found)
-			return true;
-
-		if(aux[x][y-1] != 1 && m[x][y-1] != 'X' && m[x][y-1] != 'I'){
-			System.out.println("d");
-			if(m[x][y-1] == target){
-				found = true;
-				return true;
-			}
-			aux[x][y-1] = 1;
-			verifyPath(x,y-1,target,aux);
-		}
-
-		return false;
-	}
 
 	private void printTile(Graphics g, char tile, int dx, int dy){
 		if(tile == 'X')

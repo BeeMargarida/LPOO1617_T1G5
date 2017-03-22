@@ -8,21 +8,22 @@ public class KeepLogic extends Logic {
 		/*HERO NOT ARMED*/ 
 		super(new Hero('A', heropos[0], heropos[1], null));   //7,1  //testes
 		if(armedHero){
-			hero.weapon = new Club('*','$',7,2);
+			hero.weapon = new Club('*','$',heropos[0],heropos[1]);
+			hero.weapon.setNotValid();
 		}
 		enemies = new ArrayList<Character>();
 
 		/*OGRE WITHOUT WEAPON*/
 		int[] ogrePos = map.getOgrePos();
-
 		/*OGRE WITH WEAPON*/
 		//Weapon weaponE = new Club('*','$',2,4);
 		//enemies.add(new CrazyOgre('O', ogrePos[0], ogrePos[1], weaponE));   //1,4  //testes
 
 		/*SEVERAL OGRES*/
 		for(int i = 0; i < option; i++) {
-			Weapon weaponE = new Club('*','$',2,4); 
+			Weapon weaponE = new Club('*','$',ogrePos[0],ogrePos[1]); 
 			enemies.add(new CrazyOgre('O',ogrePos[0], ogrePos[1], weaponE));
+			enemies.get(i).weapon.setNotValid();
 		}
 	}
 
@@ -54,20 +55,20 @@ public class KeepLogic extends Logic {
 	public void enemyWeaponMovement(char dir, Map map){
 		for(int i = 0; i < enemies.size(); i++){
 			if(enemies.get(i).weapon != null){
-				boolean set = false;
-				while(!set){
-					int[] weaponmov = enemies.get(i).weapon.swing(enemies.get(i).getX(), enemies.get(i).getY());
-					if(map.isFree(weaponmov[0], weaponmov[1])){
-						if(map.isKey(weaponmov[0], weaponmov[1])){
-							enemies.get(i).weapon.above = true;
-						} 
-						else
-							enemies.get(i).weapon.above = false;
-						enemies.get(i).weapon.setX(weaponmov[0]);
-						enemies.get(i).weapon.setY(weaponmov[1]);
-						set = true;
-					}
+				int[] weaponmov = enemies.get(i).weapon.swing(enemies.get(i).getX(), enemies.get(i).getY());
+				System.out.println(weaponmov[0] + " -- " + weaponmov[1]);
+				if(map.isFree(weaponmov[0], weaponmov[1])){
+					if(map.isKey(weaponmov[0], weaponmov[1])){
+						enemies.get(i).weapon.above = true;
+					} 
+					else
+						enemies.get(i).weapon.above = false;
+					enemies.get(i).weapon.setValid();
+					enemies.get(i).weapon.setX(weaponmov[0]);
+					enemies.get(i).weapon.setY(weaponmov[1]);
 				}
+				else
+					enemies.get(i).weapon.setNotValid();
 			}
 		}
 	}
@@ -108,32 +109,32 @@ public class KeepLogic extends Logic {
 	public void heroWeaponMovement(char dir, Map map){
 		if(hero.weapon == null)
 			return;
-		boolean set = false;
-		while(!set){
-			int[] weaponmov = hero.weapon.swing(hero.getX(), hero.getY());
-			if(weaponmov[0] < 0 || weaponmov[1] < 0)                       //verify if new position is in-bounds
-				continue;
-			if(map.isFree(weaponmov[0], weaponmov[1])){
-				if(map.isKey(weaponmov[0], weaponmov[1]) && !hero.hasKey()){
-					hero.weapon.above = true;
-				} 
-				else
-					hero.weapon.above = false;
-				hero.weapon.setX(weaponmov[0]);
-				hero.weapon.setY(weaponmov[1]);
+		int[] weaponmov = hero.weapon.swing(hero.getX(), hero.getY());
+		if(weaponmov[0] < 0 || weaponmov[1] < 0 || weaponmov[0] > map.getHeight() || weaponmov[1] > map.getWidth()){
+			hero.weapon.setNotValid();
+			return;
+		}
+		if(map.isFree(weaponmov[0], weaponmov[1])){
+			if(map.isKey(weaponmov[0], weaponmov[1]) && !hero.hasKey()){
+				hero.weapon.above = true;
+			} 
+			else
+				hero.weapon.above = false;
+			hero.weapon.setValid();
+			hero.weapon.setX(weaponmov[0]);
+			hero.weapon.setY(weaponmov[1]);
 
-				//hero weapon collision with enemies
-				ArrayList<Weapon> heroweapon = new ArrayList<Weapon>();
-				heroweapon.add(hero.weapon);
-				for(int i = 0; i < enemies.size(); i++){
-					if(colideWeapon(enemies.get(i).getX(), enemies.get(i).getY(),heroweapon)){
-						enemies.get(i).gotStunned();
-					}
-
+			//hero weapon collision with enemies
+			ArrayList<Weapon> heroweapon = new ArrayList<Weapon>();
+			heroweapon.add(hero.weapon);
+			for(int i = 0; i < enemies.size(); i++){
+				if(colideWeapon(enemies.get(i).getX(), enemies.get(i).getY(),heroweapon)){
+					enemies.get(i).gotStunned();
 				}
-				set = true;
 			}
-		}	
+		} 
+		else
+			hero.weapon.setNotValid();
 	}
 
 	public void gameplay(char dir, Map map) {
