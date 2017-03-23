@@ -38,7 +38,7 @@ public class DungeonLogic extends Logic {
 			hero.setY(heromov[1]);
 		}
 		
-		if(colideEnemy(hero.getX(),hero.getY(),enemies))
+		if(collideEnemy(hero.getX(),hero.getY(),enemies))
 			isOver = true; 
 	}
 	

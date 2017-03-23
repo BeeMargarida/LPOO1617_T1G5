@@ -2,24 +2,31 @@ package dkeep.logic;
 
 import java.util.ArrayList;
 
+/**
+ * KeepLogic is a class that extends Logic and it's function is to deal with the logic of the Keep level. It contains all the specific
+ * functions that deal with the hero and the type of enemies of its level. The big difference in this class, compared to the other, is
+ * the existence of armed ogres, a possible armed hero and a key instead of a lever.
+ * @see Logic
+ */
 public class KeepLogic extends Logic {
 
+	/**
+	 * Constructor of KeepLogic. It calls the Logic constructor, then adds a weapon to the hero if the armedHero variable is true. Also adds
+	 * the number of enemies(CrazyOgre) correspondent to the option value.
+	 * @param map Map of the current level
+	 * @param heropos starting position of the hero
+	 * @param armedHero flag that indicates if the hero is armed or not
+	 * @param option number of enemies
+	 */
 	public KeepLogic(Map map, int[] heropos, boolean armedHero, int option) {
-		/*HERO NOT ARMED*/ 
-		super(new Hero('A', heropos[0], heropos[1], null));   //7,1  //testes
+		super(new Hero('A', heropos[0], heropos[1], null));
 		if(armedHero){
 			hero.weapon = new Club('*','$',heropos[0],heropos[1]);
 			hero.weapon.setNotValid();
 		}
 		enemies = new ArrayList<Character>();
 
-		/*OGRE WITHOUT WEAPON*/
 		int[] ogrePos = map.getOgrePos();
-		/*OGRE WITH WEAPON*/
-		//Weapon weaponE = new Club('*','$',2,4);
-		//enemies.add(new CrazyOgre('O', ogrePos[0], ogrePos[1], weaponE));   //1,4  //testes
-
-		/*SEVERAL OGRES*/
 		for(int i = 0; i < option; i++) {
 			Weapon weaponE = new Club('*','$',ogrePos[0],ogrePos[1]); 
 			enemies.add(new CrazyOgre('O',ogrePos[0], ogrePos[1], weaponE));
@@ -27,6 +34,12 @@ public class KeepLogic extends Logic {
 		}
 	}
 
+	/**
+	 * Handles the enemies movement. Requests a possible position of each enemy, then checks if such position is valid (doesn't overlap any
+	 * of the static elements of the game). It also checks if the enemy is stunned and, if it is, it will not move.
+	 * @param dir char that correspond to the direction of the hero movement chosen by the player
+	 * @param map Object Map that corresponds to the current map of the game
+	 */
 	public void enemyMovement(char dir, Map map) {
 		for(int i = 0; i < enemies.size(); i++){
 			if(enemies.get(i).stunned){
@@ -52,6 +65,11 @@ public class KeepLogic extends Logic {
 		}
 	}
 
+	/**
+	 * Handles the enemies' weapons movement. Request a posible position of each 
+	 * @param dir char that correspond to the direction of the hero movement chosen by the player
+	 * @param map Object Map that corresponds to the current map of the game
+	 */
 	public void enemyWeaponMovement(char dir, Map map){
 		for(int i = 0; i < enemies.size(); i++){
 			if(enemies.get(i).weapon != null){
@@ -76,11 +94,11 @@ public class KeepLogic extends Logic {
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
 		if(map.isFree(heromov[0], heromov[1])){
-			if(colideEnemy(heromov[0],heromov[1],enemies)){	
+			if(collideEnemy(heromov[0],heromov[1],enemies)){	
 				isOver = true;
 			}
 			else if(this.getWeapons().size() != 0){
-				if(colideWeapon(hero.getX(), hero.getY(), this.getWeapons())){	
+				if(collideWeapon(hero.getX(), hero.getY(), this.getWeapons())){	
 					isOver = true;
 					hero.setX(heromov[0]);
 					hero.setY(heromov[1]);
@@ -127,7 +145,7 @@ public class KeepLogic extends Logic {
 			ArrayList<Weapon> heroweapon = new ArrayList<Weapon>();
 			heroweapon.add(hero.weapon);
 			for(int i = 0; i < enemies.size(); i++){
-				if(colideWeapon(enemies.get(i).getX(), enemies.get(i).getY(),heroweapon)){
+				if(collideWeapon(enemies.get(i).getX(), enemies.get(i).getY(),heroweapon)){
 					enemies.get(i).gotStunned();
 				}
 			}
@@ -135,7 +153,7 @@ public class KeepLogic extends Logic {
 		else
 			hero.weapon.setNotValid();
 	}
-
+ 
 	public void gameplay(char dir, Map map) {
 		enemyMovement(dir,map);
 		enemyWeaponMovement(dir,map);
