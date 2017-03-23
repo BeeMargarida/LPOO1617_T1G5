@@ -56,7 +56,6 @@ public class KeepLogic extends Logic {
 		for(int i = 0; i < enemies.size(); i++){
 			if(enemies.get(i).weapon != null){
 				int[] weaponmov = enemies.get(i).weapon.swing(enemies.get(i).getX(), enemies.get(i).getY());
-				System.out.println(weaponmov[0] + " -- " + weaponmov[1]);
 				if(map.isFree(weaponmov[0], weaponmov[1])){
 					if(map.isKey(weaponmov[0], weaponmov[1])){
 						enemies.get(i).weapon.above = true;
@@ -138,18 +137,10 @@ public class KeepLogic extends Logic {
 	}
 
 	public void gameplay(char dir, Map map) {
-		//enemy movement
 		enemyMovement(dir,map);
-		//System.out.println("chegou aqui");
-		//enemy weapon
 		enemyWeaponMovement(dir,map);
-		//System.out.println("chegou aqui2");
-		//hero movement
 		moveHero(dir,map);
-		//System.out.println("chegou aqui3");
-		//hero weapon
 		heroWeaponMovement(dir,map);
-		//System.out.println("chegou aqui4");
 	}
 
 	public Logic nextLogic(Map map, int option) {

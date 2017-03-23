@@ -5,9 +5,12 @@ import org.junit.Test;
 
 import dkeep.logic.Logic;
 import dkeep.logic.Map;
+import dkeep.logic.Weapon;
 import dkeep.logic.DungeonMap;
 import dkeep.logic.Game;
 import dkeep.logic.CellPosition;
+import dkeep.logic.Club;
+import dkeep.logic.CrazyOgre;
 import dkeep.logic.DungeonLogic;
 import dkeep.logic.KeepLogic;
 import dkeep.logic.KeepMap;
@@ -31,6 +34,20 @@ public class TestKeepGameLogic {
 		game.moveHero('d');
 		assertEquals(new CellPosition(1,2),logic.getHeroPosition());
 		assertTrue(game.isGameOver());
+	}
+	
+	@Test
+	public void testVictoryKeep(){
+		Map map = new Map(m,new int[] {3,1});
+		int[] numEnemy = {1};
+		int[] heropos = {1,1};
+		Logic logic = new KeepLogic(map,heropos,false,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
+		game.moveHero('s');
+		game.moveHero('s');
+		game.moveHero('a');
+		game.update('a');
+		assertTrue(game.victory());
 	}
 	
 	@Test
@@ -68,9 +85,6 @@ public class TestKeepGameLogic {
 		game.moveHero('s');
 		game.moveHero('s');
 		game.moveHero('a');
-		System.out.println(logic.getHeroPosition().getX());
-		System.out.println(logic.getHeroPosition().getY());
-		//assertEquals(new CellPosition(3,1),logic.getHeroPosition());
 		assertTrue(map.areDoorsOpen());
 	}
 	
@@ -86,6 +100,10 @@ public class TestKeepGameLogic {
 		game.moveHero('a');
 		game.moveHero('a');
 		assertTrue(game.victory());
+		char[][] board = game.getBoard();
+		assertEquals(5,board.length);
+		game.setLevel(1);
+		assertEquals(1,game.getLevel());
 	}
 	
 	@Test
@@ -93,5 +111,28 @@ public class TestKeepGameLogic {
 		Map map = new KeepMap();
 		map.openDoor();
 		assertTrue(map.areDoorsOpen());
+	}
+	
+	@Test
+	public void testNumberOgres(){
+		Map map = new Map(m,new int[] {3,1});
+		int[] numEnemy = {6};
+		int[] heropos = {1,1};
+		Logic logic = new KeepLogic(map,heropos,false,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
+		assertEquals(6,logic.getEnemies().size());
+		assertEquals(6,logic.getWeapons().size());
+	}
+	
+	@Test
+	public void testAddEnemiesandNextLogic(){
+		Map map = new KeepMap();
+		int[] heropos = map.getHeroPos();
+		Logic logic = new KeepLogic(map,heropos,false,0);
+		int[] ogrePos = map.getOgrePos();
+		Weapon weaponE = new Club('*','$',ogrePos[0],ogrePos[1]); 
+		logic.addEnemy(new CrazyOgre('O',ogrePos[0], ogrePos[1], weaponE));
+		assertEquals(1,logic.getEnemies().size());
+		assertNull(logic.nextLogic(map,0));
 	}
 }

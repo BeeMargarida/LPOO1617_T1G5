@@ -10,12 +10,8 @@ public class DungeonLogic extends Logic {
 		
 		enemies = new ArrayList<Character>();
 		char[] path = {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
-		//Choosing one of 3 guards
 		
 		int[] guardPos = map.getGuardPos();
-		System.out.println(guardPos[0]);
-		System.out.println(guardPos[1]);
-		
 		if(option == 1)
 			enemies.add(new RookieGuard('G',guardPos[0],guardPos[1], path));
 		else if(option == 2)

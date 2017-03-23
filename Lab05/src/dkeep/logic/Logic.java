@@ -1,6 +1,9 @@
 package dkeep.logic;
 import java.util.ArrayList; 
 
+/**
+ * 
+ */
 public class Logic {
 
 	protected Hero hero;
@@ -18,9 +21,17 @@ public class Logic {
 		enemies.add(enemy);
 	}
 	
+	public ArrayList<Character>getEnemies(){
+		return enemies;
+	}
+	
 	public CellPosition getHeroPosition(){
 		CellPosition c = new CellPosition(hero.getX(),hero.getY());
 		return c;
+	}
+	
+	public Hero getHero(){
+		return hero;
 	}
 	
 	public char getHeroSymbol(){

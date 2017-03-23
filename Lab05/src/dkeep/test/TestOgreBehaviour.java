@@ -47,12 +47,11 @@ public class TestOgreBehaviour {
 		int[] heropos = {1,1};
 		Logic logic = new KeepLogic(map,heropos,true,numEnemy[0]);
 		Game game = new Game(map, logic, numEnemy);
-
+		assertFalse(logic.getHero().getWeapon().getValid());
 		boolean clubsymbol = false;
 		game.moveHero('s');
 		while(!clubsymbol){
 			game.update('a');
-			//System.out.println(logic.getEnemyWeaponSymbol());
 			if(logic.getHeroWeaponSymbol() == '$')
 				clubsymbol = true;
 		}	
@@ -71,7 +70,6 @@ public class TestOgreBehaviour {
 		
 		while(!enemysymbol){
 			game.update('d');
-			//System.out.println(logic.getEnemyWeaponSymbol());
 			if(logic.getEnemySymbol() == '8')
 				enemysymbol = true;
 		}

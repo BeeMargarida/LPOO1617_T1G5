@@ -12,19 +12,10 @@ import dkeep.logic.CellPosition;
 import dkeep.logic.DungeonLogic;
 import dkeep.logic.KeepMap;
 import dkeep.logic.Hero;
+import dkeep.logic.KeepLogic;
 
 public class TestDungeonGameLogic  {
-//	char[][] m = {{'X','X','X','X','X','X','X','X','X','X'},
-//			{'X',' ',' ',' ','I',' ','X',' ',' ','X'},
-//			{'X','X','X',' ','X','X','X',' ',' ','X'},
-//			{'X',' ','I',' ','I',' ','X',' ',' ','X'},
-//			{'X','X','X',' ','X','X','X',' ',' ','X'},
-//			{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-//			{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-//			{'X','X','X',' ','X','X','X','X',' ','X'},
-//			{'X',' ','I',' ','I',' ','X','k',' ','X'},
-//			{'X','X','X','X','X','X','X','X','X','X'}};
-	
+
 	char[][] m = {{'X','X','X','X','X'},
 					{'X',' ',' ','G','X'},
 					{'I',' ',' ',' ','X'},
@@ -34,7 +25,6 @@ public class TestDungeonGameLogic  {
 	@Test
 	public void testMoveHeroIntoFreeCell() {
 		Map map = new Map(m,new int[] {3,1});
-		//Hero hero = new Hero('H',1,1,null);
 		int[] numEnemy = {1};
 		int[] heropos = {1,1};
 		Logic logic = new DungeonLogic(map,heropos, numEnemy[0]);
@@ -53,11 +43,6 @@ public class TestDungeonGameLogic  {
 		Game game = new Game(map, logic, numEnemy);
 		assertFalse(game.isGameOver());
 		game.moveHero('d');
-		/*
-		System.out.println(logic.getHeroPosition().getX());
-		System.out.println(logic.getHeroPosition().getY());
-		System.out.println(game.isGameOver());
-		*/
 		assertTrue(game.isGameOver());
 	}
 	
@@ -110,6 +95,8 @@ public class TestDungeonGameLogic  {
 		System.out.println(logic.getVictory());
 		game.moveHero('a');
 		assertTrue(game.victory());
+		assertEquals(1,logic.nextLogic(map, 1).getEnemies().size());
+		logic.setGameOver();
 	}
 	
 	@Test
@@ -117,5 +104,43 @@ public class TestDungeonGameLogic  {
 		Map map = new DungeonMap();
 		map.openDoor();
 		assertTrue(map.areDoorsOpen());
+	}
+	
+	@Test(timeout=1000)
+	public void testDrunkenGuard(){
+		Map map = new DungeonMap();
+		int[] numEnemy = {2};
+		int[] heropos = {1,1};
+		Logic logic = new DungeonLogic(map,heropos,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
+		
+		boolean enemySymbol = false;
+		while(!enemySymbol){
+			logic.gameplay('a', map);
+			if(logic.getEnemySymbol() == 'g')
+				enemySymbol = true;
+		}
+	}
+	
+	@Test(timeout=1000)
+	public void testSuspiciousGuard(){
+		Map map = new DungeonMap();
+		int[] numEnemy = {3};
+		int[] heropos = {1,1};
+		Logic logic = new DungeonLogic(map,heropos,numEnemy[0]);
+		Game game = new Game(map, logic, numEnemy);
+		
+		assertEquals('U',logic.getEnemies().get(0).getSymbol());
+		boolean enemyThere = false;
+		while(!enemyThere){
+			logic.gameplay('a', map);
+			if(logic.getEnemies().get(0).getX() == 3 && logic.getEnemies().get(0).getY() == 8)
+				enemyThere = true;
+		}
+	}
+	
+	public void testNextMap(){
+		Map map = new DungeonMap();
+		assertEquals(1,map.nextMap().getKey()[0]);
 	}
 }

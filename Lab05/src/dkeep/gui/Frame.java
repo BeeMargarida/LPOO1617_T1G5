@@ -51,9 +51,9 @@ public class Frame {
 	 */
 
 	static boolean found = false;
-	
-	
-	
+
+
+
 	private static boolean verifyBorders(){
 		for(int i = 0; i < userMap.length; i++){
 			for(int j = 0; j < userMap[i].length;j++){
@@ -69,28 +69,41 @@ public class Frame {
 		}
 		return true;
 	}
-	
+
 	private static boolean verifyAllElements(){
 		boolean door = false , hero = false, ogre = false, key=false;
 		for(int i = 0; i < userMap.length; i++){
 			for(int j = 0; j < userMap[i].length;j++){
 				if(userMap[i][j] == 'I')
 					door = true;
-				if(userMap[i][j] == 'H')
-					hero = true;
-				if(userMap[i][j] == 'O')
-					ogre = true;
-				if(userMap[i][j] == 'k')
-					key = true;
+				if(userMap[i][j] == 'H'){
+					if(hero)
+						return false;
+					else
+						hero = true;
+				}
+				if(userMap[i][j] == 'O'){
+					if(ogre)
+						return false;
+					else
+						ogre = true;
+				}
+				if(userMap[i][j] == 'k'){
+					if(key)
+						return false;
+					else
+						key = true;
+				}
 			}
 		}
 		return (door && hero && ogre && key);
+
 	}
 	private static boolean verifyPath(int x, int y, char target,int[][] aux, char[][] m){
 		/*
 		System.out.println(x);
 		System.out.println(y);
-		*/
+		 */
 
 		if(found)
 			return true;
@@ -146,19 +159,19 @@ public class Frame {
 
 		return false;
 	}
-	
-	
-	
+
+
+
 	private static boolean verifyMap(){
 		if(!verifyBorders())
 			return false;
-			
+
 		System.out.println("1");
-		
+
 		if(!verifyAllElements())
 			return false;
 		System.out.println("2");
-		
+
 		int[] pos = new int[2];
 		for(int i = 0; i < userMap.length; i++){
 			for(int j = 0; j < userMap[i].length; j++){
@@ -168,23 +181,23 @@ public class Frame {
 				}
 			}
 		}
-		
+
 		if(!verifyPath(pos[0],pos[1],'k',new int[userMap.length][userMap[0].length],userMap))
 			return false;
-		
+
 		found = false;
-		
+
 		System.out.println("3");
-	
+
 		/*//Verifica a parede  
 		if(!verifyPath(pos[0],pos[1],'I',new int[userMap.length][userMap[0].length],userMap))
 			return false;
-		
+
 		found = false;
-		
+
 		System.out.println("4");
-		*/
-		
+		 */
+
 		return true;
 	}
 
@@ -240,7 +253,7 @@ public class Frame {
 					return;
 				}
 				int[] numEnemy = {comboBox.getSelectedIndex()+1, OgreNumber};
-				
+
 				JPanel gameframe = new GameFrame(numEnemy);
 				gframe.getContentPane().add(gameframe);
 				gframe.pack(); 
@@ -277,13 +290,13 @@ public class Frame {
 		gframe = new JFrame("Game");
 		//gframe.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		gframe.addWindowListener(new WindowAdapter()
-        {
-            public void windowClosing(WindowEvent e)
-            {
-            	gframe.setVisible(false);
-            	bframe.setVisible(true);
-            }
-        });
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				gframe.setVisible(false);
+				bframe.setVisible(true);
+			}
+		});
 		gframe.setPreferredSize(new Dimension(500, 500)); 
 
 		//BUILDFRAME
@@ -294,15 +307,15 @@ public class Frame {
 		//EDITOR FRAME
 		mframe = new JFrame("Editor");
 		mframe.addWindowListener(new WindowAdapter()
-        {
-            public void windowClosing(WindowEvent e)
-            {
-            	gframe.setVisible(false);
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				gframe.setVisible(false);
 				bframe.setVisible(false);
 				mframe.setVisible(false);
 				frame.setVisible(true);
-            }
-        });
+			}
+		});
 		mframe.setSize(new Dimension(500,500));
 		mframe.getContentPane().setLayout(null);
 		mframe.setVisible(false);
@@ -377,7 +390,7 @@ public class Frame {
 		});
 		btnExit2.setBounds(48, 209, 89, 23);
 		mframe.getContentPane().add(btnExit2);
-		
+
 		btnPlay.setBounds(48, 165, 89, 23);
 		mframe.getContentPane().add(btnPlay);
 
