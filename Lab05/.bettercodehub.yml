@@ -1,8 +1,0 @@
-exclude:
-- /Lab01/src/Game.java
-- /Lab02/src/dkeep/.*
-- /Lab03/src/dkeep/.*
-- /Lab04/src/dkeep/.*
-component_depth: 1
-languages:
-- java
