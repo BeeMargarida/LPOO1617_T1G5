@@ -26,11 +26,11 @@ public class Main {
 		Logic logic = new DungeonLogic(map, heropos, numEnemy[0]); //ACABAR
 		Game g = new Game(map, logic, numEnemy);
 		while(!g.isGameOver()){
-			g.print();
+			g.getBoard();
 			char dir = askUser();
 			g.update(dir);
 		}
-		g.print();
+		g.getBoard();
 		System.out.println("End of Game!");
 		return;
 	}

@@ -23,7 +23,6 @@ public abstract class Guard extends Character {
 		if(i == path.length){
 			i = 0;
 		}
-		System.out.println(path[i]);
 		if(path[i] == 'w'){ 
 			mov = new int[] {x-1,y};
 			
@@ -52,8 +51,6 @@ public abstract class Guard extends Character {
 		if(i < 0){
 			i = path.length - 1; 
 		}
-		//i--;
-		System.out.println(path[i]);
 		if(path[i] == 'w'){ 
 			mov = new int[]{x+1,y};
 		}

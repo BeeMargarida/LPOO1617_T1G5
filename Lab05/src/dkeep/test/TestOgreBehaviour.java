@@ -73,6 +73,6 @@ public class TestOgreBehaviour {
 			if(logic.getEnemySymbol() == '8')
 				enemysymbol = true;
 		}
-		game.print();
+		game.getBoard();
 	}
 }

@@ -3,8 +3,21 @@ package dkeep.logic;
 import java.util.ArrayList; 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * DungeonLogic is a class that extends Logic and it's function is to deal with the logic of the Dungeon level. It contains all the specific
+ * functions that deal with the hero and the type of enemies of its level. The big difference in this class, compared to the other, is
+ * the existence of three guards, each with a different behaviour. This level only has a lever.
+ * @see Logic
+ */
 public class DungeonLogic extends Logic {
 
+	/**
+	 * Constructor of DungeonLogic. It calls the Logic constructor, then adds one enemy, which behaviour is chosen according to the option selected by the user.
+	 * The path is always the same.
+	 * @param map Map of the current level
+	 * @param heropos starting position of the hero
+	 * @param option refers to the behaviour of the guard
+	 */
 	public DungeonLogic(Map map, int[] heropos, int option) {
 		super(new Hero('H',heropos[0],heropos[1],null));
 		
@@ -20,7 +33,9 @@ public class DungeonLogic extends Logic {
 			enemies.add(new SuspiciousGuard('U',guardPos[0],guardPos[1],path));
 		
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public void moveHero(char dir, Map map){
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
@@ -41,7 +56,10 @@ public class DungeonLogic extends Logic {
 		if(collideEnemy(hero.getX(),hero.getY(),enemies))
 			isOver = true; 
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 * In this level, only the enemy and hero movements are made because there are no weapons.
+	 */
 	public void gameplay(char dir, Map map) {
 	
 		int[] enemymov = enemies.get(0).movement();
@@ -51,7 +69,9 @@ public class DungeonLogic extends Logic {
 		moveHero(dir, map);
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public Logic nextLogic(Map map, int option){
 		int[] heropos = map.getHeroPos();
 		return new KeepLogic(map, heropos, true, option);

@@ -66,7 +66,8 @@ public class KeepLogic extends Logic {
 	}
 
 	/**
-	 * Handles the enemies' weapons movement. Request a posible position of each 
+	 * Handles the enemies' weapons movement. Request a possible position of each enemies' weapon, then checks if such position is valid (doesn't overlap any
+	 * of the static elements of the game). It also checks if the enemies' weapon is above and, if it is, it will change it's flag accordingly.
 	 * @param dir char that correspond to the direction of the hero movement chosen by the player
 	 * @param map Object Map that corresponds to the current map of the game
 	 */
@@ -90,6 +91,10 @@ public class KeepLogic extends Logic {
 		}
 	}
 
+	/** 
+	 * {@inheritDoc}
+	 * In this level the collision of the hero with the enemies' weapons is made.
+	 */
 	public void moveHero(char dir, Map map) {
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
@@ -123,6 +128,13 @@ public class KeepLogic extends Logic {
 		}
 	}
 
+	/**
+	 * Handles the hero's weapon movement. Request a possible position of the hero's weapon, then checks if such position is valid (doesn't overlap any
+	 * of the static elements of the game). It checks if the hero's weapon is above and if is valid and, if it is, it will change it's flag accordingly.
+	 * Furthermore, it checks if the hero's weapon stuns any of the guards.
+	 * @param dir char that correspond to the direction of the hero movement chosen by the player
+	 * @param map Object Map that corresponds to the current map of the game
+	 */
 	public void heroWeaponMovement(char dir, Map map){
 		if(hero.weapon == null)
 			return;
@@ -154,6 +166,9 @@ public class KeepLogic extends Logic {
 			hero.weapon.setNotValid();
 	}
  
+	/**
+	 * {@inheritDoc}
+	 */
 	public void gameplay(char dir, Map map) {
 		enemyMovement(dir,map);
 		enemyWeaponMovement(dir,map);
@@ -161,10 +176,15 @@ public class KeepLogic extends Logic {
 		heroWeaponMovement(dir,map);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Logic nextLogic(Map map, int option) {
 		return null;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean getVictory() {
 		return victory;
 	}

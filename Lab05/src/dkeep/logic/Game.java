@@ -2,6 +2,11 @@ package dkeep.logic;
 
 import java.util.*;
 
+/**
+ * Game is a class that deals with the whole game, connecting logics with the respective map. This class checks if the game is over and either proceeds to the next level 
+ * (if there is one), or ends the game and transmits that information to the main function. It contains the map and logic of the game, the enemy's options of each level and
+ * the current level of the game being played.
+ */
 public class Game {
 	private Map map;
 	private Logic logic;
@@ -9,6 +14,12 @@ public class Game {
 	private int level;
 
 
+	/**
+	 * Constructor of Game. Initializes the map, logic and enemyoptions with the attributes given and sets the level to 0.
+	 * @param startingMap Map that is playable in the beginning of the game
+	 * @param startingLogic Logic that is playable in the beginning of the game
+	 * @param numEnemy Options regarding the enemies of the existing levels
+	 */
 	public Game(Map startingMap, Logic startingLogic, int[] numEnemy) {
 		map = startingMap;
 		logic = startingLogic;
@@ -16,74 +27,36 @@ public class Game {
 		level = 0;
 	}
 
+	/**
+	 * Checks with the logic to see if the game in the level is over, return true if it is, false if not.
+	 * @return true if the level is over, false if not
+	 */
 	public boolean isGameOver() {
 		return logic.gameOver();
 	}
 
+	/**
+	 * Checks with the logic to see if the game in the level ended in victory, return true if it has, false if not.
+	 * @return true if the level ended in victory, false if not
+	 */
 	public boolean victory(){
 		return logic.getVictory();
 	}
 
-	public String print(){
-		String text = new String("");
-
-		char[][] m = map.getMap();
-		if(!logic.hero.hasKey()){
-			m[map.getKey()[0]][map.getKey()[1]] = 'k';
-		}
-		//hero
-		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.getSymbol();
-		//enemies
-		for(int i = 0; i < logic.enemies.size(); i++){
-			m[logic.enemies.get(i).getX()][logic.enemies.get(i).getY()] = logic.enemies.get(i).getSymbol();
-		} 
-		//weapons
-		ArrayList<Weapon> weapons = logic.getWeapons();
-		if(weapons.size() != 0){
-			for(Weapon it : weapons){
-				if(it.getValid())
-					m[it.getX()][it.getY()] = it.getSymbol();
-			}
-		}
-		
-		if(logic.hero.weapon != null){
-			if(logic.hero.weapon.getValid()){
-				m[logic.hero.weapon.getX()][logic.hero.weapon.getY()] = logic.hero.weapon.getSymbol();
-			}
-		}
-		//PRINT
-		for(int i = 0; i < m.length; i++){
-			text += String.valueOf(m[i]);
-			text += "\n";
-			System.out.println(m[i]);
-		}
-		//ERASE
-		m[logic.hero.getX()][logic.hero.getY()] = ' ';
-		for(int i = 0; i < logic.enemies.size(); i++){
-			m[logic.enemies.get(i).getX()][logic.enemies.get(i).getY()] = ' ';
-		}
-		if(weapons.size() != 0){
-			for(Weapon it : weapons){
-				m[it.getX()][it.getY()] = ' ';
-			}
-		}
-		if(logic.hero.weapon != null){
-			m[logic.hero.weapon.getX()][logic.hero.weapon.getY()] = ' ';
-		}
-		m[map.getKey()[0]][map.getKey()[1]] = ' ';//erases key
-		return text;
-	}
-
+	/**
+	 * Puts all the non-static elements of the game on the map, saves it into a matrix of chars and also prints it. In the end, erases all the non-static elements.
+	 * @return matrix of chars that contain the current map of the game
+	 */
 	public char[][] getBoard(){
 		char[][] m = map.getMap();
-		if(!logic.hero.hasKey()){
+		if(!logic.getHero().hasKey()){
 			m[map.getKey()[0]][map.getKey()[1]] = 'k';
 		}
 		//hero
-		m[logic.hero.getX()][logic.hero.getY()] = logic.hero.getSymbol();
+		m[logic.getHero().getX()][logic.getHero().getY()] = logic.getHero().getSymbol();
 		//enemies
-		for(int i = 0; i < logic.enemies.size(); i++){
-			m[logic.enemies.get(i).getX()][logic.enemies.get(i).getY()] = logic.enemies.get(i).getSymbol();
+		for(int i = 0; i < logic.getEnemies().size(); i++){
+			m[logic.getEnemies().get(i).getX()][logic.getEnemies().get(i).getY()] = logic.getEnemies().get(i).getSymbol();
 		} 
 		//weapons
 		ArrayList<Weapon> weapons = logic.getWeapons();
@@ -93,49 +66,66 @@ public class Game {
 					m[it.getX()][it.getY()] = it.getSymbol();
 			}
 		}
-		if(logic.hero.weapon != null){
-			//System.out.println(logic.hero.weapon.getValid());
-			if(logic.hero.weapon.getValid()){
-				m[logic.hero.weapon.getX()][logic.hero.weapon.getY()] = logic.hero.weapon.getSymbol();
+		if(logic.getHero().getWeapon() != null){
+			//System.out.println(logic.getHero().getWeapon().getValid());
+			if(logic.getHero().getWeapon().getValid()){
+				m[logic.getHero().getWeapon().getX()][logic.getHero().getWeapon().getY()] = logic.getHero().getWeapon().getSymbol();
 			}
 		}
-
-
+		for(int i = 0; i < m.length; i++){
+			System.out.println(m[i]);
+		}
 		char[][] tmp = new char[m.length][];
 		for(int i = 0; i < tmp.length; i++){
 			tmp[i] = m[i].clone();
 		}
 
 		//ERASE
-		m[logic.hero.getX()][logic.hero.getY()] = ' ';
-		for(int i = 0; i < logic.enemies.size(); i++){
-			m[logic.enemies.get(i).getX()][logic.enemies.get(i).getY()] = ' ';
+		m[logic.getHero().getX()][logic.getHero().getY()] = ' ';
+		for(int i = 0; i < logic.getEnemies().size(); i++){
+			m[logic.getEnemies().get(i).getX()][logic.getEnemies().get(i).getY()] = ' ';
 		}
 		if(weapons.size() != 0){
 			for(Weapon it : weapons){
 				m[it.getX()][it.getY()] = ' ';
 			}
 		}
-		if(logic.hero.weapon != null){
-			m[logic.hero.weapon.getX()][logic.hero.weapon.getY()] = ' ';
+		if(logic.getHero().getWeapon() != null){
+			m[logic.getHero().getWeapon().getX()][logic.getHero().getWeapon().getY()] = ' ';
 		}
 		m[map.getKey()[0]][map.getKey()[1]] = ' ';//erases key
 
 		return tmp;
 	}
 
+	/**
+	 * Returns the current level of the game.
+	 * @return level attribute
+	 */
 	public int getLevel(){
 		return level;
 	}
 
+	/**
+	 * Sets the level attribute to a new value.
+	 * @param level new value of level
+	 */
 	public void setLevel(int level){
 		this.level = level;
 	}
 
+	/**
+	 * Moves the hero in the direction chosen by the player.
+	 * @param dir direction to which move the hero
+	 */
 	public void moveHero(char dir){
 		logic.moveHero(dir, map);
 	}
 
+	/**
+	 * Updates the state of the game and checks if it ended in victory. If that is case and there is a next level, it requests the logic and map of the next level.
+	 * @param dir direction to which move the hero
+	 */
 	public void update(char dir) {
 		logic.gameplay(dir, map);
 		if(logic.getVictory()){
