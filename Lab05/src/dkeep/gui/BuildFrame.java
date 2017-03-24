@@ -21,8 +21,6 @@ import java.awt.event.ActionEvent;
 
 
 public class BuildFrame extends JPanel implements MouseListener, MouseMotionListener{
-
-	private BufferedImage btile, wall, hero, herok, rguard, dguard, sguard, ogre, weapon, lever, key, door, opendoor, background, gameover;
 	private int x = 50, y = 0, tileheight = 30, tilewidth = 30;
 	private char[] tiles = {'X', 'I', 'k', 'O', 'H', ' '};
 	private char selected = ' ';
@@ -52,61 +50,35 @@ public class BuildFrame extends JPanel implements MouseListener, MouseMotionList
 		mapWidth = userMap[0].length;
 		selected = ' ';
 		by = (mapHeight+1)*tileheight;
-		//drag = false;
 
-		try{
-			btile = ImageIO.read(new File("imgs/Tile.png"));
-			wall = ImageIO.read(new File("imgs/Wall.png"));
-			hero = ImageIO.read(new File("imgs/Link.png"));
-			herok = ImageIO.read(new File("imgs/LinkK.png"));
-			rguard = ImageIO.read(new File("imgs/Guard.png"));
-			dguard = ImageIO.read(new File("imgs/DGuard.png"));
-			sguard = ImageIO.read(new File("imgs/SGuard.png"));
-			ogre =  ImageIO.read(new File("imgs/Ogre.png"));
-			weapon = ImageIO.read(new File("imgs/Weapon.png"));
-			lever = ImageIO.read(new File("imgs/LeverO.png"));
-			key = ImageIO.read(new File("imgs/Key.png"));
-			door = ImageIO.read(new File("imgs/Door.png"));
-			opendoor = ImageIO.read(new File("imgs/ODoor.png"));
-			background = ImageIO.read(new File("imgs/BG.png"));
-			gameover = ImageIO.read(new File("imgs/Game_Over.png"));
-		}
-		catch(IOException e){
-			System.out.println("Error loading images");
-			System.exit(1);
-		}
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		setLayout(null);
-		
+		setLayout(null);	
 	}
 
 	private void printTile(Graphics g, char tile, int dx, int dy){
 		if(tile == 'X')
-			g.drawImage(wall, dx, dy, tilewidth, tileheight, this);
+			g.drawImage(GameGui.wall, dx, dy, tilewidth, tileheight, this);
 		else if(tile == 'H' || tile == 'A')
-			g.drawImage(hero, dx, dy, tilewidth, tileheight, this);
+			g.drawImage(GameGui.hero, dx, dy, tilewidth, tileheight, this);
 		else if(tile == 'H' || tile == 'K')
-			g.drawImage(herok, dx, dy, tilewidth, tileheight, this);
-		else if(tile == 'G')
-			g.drawImage(rguard, dx, dy, tilewidth, tileheight, this);
-		else if(tile == 'g' || tile == 'D')
-			g.drawImage(dguard, dx, dy, tilewidth, tileheight, this);
-		else if(tile == 'U')
-			g.drawImage(sguard, dx, dy, tilewidth, tileheight, this);
+			g.drawImage(GameGui.herok, dx, dy, tilewidth, tileheight, this);
 		else if(tile == 'O')
-			g.drawImage(ogre, dx, dy, tilewidth, tileheight, this);
+			g.drawImage(GameGui.ogre, dx, dy, tilewidth, tileheight, this);
+		else if(tile == '8')
+			g.drawImage(GameGui.sogre, dx, dy, tilewidth, tileheight, this);
 		else if(tile == '*')
-			g.drawImage(weapon, dx, dy, tilewidth, tileheight, this);
-		else if(tile == 'k'){
-			g.drawImage(key, dx, dy, tilewidth, tileheight, this);
-		}
+			g.drawImage(GameGui.weapon, dx, dy, tilewidth, tileheight, this);
+		else if(tile == 'k')
+			g.drawImage(GameGui.key, dx, dy, tilewidth, tileheight, this);
+		else if(tile == '$')
+			g.drawImage(GameGui.overkey, dx, dy, tilewidth, tileheight, this);
 		else if(tile == 'I')
-			g.drawImage(door, dx, dy, tilewidth, tileheight, this);
+			g.drawImage(GameGui.door, dx, dy, tilewidth, tileheight, this);
 		else if(tile == 'S')
-			g.drawImage(opendoor, dx, dy, tilewidth, tileheight, this);
+			g.drawImage(GameGui.opendoor, dx, dy, tilewidth, tileheight, this);
 		else if(tile == ' ')
-			g.drawImage(btile, dx, dy, tilewidth, tileheight, this);
+			g.drawImage(GameGui.btile, dx, dy, tilewidth, tileheight, this);
 	}
 
 	protected void paintComponent(Graphics g) {
