@@ -1,12 +1,14 @@
 package dkeep.logic;
- 
+
+import java.io.Serializable;
+
 /**
  * Guard is a class that keeps information about the type of enemy Guard. This information consists of the path corresponding to it's
  * movement on the map and the index that keeps track of that path. It also contains the methods for the normal movement (following the path)
  * and the reverse movement(following the path in reverse order).
  * @see Character
  */
-public abstract class Guard extends Character {
+public abstract class Guard extends Character implements Serializable{
 	
 	protected char[] path;
 	protected int i;

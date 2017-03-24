@@ -31,19 +31,21 @@ public class BuildFrame extends JPanel implements MouseListener, MouseMotionList
 	private char[][] m; 
 	private boolean drag = false;
 	
-	public BuildFrame(int OgreNumber, char[][] userMap){
+	public BuildFrame(int OgreNumber, char[][] userMap, boolean make){
 		m = userMap;
-		for(int i = 0; i < userMap.length; i++){
-			for(int j = 0; j < userMap[i].length;  j++){
-				if(i == 0 || i == userMap.length-1)
-					m[i][j] = 'X';
-				else{
-					if(j == 0 || j == userMap[i].length-1)
+		if(make){
+			for(int i = 0; i < userMap.length; i++){
+				for(int j = 0; j < userMap[i].length;  j++){
+					if(i == 0 || i == userMap.length-1)
 						m[i][j] = 'X';
-					else
-						m[i][j] = ' ';
-				}
+					else{
+						if(j == 0 || j == userMap[i].length-1)
+							m[i][j] = 'X';
+						else
+							m[i][j] = ' ';
+					}
 
+				}
 			}
 		}
 		mapHeight = userMap.length;

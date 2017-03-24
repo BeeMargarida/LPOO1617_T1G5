@@ -1,10 +1,12 @@
-package dkeep.logic; 
+package dkeep.logic;
+
+import java.io.Serializable;
 
 /**
  * DungeonMap is a class that keeps information about the Dungeon map, containing the matrix of chars representing the map and it's key.
  * @see Map
  */
-public class DungeonMap extends Map {
+public class DungeonMap extends Map implements Serializable{
 
 	private char[][] p ={{'X','X','X','X','X','X','X','X','X','X'},
 			{'X','H',' ',' ','I',' ','X',' ','G','X'},

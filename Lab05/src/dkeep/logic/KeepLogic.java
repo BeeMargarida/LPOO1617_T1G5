@@ -1,5 +1,6 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * the existence of armed ogres, a possible armed hero and a key instead of a lever.
  * @see Logic
  */
-public class KeepLogic extends Logic {
+public class KeepLogic extends Logic implements Serializable{
 
 	/**
 	 * Constructor of KeepLogic. It calls the Logic constructor, then adds a weapon to the hero if the armedHero variable is true. Also adds

@@ -1,10 +1,12 @@
-package dkeep.logic;  
+package dkeep.logic;
+
+import java.io.Serializable;
 
 /**
  * Weapon is a class that represents a weapon possessed by a character. It keeps information about it's symbols, coordinates, and flags
  * informing if it's position is above key and if it is in a vlid position to be printed. 
  */
-public abstract class Weapon {
+public abstract class Weapon implements Serializable{
 	
 	protected int x;
 	protected int y;

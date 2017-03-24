@@ -1,5 +1,6 @@
 package dkeep.logic; 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Character is a class that keeps the information about the moving elements of the game. It keeps information about it's coordinates,
  * symbol, if it's above a key or stunned, it's turns (movement depends on it) and it's weapon.
  */
-public abstract class Character {
+public abstract class Character implements Serializable{
 	
 	protected int x;
 	protected int y;

@@ -1,5 +1,6 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList; 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -9,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * the existence of three guards, each with a different behaviour. This level only has a lever.
  * @see Logic
  */
-public class DungeonLogic extends Logic {
+public class DungeonLogic extends Logic implements Serializable{
 
 	/**
 	 * Constructor of DungeonLogic. It calls the Logic constructor, then adds one enemy, which behaviour is chosen according to the option selected by the user.

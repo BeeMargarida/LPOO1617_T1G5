@@ -1,4 +1,5 @@
 package dkeep.logic;
+import java.io.Serializable;
 import java.util.ArrayList; 
 
 /**
@@ -6,7 +7,7 @@ import java.util.ArrayList;
  * such as the hero, the enemies and a flag checks if the game is over and another that checks if it is a victory. 
  * It contains methods that deal with the movement of all the characters in the game and the collisions between them.
  */
-public class Logic {
+public class Logic implements Serializable{
 
 	protected Hero hero;
 	protected ArrayList<Character> enemies;

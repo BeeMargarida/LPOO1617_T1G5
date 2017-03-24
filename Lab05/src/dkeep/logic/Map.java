@@ -1,11 +1,12 @@
 package dkeep.logic;
 import java.util.*;
+import java.io.*;
  
 /**
  * Map is a class that keeps information about the map used in the game. It has a matrix of chars, used to store the map, and the 
  * position of it's key.
  */
-public class Map {
+public class Map implements Serializable {
 
 	protected char[][] map;
 	protected int[] key;
@@ -205,5 +206,5 @@ public class Map {
 	public Map nextMap() {
 		return null;
 	}
-
+	
 }

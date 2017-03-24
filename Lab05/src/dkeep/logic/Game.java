@@ -1,5 +1,6 @@
 package dkeep.logic; 
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,7 +8,7 @@ import java.util.*;
  * (if there is one), or ends the game and transmits that information to the main function. It contains the map and logic of the game, the enemy's options of each level and
  * the current level of the game being played.
  */
-public class Game {
+public class Game implements Serializable {
 	private Map map;
 	private Logic logic;
 	private int[] numEnemy;

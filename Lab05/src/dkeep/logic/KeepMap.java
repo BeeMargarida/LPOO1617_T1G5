@@ -1,10 +1,12 @@
 package dkeep.logic;
 
+import java.io.Serializable;
+
 /**
  * Keepmap is a class that keeps information about the Keep map, containing the matrix of chars representing the map and it's key.
  * @see Map
  */
-public class KeepMap extends Map { 
+public class KeepMap extends Map implements Serializable{ 
 
 	private char[][] p = {{'X','X','X','X','X','X','X','X','X'},
 			{'I',' ',' ',' ','O',' ',' ','k','X'},
