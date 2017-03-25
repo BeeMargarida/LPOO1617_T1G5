@@ -13,8 +13,8 @@ public class RookieGuard extends Guard {
 	 * @param y coordinate
 	 * @param path array of movements of the guard
 	 */
-	public RookieGuard(char symbol, int x, int y, char[] path) {
-		super(symbol,x,y,path,-1);
+	public RookieGuard(char symbol, int[] coord, char[] path) {
+		super(symbol,coord,path);
 	} 
 	/**
 	 * {@inheritDoc}

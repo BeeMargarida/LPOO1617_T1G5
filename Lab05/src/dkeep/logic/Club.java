@@ -16,9 +16,9 @@ public class Club extends Weapon {
 	 * @param x coordinate
 	 * @param y coordinate
 	 */
-	public Club(char symbol, char secsymbol, int x, int y) {
-		this.x = x;
-		this.y = y;
+	public Club(char symbol, char secsymbol, int[] coord) {
+		this.x = coord[0];
+		this.y = coord[1];
 		this.symbol = symbol;
 		this.secsymbol = secsymbol;
 		this.above = false;

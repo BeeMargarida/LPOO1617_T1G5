@@ -16,8 +16,8 @@ public class SuspiciousGuard extends Guard {
 	 * @param y coordinate
 	 * @param path array of movements of the guard
 	 */
-	public SuspiciousGuard(char symbol, int x, int y, char[] path) {
-		super(symbol,x,y,path,-1);
+	public SuspiciousGuard(char symbol, int[] coord, char[] path) {
+		super(symbol,coord,path);
 	}
 	/**
 	 * {@inheritDoc}

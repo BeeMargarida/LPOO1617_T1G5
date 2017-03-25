@@ -15,7 +15,7 @@ public abstract class Character implements Serializable{
 	protected char symbol;
 	protected boolean isOverKey = false; 
 	protected boolean stunned = false;
-	protected int turns;
+	protected int turns = 0;
 	protected Weapon weapon;
 	
 	/**
@@ -25,11 +25,10 @@ public abstract class Character implements Serializable{
 	 * @param symbol char that represents the character
 	 * @param weapon Object weapon that contains information about the weapon
 	 */
-	public Character(int x, int y, char symbol,Weapon weapon){
-		this.x = x;
-		this.y = y;
+	public Character(int[] coord, char symbol, Weapon weapon){
+		this.x = coord[0];
+		this.y = coord[1];
 		this.symbol = symbol;
-		this.turns = 0;
 		this.weapon = weapon;
 	}
 	/**

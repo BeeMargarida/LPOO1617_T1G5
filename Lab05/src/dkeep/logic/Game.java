@@ -43,23 +43,55 @@ public class Game implements Serializable {
 	public boolean victory(){
 		return logic.getVictory();
 	}
-
+	
 	/**
-	 * Puts all the non-static elements of the game on the map, saves it into a matrix of chars and also prints it. In the end, erases all the non-static elements.
-	 * @return matrix of chars that contain the current map of the game
+	 * Prints in the map the key symbol in it's current position.
+	 * @param m matrix of chars that represent the map of the game
 	 */
-	public char[][] getBoard(){
-		char[][] m = map.getMap();
+	public void getBoardKey(char[][] m){
 		if(!logic.getHero().hasKey()){
 			m[map.getKey()[0]][map.getKey()[1]] = 'k';
 		}
-		//hero
+	}
+	
+	/**
+	 * Erases from the map the key symbol.
+	 * @param m matrix of chars that represent the map of the game
+	 */
+	public void eraseBoardKey(char[][] m){
+		m[map.getKey()[0]][map.getKey()[1]] = ' ';
+	}
+	/**
+	 * Prints in the map the hero symbol and its weapon in their current position.
+	 * @param m matrix of chars that represent the map of the game
+	 */
+	public void getBoardHero(char[][] m){
 		m[logic.getHero().getX()][logic.getHero().getY()] = logic.getHero().getSymbol();
-		//enemies
+		if(logic.getHero().getWeapon() != null){
+			if(logic.getHero().getWeapon().getValid()){
+				m[logic.getHero().getWeapon().getX()][logic.getHero().getWeapon().getY()] = logic.getHero().getWeapon().getSymbol();
+			}
+		}
+	}
+	/**
+	 * Erases from the map the hero symbol and its weapon.
+	 * @param m matrix of chars that represent the map of the game
+	 */
+	public void eraseBoardHero(char[][] m){
+		m[logic.getHero().getX()][logic.getHero().getY()] = ' ';
+		if(logic.getHero().getWeapon() != null){
+			m[logic.getHero().getWeapon().getX()][logic.getHero().getWeapon().getY()] = ' ';
+		}
+	}
+	
+	/**
+	 * Prints in the map the enemies symbol and their weapon, in their current position.
+	 * @param m matrix of chars that represent the map of the game
+	 */
+	public void getBoardEnemies(char[][] m){
 		for(int i = 0; i < logic.getEnemies().size(); i++){
 			m[logic.getEnemies().get(i).getX()][logic.getEnemies().get(i).getY()] = logic.getEnemies().get(i).getSymbol();
-		} 
-		//weapons
+		}
 		ArrayList<Weapon> weapons = logic.getWeapons();
 		if(weapons.size() != 0){
 			for(Weapon it : weapons){
@@ -67,12 +99,31 @@ public class Game implements Serializable {
 					m[it.getX()][it.getY()] = it.getSymbol();
 			}
 		}
-		if(logic.getHero().getWeapon() != null){
-			//System.out.println(logic.getHero().getWeapon().getValid());
-			if(logic.getHero().getWeapon().getValid()){
-				m[logic.getHero().getWeapon().getX()][logic.getHero().getWeapon().getY()] = logic.getHero().getWeapon().getSymbol();
+	}
+	/**
+	 * Erases from the map the enemies symbol and their weapon.
+	 * @param m matrix of chars that represent the map of the game
+	 */
+	public void eraseBoardEnemies(char[][] m){
+		for(int i = 0; i < logic.getEnemies().size(); i++){
+			m[logic.getEnemies().get(i).getX()][logic.getEnemies().get(i).getY()] = ' ';
+		}
+		ArrayList<Weapon> weapons = logic.getWeapons();
+		if(weapons.size() != 0){
+			for(Weapon it : weapons){
+				m[it.getX()][it.getY()] = ' ';
 			}
 		}
+	}
+	/**
+	 * Puts all the non-static elements of the game on the map, saves it into a matrix of chars and also prints it. In the end, erases all the non-static elements.
+	 * @return matrix of chars that contain the current map of the game
+	 */
+	public char[][] getBoard(){
+		char[][] m = map.getMap();
+		getBoardKey(m);
+		getBoardEnemies(m);
+		getBoardHero(m);
 		for(int i = 0; i < m.length; i++){
 			System.out.println(m[i]);
 		}
@@ -80,22 +131,9 @@ public class Game implements Serializable {
 		for(int i = 0; i < tmp.length; i++){
 			tmp[i] = m[i].clone();
 		}
-
-		//ERASE
-		m[logic.getHero().getX()][logic.getHero().getY()] = ' ';
-		for(int i = 0; i < logic.getEnemies().size(); i++){
-			m[logic.getEnemies().get(i).getX()][logic.getEnemies().get(i).getY()] = ' ';
-		}
-		if(weapons.size() != 0){
-			for(Weapon it : weapons){
-				m[it.getX()][it.getY()] = ' ';
-			}
-		}
-		if(logic.getHero().getWeapon() != null){
-			m[logic.getHero().getWeapon().getX()][logic.getHero().getWeapon().getY()] = ' ';
-		}
-		m[map.getKey()[0]][map.getKey()[1]] = ' ';//erases key
-
+		eraseBoardHero(m);
+		eraseBoardEnemies(m);
+		eraseBoardKey(m);
 		return tmp;
 	}
 

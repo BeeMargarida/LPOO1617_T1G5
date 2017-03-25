@@ -17,9 +17,9 @@ public class CrazyOgre extends Character {
 	 * @param x coordinate 
 	 * @param y coordinate
 	 * @param weapon object Weapon that contains information about a Club
-	 */
-	public CrazyOgre(char symbol, int x, int y, Weapon weapon) {
-		super(x,y,symbol,weapon);
+	 */ 
+	public CrazyOgre(char symbol, int[] coord, Weapon weapon) {
+		super(coord,symbol,weapon);
 		this.turns = 0;
 	}
 

@@ -31,6 +31,7 @@ public class Main {
 			g.update(dir);
 		}
 		g.getBoard();
+		g.getBoard();
 		System.out.println("End of Game!");
 		return;
 	}

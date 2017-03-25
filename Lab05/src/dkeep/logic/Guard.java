@@ -21,10 +21,10 @@ public abstract class Guard extends Character implements Serializable{
 	 * @param path array of chars that represent the path that the enemy will take
 	 * @param i int that keeps the progress in the array of path
 	 */
-	public Guard(char symbol, int x, int y,char[] path, int i){
-		super(x,y,symbol,null);
+	public Guard(char symbol, int[] coord, char[] path){
+		super(coord,symbol,null);
 		this.path = path;
-		this.i = i;
+		this.i = -1;
 	}
 	/**
 	 * Follows the path of the guard, using the index to know the next direction of the guard. Returns a array with the new coordinates of the

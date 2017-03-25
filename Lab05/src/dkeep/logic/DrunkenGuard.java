@@ -21,8 +21,8 @@ public class DrunkenGuard extends Guard {
 	 * @param y coordinate
 	 * @param path array of movements of the guard
 	 */
-	public DrunkenGuard(char symbol, int x, int y,char[] path){
-		super(symbol,x,y,path,-1);
+	public DrunkenGuard(char symbol, int[] coord,char[] path){
+		super(symbol,coord,path);
 		asleep = false;
 		asleepChar = 'g';
 	}

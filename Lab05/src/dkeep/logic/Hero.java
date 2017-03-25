@@ -16,8 +16,8 @@ public class Hero extends Character {
 	 * @param y coordinate
 	 * @param weapon object Weapon that contains information about a Club
 	 */
-	public Hero(char s, int x, int y, Weapon weapon) {
-		super(x,y,s,weapon);
+	public Hero(char s, int[] coord, Weapon weapon) {
+		super(coord,s,weapon);
 		hasKey = false;
 	}
 

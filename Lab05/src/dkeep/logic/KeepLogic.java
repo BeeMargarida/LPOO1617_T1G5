@@ -20,17 +20,15 @@ public class KeepLogic extends Logic implements Serializable{
 	 * @param option number of enemies
 	 */
 	public KeepLogic(Map map, int[] heropos, boolean armedHero, int option) {
-		super(new Hero('A', heropos[0], heropos[1], null));
-		if(armedHero){
-			hero.weapon = new Club('*','$',heropos[0],heropos[1]);
+		super(new Hero('A', heropos, null));
+		/*if(armedHero){
+			hero.weapon = new Club('*','$',heropos);
 			hero.weapon.setNotValid();
-		}
+		}*/
 		enemies = new ArrayList<Character>();
-
-		int[] ogrePos = map.getOgrePos();
 		for(int i = 0; i < option; i++) {
-			Weapon weaponE = new Club('*','$',ogrePos[0],ogrePos[1]); 
-			enemies.add(new CrazyOgre('O',ogrePos[0], ogrePos[1], weaponE));
+			Weapon weaponE = new Club('*','$',map.getOgrePos()); 
+			enemies.add(new CrazyOgre('O',map.getOgrePos(), weaponE));
 			enemies.get(i).weapon.setNotValid();
 		}
 	}
@@ -96,19 +94,22 @@ public class KeepLogic extends Logic implements Serializable{
 	 * {@inheritDoc}
 	 * In this level the collision of the hero with the enemies' weapons is made.
 	 */
-	public void moveHero(char dir, Map map) {
+	public boolean moveHero(char dir, Map map) {
 		hero.setDir(dir);
 		int[] heromov = hero.movement();
 		if(map.isFree(heromov[0], heromov[1])){
-			if(collideEnemy(heromov[0],heromov[1],enemies)){	
+			if(collideEnemy(heromov,enemies)){	
 				isOver = true;
+				hero.setX(heromov[0]);
+				hero.setY(heromov[1]);
+				return false;
 			}
 			else if(this.getWeapons().size() != 0){
-				if(collideWeapon(hero.getX(), hero.getY(), this.getWeapons())){	
+				if(collideWeapon(heromov, this.getWeapons())){	
 					isOver = true;
 					hero.setX(heromov[0]);
 					hero.setY(heromov[1]);
-					return;
+					return false;
 				}
 			}
 			if(map.isKey(heromov[0], heromov[1])){
@@ -119,14 +120,15 @@ public class KeepLogic extends Logic implements Serializable{
 		}	
 		if(map.isI(heromov[0],heromov[1]) && hero.hasKey()){
 			map.openDoor();
-			return;
+			return true;
 		}
 		if(map.isS(heromov[0], heromov[1])){
 			victory = true;
 			hero.setX(heromov[0]);
 			hero.setY(heromov[1]);
-			return;
+			return false;
 		}
+		return true;
 	}
 
 	/**
@@ -158,7 +160,7 @@ public class KeepLogic extends Logic implements Serializable{
 			ArrayList<Weapon> heroweapon = new ArrayList<Weapon>();
 			heroweapon.add(hero.weapon);
 			for(int i = 0; i < enemies.size(); i++){
-				if(collideWeapon(enemies.get(i).getX(), enemies.get(i).getY(),heroweapon)){
+				if(collideWeapon(new int[] {enemies.get(i).getX(),enemies.get(i).getY()},heroweapon)){
 					enemies.get(i).gotStunned();
 				}
 			}
@@ -173,8 +175,9 @@ public class KeepLogic extends Logic implements Serializable{
 	public void gameplay(char dir, Map map) {
 		enemyMovement(dir,map);
 		enemyWeaponMovement(dir,map);
-		moveHero(dir,map);
-		heroWeaponMovement(dir,map);
+		if(!moveHero(dir,map))
+			return;
+		//heroWeaponMovement(dir,map);
 	}
 
 	/**

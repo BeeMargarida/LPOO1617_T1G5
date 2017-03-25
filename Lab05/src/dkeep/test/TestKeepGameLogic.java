@@ -130,8 +130,8 @@ public class TestKeepGameLogic {
 		int[] heropos = map.getHeroPos();
 		Logic logic = new KeepLogic(map,heropos,false,0);
 		int[] ogrePos = map.getOgrePos();
-		Weapon weaponE = new Club('*','$',ogrePos[0],ogrePos[1]); 
-		logic.addEnemy(new CrazyOgre('O',ogrePos[0], ogrePos[1], weaponE));
+		Weapon weaponE = new Club('*','$',ogrePos); 
+		logic.addEnemy(new CrazyOgre('O',ogrePos, weaponE));
 		assertEquals(1,logic.getEnemies().size());
 		assertNull(logic.nextLogic(map,0));
 	}

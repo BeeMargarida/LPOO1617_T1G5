@@ -86,6 +86,51 @@ public class Logic implements Serializable{
 	public char getEnemyWeaponSymbol(){
 		return enemies.get(0).getWeaponSymbol();
 	}
+	
+	/**
+	 * Checks if one of the elements is in the cell to the left of the other element. If it is, it is a collision.
+	 * @param pos1 array of ints with the position of an element of the game
+	 * @param pos2 array of ints with the position of an element of the game
+	 * @return true if there is a collision, false if not
+	 */
+	public boolean collideLeft(int[] pos1, int[] pos2){
+		if(((pos1[0] == pos2[0]) && (pos1[1] == pos2[1] - 1)) || ((pos1[0] == pos2[0]) && (pos1[1] == pos2[1])))
+			return true;
+		return false;
+	}
+	/**
+	 * Checks if one of the elements is in the cell to the right of the other element. If it is, it is a collision.
+	 * @param pos1 array of ints with the position of an element of the game
+	 * @param pos2 array of ints with the position of an element of the game
+	 * @return true if there is a collision, false if not
+	 */
+	public boolean collideRight(int[] pos1, int[] pos2){
+		if((pos1[0] == pos2[0]) && (pos1[1] == pos2[1] + 1))
+			return true;
+		return false;
+	}
+	/**
+	 * Checks if one of the elements is in the cell above the other element. If it is, it is a collision.
+	 * @param pos1 array of ints with the position of an element of the game
+	 * @param pos2 array of ints with the position of an element of the game
+	 * @return true if there is a collision, false if not
+	 */
+	public boolean collideUp(int[] pos1, int[] pos2){
+		if((pos1[0] == pos2[0]-1) && (pos1[1] == pos2[1]))
+			return true;
+		return false;
+	}
+	/**
+	 * Checks if one of the elements is in the cell under the other element. If it is, it is a collision.
+	 * @param pos1 array of ints with the position of an element of the game
+	 * @param pos2 array of ints with the position of an element of the game
+	 * @return true if there is a collision, false if not
+	 */
+	public boolean collideDown(int[] pos1, int[] pos2){
+		if((pos1[0] == pos2[0]+1) && (pos1[1] == pos2[1]))
+			return true;
+		return false;
+	}
 
 	/**
 	 * Checks if the hero is in any position adjacent (up, down, left, right) to any of the enemies. If it is, it will return true,
@@ -95,11 +140,13 @@ public class Logic implements Serializable{
 	 * @param vector contains all the enemies of the levels
 	 * @return true if the hero collides with any of the enemies, false if it doesn't
 	 */
-	public boolean collideEnemy(int x, int y, ArrayList<Character> vector) {
+	public boolean collideEnemy(int[] pos, ArrayList<Character> vector) {
 		for(int i = 0; i < vector.size(); i++){
-			if((vector.get(i).stunned == false) && ((x == vector.get(i).getX() && y == vector.get(i).getY()) || (x+1 == vector.get(i).getX() && y == vector.get(i).getY()) || (x-1 == vector.get(i).getX() && y == vector.get(i).getY()) || (y+1 == vector.get(i).getY() && x == vector.get(i).getX()) || (y-1 == vector.get(i).getY() && x == vector.get(i).getX()))){
+			/*if((vector.get(i).stunned == false) && ((x == vector.get(i).getX() && y == vector.get(i).getY()) || (x+1 == vector.get(i).getX() && y == vector.get(i).getY()) || (x-1 == vector.get(i).getX() && y == vector.get(i).getY()) || (y+1 == vector.get(i).getY() && x == vector.get(i).getX()) || (y-1 == vector.get(i).getY() && x == vector.get(i).getX()))){
 				return true;
-			}
+			}*/
+			if((!vector.get(i).stunned) && (collideLeft(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideRight(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideUp(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideDown(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()})))
+				return true;
 		}
 		return false;
 	}
@@ -111,11 +158,10 @@ public class Logic implements Serializable{
 	 * @param vector contains the weapons to be tested
 	 * @return true if any of the weapons collide with the Character, false id it doesn't
 	 */
-	public boolean collideWeapon(int x, int y, ArrayList<Weapon> vector) {
+	public boolean collideWeapon(int[] pos, ArrayList<Weapon> vector) {
 		for(int i = 0; i < vector.size(); i++){
-			if((x == vector.get(i).getX() && y == vector.get(i).getY()) || (x+1 == vector.get(i).getX() && y == vector.get(i).getY()) || (x-1 == vector.get(i).getX() && y == vector.get(i).getY()) || (y+1 == vector.get(i).getY() && x == vector.get(i).getX()) || (y-1 == vector.get(i).getY() && x == vector.get(i).getX())){
+			if(collideLeft(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideRight(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideUp(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideDown(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}))
 				return true;
-			}
 		}
 		return false;
 	}
@@ -148,8 +194,9 @@ public class Logic implements Serializable{
 	 * once in front of doors.
 	 * @param dir char that correspond to the direction of movement chosen by the player
 	 * @param map Object Map that corresponds to the current map of the game
+	 * @return true if the hero has made with no collisions, false if it was caught
 	 */
-	public void moveHero(char dir, Map map){}
+	public boolean moveHero(char dir, Map map){return true;}
 
 	/**
 	 * Handles all the movement logic of the game. It calls the functions that deal with the hero's and hero's weapon movement, and the 

@@ -206,14 +206,15 @@ public class GameGui {
 		}
 	}
 	
-	private static boolean verifyPath(int x, int y, char target,int[][] aux, char[][] m){
+	private static boolean verifyPath(int[] coord, char target, int[][] aux, char[][] m){
+		int x = coord[0], y = coord[1];
 		if(found)
 			return true;
 		if(aux[x+1][y] != 1 && m[x+1][y] != 'X'){
 			if(m[x+1][y] == target){ found = true; return true; }
 			else if(m[x+1][y] != 'I'){
 				aux[x+1][y] = 1;
-				verifyPath(x+1,y,target,aux,m);
+				verifyPath(new int[] {x+1,y},target,aux,m);
 			}
 		}
 		if(found)
@@ -222,7 +223,7 @@ public class GameGui {
 			if(m[x-1][y] == target){ found = true; return true; }
 			else if(m[x-1][y] != 'I'){
 				aux[x-1][y] = 1;
-				verifyPath(x-1,y,target,aux,m);
+				verifyPath(new int[] {x-1,y},target,aux,m);
 			}
 		}
 		if(found)
@@ -231,7 +232,7 @@ public class GameGui {
 			if(m[x][y+1] == target){ found = true; return true;	}
 			else if(m[x][y+1] != 'I'){
 				aux[x][y+1] = 1;
-				verifyPath(x,y+1,target,aux,m);
+				verifyPath(new int[] {x,y+1},target,aux,m);
 			}
 		}
 		if(found)
@@ -240,7 +241,7 @@ public class GameGui {
 			if(m[x][y-1] == target){ found = true; return true; }
 			else if(m[x][y-1] != 'I'){
 				aux[x][y-1] = 1;
-				verifyPath(x,y-1,target,aux,m);
+				verifyPath(new int[] {x,y-1},target,aux,m);
 			}
 		}
 		return false;
@@ -260,18 +261,16 @@ public class GameGui {
 		int[] pos = userMap.getHeroPos();
 
 
-		if(!verifyPath(pos[0],pos[1],'k',new int[userMap.getMap().length][userMap.getMap()[0].length],userMap.getMap())){
+		if(!verifyPath(pos,'k',new int[userMap.getMap().length][userMap.getMap()[0].length],userMap.getMap())){
 			editor.inf.setText("No path to reach key");
 			return false;
 		}
 		found = false;
-		if(!verifyPath(pos[0],pos[1],'I',new int[userMap.getMap().length][userMap.getMap()[0].length],userMap.getMap())){
+		if(!verifyPath(pos,'I',new int[userMap.getMap().length][userMap.getMap()[0].length],userMap.getMap())){
 			editor.inf.setText("No path to reach door");
 			return false;
 		}
 		found = false;
-		
-
 
 		System.out.println("3");
 		/*
@@ -285,8 +284,6 @@ public class GameGui {
 
 		System.out.println("4");
 		 */
-
-
 		return true;
 	}
 
