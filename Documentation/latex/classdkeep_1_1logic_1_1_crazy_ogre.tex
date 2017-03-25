@@ -1,0 +1,66 @@
+\hypertarget{classdkeep_1_1logic_1_1_crazy_ogre}{}\section{dkeep.\+logic.\+Crazy\+Ogre Class Reference}
+\label{classdkeep_1_1logic_1_1_crazy_ogre}\index{dkeep.\+logic.\+Crazy\+Ogre@{dkeep.\+logic.\+Crazy\+Ogre}}
+Inheritance diagram for dkeep.\+logic.\+Crazy\+Ogre\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdkeep_1_1logic_1_1_crazy_ogre}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_crazy_ogre_a80eeff663b6b50957cb22dfd0f738a8e}{Crazy\+Ogre} (char symbol, int\mbox{[}$\,$\mbox{]} coord, \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} weapon)
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_crazy_ogre_a4b12a877e7adb6af8b40d987f0b37e8c}{movement} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_crazy_ogre_af1bf05bce7387b6ac6800d7b4290565c}{get\+Symbol} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_crazy_ogre}{Crazy\+Ogre} is a class that keeps information about the enemy \hyperlink{classdkeep_1_1logic_1_1_crazy_ogre}{Crazy\+Ogre} of the game. This enemy has a symbol, coordinates x and y, two booleans representing if he is in the same position of the key and if it is stunned (was it by the hero weapon).It also keeps information about the turns it still has to wait while stunned and it\textquotesingle{}s weapon.
+
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classdkeep_1_1logic_1_1_character}{Character} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_crazy_ogre_a80eeff663b6b50957cb22dfd0f738a8e}\label{classdkeep_1_1logic_1_1_crazy_ogre_a80eeff663b6b50957cb22dfd0f738a8e}} 
+\index{dkeep\+::logic\+::\+Crazy\+Ogre@{dkeep\+::logic\+::\+Crazy\+Ogre}!Crazy\+Ogre@{Crazy\+Ogre}}
+\index{Crazy\+Ogre@{Crazy\+Ogre}!dkeep\+::logic\+::\+Crazy\+Ogre@{dkeep\+::logic\+::\+Crazy\+Ogre}}
+\subsubsection{\texorpdfstring{Crazy\+Ogre()}{CrazyOgre()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Crazy\+Ogre.\+Crazy\+Ogre (\begin{DoxyParamCaption}\item[{char}]{symbol,  }\item[{int \mbox{[}$\,$\mbox{]}}]{coord,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon}}]{weapon }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_crazy_ogre}{Crazy\+Ogre}. Receives it\textquotesingle{}s coordinates, it\textquotesingle{}s symbol and the weapon, that could possibly be null or a \hyperlink{classdkeep_1_1logic_1_1_club}{Club}. 
+\begin{DoxyParams}{Parameters}
+{\em symbol} & char that will represent the ogre \\
+\hline
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+{\em weapon} & object \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} that contains information about a \hyperlink{classdkeep_1_1logic_1_1_club}{Club} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_crazy_ogre_af1bf05bce7387b6ac6800d7b4290565c}\label{classdkeep_1_1logic_1_1_crazy_ogre_af1bf05bce7387b6ac6800d7b4290565c}} 
+\index{dkeep\+::logic\+::\+Crazy\+Ogre@{dkeep\+::logic\+::\+Crazy\+Ogre}!get\+Symbol@{get\+Symbol}}
+\index{get\+Symbol@{get\+Symbol}!dkeep\+::logic\+::\+Crazy\+Ogre@{dkeep\+::logic\+::\+Crazy\+Ogre}}
+\subsubsection{\texorpdfstring{get\+Symbol()}{getSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Crazy\+Ogre.\+get\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+If the Ogre is in the same position has the key or if it is stunned, it symbol is different that the default one. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_crazy_ogre_a4b12a877e7adb6af8b40d987f0b37e8c}\label{classdkeep_1_1logic_1_1_crazy_ogre_a4b12a877e7adb6af8b40d987f0b37e8c}} 
+\index{dkeep\+::logic\+::\+Crazy\+Ogre@{dkeep\+::logic\+::\+Crazy\+Ogre}!movement@{movement}}
+\index{movement@{movement}!dkeep\+::logic\+::\+Crazy\+Ogre@{dkeep\+::logic\+::\+Crazy\+Ogre}}
+\subsubsection{\texorpdfstring{movement()}{movement()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Crazy\+Ogre.\+movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+It randomly chooses between one of 4 directions and calculates the respective coordinates based on the actual ones, then returns the calculated coordinates. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Crazy\+Ogre.\+java\end{DoxyCompactItemize}

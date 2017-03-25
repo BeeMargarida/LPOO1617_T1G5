@@ -1,0 +1,64 @@
+\hypertarget{classdkeep_1_1logic_1_1_suspicious_guard}{}\section{dkeep.\+logic.\+Suspicious\+Guard Class Reference}
+\label{classdkeep_1_1logic_1_1_suspicious_guard}\index{dkeep.\+logic.\+Suspicious\+Guard@{dkeep.\+logic.\+Suspicious\+Guard}}
+Inheritance diagram for dkeep.\+logic.\+Suspicious\+Guard\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classdkeep_1_1logic_1_1_suspicious_guard}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_suspicious_guard_a457daeb625091df0489c7a35598f6434}{Suspicious\+Guard} (char symbol, int\mbox{[}$\,$\mbox{]} coord, char\mbox{[}$\,$\mbox{]} path)
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_suspicious_guard_a10c4b42ec52624f5f4fbc8f38bb4faf1}{movement} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_suspicious_guard_a760c8c915013dda755c4d0440071514f}{get\+Symbol} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_suspicious_guard}{Suspicious\+Guard} is a class that contains information about a specific guard, which behaviour alternates between following the path in the normal order or in the reverse order. \begin{DoxySeeAlso}{See also}
+\hyperlink{classdkeep_1_1logic_1_1_guard}{Guard} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_suspicious_guard_a457daeb625091df0489c7a35598f6434}\label{classdkeep_1_1logic_1_1_suspicious_guard_a457daeb625091df0489c7a35598f6434}} 
+\index{dkeep\+::logic\+::\+Suspicious\+Guard@{dkeep\+::logic\+::\+Suspicious\+Guard}!Suspicious\+Guard@{Suspicious\+Guard}}
+\index{Suspicious\+Guard@{Suspicious\+Guard}!dkeep\+::logic\+::\+Suspicious\+Guard@{dkeep\+::logic\+::\+Suspicious\+Guard}}
+\subsubsection{\texorpdfstring{Suspicious\+Guard()}{SuspiciousGuard()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Suspicious\+Guard.\+Suspicious\+Guard (\begin{DoxyParamCaption}\item[{char}]{symbol,  }\item[{int \mbox{[}$\,$\mbox{]}}]{coord,  }\item[{char \mbox{[}$\,$\mbox{]}}]{path }\end{DoxyParamCaption})}
+
+Constructor of the \hyperlink{classdkeep_1_1logic_1_1_suspicious_guard}{Suspicious\+Guard}. Puts the i variable to -\/1 and initializes other variables with the given values, calling the \hyperlink{classdkeep_1_1logic_1_1_guard}{Guard} constructor. 
+\begin{DoxyParams}{Parameters}
+{\em symbol} & char that represents the \hyperlink{classdkeep_1_1logic_1_1_suspicious_guard}{Suspicious\+Guard} \\
+\hline
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+{\em path} & array of movements of the guard \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_suspicious_guard_a760c8c915013dda755c4d0440071514f}\label{classdkeep_1_1logic_1_1_suspicious_guard_a760c8c915013dda755c4d0440071514f}} 
+\index{dkeep\+::logic\+::\+Suspicious\+Guard@{dkeep\+::logic\+::\+Suspicious\+Guard}!get\+Symbol@{get\+Symbol}}
+\index{get\+Symbol@{get\+Symbol}!dkeep\+::logic\+::\+Suspicious\+Guard@{dkeep\+::logic\+::\+Suspicious\+Guard}}
+\subsubsection{\texorpdfstring{get\+Symbol()}{getSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Suspicious\+Guard.\+get\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_suspicious_guard_a10c4b42ec52624f5f4fbc8f38bb4faf1}\label{classdkeep_1_1logic_1_1_suspicious_guard_a10c4b42ec52624f5f4fbc8f38bb4faf1}} 
+\index{dkeep\+::logic\+::\+Suspicious\+Guard@{dkeep\+::logic\+::\+Suspicious\+Guard}!movement@{movement}}
+\index{movement@{movement}!dkeep\+::logic\+::\+Suspicious\+Guard@{dkeep\+::logic\+::\+Suspicious\+Guard}}
+\subsubsection{\texorpdfstring{movement()}{movement()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Suspicious\+Guard.\+movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+in this particular class, this function randomly chooses between 2 behaviours, the normal one (follows the path and calls the \hyperlink{classdkeep_1_1logic_1_1_guard_a2389016085c6d65d4366930fac72dab4}{normal\+Movement()} function) and the reverse one (follows the path in reverse order, calls the \hyperlink{classdkeep_1_1logic_1_1_guard_a8c588aa887fcfe6d3e4a9e13d236c644}{reverse\+Movement()} function). 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Suspicious\+Guard.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,241 @@
+\hypertarget{classdkeep_1_1logic_1_1_map}{}\section{dkeep.\+logic.\+Map Class Reference}
+\label{classdkeep_1_1logic_1_1_map}\index{dkeep.\+logic.\+Map@{dkeep.\+logic.\+Map}}
+Inheritance diagram for dkeep.\+logic.\+Map\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdkeep_1_1logic_1_1_map}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_map_a21bca3900428a3b8825b6da6214f2996}{Map} (char\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} map, int\mbox{[}$\,$\mbox{]} key)
+\item 
+char \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_map_ab9624f3fa58049b3481f95e4c77277a3}{get\+Map} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_map_af00c4221d9896abaa16dff00a462ba23}{set\+Map} (char\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} map)
+\item 
+int \hyperlink{classdkeep_1_1logic_1_1_map_ad066c2de42a31b55a7649149cac143b2}{get\+Width} ()
+\item 
+int \hyperlink{classdkeep_1_1logic_1_1_map_aec82d7520e74ad90f897a34c30ebc056}{get\+Height} ()
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_map_aba4049e879891996457634979ec146a7}{get\+Key} ()
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_map_a94bbd79e68a9e0901cb129f9ef7bfa37}{get\+Hero\+Pos} ()
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_map_aeaad6dec94f54cf67dcb5c2bd23adbbf}{get\+Guard\+Pos} ()
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_map_a8dae121a32549da2035765a886f92d68}{get\+Ogre\+Pos} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_map_a2d626ecdbda836f971f08ad31eadbd7b}{open\+Door} ()
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_map_a2237fa9a56d3aa3be8638be42bbc16e6}{are\+Doors\+Open} ()
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_map_a821f7fc33840cec683d9fe1d7146a3a5}{is\+Free} (int x, int y)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_map_a721b87b71cb211ab754b9077963546f3}{is\+Key} (int x, int y)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_map_a9af86cd24b6080738ca2059077249ff2}{isS} (int x, int y)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_map_aa0e97d3c7fc51f4fa0caaa286745ff72}{isI} (int x, int y)
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_map}{Map} \hyperlink{classdkeep_1_1logic_1_1_map_a05fd3c758bc198e790c9f04f2004bcb9}{next\+Map} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a1233e77a9f52ff73c1e233790caba7f8}\label{classdkeep_1_1logic_1_1_map_a1233e77a9f52ff73c1e233790caba7f8}} 
+char \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} {\bfseries map}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a38fbe49aa5250d71f3f0fb55c44ba973}\label{classdkeep_1_1logic_1_1_map_a38fbe49aa5250d71f3f0fb55c44ba973}} 
+int \mbox{[}$\,$\mbox{]} {\bfseries key}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_map}{Map} is a class that keeps information about the map used in the game. It has a matrix of chars, used to store the map, and the position of it\textquotesingle{}s key. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a21bca3900428a3b8825b6da6214f2996}\label{classdkeep_1_1logic_1_1_map_a21bca3900428a3b8825b6da6214f2996}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!Map@{Map}}
+\index{Map@{Map}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{Map()}{Map()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Map.\+Map (\begin{DoxyParamCaption}\item[{char}]{map\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int \mbox{[}$\,$\mbox{]}}]{key }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_map}{Map}. It initializes its attributes with the values given. 
+\begin{DoxyParams}{Parameters}
+{\em map} & matrix of chars with the map setup \\
+\hline
+{\em key} & array of ints with the coordinates of the key in the map \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a2237fa9a56d3aa3be8638be42bbc16e6}\label{classdkeep_1_1logic_1_1_map_a2237fa9a56d3aa3be8638be42bbc16e6}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!are\+Doors\+Open@{are\+Doors\+Open}}
+\index{are\+Doors\+Open@{are\+Doors\+Open}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{are\+Doors\+Open()}{areDoorsOpen()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Map.\+are\+Doors\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Goes through the map and return true if it finds a open door. \begin{DoxyReturn}{Returns}
+true if a door is open, false if it is not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_aeaad6dec94f54cf67dcb5c2bd23adbbf}\label{classdkeep_1_1logic_1_1_map_aeaad6dec94f54cf67dcb5c2bd23adbbf}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!get\+Guard\+Pos@{get\+Guard\+Pos}}
+\index{get\+Guard\+Pos@{get\+Guard\+Pos}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{get\+Guard\+Pos()}{getGuardPos()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Map.\+get\+Guard\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Goes through the map and coordinates of the enemy, returning them. Only works for Rookie\+Guards. \begin{DoxyReturn}{Returns}
+array of ints with the actual coordinates of the guard 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_aec82d7520e74ad90f897a34c30ebc056}\label{classdkeep_1_1logic_1_1_map_aec82d7520e74ad90f897a34c30ebc056}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!get\+Height@{get\+Height}}
+\index{get\+Height@{get\+Height}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{get\+Height()}{getHeight()}}
+{\footnotesize\ttfamily int dkeep.\+logic.\+Map.\+get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the map height. \begin{DoxyReturn}{Returns}
+map height, which can also be called the maximum x coordinate -\/ 1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a94bbd79e68a9e0901cb129f9ef7bfa37}\label{classdkeep_1_1logic_1_1_map_a94bbd79e68a9e0901cb129f9ef7bfa37}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!get\+Hero\+Pos@{get\+Hero\+Pos}}
+\index{get\+Hero\+Pos@{get\+Hero\+Pos}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{get\+Hero\+Pos()}{getHeroPos()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Map.\+get\+Hero\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Goes through the map and coordinates of the hero, returning them. \begin{DoxyReturn}{Returns}
+array of ints with the actual coordinates of the hero 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_aba4049e879891996457634979ec146a7}\label{classdkeep_1_1logic_1_1_map_aba4049e879891996457634979ec146a7}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!get\+Key@{get\+Key}}
+\index{get\+Key@{get\+Key}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{get\+Key()}{getKey()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Map.\+get\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the coordinates of the key. \begin{DoxyReturn}{Returns}
+array of ints with the coordinates of the key in the map 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_ab9624f3fa58049b3481f95e4c77277a3}\label{classdkeep_1_1logic_1_1_map_ab9624f3fa58049b3481f95e4c77277a3}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!get\+Map@{get\+Map}}
+\index{get\+Map@{get\+Map}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{get\+Map()}{getMap()}}
+{\footnotesize\ttfamily char \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Map.\+get\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return a array of arrays that represent the map. \begin{DoxyReturn}{Returns}
+array of array (matrix) of chars that represent the map 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a8dae121a32549da2035765a886f92d68}\label{classdkeep_1_1logic_1_1_map_a8dae121a32549da2035765a886f92d68}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!get\+Ogre\+Pos@{get\+Ogre\+Pos}}
+\index{get\+Ogre\+Pos@{get\+Ogre\+Pos}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{get\+Ogre\+Pos()}{getOgrePos()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Map.\+get\+Ogre\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Goes through the map and coordinates of the enemy, returning them. Only works for Crazy\+Ogres. \begin{DoxyReturn}{Returns}
+array of ints with the actual coordinates of the ogre 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_ad066c2de42a31b55a7649149cac143b2}\label{classdkeep_1_1logic_1_1_map_ad066c2de42a31b55a7649149cac143b2}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!get\+Width@{get\+Width}}
+\index{get\+Width@{get\+Width}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{get\+Width()}{getWidth()}}
+{\footnotesize\ttfamily int dkeep.\+logic.\+Map.\+get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the map width. \begin{DoxyReturn}{Returns}
+map width, which can also be called the maximum y coordinate -\/ 1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a821f7fc33840cec683d9fe1d7146a3a5}\label{classdkeep_1_1logic_1_1_map_a821f7fc33840cec683d9fe1d7146a3a5}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!is\+Free@{is\+Free}}
+\index{is\+Free@{is\+Free}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{is\+Free()}{isFree()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Map.\+is\+Free (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Checks if the cell with the coordinates given is free, meaning that in that position can\textquotesingle{}t be walls(\textquotesingle{}X\textquotesingle{}), closed and doors (\textquotesingle{}I\textquotesingle{},\textquotesingle{}S\textquotesingle{}). 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if position is free, false if it\textquotesingle{}s not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_aa0e97d3c7fc51f4fa0caaa286745ff72}\label{classdkeep_1_1logic_1_1_map_aa0e97d3c7fc51f4fa0caaa286745ff72}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!isI@{isI}}
+\index{isI@{isI}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{is\+I()}{isI()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Map.\+isI (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Checks if the given coordinates correspond to a closed door. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if in the given coordinates is a closed door, false if it\textquotesingle{}s not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a721b87b71cb211ab754b9077963546f3}\label{classdkeep_1_1logic_1_1_map_a721b87b71cb211ab754b9077963546f3}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!is\+Key@{is\+Key}}
+\index{is\+Key@{is\+Key}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{is\+Key()}{isKey()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Map.\+is\+Key (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Checks if the given coordinates match the position of the key. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the key is in given coordinates, false if it\textquotesingle{}s not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a9af86cd24b6080738ca2059077249ff2}\label{classdkeep_1_1logic_1_1_map_a9af86cd24b6080738ca2059077249ff2}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!isS@{isS}}
+\index{isS@{isS}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{is\+S()}{isS()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Map.\+isS (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Checks if the given coordinates correspond to a open door. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if in the given coordinates is a open door, false if it\textquotesingle{}s not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a05fd3c758bc198e790c9f04f2004bcb9}\label{classdkeep_1_1logic_1_1_map_a05fd3c758bc198e790c9f04f2004bcb9}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!next\+Map@{next\+Map}}
+\index{next\+Map@{next\+Map}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{next\+Map()}{nextMap()}}
+{\footnotesize\ttfamily \hyperlink{classdkeep_1_1logic_1_1_map}{Map} dkeep.\+logic.\+Map.\+next\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns a new map if there is a next level, return null if there isn\textquotesingle{}t a next level. \begin{DoxyReturn}{Returns}
+\hyperlink{classdkeep_1_1logic_1_1_map}{Map} or null 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_a2d626ecdbda836f971f08ad31eadbd7b}\label{classdkeep_1_1logic_1_1_map_a2d626ecdbda836f971f08ad31eadbd7b}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!open\+Door@{open\+Door}}
+\index{open\+Door@{open\+Door}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{open\+Door()}{openDoor()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Map.\+open\+Door (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Goes through the map, finding the chars representing the closed doors and switching them by chars representing the open doors. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_map_af00c4221d9896abaa16dff00a462ba23}\label{classdkeep_1_1logic_1_1_map_af00c4221d9896abaa16dff00a462ba23}} 
+\index{dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}!set\+Map@{set\+Map}}
+\index{set\+Map@{set\+Map}!dkeep\+::logic\+::\+Map@{dkeep\+::logic\+::\+Map}}
+\subsubsection{\texorpdfstring{set\+Map()}{setMap()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Map.\+set\+Map (\begin{DoxyParamCaption}\item[{char}]{map\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Sets the map attribute with the variable given. 
+\begin{DoxyParams}{Parameters}
+{\em map} & variable that represents the map to be updated \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Map.\+java\end{DoxyCompactItemize}

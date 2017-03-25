@@ -1,0 +1,96 @@
+\hypertarget{classdkeep_1_1logic_1_1_hero}{}\section{dkeep.\+logic.\+Hero Class Reference}
+\label{classdkeep_1_1logic_1_1_hero}\index{dkeep.\+logic.\+Hero@{dkeep.\+logic.\+Hero}}
+Inheritance diagram for dkeep.\+logic.\+Hero\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdkeep_1_1logic_1_1_hero}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_hero_ae74a6e3427b1da89bd52b14cdc632d9b}{Hero} (char s, int\mbox{[}$\,$\mbox{]} coord, \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} weapon)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_hero_a5fb6abc6ce91464833c67f143b4f913b}{set\+Dir} (char dir)
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_hero_a5c9eff750321d53e1e4257fd9efd4cd6}{movement} ()
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_hero_a5fc18a0a10613780cdc6b966dc8810f1}{has\+Key} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_hero_a72b13a616bd52ce76b73e6e5e96ccf72}{set\+Key\+True} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_hero_afaf5e4c05717a5bdf568c565339e30f6}{get\+Symbol} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_hero}{Hero} is a class that represents the hero of the game, that is, the character controlled by the user. \begin{DoxySeeAlso}{See also}
+\hyperlink{classdkeep_1_1logic_1_1_character}{Character} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_hero_ae74a6e3427b1da89bd52b14cdc632d9b}\label{classdkeep_1_1logic_1_1_hero_ae74a6e3427b1da89bd52b14cdc632d9b}} 
+\index{dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}!Hero@{Hero}}
+\index{Hero@{Hero}!dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}}
+\subsubsection{\texorpdfstring{Hero()}{Hero()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Hero.\+Hero (\begin{DoxyParamCaption}\item[{char}]{s,  }\item[{int \mbox{[}$\,$\mbox{]}}]{coord,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon}}]{weapon }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_hero}{Hero}. Puts all flags to false and initialize all elements with the information given. The weapon can be null. 
+\begin{DoxyParams}{Parameters}
+{\em s} & char that represents the hero \\
+\hline
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+{\em weapon} & object \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} that contains information about a \hyperlink{classdkeep_1_1logic_1_1_club}{Club} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_hero_afaf5e4c05717a5bdf568c565339e30f6}\label{classdkeep_1_1logic_1_1_hero_afaf5e4c05717a5bdf568c565339e30f6}} 
+\index{dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}!get\+Symbol@{get\+Symbol}}
+\index{get\+Symbol@{get\+Symbol}!dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}}
+\subsubsection{\texorpdfstring{get\+Symbol()}{getSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Hero.\+get\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+In this specific class, if the hero has caught the key, the symbol will be different. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_hero_a5fc18a0a10613780cdc6b966dc8810f1}\label{classdkeep_1_1logic_1_1_hero_a5fc18a0a10613780cdc6b966dc8810f1}} 
+\index{dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}!has\+Key@{has\+Key}}
+\index{has\+Key@{has\+Key}!dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}}
+\subsubsection{\texorpdfstring{has\+Key()}{hasKey()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Hero.\+has\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns boolean corresponding to the hero\textquotesingle{}s possession of the key. \begin{DoxyReturn}{Returns}
+true if the hero has the key, false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_hero_a5c9eff750321d53e1e4257fd9efd4cd6}\label{classdkeep_1_1logic_1_1_hero_a5c9eff750321d53e1e4257fd9efd4cd6}} 
+\index{dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}!movement@{movement}}
+\index{movement@{movement}!dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}}
+\subsubsection{\texorpdfstring{movement()}{movement()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Hero.\+movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_hero_a5fb6abc6ce91464833c67f143b4f913b}\label{classdkeep_1_1logic_1_1_hero_a5fb6abc6ce91464833c67f143b4f913b}} 
+\index{dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}!set\+Dir@{set\+Dir}}
+\index{set\+Dir@{set\+Dir}!dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}}
+\subsubsection{\texorpdfstring{set\+Dir()}{setDir()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Hero.\+set\+Dir (\begin{DoxyParamCaption}\item[{char}]{dir }\end{DoxyParamCaption})}
+
+Sets the direction of the hero to a particular direction (a -\/ left, d -\/ right, w -\/ up, s -\/ down). 
+\begin{DoxyParams}{Parameters}
+{\em dir} & movement direction taken by the hero \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_hero_a72b13a616bd52ce76b73e6e5e96ccf72}\label{classdkeep_1_1logic_1_1_hero_a72b13a616bd52ce76b73e6e5e96ccf72}} 
+\index{dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}!set\+Key\+True@{set\+Key\+True}}
+\index{set\+Key\+True@{set\+Key\+True}!dkeep\+::logic\+::\+Hero@{dkeep\+::logic\+::\+Hero}}
+\subsubsection{\texorpdfstring{set\+Key\+True()}{setKeyTrue()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Hero.\+set\+Key\+True (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Sets true the has\+Key flag, meaning that the hero has caught the key. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Hero.\+java\end{DoxyCompactItemize}

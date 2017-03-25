@@ -1,0 +1,98 @@
+\hypertarget{classdkeep_1_1logic_1_1_guard}{}\section{dkeep.\+logic.\+Guard Class Reference}
+\label{classdkeep_1_1logic_1_1_guard}\index{dkeep.\+logic.\+Guard@{dkeep.\+logic.\+Guard}}
+Inheritance diagram for dkeep.\+logic.\+Guard\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classdkeep_1_1logic_1_1_guard}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_guard_a3e09758314f42000eca6134717672855}{Guard} (char symbol, int\mbox{[}$\,$\mbox{]} coord, char\mbox{[}$\,$\mbox{]} path)
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_guard_a2389016085c6d65d4366930fac72dab4}{normal\+Movement} ()
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_guard_a8c588aa887fcfe6d3e4a9e13d236c644}{reverse\+Movement} ()
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_guard_a4c4590d86f573a575bc3ece3d441f83f}{movement} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_guard_a2008fdc91b313fa18059fab7d92ddc61}{get\+Symbol} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_guard_a74ea55aa131d73784e9487ef3aeef5ca}\label{classdkeep_1_1logic_1_1_guard_a74ea55aa131d73784e9487ef3aeef5ca}} 
+char \mbox{[}$\,$\mbox{]} {\bfseries path}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_guard_a0e0434321ead6cd193358d9069177ba3}\label{classdkeep_1_1logic_1_1_guard_a0e0434321ead6cd193358d9069177ba3}} 
+int {\bfseries i}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_guard}{Guard} is a class that keeps information about the type of enemy \hyperlink{classdkeep_1_1logic_1_1_guard}{Guard}. This information consists of the path corresponding to it\textquotesingle{}s movement on the map and the index that keeps track of that path. It also contains the methods for the normal movement (following the path) and the reverse movement(following the path in reverse order). \begin{DoxySeeAlso}{See also}
+\hyperlink{classdkeep_1_1logic_1_1_character}{Character} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_guard_a3e09758314f42000eca6134717672855}\label{classdkeep_1_1logic_1_1_guard_a3e09758314f42000eca6134717672855}} 
+\index{dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}!Guard@{Guard}}
+\index{Guard@{Guard}!dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}}
+\subsubsection{\texorpdfstring{Guard()}{Guard()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Guard.\+Guard (\begin{DoxyParamCaption}\item[{char}]{symbol,  }\item[{int \mbox{[}$\,$\mbox{]}}]{coord,  }\item[{char \mbox{[}$\,$\mbox{]}}]{path }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_guard}{Guard}. It initializes the character variables and also the path and index. 
+\begin{DoxyParams}{Parameters}
+{\em symbol} & char that represents the guard \\
+\hline
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+{\em path} & array of chars that represent the path that the enemy will take \\
+\hline
+{\em i} & int that keeps the progress in the array of path \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_guard_a2008fdc91b313fa18059fab7d92ddc61}\label{classdkeep_1_1logic_1_1_guard_a2008fdc91b313fa18059fab7d92ddc61}} 
+\index{dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}!get\+Symbol@{get\+Symbol}}
+\index{get\+Symbol@{get\+Symbol}!dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}}
+\subsubsection{\texorpdfstring{get\+Symbol()}{getSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Guard.\+get\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_guard_a4c4590d86f573a575bc3ece3d441f83f}\label{classdkeep_1_1logic_1_1_guard_a4c4590d86f573a575bc3ece3d441f83f}} 
+\index{dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}!movement@{movement}}
+\index{movement@{movement}!dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}}
+\subsubsection{\texorpdfstring{movement()}{movement()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Guard.\+movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_guard_a2389016085c6d65d4366930fac72dab4}\label{classdkeep_1_1logic_1_1_guard_a2389016085c6d65d4366930fac72dab4}} 
+\index{dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}!normal\+Movement@{normal\+Movement}}
+\index{normal\+Movement@{normal\+Movement}!dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}}
+\subsubsection{\texorpdfstring{normal\+Movement()}{normalMovement()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Guard.\+normal\+Movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Follows the path of the guard, using the index to know the next direction of the guard. Returns a array with the new coordinates of the guard and updates the index. \begin{DoxyReturn}{Returns}
+array of 2 ints with the coordinates x and y 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_guard_a8c588aa887fcfe6d3e4a9e13d236c644}\label{classdkeep_1_1logic_1_1_guard_a8c588aa887fcfe6d3e4a9e13d236c644}} 
+\index{dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}!reverse\+Movement@{reverse\+Movement}}
+\index{reverse\+Movement@{reverse\+Movement}!dkeep\+::logic\+::\+Guard@{dkeep\+::logic\+::\+Guard}}
+\subsubsection{\texorpdfstring{reverse\+Movement()}{reverseMovement()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Guard.\+reverse\+Movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Follows the path of the guard but in reverse order. Instead of adding 1 to the index, it subtracts 1. Returns a array with the new coordinates of the guard.
+
+\begin{DoxyReturn}{Returns}
+array of 2 ints with the coordinates x and y 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Guard.\+java\end{DoxyCompactItemize}

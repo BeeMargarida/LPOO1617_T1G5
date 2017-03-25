@@ -1,0 +1,176 @@
+\hypertarget{classdkeep_1_1logic_1_1_character}{}\section{dkeep.\+logic.\+Character Class Reference}
+\label{classdkeep_1_1logic_1_1_character}\index{dkeep.\+logic.\+Character@{dkeep.\+logic.\+Character}}
+Inheritance diagram for dkeep.\+logic.\+Character\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classdkeep_1_1logic_1_1_character}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_character_aae3bf0eb8507fa97aef9e6ece534ea58}{Character} (int\mbox{[}$\,$\mbox{]} coord, char symbol, \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} weapon)
+\item 
+int \hyperlink{classdkeep_1_1logic_1_1_character_aa8f5ac737dad552c4cffeeaffd2194ec}{getX} ()
+\item 
+int \hyperlink{classdkeep_1_1logic_1_1_character_a6d872834994ec8c4bea59d1803f3be59}{getY} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_character_a5e41fc20fed934fc02bf114f603e540b}{setX} (int x)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_character_aef6651cd827a83c4518e4dcba4ead2b4}{setY} (int y)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_character_a39b7935ecc4b2be1e3070c292d1356bf}{got\+Stunned} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_character_afe41039ed701e55162455dd8d480fe2b}{back\+To\+Normal} ()
+\item 
+abstract char \hyperlink{classdkeep_1_1logic_1_1_character_a8cb0733b49fdd569cc58fe5a3b1a9c29}{get\+Symbol} ()
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} \hyperlink{classdkeep_1_1logic_1_1_character_a19d825a86884f725aedd76fdd49ff964}{get\+Weapon} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_character_a22be2db9df156acfb3638b3d8826f5ea}{get\+Weapon\+Symbol} ()
+\item 
+abstract int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_character_a400aadf032a66c591f4ad6ca2660f3f2}{movement} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_aa1674c0adfcc7425cccd957ce594b8ed}\label{classdkeep_1_1logic_1_1_character_aa1674c0adfcc7425cccd957ce594b8ed}} 
+int {\bfseries x}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a2b1ff3a7a088a91798ddb264ff37e897}\label{classdkeep_1_1logic_1_1_character_a2b1ff3a7a088a91798ddb264ff37e897}} 
+int {\bfseries y}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a6ae027052136fb9b1c89851f4ed68fd3}\label{classdkeep_1_1logic_1_1_character_a6ae027052136fb9b1c89851f4ed68fd3}} 
+char {\bfseries symbol}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_ad00f5df3d896d30368c2b25b92452a5b}\label{classdkeep_1_1logic_1_1_character_ad00f5df3d896d30368c2b25b92452a5b}} 
+boolean {\bfseries is\+Over\+Key} = false
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a556deb48a158574080c8e144c80ea1d9}\label{classdkeep_1_1logic_1_1_character_a556deb48a158574080c8e144c80ea1d9}} 
+boolean {\bfseries stunned} = false
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a474a59d32601ec8153b6b751d7fc1b25}\label{classdkeep_1_1logic_1_1_character_a474a59d32601ec8153b6b751d7fc1b25}} 
+int {\bfseries turns} = 0
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a0ce79e6c96b912490371d589c7e8420e}\label{classdkeep_1_1logic_1_1_character_a0ce79e6c96b912490371d589c7e8420e}} 
+\hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} {\bfseries weapon}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_character}{Character} is a class that keeps the information about the moving elements of the game. It keeps information about it\textquotesingle{}s coordinates, symbol, if it\textquotesingle{}s above a key or stunned, it\textquotesingle{}s turns (movement depends on it) and it\textquotesingle{}s weapon. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_aae3bf0eb8507fa97aef9e6ece534ea58}\label{classdkeep_1_1logic_1_1_character_aae3bf0eb8507fa97aef9e6ece534ea58}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!Character@{Character}}
+\index{Character@{Character}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{Character()}{Character()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Character.\+Character (\begin{DoxyParamCaption}\item[{int \mbox{[}$\,$\mbox{]}}]{coord,  }\item[{char}]{symbol,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon}}]{weapon }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_character}{Character}. Receives it\textquotesingle{}s coordinates, symbol and weapon. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+{\em symbol} & char that represents the character \\
+\hline
+{\em weapon} & Object weapon that contains information about the weapon \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_afe41039ed701e55162455dd8d480fe2b}\label{classdkeep_1_1logic_1_1_character_afe41039ed701e55162455dd8d480fe2b}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!back\+To\+Normal@{back\+To\+Normal}}
+\index{back\+To\+Normal@{back\+To\+Normal}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{back\+To\+Normal()}{backToNormal()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Character.\+back\+To\+Normal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Puts the flag stunned back to false. Happens when the number of turns has reached 0. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a8cb0733b49fdd569cc58fe5a3b1a9c29}\label{classdkeep_1_1logic_1_1_character_a8cb0733b49fdd569cc58fe5a3b1a9c29}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!get\+Symbol@{get\+Symbol}}
+\index{get\+Symbol@{get\+Symbol}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{get\+Symbol()}{getSymbol()}}
+{\footnotesize\ttfamily abstract char dkeep.\+logic.\+Character.\+get\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Returns the symbol of the \hyperlink{classdkeep_1_1logic_1_1_character}{Character}, depending on it\textquotesingle{}s state and qualities. \begin{DoxyReturn}{Returns}
+char representing it\textquotesingle{}s display on the game 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a19d825a86884f725aedd76fdd49ff964}\label{classdkeep_1_1logic_1_1_character_a19d825a86884f725aedd76fdd49ff964}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!get\+Weapon@{get\+Weapon}}
+\index{get\+Weapon@{get\+Weapon}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{get\+Weapon()}{getWeapon()}}
+{\footnotesize\ttfamily \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} dkeep.\+logic.\+Character.\+get\+Weapon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retrieve the weapon of the character. If null, it will return null \begin{DoxyReturn}{Returns}
+weapon of the character, Object \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a22be2db9df156acfb3638b3d8826f5ea}\label{classdkeep_1_1logic_1_1_character_a22be2db9df156acfb3638b3d8826f5ea}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!get\+Weapon\+Symbol@{get\+Weapon\+Symbol}}
+\index{get\+Weapon\+Symbol@{get\+Weapon\+Symbol}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{get\+Weapon\+Symbol()}{getWeaponSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Character.\+get\+Weapon\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retrieve the weapon char depending on it\textquotesingle{}s state. If weapon is null, it will return a char with empty space. \begin{DoxyReturn}{Returns}
+char representing the weapon symbol 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_aa8f5ac737dad552c4cffeeaffd2194ec}\label{classdkeep_1_1logic_1_1_character_aa8f5ac737dad552c4cffeeaffd2194ec}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!getX@{getX}}
+\index{getX@{getX}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{get\+X()}{getX()}}
+{\footnotesize\ttfamily int dkeep.\+logic.\+Character.\+getX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retrieve the valor of the coordinate x. \begin{DoxyReturn}{Returns}
+the coordinate x, type int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a6d872834994ec8c4bea59d1803f3be59}\label{classdkeep_1_1logic_1_1_character_a6d872834994ec8c4bea59d1803f3be59}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!getY@{getY}}
+\index{getY@{getY}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{get\+Y()}{getY()}}
+{\footnotesize\ttfamily int dkeep.\+logic.\+Character.\+getY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retrieve the valor of the coordinate y. \begin{DoxyReturn}{Returns}
+the coordinate y, type int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a39b7935ecc4b2be1e3070c292d1356bf}\label{classdkeep_1_1logic_1_1_character_a39b7935ecc4b2be1e3070c292d1356bf}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!got\+Stunned@{got\+Stunned}}
+\index{got\+Stunned@{got\+Stunned}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{got\+Stunned()}{gotStunned()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Character.\+got\+Stunned (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Puts the flag stunned true and updates the turns to 2. Only happens for enemies if they got \char`\"{}hit\char`\"{} with the hero weapon. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a400aadf032a66c591f4ad6ca2660f3f2}\label{classdkeep_1_1logic_1_1_character_a400aadf032a66c591f4ad6ca2660f3f2}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!movement@{movement}}
+\index{movement@{movement}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{movement()}{movement()}}
+{\footnotesize\ttfamily abstract int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Character.\+movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Retrieve a array on 2 ints with the possible new coordinates x and y of the character. \begin{DoxyReturn}{Returns}
+array of 2 ints with the coordinates x and y 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_a5e41fc20fed934fc02bf114f603e540b}\label{classdkeep_1_1logic_1_1_character_a5e41fc20fed934fc02bf114f603e540b}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!setX@{setX}}
+\index{setX@{setX}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{set\+X()}{setX()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Character.\+setX (\begin{DoxyParamCaption}\item[{int}]{x }\end{DoxyParamCaption})}
+
+Set the coordinate x to the value given. 
+\begin{DoxyParams}{Parameters}
+{\em x} & new coordinate to be updated \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_character_aef6651cd827a83c4518e4dcba4ead2b4}\label{classdkeep_1_1logic_1_1_character_aef6651cd827a83c4518e4dcba4ead2b4}} 
+\index{dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}!setY@{setY}}
+\index{setY@{setY}!dkeep\+::logic\+::\+Character@{dkeep\+::logic\+::\+Character}}
+\subsubsection{\texorpdfstring{set\+Y()}{setY()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Character.\+setY (\begin{DoxyParamCaption}\item[{int}]{y }\end{DoxyParamCaption})}
+
+Set the coordinate y to the value given. 
+\begin{DoxyParams}{Parameters}
+{\em y} & new coordinate to be updated \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Character.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,70 @@
+\hypertarget{classdkeep_1_1logic_1_1_dungeon_logic}{}\section{dkeep.\+logic.\+Dungeon\+Logic Class Reference}
+\label{classdkeep_1_1logic_1_1_dungeon_logic}\index{dkeep.\+logic.\+Dungeon\+Logic@{dkeep.\+logic.\+Dungeon\+Logic}}
+Inheritance diagram for dkeep.\+logic.\+Dungeon\+Logic\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdkeep_1_1logic_1_1_dungeon_logic}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_dungeon_logic_a705c692038bc3af07788e0091f9176b7}{Dungeon\+Logic} (\hyperlink{classdkeep_1_1logic_1_1_map}{Map} map, int\mbox{[}$\,$\mbox{]} heropos, int option)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_dungeon_logic_a5560298a8a9e7831ce61a8cc1a7bc7c4}{move\+Hero} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_dungeon_logic_a94e25841318f6c9f82bd7f1654b7368a}{gameplay} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} \hyperlink{classdkeep_1_1logic_1_1_dungeon_logic_ae94692c5c7044d32f78d2e021b0a9513}{next\+Logic} (\hyperlink{classdkeep_1_1logic_1_1_map}{Map} map, int option)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_dungeon_logic}{Dungeon\+Logic} is a class that extends \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} and it\textquotesingle{}s function is to deal with the logic of the Dungeon level. It contains all the specific functions that deal with the hero and the type of enemies of its level. The big difference in this class, compared to the other, is the existence of three guards, each with a different behaviour. This level only has a lever. \begin{DoxySeeAlso}{See also}
+\hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_dungeon_logic_a705c692038bc3af07788e0091f9176b7}\label{classdkeep_1_1logic_1_1_dungeon_logic_a705c692038bc3af07788e0091f9176b7}} 
+\index{dkeep\+::logic\+::\+Dungeon\+Logic@{dkeep\+::logic\+::\+Dungeon\+Logic}!Dungeon\+Logic@{Dungeon\+Logic}}
+\index{Dungeon\+Logic@{Dungeon\+Logic}!dkeep\+::logic\+::\+Dungeon\+Logic@{dkeep\+::logic\+::\+Dungeon\+Logic}}
+\subsubsection{\texorpdfstring{Dungeon\+Logic()}{DungeonLogic()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Dungeon\+Logic.\+Dungeon\+Logic (\begin{DoxyParamCaption}\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map,  }\item[{int \mbox{[}$\,$\mbox{]}}]{heropos,  }\item[{int}]{option }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_dungeon_logic}{Dungeon\+Logic}. It calls the \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} constructor, then adds one enemy, which behaviour is chosen according to the option selected by the user. The path is always the same. 
+\begin{DoxyParams}{Parameters}
+{\em map} & \hyperlink{classdkeep_1_1logic_1_1_map}{Map} of the current level \\
+\hline
+{\em heropos} & starting position of the hero \\
+\hline
+{\em option} & refers to the behaviour of the guard \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_dungeon_logic_a94e25841318f6c9f82bd7f1654b7368a}\label{classdkeep_1_1logic_1_1_dungeon_logic_a94e25841318f6c9f82bd7f1654b7368a}} 
+\index{dkeep\+::logic\+::\+Dungeon\+Logic@{dkeep\+::logic\+::\+Dungeon\+Logic}!gameplay@{gameplay}}
+\index{gameplay@{gameplay}!dkeep\+::logic\+::\+Dungeon\+Logic@{dkeep\+::logic\+::\+Dungeon\+Logic}}
+\subsubsection{\texorpdfstring{gameplay()}{gameplay()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Dungeon\+Logic.\+gameplay (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+In this level, only the enemy and hero movements are made because there are no weapons. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_dungeon_logic_a5560298a8a9e7831ce61a8cc1a7bc7c4}\label{classdkeep_1_1logic_1_1_dungeon_logic_a5560298a8a9e7831ce61a8cc1a7bc7c4}} 
+\index{dkeep\+::logic\+::\+Dungeon\+Logic@{dkeep\+::logic\+::\+Dungeon\+Logic}!move\+Hero@{move\+Hero}}
+\index{move\+Hero@{move\+Hero}!dkeep\+::logic\+::\+Dungeon\+Logic@{dkeep\+::logic\+::\+Dungeon\+Logic}}
+\subsubsection{\texorpdfstring{move\+Hero()}{moveHero()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Dungeon\+Logic.\+move\+Hero (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_dungeon_logic_ae94692c5c7044d32f78d2e021b0a9513}\label{classdkeep_1_1logic_1_1_dungeon_logic_ae94692c5c7044d32f78d2e021b0a9513}} 
+\index{dkeep\+::logic\+::\+Dungeon\+Logic@{dkeep\+::logic\+::\+Dungeon\+Logic}!next\+Logic@{next\+Logic}}
+\index{next\+Logic@{next\+Logic}!dkeep\+::logic\+::\+Dungeon\+Logic@{dkeep\+::logic\+::\+Dungeon\+Logic}}
+\subsubsection{\texorpdfstring{next\+Logic()}{nextLogic()}}
+{\footnotesize\ttfamily \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} dkeep.\+logic.\+Dungeon\+Logic.\+next\+Logic (\begin{DoxyParamCaption}\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map,  }\item[{int}]{option }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Dungeon\+Logic.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,147 @@
+\hypertarget{classdkeep_1_1logic_1_1_weapon}{}\section{dkeep.\+logic.\+Weapon Class Reference}
+\label{classdkeep_1_1logic_1_1_weapon}\index{dkeep.\+logic.\+Weapon@{dkeep.\+logic.\+Weapon}}
+Inheritance diagram for dkeep.\+logic.\+Weapon\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdkeep_1_1logic_1_1_weapon}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_weapon_adb73dd1c376c37614cad2b5ad2e9d1d4}{swing} (int x, int y)
+\item 
+int \hyperlink{classdkeep_1_1logic_1_1_weapon_a91b3f16c06cb271d31f1aa013c45ce31}{getX} ()
+\item 
+int \hyperlink{classdkeep_1_1logic_1_1_weapon_a5e47ccc0670cc36854af2dd1f72a70ee}{getY} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_weapon_a5be1b0ffe5c917345fad810d83307461}{setX} (int x)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_weapon_a11572cdd07ba03705550964e1d076e9c}{setY} (int y)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_weapon_a93d2e4eb12cf90e2f07d54e7f99e2446}{set\+Not\+Valid} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_weapon_a73776355a004878e7ca9a0a32033426f}{set\+Valid} ()
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_weapon_a68d3c9c406b56366ccfd75cae899bb68}{get\+Valid} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_weapon_ad60afd31631a1552c749b5ddd0a5b949}{get\+Symbol} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_af6f8a376f3f843d84890f823b696449d}\label{classdkeep_1_1logic_1_1_weapon_af6f8a376f3f843d84890f823b696449d}} 
+int {\bfseries x}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_adab0e9dd2253065c9bf26eb90df44937}\label{classdkeep_1_1logic_1_1_weapon_adab0e9dd2253065c9bf26eb90df44937}} 
+int {\bfseries y}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_ac25e811e29333780f6f1ddf88b22c202}\label{classdkeep_1_1logic_1_1_weapon_ac25e811e29333780f6f1ddf88b22c202}} 
+char {\bfseries symbol}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a676b1b620341ad36649cd8408475c56b}\label{classdkeep_1_1logic_1_1_weapon_a676b1b620341ad36649cd8408475c56b}} 
+char {\bfseries secsymbol}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a89d4f4b0d4c737af7ef786e88f254085}\label{classdkeep_1_1logic_1_1_weapon_a89d4f4b0d4c737af7ef786e88f254085}} 
+boolean {\bfseries above}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a453cf282b3402e717715f3f3c6154a67}\label{classdkeep_1_1logic_1_1_weapon_a453cf282b3402e717715f3f3c6154a67}} 
+boolean {\bfseries valid}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} is a class that represents a weapon possessed by a character. It keeps information about it\textquotesingle{}s symbols, coordinates, and flags informing if it\textquotesingle{}s position is above key and if it is in a vlid position to be printed. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_ad60afd31631a1552c749b5ddd0a5b949}\label{classdkeep_1_1logic_1_1_weapon_ad60afd31631a1552c749b5ddd0a5b949}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!get\+Symbol@{get\+Symbol}}
+\index{get\+Symbol@{get\+Symbol}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{get\+Symbol()}{getSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Weapon.\+get\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the char representing the weapon based on it\textquotesingle{}s status. \begin{DoxyReturn}{Returns}
+char representing the weapon 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a68d3c9c406b56366ccfd75cae899bb68}\label{classdkeep_1_1logic_1_1_weapon_a68d3c9c406b56366ccfd75cae899bb68}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!get\+Valid@{get\+Valid}}
+\index{get\+Valid@{get\+Valid}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{get\+Valid()}{getValid()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Weapon.\+get\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the value of the flag valid. \begin{DoxyReturn}{Returns}
+true if valid is true, false if valid is false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a91b3f16c06cb271d31f1aa013c45ce31}\label{classdkeep_1_1logic_1_1_weapon_a91b3f16c06cb271d31f1aa013c45ce31}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!getX@{getX}}
+\index{getX@{getX}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{get\+X()}{getX()}}
+{\footnotesize\ttfamily int dkeep.\+logic.\+Weapon.\+getX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retrieve the valor of the coordinate x. \begin{DoxyReturn}{Returns}
+the coordinate x, type int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a5e47ccc0670cc36854af2dd1f72a70ee}\label{classdkeep_1_1logic_1_1_weapon_a5e47ccc0670cc36854af2dd1f72a70ee}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!getY@{getY}}
+\index{getY@{getY}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{get\+Y()}{getY()}}
+{\footnotesize\ttfamily int dkeep.\+logic.\+Weapon.\+getY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Retrieve the valor of the coordinate y. \begin{DoxyReturn}{Returns}
+the coordinate y, type int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a93d2e4eb12cf90e2f07d54e7f99e2446}\label{classdkeep_1_1logic_1_1_weapon_a93d2e4eb12cf90e2f07d54e7f99e2446}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!set\+Not\+Valid@{set\+Not\+Valid}}
+\index{set\+Not\+Valid@{set\+Not\+Valid}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{set\+Not\+Valid()}{setNotValid()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Weapon.\+set\+Not\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Sets the valid flag to false, meaning that the weapon is in a position not valid to be printed. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a73776355a004878e7ca9a0a32033426f}\label{classdkeep_1_1logic_1_1_weapon_a73776355a004878e7ca9a0a32033426f}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!set\+Valid@{set\+Valid}}
+\index{set\+Valid@{set\+Valid}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{set\+Valid()}{setValid()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Weapon.\+set\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Sets the valid flag to true, meaning that the weapon is in a position valid to be printed. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a5be1b0ffe5c917345fad810d83307461}\label{classdkeep_1_1logic_1_1_weapon_a5be1b0ffe5c917345fad810d83307461}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!setX@{setX}}
+\index{setX@{setX}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{set\+X()}{setX()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Weapon.\+setX (\begin{DoxyParamCaption}\item[{int}]{x }\end{DoxyParamCaption})}
+
+Set the coordinate x to the value given. 
+\begin{DoxyParams}{Parameters}
+{\em x} & new coordinate to be updated \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_a11572cdd07ba03705550964e1d076e9c}\label{classdkeep_1_1logic_1_1_weapon_a11572cdd07ba03705550964e1d076e9c}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!setY@{setY}}
+\index{setY@{setY}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{set\+Y()}{setY()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Weapon.\+setY (\begin{DoxyParamCaption}\item[{int}]{y }\end{DoxyParamCaption})}
+
+Set the coordinate y to the value given. 
+\begin{DoxyParams}{Parameters}
+{\em y} & new coordinate to be updated \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_weapon_adb73dd1c376c37614cad2b5ad2e9d1d4}\label{classdkeep_1_1logic_1_1_weapon_adb73dd1c376c37614cad2b5ad2e9d1d4}} 
+\index{dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}!swing@{swing}}
+\index{swing@{swing}!dkeep\+::logic\+::\+Weapon@{dkeep\+::logic\+::\+Weapon}}
+\subsubsection{\texorpdfstring{swing()}{swing()}}
+{\footnotesize\ttfamily abstract int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Weapon.\+swing (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Using the coordinates of the weapon\textquotesingle{}s character (x and y), randomly calculates the direction of the next position of the weapon, returning a array of ints that represent the new coordinates for the weapon to take. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinates of the weapon\textquotesingle{}s \hyperlink{classdkeep_1_1logic_1_1_character}{Character} \\
+\hline
+{\em y} & coordinates of the weapon\textquotesingle{}s \hyperlink{classdkeep_1_1logic_1_1_character}{Character} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+array of ints with coordinates x and y 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Weapon.\+java\end{DoxyCompactItemize}

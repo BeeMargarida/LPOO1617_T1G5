@@ -1,0 +1,125 @@
+\hypertarget{classdkeep_1_1logic_1_1_keep_logic}{}\section{dkeep.\+logic.\+Keep\+Logic Class Reference}
+\label{classdkeep_1_1logic_1_1_keep_logic}\index{dkeep.\+logic.\+Keep\+Logic@{dkeep.\+logic.\+Keep\+Logic}}
+Inheritance diagram for dkeep.\+logic.\+Keep\+Logic\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdkeep_1_1logic_1_1_keep_logic}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_keep_logic_a9dc4f4d265b8964807c6d3f7e306e2c9}{Keep\+Logic} (\hyperlink{classdkeep_1_1logic_1_1_map}{Map} map, int\mbox{[}$\,$\mbox{]} heropos, boolean armed\+Hero, int option)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_keep_logic_a591c644d50fb74047689ee7f23e4e9e0}{enemy\+Movement} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_keep_logic_a02e0e445c71a2d460eea461ed8aadb67}{enemy\+Weapon\+Movement} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_keep_logic_aee771ab14d616048b4257d7cecaad640}{move\+Hero} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_keep_logic_a4f6646f5672e33e69d2d16e759223775}{hero\+Weapon\+Movement} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_keep_logic_a3fd0f0c657498c6cbe5d853bbf35b421}{gameplay} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} \hyperlink{classdkeep_1_1logic_1_1_keep_logic_ac88c1dcda340a853c14ae4f9a9f89095}{next\+Logic} (\hyperlink{classdkeep_1_1logic_1_1_map}{Map} map, int option)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_keep_logic_ac46609fcbfdc60046724ae28b369de4a}{get\+Victory} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_keep_logic}{Keep\+Logic} is a class that extends \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} and it\textquotesingle{}s function is to deal with the logic of the Keep level. It contains all the specific functions that deal with the hero and the type of enemies of its level. The big difference in this class, compared to the other, is the existence of armed ogres, a possible armed hero and a key instead of a lever. \begin{DoxySeeAlso}{See also}
+\hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_keep_logic_a9dc4f4d265b8964807c6d3f7e306e2c9}\label{classdkeep_1_1logic_1_1_keep_logic_a9dc4f4d265b8964807c6d3f7e306e2c9}} 
+\index{dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}!Keep\+Logic@{Keep\+Logic}}
+\index{Keep\+Logic@{Keep\+Logic}!dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}}
+\subsubsection{\texorpdfstring{Keep\+Logic()}{KeepLogic()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Keep\+Logic.\+Keep\+Logic (\begin{DoxyParamCaption}\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map,  }\item[{int \mbox{[}$\,$\mbox{]}}]{heropos,  }\item[{boolean}]{armed\+Hero,  }\item[{int}]{option }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_keep_logic}{Keep\+Logic}. It calls the \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} constructor, then adds a weapon to the hero if the armed\+Hero variable is true. Also adds the number of enemies(\+Crazy\+Ogre) correspondent to the option value. 
+\begin{DoxyParams}{Parameters}
+{\em map} & \hyperlink{classdkeep_1_1logic_1_1_map}{Map} of the current level \\
+\hline
+{\em heropos} & starting position of the hero \\
+\hline
+{\em armed\+Hero} & flag that indicates if the hero is armed or not \\
+\hline
+{\em option} & number of enemies \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_keep_logic_a591c644d50fb74047689ee7f23e4e9e0}\label{classdkeep_1_1logic_1_1_keep_logic_a591c644d50fb74047689ee7f23e4e9e0}} 
+\index{dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}!enemy\+Movement@{enemy\+Movement}}
+\index{enemy\+Movement@{enemy\+Movement}!dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}}
+\subsubsection{\texorpdfstring{enemy\+Movement()}{enemyMovement()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Keep\+Logic.\+enemy\+Movement (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+Handles the enemies movement. Requests a possible position of each enemy, then checks if such position is valid (doesn\textquotesingle{}t overlap any of the static elements of the game). It also checks if the enemy is stunned and, if it is, it will not move. 
+\begin{DoxyParams}{Parameters}
+{\em dir} & char that correspond to the direction of the hero movement chosen by the player \\
+\hline
+{\em map} & Object \hyperlink{classdkeep_1_1logic_1_1_map}{Map} that corresponds to the current map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_keep_logic_a02e0e445c71a2d460eea461ed8aadb67}\label{classdkeep_1_1logic_1_1_keep_logic_a02e0e445c71a2d460eea461ed8aadb67}} 
+\index{dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}!enemy\+Weapon\+Movement@{enemy\+Weapon\+Movement}}
+\index{enemy\+Weapon\+Movement@{enemy\+Weapon\+Movement}!dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}}
+\subsubsection{\texorpdfstring{enemy\+Weapon\+Movement()}{enemyWeaponMovement()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Keep\+Logic.\+enemy\+Weapon\+Movement (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+Handles the enemies\textquotesingle{} weapons movement. Request a possible position of each enemies\textquotesingle{} weapon, then checks if such position is valid (doesn\textquotesingle{}t overlap any of the static elements of the game). It also checks if the enemies\textquotesingle{} weapon is above and, if it is, it will change it\textquotesingle{}s flag accordingly. 
+\begin{DoxyParams}{Parameters}
+{\em dir} & char that correspond to the direction of the hero movement chosen by the player \\
+\hline
+{\em map} & Object \hyperlink{classdkeep_1_1logic_1_1_map}{Map} that corresponds to the current map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_keep_logic_a3fd0f0c657498c6cbe5d853bbf35b421}\label{classdkeep_1_1logic_1_1_keep_logic_a3fd0f0c657498c6cbe5d853bbf35b421}} 
+\index{dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}!gameplay@{gameplay}}
+\index{gameplay@{gameplay}!dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}}
+\subsubsection{\texorpdfstring{gameplay()}{gameplay()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Keep\+Logic.\+gameplay (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_keep_logic_ac46609fcbfdc60046724ae28b369de4a}\label{classdkeep_1_1logic_1_1_keep_logic_ac46609fcbfdc60046724ae28b369de4a}} 
+\index{dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}!get\+Victory@{get\+Victory}}
+\index{get\+Victory@{get\+Victory}!dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}}
+\subsubsection{\texorpdfstring{get\+Victory()}{getVictory()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Keep\+Logic.\+get\+Victory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_keep_logic_a4f6646f5672e33e69d2d16e759223775}\label{classdkeep_1_1logic_1_1_keep_logic_a4f6646f5672e33e69d2d16e759223775}} 
+\index{dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}!hero\+Weapon\+Movement@{hero\+Weapon\+Movement}}
+\index{hero\+Weapon\+Movement@{hero\+Weapon\+Movement}!dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}}
+\subsubsection{\texorpdfstring{hero\+Weapon\+Movement()}{heroWeaponMovement()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Keep\+Logic.\+hero\+Weapon\+Movement (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+Handles the hero\textquotesingle{}s weapon movement. Request a possible position of the hero\textquotesingle{}s weapon, then checks if such position is valid (doesn\textquotesingle{}t overlap any of the static elements of the game). It checks if the hero\textquotesingle{}s weapon is above and if is valid and, if it is, it will change it\textquotesingle{}s flag accordingly. Furthermore, it checks if the hero\textquotesingle{}s weapon stuns any of the guards. 
+\begin{DoxyParams}{Parameters}
+{\em dir} & char that correspond to the direction of the hero movement chosen by the player \\
+\hline
+{\em map} & Object \hyperlink{classdkeep_1_1logic_1_1_map}{Map} that corresponds to the current map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_keep_logic_aee771ab14d616048b4257d7cecaad640}\label{classdkeep_1_1logic_1_1_keep_logic_aee771ab14d616048b4257d7cecaad640}} 
+\index{dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}!move\+Hero@{move\+Hero}}
+\index{move\+Hero@{move\+Hero}!dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}}
+\subsubsection{\texorpdfstring{move\+Hero()}{moveHero()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Keep\+Logic.\+move\+Hero (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+In this level the collision of the hero with the enemies\textquotesingle{} weapons is made. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_keep_logic_ac88c1dcda340a853c14ae4f9a9f89095}\label{classdkeep_1_1logic_1_1_keep_logic_ac88c1dcda340a853c14ae4f9a9f89095}} 
+\index{dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}!next\+Logic@{next\+Logic}}
+\index{next\+Logic@{next\+Logic}!dkeep\+::logic\+::\+Keep\+Logic@{dkeep\+::logic\+::\+Keep\+Logic}}
+\subsubsection{\texorpdfstring{next\+Logic()}{nextLogic()}}
+{\footnotesize\ttfamily \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} dkeep.\+logic.\+Keep\+Logic.\+next\+Logic (\begin{DoxyParamCaption}\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map,  }\item[{int}]{option }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Keep\+Logic.\+java\end{DoxyCompactItemize}

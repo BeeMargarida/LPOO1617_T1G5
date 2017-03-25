@@ -1,0 +1,203 @@
+\hypertarget{classdkeep_1_1logic_1_1_game}{}\section{dkeep.\+logic.\+Game Class Reference}
+\label{classdkeep_1_1logic_1_1_game}\index{dkeep.\+logic.\+Game@{dkeep.\+logic.\+Game}}
+Inheritance diagram for dkeep.\+logic.\+Game\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classdkeep_1_1logic_1_1_game}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_game_ad630e9f66ca2e6fc818411499b9a7d7a}{Game} (\hyperlink{classdkeep_1_1logic_1_1_map}{Map} starting\+Map, \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} starting\+Logic, int\mbox{[}$\,$\mbox{]} num\+Enemy)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_game_a6f548ad7f01432adb418f5891f130ec4}{is\+Game\+Over} ()
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_game_af2953cb36d8db8ff068d0291f6c6dbba}{victory} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_a45d8230123f2046b5d5a82ba7e6b2147}{get\+Board\+Key} (char\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} m)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_a5a87ac790c4389d6e6066e19e4be4983}{erase\+Board\+Key} (char\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} m)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_a4d9a18b2ade5e68657a41d2f2516f696}{get\+Board\+Hero} (char\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} m)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_afe09f2713bb62e5ace6943edb3306043}{erase\+Board\+Hero} (char\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} m)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_a891c0dd84b0a828714135cf2e56258e8}{get\+Board\+Enemies} (char\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} m)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_acb0bd46f08b7987f30692afcc49525cf}{erase\+Board\+Enemies} (char\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} m)
+\item 
+char \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_game_a00104638b06a79e0b90768a1df2628c2}{get\+Board} ()
+\item 
+int \hyperlink{classdkeep_1_1logic_1_1_game_ada3e80740d47374027077803c6442ca4}{get\+Level} ()
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_af80ce295e13bccbe8fe6f48399d4d808}{set\+Level} (int level)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_a10736bc5627d884177a850b7b3182fb4}{move\+Hero} (char dir)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_game_add0b32fc7d2370e0071ccdf85ee341e1}{update} (char dir)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_game}{Game} is a class that deals with the whole game, connecting logics with the respective map. This class checks if the game is over and either proceeds to the next level (if there is one), or ends the game and transmits that information to the main function. It contains the map and logic of the game, the enemy\textquotesingle{}s options of each level and the current level of the game being played. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_ad630e9f66ca2e6fc818411499b9a7d7a}\label{classdkeep_1_1logic_1_1_game_ad630e9f66ca2e6fc818411499b9a7d7a}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!Game@{Game}}
+\index{Game@{Game}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{Game()}{Game()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Game.\+Game (\begin{DoxyParamCaption}\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{starting\+Map,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_logic}{Logic}}]{starting\+Logic,  }\item[{int \mbox{[}$\,$\mbox{]}}]{num\+Enemy }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_game}{Game}. Initializes the map, logic and enemyoptions with the attributes given and sets the level to 0. 
+\begin{DoxyParams}{Parameters}
+{\em starting\+Map} & \hyperlink{classdkeep_1_1logic_1_1_map}{Map} that is playable in the beginning of the game \\
+\hline
+{\em starting\+Logic} & \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} that is playable in the beginning of the game \\
+\hline
+{\em num\+Enemy} & Options regarding the enemies of the existing levels \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_acb0bd46f08b7987f30692afcc49525cf}\label{classdkeep_1_1logic_1_1_game_acb0bd46f08b7987f30692afcc49525cf}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!erase\+Board\+Enemies@{erase\+Board\+Enemies}}
+\index{erase\+Board\+Enemies@{erase\+Board\+Enemies}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{erase\+Board\+Enemies()}{eraseBoardEnemies()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+erase\+Board\+Enemies (\begin{DoxyParamCaption}\item[{char}]{m\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Erases from the map the enemies symbol and their weapon. 
+\begin{DoxyParams}{Parameters}
+{\em m} & matrix of chars that represent the map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_afe09f2713bb62e5ace6943edb3306043}\label{classdkeep_1_1logic_1_1_game_afe09f2713bb62e5ace6943edb3306043}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!erase\+Board\+Hero@{erase\+Board\+Hero}}
+\index{erase\+Board\+Hero@{erase\+Board\+Hero}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{erase\+Board\+Hero()}{eraseBoardHero()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+erase\+Board\+Hero (\begin{DoxyParamCaption}\item[{char}]{m\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Erases from the map the hero symbol and its weapon. 
+\begin{DoxyParams}{Parameters}
+{\em m} & matrix of chars that represent the map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_a5a87ac790c4389d6e6066e19e4be4983}\label{classdkeep_1_1logic_1_1_game_a5a87ac790c4389d6e6066e19e4be4983}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!erase\+Board\+Key@{erase\+Board\+Key}}
+\index{erase\+Board\+Key@{erase\+Board\+Key}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{erase\+Board\+Key()}{eraseBoardKey()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+erase\+Board\+Key (\begin{DoxyParamCaption}\item[{char}]{m\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Erases from the map the key symbol. 
+\begin{DoxyParams}{Parameters}
+{\em m} & matrix of chars that represent the map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_a00104638b06a79e0b90768a1df2628c2}\label{classdkeep_1_1logic_1_1_game_a00104638b06a79e0b90768a1df2628c2}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!get\+Board@{get\+Board}}
+\index{get\+Board@{get\+Board}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{get\+Board()}{getBoard()}}
+{\footnotesize\ttfamily char \mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Game.\+get\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Puts all the non-\/static elements of the game on the map, saves it into a matrix of chars and also prints it. In the end, erases all the non-\/static elements. \begin{DoxyReturn}{Returns}
+matrix of chars that contain the current map of the game 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_a891c0dd84b0a828714135cf2e56258e8}\label{classdkeep_1_1logic_1_1_game_a891c0dd84b0a828714135cf2e56258e8}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!get\+Board\+Enemies@{get\+Board\+Enemies}}
+\index{get\+Board\+Enemies@{get\+Board\+Enemies}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{get\+Board\+Enemies()}{getBoardEnemies()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+get\+Board\+Enemies (\begin{DoxyParamCaption}\item[{char}]{m\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Prints in the map the enemies symbol and their weapon, in their current position. 
+\begin{DoxyParams}{Parameters}
+{\em m} & matrix of chars that represent the map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_a4d9a18b2ade5e68657a41d2f2516f696}\label{classdkeep_1_1logic_1_1_game_a4d9a18b2ade5e68657a41d2f2516f696}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!get\+Board\+Hero@{get\+Board\+Hero}}
+\index{get\+Board\+Hero@{get\+Board\+Hero}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{get\+Board\+Hero()}{getBoardHero()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+get\+Board\+Hero (\begin{DoxyParamCaption}\item[{char}]{m\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Prints in the map the hero symbol and its weapon in their current position. 
+\begin{DoxyParams}{Parameters}
+{\em m} & matrix of chars that represent the map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_a45d8230123f2046b5d5a82ba7e6b2147}\label{classdkeep_1_1logic_1_1_game_a45d8230123f2046b5d5a82ba7e6b2147}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!get\+Board\+Key@{get\+Board\+Key}}
+\index{get\+Board\+Key@{get\+Board\+Key}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{get\+Board\+Key()}{getBoardKey()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+get\+Board\+Key (\begin{DoxyParamCaption}\item[{char}]{m\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Prints in the map the key symbol in it\textquotesingle{}s current position. 
+\begin{DoxyParams}{Parameters}
+{\em m} & matrix of chars that represent the map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_ada3e80740d47374027077803c6442ca4}\label{classdkeep_1_1logic_1_1_game_ada3e80740d47374027077803c6442ca4}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!get\+Level@{get\+Level}}
+\index{get\+Level@{get\+Level}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{get\+Level()}{getLevel()}}
+{\footnotesize\ttfamily int dkeep.\+logic.\+Game.\+get\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the current level of the game. \begin{DoxyReturn}{Returns}
+level attribute 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_a6f548ad7f01432adb418f5891f130ec4}\label{classdkeep_1_1logic_1_1_game_a6f548ad7f01432adb418f5891f130ec4}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!is\+Game\+Over@{is\+Game\+Over}}
+\index{is\+Game\+Over@{is\+Game\+Over}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{is\+Game\+Over()}{isGameOver()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Game.\+is\+Game\+Over (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Checks with the logic to see if the game in the level is over, return true if it is, false if not. \begin{DoxyReturn}{Returns}
+true if the level is over, false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_a10736bc5627d884177a850b7b3182fb4}\label{classdkeep_1_1logic_1_1_game_a10736bc5627d884177a850b7b3182fb4}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!move\+Hero@{move\+Hero}}
+\index{move\+Hero@{move\+Hero}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{move\+Hero()}{moveHero()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+move\+Hero (\begin{DoxyParamCaption}\item[{char}]{dir }\end{DoxyParamCaption})}
+
+Moves the hero in the direction chosen by the player. 
+\begin{DoxyParams}{Parameters}
+{\em dir} & direction to which move the hero \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_af80ce295e13bccbe8fe6f48399d4d808}\label{classdkeep_1_1logic_1_1_game_af80ce295e13bccbe8fe6f48399d4d808}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!set\+Level@{set\+Level}}
+\index{set\+Level@{set\+Level}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{set\+Level()}{setLevel()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+set\+Level (\begin{DoxyParamCaption}\item[{int}]{level }\end{DoxyParamCaption})}
+
+Sets the level attribute to a new value. 
+\begin{DoxyParams}{Parameters}
+{\em level} & new value of level \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_add0b32fc7d2370e0071ccdf85ee341e1}\label{classdkeep_1_1logic_1_1_game_add0b32fc7d2370e0071ccdf85ee341e1}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!update@{update}}
+\index{update@{update}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Game.\+update (\begin{DoxyParamCaption}\item[{char}]{dir }\end{DoxyParamCaption})}
+
+Updates the state of the game and checks if it ended in victory. If that is case and there is a next level, it requests the logic and map of the next level. 
+\begin{DoxyParams}{Parameters}
+{\em dir} & direction to which move the hero \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_game_af2953cb36d8db8ff068d0291f6c6dbba}\label{classdkeep_1_1logic_1_1_game_af2953cb36d8db8ff068d0291f6c6dbba}} 
+\index{dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}!victory@{victory}}
+\index{victory@{victory}!dkeep\+::logic\+::\+Game@{dkeep\+::logic\+::\+Game}}
+\subsubsection{\texorpdfstring{victory()}{victory()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Game.\+victory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Checks with the logic to see if the game in the level ended in victory, return true if it has, false if not. \begin{DoxyReturn}{Returns}
+true if the level ended in victory, false if not 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Game.\+java\end{DoxyCompactItemize}

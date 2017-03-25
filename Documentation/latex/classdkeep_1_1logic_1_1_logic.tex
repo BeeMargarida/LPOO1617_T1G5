@@ -1,0 +1,347 @@
+\hypertarget{classdkeep_1_1logic_1_1_logic}{}\section{dkeep.\+logic.\+Logic Class Reference}
+\label{classdkeep_1_1logic_1_1_logic}\index{dkeep.\+logic.\+Logic@{dkeep.\+logic.\+Logic}}
+Inheritance diagram for dkeep.\+logic.\+Logic\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classdkeep_1_1logic_1_1_logic}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_logic_a3e2a7548a462e06de5852e39df402b48}{Logic} (\hyperlink{classdkeep_1_1logic_1_1_hero}{Hero} hero)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_logic_ad52a9235db954ca4014550582c94aa50}{add\+Enemy} (\hyperlink{classdkeep_1_1logic_1_1_character}{Character} enemy)
+\item 
+Array\+List$<$ \hyperlink{classdkeep_1_1logic_1_1_character}{Character} $>$ \hyperlink{classdkeep_1_1logic_1_1_logic_a2f36d0e37683459a9d26925b66842efb}{get\+Enemies} ()
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_cell_position}{Cell\+Position} \hyperlink{classdkeep_1_1logic_1_1_logic_a83397013032b9ff9b023b52d54e2a839}{get\+Hero\+Position} ()
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_hero}{Hero} \hyperlink{classdkeep_1_1logic_1_1_logic_a69dc81092b0395e64b0f09e6c39a355a}{get\+Hero} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_logic_a8629375c65c00b778f7bc927ad30da72}{get\+Hero\+Symbol} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_logic_a31914ab092089708b8b1a788a90b5bfc}{get\+Hero\+Weapon\+Symbol} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_logic_aec99013c9c1b9e5a52615752e1e0a4f2}{get\+Enemy\+Symbol} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_logic_a73d73f30185c2a55b7bc9d3e743dc6bf}{get\+Enemy\+Weapon\+Symbol} ()
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_a4e216fa33c4ed8fc48649d6cac3e5b7a}{collide\+Left} (int\mbox{[}$\,$\mbox{]} pos1, int\mbox{[}$\,$\mbox{]} pos2)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_af55798f2e54446a1df0ebed4319f78bf}{collide\+Right} (int\mbox{[}$\,$\mbox{]} pos1, int\mbox{[}$\,$\mbox{]} pos2)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_af2fb54584f4206e935755e4bc5afce81}{collide\+Up} (int\mbox{[}$\,$\mbox{]} pos1, int\mbox{[}$\,$\mbox{]} pos2)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_a8918f9ee21260104e05bf39c43782e70}{collide\+Down} (int\mbox{[}$\,$\mbox{]} pos1, int\mbox{[}$\,$\mbox{]} pos2)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_aa038077e7e65bd2d047a125c5a7e6185}{collide\+Enemy} (int\mbox{[}$\,$\mbox{]} pos, Array\+List$<$ \hyperlink{classdkeep_1_1logic_1_1_character}{Character} $>$ vector)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_a6205c4d1912a64443bd9e5743d2db3bb}{collide\+Weapon} (int\mbox{[}$\,$\mbox{]} pos, Array\+List$<$ \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} $>$ vector)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_logic_a6f9b5655e854e6460900b165f3f5f17a}{set\+Game\+Over} ()
+\item 
+Array\+List$<$ \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} $>$ \hyperlink{classdkeep_1_1logic_1_1_logic_af58982bc364016e2d0e03a36440a99b4}{get\+Weapons} ()
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_a90069e7aa3f72919105ee446842e44fa}{move\+Hero} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+void \hyperlink{classdkeep_1_1logic_1_1_logic_a1917b8f625dfb7c50ed2a2075209ed1a}{gameplay} (char dir, \hyperlink{classdkeep_1_1logic_1_1_map}{Map} map)
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} \hyperlink{classdkeep_1_1logic_1_1_logic_a2f6e65021a7b525a5c61ebe1a56f09db}{next\+Logic} (\hyperlink{classdkeep_1_1logic_1_1_map}{Map} map, int option)
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_a36229f271b0682f9a68c31390b4759cb}{game\+Over} ()
+\item 
+boolean \hyperlink{classdkeep_1_1logic_1_1_logic_a8873eb8f5bcdd55d87fe1e9953da00e0}{get\+Victory} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_acf37fbec31325d4209c3127b9754b2e6}\label{classdkeep_1_1logic_1_1_logic_acf37fbec31325d4209c3127b9754b2e6}} 
+\hyperlink{classdkeep_1_1logic_1_1_hero}{Hero} {\bfseries hero}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a2a25bee4f951f296f9cea3bb29f6ba07}\label{classdkeep_1_1logic_1_1_logic_a2a25bee4f951f296f9cea3bb29f6ba07}} 
+Array\+List$<$ \hyperlink{classdkeep_1_1logic_1_1_character}{Character} $>$ {\bfseries enemies}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_affc85b490b04c1b96994acfdfdcc1b50}\label{classdkeep_1_1logic_1_1_logic_affc85b490b04c1b96994acfdfdcc1b50}} 
+boolean {\bfseries is\+Over}
+\item 
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a66c6502b38114e5af23068cb0089bbb2}\label{classdkeep_1_1logic_1_1_logic_a66c6502b38114e5af23068cb0089bbb2}} 
+boolean {\bfseries victory}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} is a class that deals with all the logic of the current level of the game. It contains information about the current game elements, such as the hero, the enemies and a flag checks if the game is over and another that checks if it is a victory. It contains methods that deal with the movement of all the characters in the game and the collisions between them. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a3e2a7548a462e06de5852e39df402b48}\label{classdkeep_1_1logic_1_1_logic_a3e2a7548a462e06de5852e39df402b48}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!Logic@{Logic}}
+\index{Logic@{Logic}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{Logic()}{Logic()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Logic.\+Logic (\begin{DoxyParamCaption}\item[{\hyperlink{classdkeep_1_1logic_1_1_hero}{Hero}}]{hero }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic}. It initializes the hero with the variable given and puts all the flags to false. 
+\begin{DoxyParams}{Parameters}
+{\em hero} & Object \hyperlink{classdkeep_1_1logic_1_1_hero}{Hero} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_ad52a9235db954ca4014550582c94aa50}\label{classdkeep_1_1logic_1_1_logic_ad52a9235db954ca4014550582c94aa50}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!add\+Enemy@{add\+Enemy}}
+\index{add\+Enemy@{add\+Enemy}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{add\+Enemy()}{addEnemy()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Logic.\+add\+Enemy (\begin{DoxyParamCaption}\item[{\hyperlink{classdkeep_1_1logic_1_1_character}{Character}}]{enemy }\end{DoxyParamCaption})}
+
+Adds an enemy to the arraylist of enemies 
+\begin{DoxyParams}{Parameters}
+{\em enemy} & Object \hyperlink{classdkeep_1_1logic_1_1_character}{Character} that represents an enemy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a8918f9ee21260104e05bf39c43782e70}\label{classdkeep_1_1logic_1_1_logic_a8918f9ee21260104e05bf39c43782e70}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!collide\+Down@{collide\+Down}}
+\index{collide\+Down@{collide\+Down}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{collide\+Down()}{collideDown()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+collide\+Down (\begin{DoxyParamCaption}\item[{int \mbox{[}$\,$\mbox{]}}]{pos1,  }\item[{int \mbox{[}$\,$\mbox{]}}]{pos2 }\end{DoxyParamCaption})}
+
+Checks if one of the elements is in the cell under the other element. If it is, it is a collision. 
+\begin{DoxyParams}{Parameters}
+{\em pos1} & array of ints with the position of an element of the game \\
+\hline
+{\em pos2} & array of ints with the position of an element of the game \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if there is a collision, false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_aa038077e7e65bd2d047a125c5a7e6185}\label{classdkeep_1_1logic_1_1_logic_aa038077e7e65bd2d047a125c5a7e6185}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!collide\+Enemy@{collide\+Enemy}}
+\index{collide\+Enemy@{collide\+Enemy}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{collide\+Enemy()}{collideEnemy()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+collide\+Enemy (\begin{DoxyParamCaption}\item[{int \mbox{[}$\,$\mbox{]}}]{pos,  }\item[{Array\+List$<$ \hyperlink{classdkeep_1_1logic_1_1_character}{Character} $>$}]{vector }\end{DoxyParamCaption})}
+
+Checks if the hero is in any position adjacent (up, down, left, right) to any of the enemies. If it is, it will return true, else it will return false. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate of the hero \\
+\hline
+{\em y} & coordinate of the hero \\
+\hline
+{\em vector} & contains all the enemies of the levels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the hero collides with any of the enemies, false if it doesn\textquotesingle{}t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a4e216fa33c4ed8fc48649d6cac3e5b7a}\label{classdkeep_1_1logic_1_1_logic_a4e216fa33c4ed8fc48649d6cac3e5b7a}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!collide\+Left@{collide\+Left}}
+\index{collide\+Left@{collide\+Left}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{collide\+Left()}{collideLeft()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+collide\+Left (\begin{DoxyParamCaption}\item[{int \mbox{[}$\,$\mbox{]}}]{pos1,  }\item[{int \mbox{[}$\,$\mbox{]}}]{pos2 }\end{DoxyParamCaption})}
+
+Checks if one of the elements is in the cell to the left of the other element. If it is, it is a collision. 
+\begin{DoxyParams}{Parameters}
+{\em pos1} & array of ints with the position of an element of the game \\
+\hline
+{\em pos2} & array of ints with the position of an element of the game \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if there is a collision, false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_af55798f2e54446a1df0ebed4319f78bf}\label{classdkeep_1_1logic_1_1_logic_af55798f2e54446a1df0ebed4319f78bf}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!collide\+Right@{collide\+Right}}
+\index{collide\+Right@{collide\+Right}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{collide\+Right()}{collideRight()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+collide\+Right (\begin{DoxyParamCaption}\item[{int \mbox{[}$\,$\mbox{]}}]{pos1,  }\item[{int \mbox{[}$\,$\mbox{]}}]{pos2 }\end{DoxyParamCaption})}
+
+Checks if one of the elements is in the cell to the right of the other element. If it is, it is a collision. 
+\begin{DoxyParams}{Parameters}
+{\em pos1} & array of ints with the position of an element of the game \\
+\hline
+{\em pos2} & array of ints with the position of an element of the game \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if there is a collision, false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_af2fb54584f4206e935755e4bc5afce81}\label{classdkeep_1_1logic_1_1_logic_af2fb54584f4206e935755e4bc5afce81}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!collide\+Up@{collide\+Up}}
+\index{collide\+Up@{collide\+Up}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{collide\+Up()}{collideUp()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+collide\+Up (\begin{DoxyParamCaption}\item[{int \mbox{[}$\,$\mbox{]}}]{pos1,  }\item[{int \mbox{[}$\,$\mbox{]}}]{pos2 }\end{DoxyParamCaption})}
+
+Checks if one of the elements is in the cell above the other element. If it is, it is a collision. 
+\begin{DoxyParams}{Parameters}
+{\em pos1} & array of ints with the position of an element of the game \\
+\hline
+{\em pos2} & array of ints with the position of an element of the game \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if there is a collision, false if not 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a6205c4d1912a64443bd9e5743d2db3bb}\label{classdkeep_1_1logic_1_1_logic_a6205c4d1912a64443bd9e5743d2db3bb}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!collide\+Weapon@{collide\+Weapon}}
+\index{collide\+Weapon@{collide\+Weapon}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{collide\+Weapon()}{collideWeapon()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+collide\+Weapon (\begin{DoxyParamCaption}\item[{int \mbox{[}$\,$\mbox{]}}]{pos,  }\item[{Array\+List$<$ \hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon} $>$}]{vector }\end{DoxyParamCaption})}
+
+Checks if the \hyperlink{classdkeep_1_1logic_1_1_character}{Character} (can be both hero or enemy) is in any adjacent position to a weapon (can be from hero or enemy). If it is, it will return true, else false. 
+\begin{DoxyParams}{Parameters}
+{\em x} & coordinate of the \hyperlink{classdkeep_1_1logic_1_1_character}{Character} \\
+\hline
+{\em y} & coordinate of the \hyperlink{classdkeep_1_1logic_1_1_character}{Character} \\
+\hline
+{\em vector} & contains the weapons to be tested \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if any of the weapons collide with the \hyperlink{classdkeep_1_1logic_1_1_character}{Character}, false id it doesn\textquotesingle{}t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a36229f271b0682f9a68c31390b4759cb}\label{classdkeep_1_1logic_1_1_logic_a36229f271b0682f9a68c31390b4759cb}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!game\+Over@{game\+Over}}
+\index{game\+Over@{game\+Over}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{game\+Over()}{gameOver()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+game\+Over (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns true if the game is over, false if it isn\textquotesingle{}t. \begin{DoxyReturn}{Returns}
+true if the is\+Over is true, false if it isn\textquotesingle{}t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a1917b8f625dfb7c50ed2a2075209ed1a}\label{classdkeep_1_1logic_1_1_logic_a1917b8f625dfb7c50ed2a2075209ed1a}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!gameplay@{gameplay}}
+\index{gameplay@{gameplay}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{gameplay()}{gameplay()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Logic.\+gameplay (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+Handles all the movement logic of the game. It calls the functions that deal with the hero\textquotesingle{}s and hero\textquotesingle{}s weapon movement, and the enemies\textquotesingle{}s and enemies\textquotesingle{}s weapons movement. 
+\begin{DoxyParams}{Parameters}
+{\em dir} & char that correspond to the direction of the hero movement chosen by the player \\
+\hline
+{\em map} & Object \hyperlink{classdkeep_1_1logic_1_1_map}{Map} that corresponds to the current map of the game \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a2f36d0e37683459a9d26925b66842efb}\label{classdkeep_1_1logic_1_1_logic_a2f36d0e37683459a9d26925b66842efb}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Enemies@{get\+Enemies}}
+\index{get\+Enemies@{get\+Enemies}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Enemies()}{getEnemies()}}
+{\footnotesize\ttfamily Array\+List$<$\hyperlink{classdkeep_1_1logic_1_1_character}{Character}$>$ dkeep.\+logic.\+Logic.\+get\+Enemies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Return all the enemies that exist in the current level. \begin{DoxyReturn}{Returns}
+Array\+List of Characters that correspond to the enemies of the level 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_aec99013c9c1b9e5a52615752e1e0a4f2}\label{classdkeep_1_1logic_1_1_logic_aec99013c9c1b9e5a52615752e1e0a4f2}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Enemy\+Symbol@{get\+Enemy\+Symbol}}
+\index{get\+Enemy\+Symbol@{get\+Enemy\+Symbol}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Enemy\+Symbol()}{getEnemySymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Logic.\+get\+Enemy\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the symbol of the first enemy in the array of enemies. \begin{DoxyReturn}{Returns}
+char that represents the enemy 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a73d73f30185c2a55b7bc9d3e743dc6bf}\label{classdkeep_1_1logic_1_1_logic_a73d73f30185c2a55b7bc9d3e743dc6bf}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Enemy\+Weapon\+Symbol@{get\+Enemy\+Weapon\+Symbol}}
+\index{get\+Enemy\+Weapon\+Symbol@{get\+Enemy\+Weapon\+Symbol}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Enemy\+Weapon\+Symbol()}{getEnemyWeaponSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Logic.\+get\+Enemy\+Weapon\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the symbol of the first enemy\textquotesingle{}s weapon in the array of enemies. \begin{DoxyReturn}{Returns}
+char that represents the enemy\textquotesingle{}s weapon 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a69dc81092b0395e64b0f09e6c39a355a}\label{classdkeep_1_1logic_1_1_logic_a69dc81092b0395e64b0f09e6c39a355a}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Hero@{get\+Hero}}
+\index{get\+Hero@{get\+Hero}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Hero()}{getHero()}}
+{\footnotesize\ttfamily \hyperlink{classdkeep_1_1logic_1_1_hero}{Hero} dkeep.\+logic.\+Logic.\+get\+Hero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the hero. \begin{DoxyReturn}{Returns}
+Object \hyperlink{classdkeep_1_1logic_1_1_hero}{Hero} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a83397013032b9ff9b023b52d54e2a839}\label{classdkeep_1_1logic_1_1_logic_a83397013032b9ff9b023b52d54e2a839}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Hero\+Position@{get\+Hero\+Position}}
+\index{get\+Hero\+Position@{get\+Hero\+Position}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Hero\+Position()}{getHeroPosition()}}
+{\footnotesize\ttfamily \hyperlink{classdkeep_1_1logic_1_1_cell_position}{Cell\+Position} dkeep.\+logic.\+Logic.\+get\+Hero\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the \hyperlink{classdkeep_1_1logic_1_1_cell_position}{Cell\+Position} with the current coordinates of the hero. \begin{DoxyReturn}{Returns}
+Object \hyperlink{classdkeep_1_1logic_1_1_cell_position}{Cell\+Position} that correspond to the position of the hero 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a8629375c65c00b778f7bc927ad30da72}\label{classdkeep_1_1logic_1_1_logic_a8629375c65c00b778f7bc927ad30da72}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Hero\+Symbol@{get\+Hero\+Symbol}}
+\index{get\+Hero\+Symbol@{get\+Hero\+Symbol}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Hero\+Symbol()}{getHeroSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Logic.\+get\+Hero\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the symbol with which the hero is represented in the map. \begin{DoxyReturn}{Returns}
+char that represents the hero 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a31914ab092089708b8b1a788a90b5bfc}\label{classdkeep_1_1logic_1_1_logic_a31914ab092089708b8b1a788a90b5bfc}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Hero\+Weapon\+Symbol@{get\+Hero\+Weapon\+Symbol}}
+\index{get\+Hero\+Weapon\+Symbol@{get\+Hero\+Weapon\+Symbol}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Hero\+Weapon\+Symbol()}{getHeroWeaponSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Logic.\+get\+Hero\+Weapon\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the symbol with which the hero\textquotesingle{}s weapon is represented in the map. \begin{DoxyReturn}{Returns}
+char that represents the hero\textquotesingle{}s weapon 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a8873eb8f5bcdd55d87fe1e9953da00e0}\label{classdkeep_1_1logic_1_1_logic_a8873eb8f5bcdd55d87fe1e9953da00e0}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Victory@{get\+Victory}}
+\index{get\+Victory@{get\+Victory}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Victory()}{getVictory()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+get\+Victory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns true if the player has won, false if it hasn\textquotesingle{}t. \begin{DoxyReturn}{Returns}
+true if victory is true, false if it isn\textquotesingle{}t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_af58982bc364016e2d0e03a36440a99b4}\label{classdkeep_1_1logic_1_1_logic_af58982bc364016e2d0e03a36440a99b4}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!get\+Weapons@{get\+Weapons}}
+\index{get\+Weapons@{get\+Weapons}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{get\+Weapons()}{getWeapons()}}
+{\footnotesize\ttfamily Array\+List$<$\hyperlink{classdkeep_1_1logic_1_1_weapon}{Weapon}$>$ dkeep.\+logic.\+Logic.\+get\+Weapons (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Goes through the enemies arraylist and groups their weapons into an arraylist, returning it. \begin{DoxyReturn}{Returns}
+Array\+List with all the weapons of the enemies 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a90069e7aa3f72919105ee446842e44fa}\label{classdkeep_1_1logic_1_1_logic_a90069e7aa3f72919105ee446842e44fa}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!move\+Hero@{move\+Hero}}
+\index{move\+Hero@{move\+Hero}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{move\+Hero()}{moveHero()}}
+{\footnotesize\ttfamily boolean dkeep.\+logic.\+Logic.\+move\+Hero (\begin{DoxyParamCaption}\item[{char}]{dir,  }\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map }\end{DoxyParamCaption})}
+
+Moves the hero accordingly to the dir variable, checking if it collides with the enemy (which makes the flag is\+Over to turn to true). It also checks if the direction chosen is a valid one, making sure it doesn\textquotesingle{}t overlap any of the static elements of the game. Furthermore, it also checks if the hero has caught the key or pulled the lever, using this information to change it\textquotesingle{}s behaviour once in front of doors. 
+\begin{DoxyParams}{Parameters}
+{\em dir} & char that correspond to the direction of movement chosen by the player \\
+\hline
+{\em map} & Object \hyperlink{classdkeep_1_1logic_1_1_map}{Map} that corresponds to the current map of the game \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the hero has made with no collisions, false if it was caught 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a2f6e65021a7b525a5c61ebe1a56f09db}\label{classdkeep_1_1logic_1_1_logic_a2f6e65021a7b525a5c61ebe1a56f09db}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!next\+Logic@{next\+Logic}}
+\index{next\+Logic@{next\+Logic}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{next\+Logic()}{nextLogic()}}
+{\footnotesize\ttfamily \hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} dkeep.\+logic.\+Logic.\+next\+Logic (\begin{DoxyParamCaption}\item[{\hyperlink{classdkeep_1_1logic_1_1_map}{Map}}]{map,  }\item[{int}]{option }\end{DoxyParamCaption})}
+
+Returns the logic of the next level. 
+\begin{DoxyParams}{Parameters}
+{\em map} & \hyperlink{classdkeep_1_1logic_1_1_map}{Map} of the next level \\
+\hline
+{\em option} & number or behaviour of the enemies of the next level \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classdkeep_1_1logic_1_1_logic}{Logic} of the next level 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_logic_a6f9b5655e854e6460900b165f3f5f17a}\label{classdkeep_1_1logic_1_1_logic_a6f9b5655e854e6460900b165f3f5f17a}} 
+\index{dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}!set\+Game\+Over@{set\+Game\+Over}}
+\index{set\+Game\+Over@{set\+Game\+Over}!dkeep\+::logic\+::\+Logic@{dkeep\+::logic\+::\+Logic}}
+\subsubsection{\texorpdfstring{set\+Game\+Over()}{setGameOver()}}
+{\footnotesize\ttfamily void dkeep.\+logic.\+Logic.\+set\+Game\+Over (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Puts the flag of the game over to true. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Logic.\+java\end{DoxyCompactItemize}

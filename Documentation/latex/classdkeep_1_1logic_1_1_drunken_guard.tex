@@ -1,0 +1,64 @@
+\hypertarget{classdkeep_1_1logic_1_1_drunken_guard}{}\section{dkeep.\+logic.\+Drunken\+Guard Class Reference}
+\label{classdkeep_1_1logic_1_1_drunken_guard}\index{dkeep.\+logic.\+Drunken\+Guard@{dkeep.\+logic.\+Drunken\+Guard}}
+Inheritance diagram for dkeep.\+logic.\+Drunken\+Guard\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classdkeep_1_1logic_1_1_drunken_guard}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classdkeep_1_1logic_1_1_drunken_guard_a8779127a311ed0f350abb672304854db}{Drunken\+Guard} (char symbol, int\mbox{[}$\,$\mbox{]} coord, char\mbox{[}$\,$\mbox{]} path)
+\item 
+int \mbox{[}$\,$\mbox{]} \hyperlink{classdkeep_1_1logic_1_1_drunken_guard_ade9c30f28e40df9049472a5807c2b79e}{movement} ()
+\item 
+char \hyperlink{classdkeep_1_1logic_1_1_drunken_guard_a03c948e95e3c62b9708b4c5a6b8770f8}{get\+Symbol} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classdkeep_1_1logic_1_1_drunken_guard}{Drunken\+Guard} is a class that extend the class \hyperlink{classdkeep_1_1logic_1_1_guard}{Guard}. It contains specific information about this type of guard, such as the boolean that says if the guard is asleep and the corresponding char that expresses that status. This guard randomly chooses to follows the normal path, the reverse path or to be asleep. This last one consist of staying in the same position, changing it\textquotesingle{}s symbol and being unaware of the hero movements, even in the adjacent tiles. \begin{DoxySeeAlso}{See also}
+\hyperlink{classdkeep_1_1logic_1_1_guard}{Guard} 
+\end{DoxySeeAlso}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_drunken_guard_a8779127a311ed0f350abb672304854db}\label{classdkeep_1_1logic_1_1_drunken_guard_a8779127a311ed0f350abb672304854db}} 
+\index{dkeep\+::logic\+::\+Drunken\+Guard@{dkeep\+::logic\+::\+Drunken\+Guard}!Drunken\+Guard@{Drunken\+Guard}}
+\index{Drunken\+Guard@{Drunken\+Guard}!dkeep\+::logic\+::\+Drunken\+Guard@{dkeep\+::logic\+::\+Drunken\+Guard}}
+\subsubsection{\texorpdfstring{Drunken\+Guard()}{DrunkenGuard()}}
+{\footnotesize\ttfamily dkeep.\+logic.\+Drunken\+Guard.\+Drunken\+Guard (\begin{DoxyParamCaption}\item[{char}]{symbol,  }\item[{int \mbox{[}$\,$\mbox{]}}]{coord,  }\item[{char \mbox{[}$\,$\mbox{]}}]{path }\end{DoxyParamCaption})}
+
+Constructor of \hyperlink{classdkeep_1_1logic_1_1_drunken_guard}{Drunken\+Guard}. Sets all flags to false, puts the i variable to -\/1 and initializes other variables with the given values. 
+\begin{DoxyParams}{Parameters}
+{\em symbol} & char that represents the \hyperlink{classdkeep_1_1logic_1_1_drunken_guard}{Drunken\+Guard} \\
+\hline
+{\em x} & coordinate \\
+\hline
+{\em y} & coordinate \\
+\hline
+{\em path} & array of movements of the guard \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classdkeep_1_1logic_1_1_drunken_guard_a03c948e95e3c62b9708b4c5a6b8770f8}\label{classdkeep_1_1logic_1_1_drunken_guard_a03c948e95e3c62b9708b4c5a6b8770f8}} 
+\index{dkeep\+::logic\+::\+Drunken\+Guard@{dkeep\+::logic\+::\+Drunken\+Guard}!get\+Symbol@{get\+Symbol}}
+\index{get\+Symbol@{get\+Symbol}!dkeep\+::logic\+::\+Drunken\+Guard@{dkeep\+::logic\+::\+Drunken\+Guard}}
+\subsubsection{\texorpdfstring{get\+Symbol()}{getSymbol()}}
+{\footnotesize\ttfamily char dkeep.\+logic.\+Drunken\+Guard.\+get\+Symbol (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+If the guard is asleep, the symbol is different. \mbox{\Hypertarget{classdkeep_1_1logic_1_1_drunken_guard_ade9c30f28e40df9049472a5807c2b79e}\label{classdkeep_1_1logic_1_1_drunken_guard_ade9c30f28e40df9049472a5807c2b79e}} 
+\index{dkeep\+::logic\+::\+Drunken\+Guard@{dkeep\+::logic\+::\+Drunken\+Guard}!movement@{movement}}
+\index{movement@{movement}!dkeep\+::logic\+::\+Drunken\+Guard@{dkeep\+::logic\+::\+Drunken\+Guard}}
+\subsubsection{\texorpdfstring{movement()}{movement()}}
+{\footnotesize\ttfamily int \mbox{[}$\,$\mbox{]} dkeep.\+logic.\+Drunken\+Guard.\+movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+in this particular class, this function randomly chooses between 3 behaviours, the normal one (follows the path and calls the \hyperlink{classdkeep_1_1logic_1_1_guard_a2389016085c6d65d4366930fac72dab4}{normal\+Movement()} function), the reverse one (follows the path in reverse order, calls the \hyperlink{classdkeep_1_1logic_1_1_guard_a8c588aa887fcfe6d3e4a9e13d236c644}{reverse\+Movement()} function) and the asleep one, that puts the enemy in a temporary status of 2 turns, making it oblivious to the hero movements. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+M\+C-\/\+Guida/git/\+L\+P\+O\+O1617\+\_\+\+T1\+G5/\+Lab05/src/dkeep/logic/Drunken\+Guard.\+java\end{DoxyCompactItemize}
