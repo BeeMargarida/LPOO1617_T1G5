@@ -28,6 +28,7 @@ public class MenuWindow {
 	public static JComboBox comboBox;
 	public static JButton  btnNewGame, btnCreateMap, btnLoad, btnSave, btnExit;
 	public static JLabel label, lblNewLabel, lblGuardPersonality;
+	private static int minOgre = 1, maxOgre = 5;
 	
 	public MenuWindow(){
 		frame = new JFrame("Main Menu");
@@ -86,13 +87,15 @@ public class MenuWindow {
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Verify options
-				GameGui.gframe.frame.getContentPane().removeAll();
+				if(GameGui.gframe.gameframe != null){
+					GameGui.gframe.frame.getContentPane().remove(GameGui.gframe.gameframe);
+				}
 				if(txtNumberOfOgres.getText().equals("")){
 					//lblYouCanStart.setText("Must Input Number of Ogres");
 					return;
 				}
 				int OgreNumber = Integer.parseInt(txtNumberOfOgres.getText());
-				if(OgreNumber < 1 || OgreNumber > 5 ){
+				if(OgreNumber < minOgre || OgreNumber > maxOgre){
 					//lblYouCanStart.setText("Invalid Number of Ogres");
 					return;
 				}
@@ -101,13 +104,20 @@ public class MenuWindow {
 				int[] heropos = map.getHeroPos();
 				Logic logic = new DungeonLogic(map, heropos, numEnemy[0]);
 				GameGui.game = new Game(map,logic,numEnemy);
-				
-				JPanel gameframe = new GameFrame(GameGui.game);
-				GameGui.gframe.frame.getContentPane().add(gameframe);
+				GameGui.gframe.gameframe = new GameFrame(GameGui.game, false);
+				GameGui.gframe.gameframe.setBounds(0, 0, 400, 500);
+				GameGui.gframe.frame.getContentPane().add(GameGui.gframe.gameframe);
+				GameGui.gframe.gameframe.validate();
+				GameGui.gframe.gameframe.repaint();
 				GameGui.gframe.frame.pack(); 
 				GameGui.gframe.frame.setVisible(true);
-				gameframe.setFocusable(true);
-				gameframe.requestFocusInWindow();  //to handle keyboard events
+				GameGui.gframe.gameframe.setFocusable(true);
+				GameGui.gframe.gameframe.requestFocusInWindow();  //to handle keyboard events
+				
+				/*
+				GameGui.gframe.frame.pack();
+				GameGui.gframe.frame.setVisible(true);
+				*/
 			}
 		});
 		btnNewGame.setBounds(50, 100, 89, 23);
@@ -159,10 +169,14 @@ public class MenuWindow {
 					System.out.println("Invalid Save File");
 					return;
 				}
-				GameGui.gframe.frame.getContentPane().removeAll();
+				if(GameGui.gframe.frame != null)
+					GameGui.gframe.frame.getContentPane().remove(GameGui.gframe.gameframe);
 				GameGui.bframe.frame.setVisible(false);
-				GameGui.gframe.gameframe = new GameFrame(GameGui.game);
+				GameGui.gframe.gameframe = new GameFrame(GameGui.game, false);
+				GameGui.gframe.gameframe.setBounds(0, 0, 400, 500);
 				GameGui.gframe.frame.getContentPane().add(GameGui.gframe.gameframe);
+				GameGui.gframe.gameframe.validate();
+				GameGui.gframe.gameframe.repaint();
 				GameGui.gframe.frame.pack();
 				GameGui.gframe.frame.setVisible(true);
 				GameGui.gframe.gameframe.setFocusable(true);

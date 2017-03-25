@@ -11,6 +11,7 @@ public class EditorWindow {
 	public EditorWindow(){
 		frame = new JFrame("Build");
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(500,500));
+		//frame.setPreferredSize(new Dimension(500,500));
+		frame.setMinimumSize(new Dimension(700,600));
 	}
 }

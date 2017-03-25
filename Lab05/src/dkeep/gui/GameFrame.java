@@ -19,15 +19,19 @@ public class GameFrame extends JPanel implements KeyListener {
 	private Logic logic;
 	private Map map;
 	private Game game;
-	private int level;
-	private int mapHeight, mapWidth;
-	private char[][] m; 
-	boolean found = false;
+	public int level;
+	public int mapHeight, mapWidth;
+	public char[][] m; 
 
-	public GameFrame(Game game) {
-		this.game = game;
-		level = game.getLevel();
-		m = game.getBoard();
+	public GameFrame(Game game, boolean custom) {
+		if(custom){
+			makeCustomMapGame();
+			this.game = GameGui.game;
+		}
+		else
+			this.game = game;
+		level = this.game.getLevel();
+		m = this.game.getBoard();
 		
 		mapHeight = m.length;
 		mapWidth = m[0].length;
@@ -35,35 +39,28 @@ public class GameFrame extends JPanel implements KeyListener {
 		addKeyListener(this); 
 	}
 	
-	public GameFrame(int ogreNumber, char[][] userMap){
-		level = 1;
+	
+	private void makeCustomMapGame(){
 		int[] pos = new int[2];
-		for(int i = 0; i < userMap.length; i++){
-			for(int j = 0; j < userMap[i].length; j++){
-				if(userMap[i][j] == 'k'){
+		for(int i = 0; i < GameGui.userMap.getHeight(); i++){
+			for(int j = 0; j < GameGui.userMap.getWidth(); j++){
+				if(GameGui.userMap.getMap()[i][j] == 'k'){
 					pos[0] = i;
 					pos[1] = j;
 				}
 			}
 		}
-		char[][] tmp = new char[userMap.length][userMap[0].length];
-		for(int i = 0; i < userMap.length; i++){
-			tmp[i] = userMap[i].clone();
+		char[][] tmp = new char[GameGui.userMap.getHeight()][GameGui.userMap.getWidth()];
+		for(int i = 0; i < GameGui.userMap.getHeight(); i++){
+			tmp[i] = GameGui.userMap.getMap()[i].clone();
 		}
 		map = new Map(tmp, pos);
 		int[] heropos = map.getHeroPos();
-		int[] enemyOptions = new int[] {0,ogreNumber};
+		int[] enemyOptions = new int[] {0,Integer.parseInt(GameGui.mainmenu.txtNumberOfOgres.getText())};
 		logic = new KeepLogic(map, heropos, true, enemyOptions[1]);
-		game = new Game(map, logic, enemyOptions);
-		game.setLevel(1);
-		m = game.getBoard(); 
-		
-		mapHeight = m.length;
-		mapWidth = m[0].length;
-
-		addKeyListener(this); 
+		GameGui.game = new Game(map, logic, enemyOptions);
+		GameGui.game.setLevel(1);
 	}
-
 
 	private void printTile(Graphics g, char tile, int dx, int dy){
 		if(tile == 'X')
@@ -74,8 +71,10 @@ public class GameFrame extends JPanel implements KeyListener {
 			g.drawImage(GameGui.herok, dx, dy, tilewidth, tileheight, this);
 		else if(tile == 'G')
 			g.drawImage(GameGui.rguard, dx, dy, tilewidth, tileheight, this);
-		else if(tile == 'g' || tile == 'D')
+		else if(tile == 'D')
 			g.drawImage(GameGui.dguard, dx, dy, tilewidth, tileheight, this);
+		else if(tile == 'g')
+			g.drawImage(GameGui.sdguard, dx, dy, tilewidth, tileheight, this);
 		else if(tile == 'U')
 			g.drawImage(GameGui.sguard, dx, dy, tilewidth, tileheight, this);
 		else if(tile == 'O')

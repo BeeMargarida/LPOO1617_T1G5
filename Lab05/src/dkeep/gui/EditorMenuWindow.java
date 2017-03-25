@@ -23,6 +23,7 @@ public class EditorMenuWindow {
 	public static JLabel lblHeight, lblWidth, inf;
 	public static JTextField txtHeight, txtWidth;
 	public static JButton  btnMake, btnPlay, btnLoad, btnSave, btnExit;
+	private static int minWidth = 5, maxWidth = 12, minHeight = 5,  maxHeight = 12;
 	
 	
 	public EditorMenuWindow(){
@@ -88,22 +89,22 @@ public class EditorMenuWindow {
 		btnMake = new JButton("Make");
 		btnMake.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(GameGui.mainmenu.txtNumberOfOgres.getText().equals("")){
+					inf.setText("Must Input Number of Ogres");return;}
+				int OgreNumber = Integer.parseInt(GameGui.mainmenu.txtNumberOfOgres.getText());
+				if(OgreNumber < 1 || OgreNumber > 5 ){
+					inf.setText("Invalid Number of Ogres");return;}
+				if(txtHeight.getText().equals("") || txtWidth.getText().equals("")){
+					inf.setText("Must input map dimensions"); return;}
+				int height = Integer.parseInt(txtHeight.getText()), width = Integer.parseInt(txtWidth.getText());
+				if(height < minHeight || height > maxHeight  || width < minWidth || width > maxWidth){
+					inf.setText("Invalid map dimensions"); return;}
 				btnSave.setEnabled(false);
 				inf.setText("You can make a map");
 				GameGui.gframe.frame.setVisible(false);
 				GameGui.bframe.frame.getContentPane().removeAll();
-				char [][] map = new char[Integer.parseInt(txtHeight.getText())][Integer.parseInt(txtWidth.getText())];
-				//URGENTE ALTERAR
-				int[] pos = new int[2];
-				for(int i = 0; i < map.length; i++){
-					for(int j = 0; j < map[i].length; j++){
-						if(map[i][j] == 'k'){
-							pos[0] = i;
-							pos[1] = j;
-						}
-					}
-				}
-				GameGui.userMap = new Map(map, pos);
+				char [][] map = new char[height][width];
+				GameGui.userMap = new Map(map, new int[] {0,0});
 				GameGui.bframe.buildframe = new BuildFrame(1,GameGui.userMap.getMap(), true);
 				GameGui.bframe.frame.getContentPane().add(GameGui.bframe.buildframe);
 				GameGui.bframe.frame.pack();
@@ -128,16 +129,18 @@ public class EditorMenuWindow {
 					return;
 				btnSave.setEnabled(true);
 				inf.setText("Map is playable and savable");
-				GameGui.gframe.frame.getContentPane().removeAll();
+				if(GameGui.gframe.gameframe != null)
+					GameGui.gframe.frame.getContentPane().remove(GameGui.gframe.gameframe);
 				GameGui.bframe.frame.setVisible(false);
-				GameGui.gframe.gameframe = new GameFrame(Integer.parseInt(GameGui.mainmenu.txtNumberOfOgres.getText()), GameGui.userMap.getMap());
-				//GameGui.gframe.frame.remove(buildframe);
+				GameGui.gframe.gameframe = new GameFrame(GameGui.game, true);
+				GameGui.gframe.gameframe.setBounds(0, 0, 450, 600);
 				GameGui.gframe.frame.getContentPane().add(GameGui.gframe.gameframe);
+				GameGui.gframe.gameframe.validate();
+				GameGui.gframe.gameframe.repaint();
 				GameGui.gframe.frame.pack();
 				GameGui.gframe.frame.setVisible(true);
 				GameGui.gframe.gameframe.setFocusable(true);
 				GameGui.gframe.gameframe.requestFocusInWindow();  //to handle keyboard events	
-
 			}
 		});
 		btnPlay.setBounds(48, 165, 89, 23);

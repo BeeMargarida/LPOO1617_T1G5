@@ -13,7 +13,7 @@ import dkeep.logic.*;
 import javax.imageio.ImageIO;
 
 public class GameGui {
-	public static BufferedImage btile, wall, hero, herok, rguard, dguard, sguard, ogre, sogre, weapon, lever, key, overkey, door, opendoor, background, gameover;
+	public static BufferedImage btile, wall, hero, herok, rguard, dguard, sdguard, sguard, ogre, sogre, weapon, lever, key, overkey, door, opendoor, background, gameover;
 	public static MenuWindow mainmenu;
 	public static EditorMenuWindow editor;
 	public static GameWindow gframe;
@@ -38,6 +38,7 @@ public class GameGui {
 			herok = ImageIO.read(new File("imgs/LinkK.png"));
 			rguard = ImageIO.read(new File("imgs/Guard.png"));
 			dguard = ImageIO.read(new File("imgs/DGuard.png"));
+			sdguard = ImageIO.read(new File("imgs/SDGuard.png"));
 			sguard = ImageIO.read(new File("imgs/SGuard.png"));
 			ogre =  ImageIO.read(new File("imgs/Ogre.png"));
 			sogre =  ImageIO.read(new File("imgs/SOgre.png"));
@@ -156,39 +157,64 @@ public class GameGui {
 		}
 		return true;
 	}
-
-	private static boolean verifyAllElements(){
-		boolean door = false , hero = false, ogre = false, key=false;
+	
+	private static boolean verifyDoor(){
 		for(int i = 0; i < userMap.getMap().length; i++){
 			for(int j = 0; j < userMap.getMap()[i].length;j++){
 				if(userMap.getMap()[i][j] == 'I')
-					door = true;
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	private static boolean verifyHero(){
+		boolean hero = false;
+		for(int i = 0; i < userMap.getMap().length; i++){
+			for(int j = 0; j < userMap.getMap()[i].length;j++){
 				if(userMap.getMap()[i][j] == 'H'){
 					if(hero){
-						editor.inf.setText("Too many heros, must be only one");
-						return false;
-					}
-					else
-						hero = true;
-				}
-				if(userMap.getMap()[i][j] == 'O'){
-					if(ogre){
-						editor.inf.setText("Too many ogres, must be only one");
-						return false;
-					}
-					else
-						ogre = true;
-				}
-				if(userMap.getMap()[i][j] == 'k'){
-					if(key){
-						editor.inf.setText("Too many keys, must be only one");
-						return false;
-					}
-					else
-						key = true;
+						editor.inf.setText("Too many heros, must be only one"); return false;}
+					else hero = true;
 				}
 			}
 		}
+		return hero;
+	}
+	
+	private static boolean verifyOgre(){
+		boolean ogre = false;
+		for(int i = 0; i < userMap.getMap().length; i++){
+			for(int j = 0; j < userMap.getMap()[i].length;j++){
+				if(userMap.getMap()[i][j] == 'O'){
+					if(ogre){
+						editor.inf.setText("Too many ogres, must be only one"); return false;}
+					else ogre = true;
+				}
+			}
+		}
+		return ogre;
+	}
+	
+	private static boolean verifyKey(){
+		boolean key = false;
+		for(int i = 0; i < userMap.getMap().length; i++){
+			for(int j = 0; j < userMap.getMap()[i].length;j++){
+				if(userMap.getMap()[i][j] == 'k'){
+					if(key){
+						editor.inf.setText("Too many keys, must be only one"); return false;}
+					else key = true;
+				}
+			}
+		}
+		return key;
+	}
+	
+	private static boolean verifyAllElements(){
+		editor.inf.setText("");
+		boolean door, hero,  ogre, key;
+		door = verifyDoor(); hero = verifyHero(); ogre = verifyOgre(); key = verifyKey();
+		if(editor.inf.getText().contains("Too")) return false;
 		if(door && hero && ogre && key)
 			return true;
 		else{
@@ -246,21 +272,16 @@ public class GameGui {
 		}
 		return false;
 	}
+	
 	public static boolean verifyMap(){
 		if(!verifyBorders()){
 			editor.inf.setText("Incorrect borders");
 			return false;
 		}
-
-		System.out.println("1");
-
 		if(!verifyAllElements())
 			return false;
-		System.out.println("2");
 
 		int[] pos = userMap.getHeroPos();
-
-
 		if(!verifyPath(pos,'k',new int[userMap.getMap().length][userMap.getMap()[0].length],userMap.getMap())){
 			editor.inf.setText("No path to reach key");
 			return false;
@@ -271,19 +292,6 @@ public class GameGui {
 			return false;
 		}
 		found = false;
-
-		System.out.println("3");
-		/*
-		//Verifica a parede  
-		if(!verifyDoors(pos[0],pos[1],new int[userMap.getMap().length][userMap.getMap()[0].length],userMap.getMap())){
-			editor.inf.setText("No path to reach door");
-			return false;
-		}
-
-		found = false;
-
-		System.out.println("4");
-		 */
 		return true;
 	}
 

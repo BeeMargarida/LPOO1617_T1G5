@@ -21,10 +21,10 @@ public class KeepLogic extends Logic implements Serializable{
 	 */
 	public KeepLogic(Map map, int[] heropos, boolean armedHero, int option) {
 		super(new Hero('A', heropos, null));
-		/*if(armedHero){
+		if(armedHero){
 			hero.weapon = new Club('*','$',heropos);
 			hero.weapon.setNotValid();
-		}*/
+		}
 		enemies = new ArrayList<Character>();
 		for(int i = 0; i < option; i++) {
 			Weapon weaponE = new Club('*','$',map.getOgrePos()); 
@@ -53,7 +53,8 @@ public class KeepLogic extends Logic implements Serializable{
 			int[] enemymov = enemies.get(i).movement();
 			if(map.isFree(enemymov[0],enemymov[1])){
 				if(map.isKey(enemymov[0],enemymov[1])){
-					enemies.get(i).isOverKey = true;
+					if(!hero.hasKey())
+						enemies.get(i).isOverKey = true;
 				}
 				else {
 					enemies.get(i).isOverKey = false;
@@ -76,7 +77,8 @@ public class KeepLogic extends Logic implements Serializable{
 				int[] weaponmov = enemies.get(i).weapon.swing(enemies.get(i).getX(), enemies.get(i).getY());
 				if(map.isFree(weaponmov[0], weaponmov[1])){
 					if(map.isKey(weaponmov[0], weaponmov[1])){
-						enemies.get(i).weapon.above = true;
+						if(!hero.hasKey())
+							enemies.get(i).weapon.above = true;
 					} 
 					else
 						enemies.get(i).weapon.above = false;
