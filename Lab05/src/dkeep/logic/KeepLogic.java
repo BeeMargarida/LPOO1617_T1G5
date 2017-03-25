@@ -179,7 +179,7 @@ public class KeepLogic extends Logic implements Serializable{
 		enemyWeaponMovement(dir,map);
 		if(!moveHero(dir,map))
 			return;
-		//heroWeaponMovement(dir,map);
+		heroWeaponMovement(dir,map);
 	}
 
 	/**

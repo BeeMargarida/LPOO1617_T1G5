@@ -142,9 +142,6 @@ public class Logic implements Serializable{
 	 */
 	public boolean collideEnemy(int[] pos, ArrayList<Character> vector) {
 		for(int i = 0; i < vector.size(); i++){
-			/*if((vector.get(i).stunned == false) && ((x == vector.get(i).getX() && y == vector.get(i).getY()) || (x+1 == vector.get(i).getX() && y == vector.get(i).getY()) || (x-1 == vector.get(i).getX() && y == vector.get(i).getY()) || (y+1 == vector.get(i).getY() && x == vector.get(i).getX()) || (y-1 == vector.get(i).getY() && x == vector.get(i).getX()))){
-				return true;
-			}*/
 			if((!vector.get(i).stunned) && (collideLeft(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideRight(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideUp(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()}) || collideDown(pos,new int[] {vector.get(i).getX(),vector.get(i).getY()})))
 				return true;
 		}

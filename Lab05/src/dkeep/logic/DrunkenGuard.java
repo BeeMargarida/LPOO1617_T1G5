@@ -11,7 +11,6 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class DrunkenGuard extends Guard {
 	
-	private boolean asleep;
 	private char asleepChar;
 	
 	/**
@@ -23,7 +22,6 @@ public class DrunkenGuard extends Guard {
 	 */
 	public DrunkenGuard(char symbol, int[] coord,char[] path){
 		super(symbol,coord,path);
-		asleep = false;
 		asleepChar = 'g';
 	}
 
@@ -39,16 +37,16 @@ public class DrunkenGuard extends Guard {
 		int choice = ThreadLocalRandom.current().nextInt(0, 2 + 1);
 		char beh = behaviour[choice];
 		if(beh == 'n'){
-			asleep = false;
+			stunned = false;
 			return normalMovement();
 		}
 		else if (beh == 's'){
-			asleep = true;
+			stunned = true;
 			int[] mov = {x,y};
 			return mov;
 		}
 		else {
-			asleep = false;
+			stunned = false;
 			return reverseMovement();
 		}
 	}
@@ -58,7 +56,7 @@ public class DrunkenGuard extends Guard {
 	 */
 	@Override
 	public char getSymbol() {
-		if(asleep){
+		if(stunned){
 			return asleepChar;
 		}
 		else
