@@ -13,11 +13,25 @@ public abstract class Character implements Serializable{
 	protected int x;
 	protected int y;
 	protected char symbol;
-	protected boolean isOverKey; 
-	protected boolean stunned;
+	protected boolean isOverKey = false; 
+	protected boolean stunned = false;
 	protected int turns;
 	protected Weapon weapon;
 	
+	/**
+	 * Constructor of Character. Receives it's coordinates, symbol and weapon.
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @param symbol char that represents the character
+	 * @param weapon Object weapon that contains information about the weapon
+	 */
+	public Character(int x, int y, char symbol,Weapon weapon){
+		this.x = x;
+		this.y = y;
+		this.symbol = symbol;
+		this.turns = 0;
+		this.weapon = weapon;
+	}
 	/**
 	 * Retrieve the valor of the coordinate x.
 	 * @return the coordinate x, type int

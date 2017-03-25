@@ -22,15 +22,7 @@ public class DrunkenGuard extends Guard {
 	 * @param path array of movements of the guard
 	 */
 	public DrunkenGuard(char symbol, int x, int y,char[] path){
-		this.x = x;
-		this.y = y;
-		this.symbol = symbol;
-		this.path = path;
-		this.isOverKey = false;
-		this.stunned = false;
-		this.turns = 0;
-		this.weapon = null;
-		i = -1;
+		super(symbol,x,y,path,-1);
 		asleep = false;
 		asleepChar = 'g';
 	}

@@ -10,22 +10,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SuspiciousGuard extends Guard {
 	
 	/**
-	 * Constructor of the SuspiciousGuard. Sets all flags to false, puts the i variable to -1 and initializes other variables with the given values.
+	 * Constructor of the SuspiciousGuard. Puts the i variable to -1 and initializes other variables with the given values, calling the Guard constructor.
 	 * @param symbol char that represents the SuspiciousGuard
 	 * @param x coordinate
 	 * @param y coordinate
 	 * @param path array of movements of the guard
 	 */
 	public SuspiciousGuard(char symbol, int x, int y, char[] path) {
-		this.x = x;
-		this.y = y;
-		this.symbol = symbol;
-		this.path = path; //double check this
-		this.isOverKey = false;
-		this.stunned = false;
-		this.turns = 0;
-		this.weapon = null;
-		i = -1;
+		super(symbol,x,y,path,-1);
 	}
 	/**
 	 * {@inheritDoc}

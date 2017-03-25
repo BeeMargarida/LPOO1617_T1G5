@@ -13,12 +13,25 @@ public abstract class Guard extends Character implements Serializable{
 	protected char[] path;
 	protected int i;
 	
-	
+	/**
+	 * Constructor of Guard. It initializes the character variables and also the path and index.
+	 * @param symbol char that represents the guard
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @param path array of chars that represent the path that the enemy will take
+	 * @param i int that keeps the progress in the array of path
+	 */
+	public Guard(char symbol, int x, int y,char[] path, int i){
+		super(x,y,symbol,null);
+		this.path = path;
+		this.i = i;
+	}
 	/**
 	 * Follows the path of the guard, using the index to know the next direction of the guard. Returns a array with the new coordinates of the
 	 * guard and updates the index.
 	 * @return array of 2 ints with the coordinates x and y
 	 */
+	
 	public int[] normalMovement(){
 		int[] mov;
 		i++;
@@ -38,7 +51,6 @@ public abstract class Guard extends Character implements Serializable{
 		else{
 			mov = new int[] {x+1,y};
 		}
-		//i++;
 		return mov;
 	}
 	
@@ -72,11 +84,11 @@ public abstract class Guard extends Character implements Serializable{
 	/**
 	 * {@inheritDoc}
 	 */
-	public abstract int[] movement();
+	public int[] movement(){ return null;};
 	
 	/**
 	 * {@inheritDoc}
 	 */
-	public abstract char getSymbol();
+	public char getSymbol(){ return ' ';};
 	
 }

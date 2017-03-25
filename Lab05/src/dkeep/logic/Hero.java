@@ -17,13 +17,7 @@ public class Hero extends Character {
 	 * @param weapon object Weapon that contains information about a Club
 	 */
 	public Hero(char s, int x, int y, Weapon weapon) {
-		symbol = s;
-		this.x = x;
-		this.y = y;
-		this.isOverKey = false;
-		this.stunned = false;
-		this.turns = 0;
-		this.weapon = weapon;
+		super(x,y,s,weapon);
 		hasKey = false;
 	}
 

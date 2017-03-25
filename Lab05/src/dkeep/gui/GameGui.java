@@ -21,7 +21,7 @@ public class GameGui {
 	public static Map userMap;
 	public static Game game;
 	private static boolean found = false;
-	
+
 	public GameGui(){
 		loadImages();
 		mainmenu = new MenuWindow();
@@ -29,7 +29,7 @@ public class GameGui {
 		gframe = new GameWindow();
 		bframe = new EditorWindow();
 	}
-	
+
 	private void loadImages(){
 		try{
 			btile = ImageIO.read(new File("imgs/Tile.png"));
@@ -55,7 +55,7 @@ public class GameGui {
 			System.exit(1);
 		}
 	}
-	
+
 	public static boolean saveGame(File f){
 		try{
 			FileOutputStream fout = new FileOutputStream(f.getAbsolutePath());
@@ -67,12 +67,12 @@ public class GameGui {
 		catch(IOException ex){
 			System.out.println("No save");
 		}
-		
+
 		return true;
 	}
-	
+
 	public static boolean loadGame(File f){
-		
+
 		try{
 			FileInputStream fout = new FileInputStream(f.getAbsolutePath());
 			ObjectInputStream out = new ObjectInputStream(fout);
@@ -88,15 +88,15 @@ public class GameGui {
 			System.out.println("Error loading game");
 			return false;
 		}
-		
+
 		catch(ClassNotFoundException c){
 			System.out.println("Error loading game");
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	public static boolean saveMap(File f){
 		try{
 			FileOutputStream fout = new FileOutputStream(f.getAbsolutePath());
@@ -107,14 +107,14 @@ public class GameGui {
 			out.close();
 		}
 		catch(IOException ex){
-			
+
 		}
-		
+
 		return true;
 	}
-	
+
 	public static boolean loadMap(File f){
-		
+
 		try{
 			FileInputStream fout = new FileInputStream(f.getAbsolutePath());
 			ObjectInputStream out = new ObjectInputStream(fout);
@@ -132,15 +132,15 @@ public class GameGui {
 			System.out.println("Error loading map");
 			return false;
 		}
-		
+
 		catch(ClassNotFoundException c){
 			System.out.println("Error loading map");
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	public static boolean verifyBorders(){
 		for(int i = 0; i < userMap.getMap().length; i++){
 			for(int j = 0; j < userMap.getMap()[i].length;j++){
@@ -156,7 +156,7 @@ public class GameGui {
 		}
 		return true;
 	}
-	
+
 	private static boolean verifyAllElements(){
 		boolean door = false , hero = false, ogre = false, key=false;
 		for(int i = 0; i < userMap.getMap().length; i++){
@@ -207,120 +207,44 @@ public class GameGui {
 	}
 	
 	private static boolean verifyPath(int x, int y, char target,int[][] aux, char[][] m){
-		/*
-		System.out.println(x);
-		System.out.println(y);
-		 */
-
 		if(found)
 			return true;
-
-		if(aux[x+1][y] != 1 && m[x+1][y] != 'X' && m[x+1][y] != 'I'){
-			//System.out.println("a");
-			if(m[x+1][y] == target){
-				found = true;
-				return true;
-			}
-			aux[x+1][y] = 1;
-			verifyPath(x+1,y,target,aux,m);
-		}
-
-		if(found)
-			return true;
-
-		if(aux[x-1][y] != 1 && m[x-1][y] != 'X' && m[x-1][y] != 'I'){
-			//System.out.println("b");
-			if(m[x-1][y] == target){
-				found = true;
-				return true;
-			}
-			aux[x-1][y] = 1;
-			verifyPath(x-1,y,target,aux,m);
-		}
-
-		if(found)
-			return true;
-
-		if(aux[x][y+1] != 1 && m[x][y+1] != 'X' && m[x][y+1] != 'I'){
-			//System.out.println("c");
-			if(m[x][y+1] == target){
-				found = true;
-				return true;
-			}
-			aux[x][y+1] = 1;
-			verifyPath(x,y+1,target,aux,m);
-		}
-
-		if(found)
-			return true;
-
-		if(aux[x][y-1] != 1 && m[x][y-1] != 'X' && m[x][y-1] != 'I'){
-			//System.out.println("d");
-			if(m[x][y-1] == target){
-				found = true;
-				return true;
-			}
-			aux[x][y-1] = 1;
-			verifyPath(x,y-1,target,aux,m);
-		}
-
-		return false;
-	}
-	
-	/*
-	private static boolean verifyDoors(int x, int y, int[][] aux, char[][] m){
-		if(found)
-			return true;
-
 		if(aux[x+1][y] != 1 && m[x+1][y] != 'X'){
-			if(m[x+1][y] == 'I'){
-				found = true;
-				return true;
+			if(m[x+1][y] == target){ found = true; return true; }
+			else if(m[x+1][y] != 'I'){
+				aux[x+1][y] = 1;
+				verifyPath(x+1,y,target,aux,m);
 			}
-			aux[x+1][y] = 1;
-			verifyDoors(x+1,y,aux,m);
 		}
-
 		if(found)
 			return true;
-
 		if(aux[x-1][y] != 1 && m[x-1][y] != 'X'){
-			if(m[x-1][y] == 'I'){
-				found = true;
-				return true;
+			if(m[x-1][y] == target){ found = true; return true; }
+			else if(m[x-1][y] != 'I'){
+				aux[x-1][y] = 1;
+				verifyPath(x-1,y,target,aux,m);
 			}
-			aux[x-1][y] = 1;
-			verifyDoors(x+1,y,aux,m);
 		}
-
 		if(found)
 			return true;
-
 		if(aux[x][y+1] != 1 && m[x][y+1] != 'X'){
-			if(m[x][y+1] == 'I'){
-				found = true;
-				return true;
+			if(m[x][y+1] == target){ found = true; return true;	}
+			else if(m[x][y+1] != 'I'){
+				aux[x][y+1] = 1;
+				verifyPath(x,y+1,target,aux,m);
 			}
-			aux[x][y+1] = 1;
-			verifyDoors(x+1,y,aux,m);
 		}
-
 		if(found)
 			return true;
-
 		if(aux[x][y-1] != 1 && m[x][y-1] != 'X'){
-			if(m[x][y-1] == 'I'){
-				found = true;
-				return true;
+			if(m[x][y-1] == target){ found = true; return true; }
+			else if(m[x][y-1] != 'I'){
+				aux[x][y-1] = 1;
+				verifyPath(x,y-1,target,aux,m);
 			}
-			aux[x][y-1] = 1;
-			verifyDoors(x+1,y,aux,m);
 		}
-
 		return false;
 	}
-	*/
-	
 	public static boolean verifyMap(){
 		if(!verifyBorders()){
 			editor.inf.setText("Incorrect borders");
@@ -335,13 +259,18 @@ public class GameGui {
 
 		int[] pos = userMap.getHeroPos();
 
-		
+
 		if(!verifyPath(pos[0],pos[1],'k',new int[userMap.getMap().length][userMap.getMap()[0].length],userMap.getMap())){
 			editor.inf.setText("No path to reach key");
 			return false;
 		}
-
 		found = false;
+		if(!verifyPath(pos[0],pos[1],'I',new int[userMap.getMap().length][userMap.getMap()[0].length],userMap.getMap())){
+			editor.inf.setText("No path to reach door");
+			return false;
+		}
+		found = false;
+		
 
 
 		System.out.println("3");
@@ -355,7 +284,7 @@ public class GameGui {
 		found = false;
 
 		System.out.println("4");
-		*/
+		 */
 
 
 		return true;
