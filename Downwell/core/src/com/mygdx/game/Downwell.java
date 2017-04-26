@@ -12,6 +12,7 @@ public class Downwell extends Game {
 
 
 	private AssetManager assetManager;
+	private int i;
 	
 	@Override
 	public void create () {
