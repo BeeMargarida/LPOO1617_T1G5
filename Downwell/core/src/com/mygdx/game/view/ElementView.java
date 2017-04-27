@@ -31,5 +31,5 @@ public abstract class ElementView {
 
     public void update(ElementModel model){} //?
 
-    public void act(float delta){};
+    public abstract void act(float delta);
 }

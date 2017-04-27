@@ -12,7 +12,7 @@ import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
 
 public abstract class ElementBody {
 
-    final Body body;
+    protected Body body;
 
     public ElementBody(World world, ElementModel model) {
         BodyDef bodyDef = new BodyDef();

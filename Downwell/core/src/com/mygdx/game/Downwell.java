@@ -21,7 +21,6 @@ public class Downwell extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
-
 		startGame();
 	}
 

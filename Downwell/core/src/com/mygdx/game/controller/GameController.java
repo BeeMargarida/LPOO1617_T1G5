@@ -10,10 +10,12 @@ public class GameController {
     public static final int ARENA_HEIGHT = 150;
     private final World world;
     private final HeroBody hero;
+    private final BatBody bat;
 
     public GameController(GameModel model){
         world = new World(new Vector2(0,0),true);
         hero = new HeroBody(world,model.getHeroModel());
+        bat = new BatBody(world,model.getBatModel());
     }
 
 
