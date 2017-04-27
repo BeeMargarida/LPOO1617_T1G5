@@ -25,6 +25,7 @@ public class GameView extends ScreenAdapter{
     private final GameController controller;
 
     private final HeroView heroView;
+    private final BatView batView;
 
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
@@ -37,6 +38,7 @@ public class GameView extends ScreenAdapter{
 
         loadAssets();
         heroView = new HeroView(game);
+        batView = new BatView(game);
 
         camera = createCamera();
     }
@@ -65,6 +67,12 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "6.png" , Texture.class);
         this.game.getAssetManager().load( "7.png" , Texture.class);
 
+        this.game.getAssetManager().load( "bat1.png" , Texture.class);
+        this.game.getAssetManager().load( "bat2.png" , Texture.class);
+        this.game.getAssetManager().load( "bat3.png" , Texture.class);
+        this.game.getAssetManager().load( "bat4.png" , Texture.class);
+        this.game.getAssetManager().load( "bat5.png" , Texture.class);
+
         this.game.getAssetManager().finishLoading();
     }
 
@@ -90,6 +98,7 @@ public class GameView extends ScreenAdapter{
         controller.update(delta);
 
         camera.position.set(model.getHeroModel().getX() / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
+
         //camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
 
@@ -108,7 +117,9 @@ public class GameView extends ScreenAdapter{
     }
 
     private void drawEntities() {
-        heroView.act(0.1f);
-        heroView.draw(game.getBatch());
+        /*heroView.act(0.1f);
+        heroView.draw(game.getBatch());*/
+        batView.act(0.1f);
+        batView.draw(game.getBatch());
     }
 }
