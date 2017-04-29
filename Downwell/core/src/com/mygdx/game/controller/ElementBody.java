@@ -14,9 +14,9 @@ public abstract class ElementBody {
 
     protected Body body;
 
-    public ElementBody(World world, ElementModel model) {
+    public ElementBody(World world, ElementModel model, BodyDef.BodyType bodyType) {
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.type = bodyType;
         bodyDef.position.set(model.getX(), model.getY());
         //bodyDef.angle = model.getRotation();
 
@@ -48,6 +48,22 @@ public abstract class ElementBody {
         body.createFixture(fixtureDef);
 
         polygon.dispose();
+    }
+
+    final void createRectangleFixture(Body body, float width, float height, float density, float friction, float restitution){
+        PolygonShape rectangle = new PolygonShape();
+        rectangle.setAsBox(width, height);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = rectangle;
+
+        fixtureDef.density = density;
+        fixtureDef.friction = friction;
+        fixtureDef.restitution = restitution;
+
+        body.createFixture(fixtureDef);
+
+        rectangle.dispose();
     }
 
     public float getX() {

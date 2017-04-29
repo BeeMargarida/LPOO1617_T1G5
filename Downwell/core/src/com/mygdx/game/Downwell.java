@@ -15,7 +15,6 @@ public class Downwell extends Game {
 
 	private SpriteBatch batch;
 	private AssetManager assetManager;
-	private int i;
 	
 	@Override
 	public void create() {
@@ -25,7 +24,7 @@ public class Downwell extends Game {
 	}
 
 	private void startGame() {
-		GameModel model = new GameModel(GameController.ARENA_WIDTH / 2, GameController.ARENA_HEIGHT/2);
+		GameModel model = new GameModel(GameController.ARENA_WIDTH / 2, GameController.ARENA_HEIGHT/2, 50);
 
 		setScreen(new GameView(this, model, new GameController(model)));
 	}

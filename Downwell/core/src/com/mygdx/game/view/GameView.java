@@ -16,16 +16,16 @@ import com.mygdx.game.view.HeroView;
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = false;
+    private static final boolean DEBUG_PHYSICS = true;
     public final static float PIXEL_TO_METER = 0.04f;
-    private static final float VIEWPORT_WIDTH = 20;
+    private static final float VIEWPORT_WIDTH = 66;
 
     private final Downwell game;
     private final GameModel model;
     private final GameController controller;
 
     private final HeroView heroView;
-    private final BatView batView;
+    //private final BatView batView;
 
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
@@ -38,7 +38,7 @@ public class GameView extends ScreenAdapter{
 
         loadAssets();
         heroView = new HeroView(game);
-        batView = new BatView(game);
+        //batView = new BatView(game);
 
         camera = createCamera();
     }
@@ -47,6 +47,7 @@ public class GameView extends ScreenAdapter{
         OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
 
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+        //camera.position.set(0,0,0);
         camera.update();
 
         if (DEBUG_PHYSICS) {
@@ -73,21 +74,23 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "bat4.png" , Texture.class);
         this.game.getAssetManager().load( "bat5.png" , Texture.class);
 
+        this.game.getAssetManager().load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
+
         this.game.getAssetManager().finishLoading();
     }
 
     private void handleInputs(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-
+            camera.position.set(camera.position.x-2, camera.position.y,0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-
+            camera.position.set(camera.position.x+2, camera.position.y,0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-
+            camera.position.set(camera.position.x, camera.position.y+2,0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-
+            camera.position.set(camera.position.x, camera.position.y-2,0);
         }
     }
 
@@ -97,16 +100,17 @@ public class GameView extends ScreenAdapter{
 
         controller.update(delta);
 
-        camera.position.set(model.getHeroModel().getX() / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
+        //camera.position.set(model.getHeroModel().getX() / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
 
-        //camera.update();
+        camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
 
         Gdx.gl.glClearColor( 103/255f, 69/255f, 117/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
         game.getBatch().begin();
-        drawEntities();
+        drawBackground();
+        //drawEntities();
         game.getBatch().end();
 
         if (DEBUG_PHYSICS) {
@@ -117,9 +121,16 @@ public class GameView extends ScreenAdapter{
     }
 
     private void drawEntities() {
-        /*heroView.act(0.1f);
-        heroView.draw(game.getBatch());*/
-        batView.act(0.1f);
-        batView.draw(game.getBatch());
+        heroView.act(0.1f);
+        heroView.draw(game.getBatch());
+        //batView.act(0.1f);
+        //batView.draw(game.getBatch());
+    }
+
+    private void drawBackground() {
+        Texture background = game.getAssetManager().get("berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
+        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+        game.getBatch().draw(background, 0, 0, 0, 0, (int)(GameController.ARENA_WIDTH / PIXEL_TO_METER), (int) (GameController.ARENA_HEIGHT / PIXEL_TO_METER));
+
     }
 }
