@@ -77,4 +77,8 @@ public abstract class ElementBody {
     public void setTransform(float x, float y, float angle) {
         body.setTransform(x, y, angle);
     }
+
+    /*public Object getUserData() {
+        return body.getUserData();
+    }*/
 }

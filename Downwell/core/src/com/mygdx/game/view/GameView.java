@@ -25,7 +25,7 @@ public class GameView extends ScreenAdapter{
     private final GameController controller;
 
     private final HeroView heroView;
-    //private final BatView batView;
+    private final BatView batView;
 
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
@@ -38,7 +38,7 @@ public class GameView extends ScreenAdapter{
 
         loadAssets();
         heroView = new HeroView(game);
-        //batView = new BatView(game);
+        batView = new BatView(game);
 
         camera = createCamera();
     }
@@ -99,7 +99,8 @@ public class GameView extends ScreenAdapter{
             controller.moveHeroRight();
         }
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            controller.jumpHero();
+            if(!controller.getHeroBody().getState())
+                controller.jumpHero();
         }
     }
 
@@ -108,6 +109,7 @@ public class GameView extends ScreenAdapter{
         handleInputs(delta);
 
         controller.update(delta);
+        model.update();
 
         //camera.position.set(model.getHeroModel().getX() / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
 
@@ -119,7 +121,7 @@ public class GameView extends ScreenAdapter{
 
         game.getBatch().begin();
         drawBackground();
-        //drawEntities();
+        drawEntities();
         game.getBatch().end();
 
         if (DEBUG_PHYSICS) {
@@ -130,10 +132,12 @@ public class GameView extends ScreenAdapter{
     }
 
     private void drawEntities() {
+        heroView.update(model.getHeroModel());
         heroView.act(0.1f);
         heroView.draw(game.getBatch());
-        //batView.act(0.1f);
-        //batView.draw(game.getBatch());
+        batView.update(model.getBatModel());
+        batView.act(0.1f);
+        batView.draw(game.getBatch());
     }
 
     private void drawBackground() {

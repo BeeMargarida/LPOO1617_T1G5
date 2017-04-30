@@ -25,12 +25,11 @@ public class GameModel {
         GameController.ARENA_HEIGHT = depth;
         this.depth = depth;
         hero = new HeroModel(GameController.ARENA_WIDTH/2, GameController.ARENA_HEIGHT);
+        bat = new BatModel(GameController.ARENA_WIDTH/2,40);
         //hero = new HeroModel(0.5f,0);
         makeMap();
         //bat = new BatModel(x,y);
     }
-
-
 
     private MapTileModel getTile(int x, int y){
         tileprob = Arrays.copyOf(tileprobfixed,tileprobfixed.length);
@@ -111,8 +110,13 @@ public class GameModel {
     public HeroModel getHeroModel(){
         return hero;
     }
-    public BatModel getBatModel() { return bat;}
+    public BatModel getBatModel() {
+        return bat;
+    }
 
+    public void update(){
+        bat.updateState(hero);
+    }
 
     public int getWidth(){
         return width;

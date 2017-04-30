@@ -15,17 +15,17 @@ public class GameController {
     public static int TILE_DIMENSIONS = 10;
 
     private final World world;
-    private float accumulator;
     private final HeroBody hero;
-    //private final BatBody bat;
+    private final BatBody bat;
+    private float accumulator;
 
     public GameController(GameModel model){
         world = new World(new Vector2(0,-1f),true);
 
         hero = new HeroBody(world,model.getHeroModel());
-        //bat = new BatBody(world,model.getBatModel());
+        bat = new BatBody(world,model.getBatModel());
         fillWorld(model);
-}
+    }
 
 
     private void fillWorld(GameModel model){
@@ -73,4 +73,6 @@ public class GameController {
     public World getWorld() {
         return world;
     }
+    public HeroBody getHeroBody() { return hero; }
+    public BatBody getBatBody() { return bat; }
 }

@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.mygdx.game.controller.GameController;
+import com.mygdx.game.controller.MenuController;
 import com.mygdx.game.model.GameModel;
+import com.mygdx.game.model.MenuModel;
 import com.mygdx.game.view.GameView;
+import com.mygdx.game.view.MenuView;
 
 public class Downwell extends Game {
 
@@ -25,8 +28,9 @@ public class Downwell extends Game {
 
 	private void startGame() {
 		GameModel model = new GameModel(GameController.ARENA_WIDTH / 2, GameController.ARENA_HEIGHT/2, 50);
-
 		setScreen(new GameView(this, model, new GameController(model)));
+		/*MenuModel model = new MenuModel(30,50);
+		setScreen(new MenuView(this,model,new MenuController(model)));*/
 	}
 
 

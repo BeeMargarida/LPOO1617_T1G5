@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
+import com.mygdx.game.model.ElementModel;
 
 public class BatView extends EnemyView {
 
@@ -31,6 +32,11 @@ public class BatView extends EnemyView {
         sprite = new Sprite(animation.getKeyFrame(0));
 
         return sprite;
+    }
+
+    @Override
+    public void update(ElementModel model) {
+        super.update(model);
     }
 
     @Override

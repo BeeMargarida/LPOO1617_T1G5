@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
+import com.mygdx.game.model.ElementModel;
+import com.mygdx.game.model.HeroModel;
 
 public class HeroView extends ElementView {
 
@@ -36,6 +38,11 @@ public class HeroView extends ElementView {
         sprite = new Sprite(animation.getKeyFrame(0));
 
         return sprite;
+    }
+
+    @Override
+    public void update(ElementModel model) {
+        super.update(model);
     }
 
     @Override

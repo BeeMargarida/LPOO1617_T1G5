@@ -29,7 +29,9 @@ public abstract class ElementView {
     public abstract Sprite createSprite(Downwell game);
     public Animation<TextureRegion> getAnimation() { return animation;}
 
-    public void update(ElementModel model){} //?
+    public void update(ElementModel model) {
+        sprite.setCenter(model.getX() / PIXEL_TO_METER, model.getY() / PIXEL_TO_METER);
+    }
 
     public abstract void act(float delta);
 }

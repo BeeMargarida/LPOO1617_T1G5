@@ -7,20 +7,11 @@ import com.badlogic.gdx.physics.box2d.World;
 public abstract class EnemyBody extends ElementBody {
 
     public EnemyBody(World world, EnemyModel model){
-        super(world, model, BodyDef.BodyType.DynamicBody);
+        super(world, model, BodyDef.BodyType.KinematicBody);
 
-        /*
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(model.getX(), model.getY());
-        //bodyDef.angle = model.getRotation();
-
-        body = world.createBody(bodyDef);
-        body.setUserData(model);
-        */
-
-        float density = 1f, friction = 0.4f, restitution = 0.5f;
-        int dimension = GameController.TILE_DIMENSIONS;
-        createRectangleFixture(body,dimension,dimension,density,friction,restitution);
+        float density = 1f, friction = 0.4f, restitution = 0f;
+        float width = 0.4f, height = 0.4f;
+        //int dimension = GameController.TILE_DIMENSIONS;
+        createRectangleFixture(body,width,height,density,friction,restitution);
     }
 }
