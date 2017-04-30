@@ -13,8 +13,8 @@ public class MapTileBody extends ElementBody {
     MapTileBody(World world, MapTileModel model){
         super(world,model, BodyDef.BodyType.KinematicBody);
 
-        float density = 1f, friction = 0.4f, restitution = 0.5f;
-        float width = 1, height = 1;
+        float density = 1f, friction = 0.4f, restitution = 0;
+        float width = 0.5f, height = 0.5f;
 
         createRectangleFixture(body,width,height,density,friction,restitution);
     }

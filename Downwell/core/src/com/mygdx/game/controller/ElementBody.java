@@ -62,6 +62,7 @@ public abstract class ElementBody {
         fixtureDef.restitution = restitution;
 
         body.createFixture(fixtureDef);
+        body.setFixedRotation(true);
 
         rectangle.dispose();
     }
@@ -71,5 +72,9 @@ public abstract class ElementBody {
     }
     public float getY() {
         return body.getPosition().y;
+    }
+
+    public void setTransform(float x, float y, float angle) {
+        body.setTransform(x, y, angle);
     }
 }

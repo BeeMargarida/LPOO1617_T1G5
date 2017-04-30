@@ -20,7 +20,7 @@ public class GameController {
     //private final BatBody bat;
 
     public GameController(GameModel model){
-        world = new World(new Vector2(0,-0.5f),true);
+        world = new World(new Vector2(0,-1f),true);
 
         hero = new HeroBody(world,model.getHeroModel());
         //bat = new BatBody(world,model.getBatModel());
@@ -30,12 +30,9 @@ public class GameController {
 
     private void fillWorld(GameModel model){
         MapTileModel map[][] = model.getMap();
-        System.out.println("Chegou aqui");
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[i].length; j++){
                 if(map[i][j] != null)
-                    //System.out.println(map[i][j].getX());
-                    //System.out.println(map[i][j].getY());
                     new MapTileBody(world,map[i][j]);
             }
         }
@@ -56,6 +53,22 @@ public class GameController {
             ((ElementModel) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
         }
     }
+
+    public void moveHeroLeft(){
+        //hero.setTransform(hero.getX()-1, hero.getY(),0);
+        hero.body.applyForceToCenter(-1f,0,true);
+    }
+
+    public void moveHeroRight(){
+        //hero.setTransform(hero.getX()+1, hero.getY(),0);
+        hero.body.applyForceToCenter(1f,0,true);
+    }
+
+
+    public void jumpHero(){
+        hero.body.applyForceToCenter(0,1f,true);
+    }
+
 
     public World getWorld() {
         return world;

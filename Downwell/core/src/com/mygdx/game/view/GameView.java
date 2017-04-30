@@ -92,6 +92,15 @@ public class GameView extends ScreenAdapter{
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             camera.position.set(camera.position.x, camera.position.y-2,0);
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            controller.moveHeroLeft();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+            controller.moveHeroRight();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+            controller.jumpHero();
+        }
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.mygdx.game.model;
 import com.badlogic.gdx.Game;
 import com.mygdx.game.controller.GameController;
 
+import java.util.Arrays;
+
 import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameModel {
@@ -12,6 +14,11 @@ public class GameModel {
     private int width = 11;
     private int depth;
     private char tiles[] = {'e','d','i'};
+    private int tileprobfixed[] = {90, 8, 2};
+    private int tileprob[] = {90, 8, 2};
+    private int tilecounter[] = {0,0,0};
+    private float dd = 0.5f;
+    private int ic = 0;
 
     public GameModel(float x, float y, int depth) {
         GameController.ARENA_WIDTH = width;
@@ -24,20 +31,62 @@ public class GameModel {
     }
 
 
+
+    private MapTileModel getTile(int x, int y){
+        tileprob = Arrays.copyOf(tileprobfixed,tileprobfixed.length);
+
+        if(ic > 2) {
+            tileprob[1] += tileprob[2];
+            tileprob[2] = 0;
+        }
+
+        int probCounter = 0;
+        int value = random.nextInt()% 100;
+        value = Math.abs(value);
+        System.out.println(value);
+        int i;
+        for(i = 0; i < tiles.length; i++){
+            if(probCounter+tileprob[i] == probCounter)
+                continue;
+
+            if(value >= probCounter && value < probCounter+tileprob[i])
+                break;
+            else
+                probCounter += tileprob[i];
+        }
+
+        if(i >= tiles.length)
+            return null;
+
+        tilecounter[i]++;
+
+        if(tiles[i] == 'e')
+            return null;
+        else if(tiles[i] == 'd') {
+            return new MapTileModel(((float) x)+dd, ((float) y)+dd, MapTileModel.TileType.D_BLOCK);
+        }
+        else if(tiles[i] == 'i') {
+            ic++;
+            return new MapTileModel( ((float) x)+dd, ((float) y)+dd, MapTileModel.TileType.I_BLOCK);
+        }
+        else
+            return null;
+    }
+
     private void makeMap() {
+        //random.setSeed();
         map = new MapTileModel[depth][width];
-        System.out.println("fuck");
         int ts, y = GameController.ARENA_HEIGHT, x;
         for (int i = 0; i < depth; i++) {
-            int ic = 0;
+            ic = 0;
             x = 0;
             y--;
             if (i < 5) {
                 for (int j = 0; j < width; j++) {
                     if (j == 0)
-                        map[i][j] = new MapTileModel(x, y, MapTileModel.TileType.L_WALL);
+                        map[i][j] = new MapTileModel(((float) x)+dd, ((float) y)+dd, MapTileModel.TileType.L_WALL);
                     else if (j == width - 1)
-                        map[i][j] = new MapTileModel(x, y, MapTileModel.TileType.R_WALL);
+                        map[i][j] = new MapTileModel( ((float) x)+dd, ((float) y)+dd, MapTileModel.TileType.R_WALL);
                     else
                         map[i][j] = null;
                     x++;
@@ -46,27 +95,17 @@ public class GameModel {
             }
             for (int j = 0; j < width; j++) {
                 if (j == 0)
-                    map[i][j] = new MapTileModel(x, y, MapTileModel.TileType.L_WALL);
+                    map[i][j] = new MapTileModel( ((float) x)+dd, ((float) y)+dd, MapTileModel.TileType.L_WALL);
                 else if (j == width - 1)
-                    map[i][j] = new MapTileModel(x, y, MapTileModel.TileType.R_WALL);
-                else {
-                    ts = tiles.length;
-                    if (ic > 2)
-                        ts = ts--;
-                    int ti = random.nextInt() % ts;
-                    if(ti < 0)
-                        ti *= -1;
-                    if (tiles[ti] == 'i') {
-                        ic++;
-                        map[i][j] = new MapTileModel(x, y, MapTileModel.TileType.I_BLOCK);
-                    } else if (tiles[ti] == 'd')
-                        map[i][j] = new MapTileModel(x, y, MapTileModel.TileType.D_BLOCK);
-                    else
-                        map[i][j] = null;
-                }
+                    map[i][j] = new MapTileModel( ((float) x)+dd, ((float) y)+dd, MapTileModel.TileType.R_WALL);
+                else
+                    map[i][j] = getTile(x,y);
                 x++;
             }
         }
+        System.out.println(tilecounter[0]);
+        System.out.println(tilecounter[1]);
+        System.out.println(tilecounter[2]);
     }
 
     public HeroModel getHeroModel(){
