@@ -8,7 +8,7 @@ O nosso projeto consiste no jogo Downwell, um vertical scroller. O objetivo dest
 
 #### Class Diagram
 
-![alt text](https://cloud.githubusercontent.com/assets/25725586/25557268/3e5c2632-2d06-11e7-8616-1b465d019296.png)
+![alt text](https://cloud.githubusercontent.com/assets/25725586/25564275/a9512f04-2da7-11e7-97d1-3055dcd02222.png)
 
 ---
 
@@ -42,6 +42,9 @@ Este padrão será usado para controlar as partículas, mais precisamente as bal
 
 ##### Factory Pattern
 Este padrão será usado para desenhar o mapa, mais precisamente escolher os métodos corretos para cada bloco do mapa do jogo, pois existem uns com comportamentos diferentes. Existem tiles indestrutíveis e outras tiles que se destroem caso hajam colisões entre elas e as balas do herói. 
+
+##### Observer Pattern
+Este padrão é usado pelo Screen do LibGDX. A ApplicationListener (aplicação de diferentes módulos/plataformas) é o sujeito e qualquer ecrã (Screen) que se cria é o observador. Então, o Screen é a interface usada para comunicar entre elas.
 
 ---
 
