@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HelloWorld/HelloWorld.iml" filepath="$PROJECT_DIR$/HelloWorld/HelloWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab01/Lab01.iml" filepath="$PROJECT_DIR$/Lab01/Lab01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab02/Lab02.iml" filepath="$PROJECT_DIR$/Lab02/Lab02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab03/Lab03.iml" filepath="$PROJECT_DIR$/Lab03/Lab03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab04/Lab04.iml" filepath="$PROJECT_DIR$/Lab04/Lab04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab05/Lab05.iml" filepath="$PROJECT_DIR$/Lab05/Lab05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Downwell/android/android.iml" filepath="$PROJECT_DIR$/Downwell/android/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Downwell/core/core.iml" filepath="$PROJECT_DIR$/Downwell/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Downwell/desktop/desktop.iml" filepath="$PROJECT_DIR$/Downwell/desktop/desktop.iml" />
+    </modules>
+  </component>
+</project>
