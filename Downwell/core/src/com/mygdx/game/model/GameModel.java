@@ -11,6 +11,7 @@ public class GameModel {
     private HeroModel hero;
     private BatModel bat;
     private MapTileModel map[][];
+    private static GameModel instance;
     private int width = 11;
     private int depth;
     private char tiles[] = {'e','d','i'};
@@ -30,6 +31,12 @@ public class GameModel {
         makeMap();
         //bat = new BatModel(x,y);
     }
+
+   /*public static GameModel getInstance() {
+        if (instance == null)
+            instance = new GameModel(0,0,0);
+        return instance;
+    }*/
 
     private MapTileModel getTile(int x, int y){
         tileprob = Arrays.copyOf(tileprobfixed,tileprobfixed.length);
@@ -112,10 +119,6 @@ public class GameModel {
     }
     public BatModel getBatModel() {
         return bat;
-    }
-
-    public void update(){
-        bat.updateState(hero);
     }
 
     public int getWidth(){

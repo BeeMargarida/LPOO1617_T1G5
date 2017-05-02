@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class HeroBody extends ElementBody {
 
-    private boolean JUMPING;
+    private boolean Jumping = true;
 
     public HeroBody(World world, HeroModel model){
         super(world,model, BodyDef.BodyType.DynamicBody);
@@ -17,5 +17,7 @@ public class HeroBody extends ElementBody {
         createRectangleFixture(body,width,height,density,friction,restitution);
     }
 
-    public boolean getState() { return JUMPING; }
+    public void setState() { Jumping = true;}
+    public void removeState() { Jumping = false;}
+    public boolean getState() { return Jumping; }
 }

@@ -99,8 +99,7 @@ public class GameView extends ScreenAdapter{
             controller.moveHeroRight();
         }
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            if(!controller.getHeroBody().getState())
-                controller.jumpHero();
+            controller.jumpHero();
         }
     }
 
@@ -109,9 +108,8 @@ public class GameView extends ScreenAdapter{
         handleInputs(delta);
 
         controller.update(delta);
-        model.update();
 
-        //camera.position.set(model.getHeroModel().getX() / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
+        //camera.position.set(0/*model.getHeroModel().getX() / PIXEL_TO_METER*/, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
 
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
