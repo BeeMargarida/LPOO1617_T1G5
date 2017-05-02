@@ -112,7 +112,7 @@ public class GameController implements ContactListener {
         if(!hero.getState()) { //it isn't jumping
             System.out.println(hero.getState());
             hero.setState();
-            hero.body.applyForceToCenter(0, 1f, true);
+            hero.body.applyForceToCenter(0,100f, true);
         }
     }
 
