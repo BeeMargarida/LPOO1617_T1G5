@@ -20,6 +20,7 @@ public class GameController implements ContactListener {
     public static int TILE_DIMENSIONS = 10;
 
     private final World world;
+    private final GameModel model;
     private final HeroBody hero;
     private final BatBody bat;
     private final BubbleBody bubble;
@@ -33,6 +34,7 @@ public class GameController implements ContactListener {
         bat = new BatBody(world,model.getBatModel());
         bubble = new BubbleBody(world,model.getBubbleModel());
         tile = new MapTileBody(world,model.getMap()[0][0]);
+        this.model = model;
         fillWorld(model);
         world.setContactListener(this);
     }
@@ -108,9 +110,13 @@ public class GameController implements ContactListener {
     }
 
     public void batUpdate() {
-        bat.update(hero);
+        float[] res = model.getBatModel().update(hero);
+        bat.setTransform(res[0],res[1],0);
     }
-    public void bubbleUpdate() { bubble.update(hero);}
+    public void bubbleUpdate() {
+        float[] res = model.getBubbleModel().update(hero);
+        bubble.setTransform(res[0],res[1],0);
+    }
 
 
     public void moveHeroLeft(){

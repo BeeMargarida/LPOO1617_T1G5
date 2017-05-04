@@ -1,14 +1,14 @@
-package com.mygdx.game.controller;
+package com.mygdx.game.model;
 
-import com.mygdx.game.model.HeroModel;
+import com.mygdx.game.controller.HeroBody;
 
 /**
  * Created by mc-guida on 30-04-2017.
  */
 
-public class FollowerBehaviourBody extends BehaviourBody {
+public class FollowerBehaviourModel extends BehaviourModel {
 
-    public FollowerBehaviourBody() {
+    public FollowerBehaviourModel() {
 
     }
 

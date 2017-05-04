@@ -1,30 +1,18 @@
 package com.mygdx.game.controller;
 
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.model.BatModel;
-import com.mygdx.game.model.EnemyModel;
-
-/**
- * Created by mc-guida on 27-04-2017.
- */
+import com.mygdx.game.model.*;
 
 public class BatBody extends EnemyBody {
 
-    private BehaviourBody behaviour;
 
     public BatBody(World world, BatModel model){
         super(world,model);
-        behaviour = new FollowerBehaviourBody();
         /*float density = 0.5f, friction = 0.4f, restitution = 0f;
         int width = 2, height = 2;*/
         /*createFixture(body, new float[]{
                 32,12, 31,46, 34,51, 40,51, 43,46, 41,12
         }, width, height, density, friction, restitution);*/
         //createRectangleFixture(body,width,height,density,friction,restitution);
-    }
-
-    public void update(HeroBody hero){
-        float[] res = behaviour.act(this.getX(), this.getY(), hero);
-        setTransform(res[0], res[1], 0);
     }
 }
