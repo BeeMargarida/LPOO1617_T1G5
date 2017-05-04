@@ -2,6 +2,7 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.Game;
 import com.mygdx.game.controller.GameController;
+import com.mygdx.game.view.BubbleView;
 
 import java.util.Arrays;
 
@@ -10,8 +11,9 @@ import static com.badlogic.gdx.math.MathUtils.random;
 public class GameModel {
     private HeroModel hero;
     private BatModel bat;
+    private BubbleModel bubble;
     private MapTileModel map[][];
-    private static GameModel instance;
+    //private static GameModel instance;
     private int width = 11;
     private int depth;
     private char tiles[] = {'e','d','i'};
@@ -27,6 +29,7 @@ public class GameModel {
         this.depth = depth;
         hero = new HeroModel(GameController.ARENA_WIDTH/2, GameController.ARENA_HEIGHT);
         bat = new BatModel(GameController.ARENA_WIDTH/2,40);
+        bubble = new BubbleModel(GameController.ARENA_WIDTH/3,20);
         //hero = new HeroModel(0.5f,0);
         makeMap();
         //bat = new BatModel(x,y);
@@ -109,9 +112,6 @@ public class GameModel {
                 x++;
             }
         }
-        System.out.println(tilecounter[0]);
-        System.out.println(tilecounter[1]);
-        System.out.println(tilecounter[2]);
     }
 
     public HeroModel getHeroModel(){
@@ -120,6 +120,7 @@ public class GameModel {
     public BatModel getBatModel() {
         return bat;
     }
+    public BubbleModel getBubbleModel() { return bubble; }
 
     public int getWidth(){
         return width;

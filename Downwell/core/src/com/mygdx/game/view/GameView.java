@@ -26,6 +26,7 @@ public class GameView extends ScreenAdapter{
 
     private final HeroView heroView;
     private final BatView batView;
+    private final BubbleView bubbleView;
 
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
@@ -39,6 +40,7 @@ public class GameView extends ScreenAdapter{
         loadAssets();
         heroView = new HeroView(game);
         batView = new BatView(game);
+        bubbleView = new BubbleView(game);
 
         camera = createCamera();
     }
@@ -75,6 +77,7 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "bat5.png" , Texture.class);
 
         this.game.getAssetManager().load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
+        this.game.getAssetManager().load( "big bullet.png", Texture.class);
 
         this.game.getAssetManager().finishLoading();
     }
@@ -136,6 +139,8 @@ public class GameView extends ScreenAdapter{
         batView.update(model.getBatModel());
         batView.act(0.1f);
         batView.draw(game.getBatch());
+        bubbleView.update(model.getBubbleModel());
+        bubbleView.draw(game.getBatch());
     }
 
     private void drawBackground() {

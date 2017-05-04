@@ -22,13 +22,17 @@ public class GameController implements ContactListener {
     private final World world;
     private final HeroBody hero;
     private final BatBody bat;
+    private final BubbleBody bubble;
+    private final MapTileBody tile;
     private float accumulator;
 
     public GameController(GameModel model){
-        world = new World(new Vector2(0,-1f),true);
+        world = new World(new Vector2(0,-4f),true);
 
         hero = new HeroBody(world,model.getHeroModel());
         bat = new BatBody(world,model.getBatModel());
+        bubble = new BubbleBody(world,model.getBubbleModel());
+        tile = new MapTileBody(world,model.getMap()[0][0]);
         fillWorld(model);
         world.setContactListener(this);
     }
@@ -46,6 +50,7 @@ public class GameController implements ContactListener {
 
     public void update(float delta){
         batUpdate();
+        bubbleUpdate();
 
         float frameTime = Math.min(delta, 0.25f);
         accumulator += frameTime;
@@ -68,15 +73,23 @@ public class GameController implements ContactListener {
         Body bodyB = contact.getFixtureB().getBody();
 
         if (bodyA.getUserData() instanceof HeroModel)
-            hero.removeState();
-        if (bodyB.getUserData() instanceof MapTileModel)
-            hero.removeState();
-
+            if(contact.getFixtureA() == hero.getUnder()) {
+                hero.removeState();
+            }
+        System.out.println(contact.getFixtureB() == tile.getAbove());
+        if (bodyB.getUserData() instanceof MapTileModel) {
+            if(contact.getFixtureB() == tile.getAbove()) {
+                hero.removeState();
+            }
+        }
         if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
-            hero.removeState();
+            if(contact.getFixtureA() == hero.getUnder() && contact.getFixtureB() == tile.getAbove()) {
+                hero.removeState();
+            }
         if (bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof HeroModel)
-            hero.removeState();
-
+            if(contact.getFixtureB() == hero.getUnder() && contact.getFixtureA() == tile.getAbove()) {
+                hero.removeState();
+            }
     }
 
     @Override
@@ -97,22 +110,24 @@ public class GameController implements ContactListener {
     public void batUpdate() {
         bat.update(hero);
     }
+    public void bubbleUpdate() { bubble.update(hero);}
+
+
     public void moveHeroLeft(){
         //hero.setTransform(hero.getX()-1, hero.getY(),0);
-        hero.body.applyForceToCenter(-1f,0,true);
+        hero.body.applyForceToCenter(-20f,0,true);
     }
 
     public void moveHeroRight(){
         //hero.setTransform(hero.getX()+1, hero.getY(),0);
-        hero.body.applyForceToCenter(1f,0,true);
+        hero.body.applyForceToCenter(20f,0,true);
     }
 
 
     public void jumpHero(){ //SOME PROBLEM HERE
         if(!hero.getState()) { //it isn't jumping
-            System.out.println(hero.getState());
             hero.setState();
-            hero.body.applyForceToCenter(0,100f, true);
+            hero.body.applyForceToCenter(0,200f, true);
         }
     }
 
@@ -122,4 +137,5 @@ public class GameController implements ContactListener {
     }
     public HeroBody getHeroBody() { return hero; }
     public BatBody getBatBody() { return bat; }
+    public BubbleBody getBubbleBody() { return bubble; }
 }

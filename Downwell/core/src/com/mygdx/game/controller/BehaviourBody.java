@@ -7,5 +7,5 @@ import com.mygdx.game.model.HeroModel;
  */
 
 public abstract class BehaviourBody {
-    public abstract float[] act(float x, float y, HeroBody hero);
+    public abstract float[] act(float x, float y, Object obj);
 }

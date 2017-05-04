@@ -13,7 +13,8 @@ public class FollowerBehaviourBody extends BehaviourBody {
     }
 
     @Override
-    public float[] act(float x, float y, HeroBody hero) {
+    public float[] act(float x, float y, Object obj) {
+        HeroBody hero = (HeroBody) obj;
         double dist = Math.sqrt(Math.pow(x - hero.getX(),2) + Math.pow(y-hero.getY(),2));
         if(dist < 5) {
             float distX = (float) ((x - hero.getX()) * 0.01);

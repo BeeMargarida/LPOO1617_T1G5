@@ -1,5 +1,7 @@
 package com.mygdx.game.controller;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.mygdx.game.model.ElementModel;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -14,12 +16,17 @@ public abstract class ElementBody {
 
     protected Body body;
 
+    protected Fixture above;
+    private Fixture under;
+    private Fixture left;
+    private Fixture right;
+
     public ElementBody(World world, ElementModel model, BodyDef.BodyType bodyType) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
         bodyDef.position.set(model.getX(), model.getY());
         //bodyDef.angle = model.getRotation();
-
+        //createExtraFixtures();
         body = world.createBody(bodyDef);
         body.setUserData(model);
     }
@@ -64,8 +71,44 @@ public abstract class ElementBody {
         body.createFixture(fixtureDef);
         body.setFixedRotation(true);
 
+        createExtraFixtures();
+
         rectangle.dispose();
     }
+
+    public void createExtraFixtures() {
+        PolygonShape rectangle = new PolygonShape();
+        Vector2 v = body.getLocalCenter();
+        v.set((float)(v.x),(float)(v.y+0.3));
+        rectangle.setAsBox(0.3f, 0.1f,v,0);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = rectangle;
+
+        fixtureDef.density = 1f;
+        fixtureDef.friction = 0;
+        fixtureDef.restitution = 0;
+
+        above = body.createFixture(fixtureDef);
+
+        v.set((float)(v.x),(float)(v.y-0.7));
+        rectangle.setAsBox(0.3f, 0.1f, v,0);
+        fixtureDef.shape = rectangle;
+        under = body.createFixture(fixtureDef);
+
+        /*left = body.createFixture(fixtureDef);
+        right = body.createFixture(fixtureDef);*/
+
+        /*body.setUserData(above);
+        body.setUserData(under);
+        body.setUserData(left);
+        body.setUserData(right);*/
+    }
+
+    public Fixture getAbove() { return above;}
+    public Fixture getUnder() { return under;}
+    public Fixture getLeft() { return left;}
+    public Fixture getRight() { return right;}
 
     public float getX() {
         return body.getPosition().x;
