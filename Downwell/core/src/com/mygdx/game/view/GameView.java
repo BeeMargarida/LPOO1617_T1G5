@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.BubbleModel;
+import com.mygdx.game.model.EnemyModel;
 import com.mygdx.game.model.GameModel;
 import com.mygdx.game.controller.GameController;
 import com.mygdx.game.model.HeroModel;
@@ -151,7 +152,14 @@ public class GameView extends ScreenAdapter{
         view.act(0.1f);
         view.draw(game.getBatch());
 
-        BatModel bat = model.getBatModel();
+        EnemyModel[] enemies = model.getEnemies();
+        for(int i = 0; i < enemies.length; i++){
+            ElementView view2 = ViewFactory.makeView(game, enemies[i]);
+            view2.update(enemies[i]);
+            view2.act(0.6f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
+            view2.draw(game.getBatch());
+        }
+        /*BatModel bat = model.getBatModel();
         ElementView view2 = ViewFactory.makeView(game, bat);
         view2.update(bat);
         view2.act(0.1f);
@@ -160,7 +168,7 @@ public class GameView extends ScreenAdapter{
         BubbleModel bubble = model.getBubbleModel();
         ElementView view3 = ViewFactory.makeView(game, bubble);
         view3.update(bubble);
-        view3.draw(game.getBatch());
+        view3.draw(game.getBatch());*/
     }
 
     private void drawBackground() {

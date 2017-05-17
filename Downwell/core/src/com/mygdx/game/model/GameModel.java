@@ -5,15 +5,16 @@ import com.mygdx.game.controller.GameController;
 import com.mygdx.game.view.BubbleView;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameModel {
     private HeroModel hero;
-    private BatModel bat;
-    private BubbleModel bubble;
+    /*private BatModel bat;
+    private BubbleModel bubble;*/
+    private EnemyModel enemies[];
     private MapTileModel map[][];
-    //private static GameModel instance;
     private int width = 11;
     private int depth;
     private char tiles[] = {'e','d','i'};
@@ -23,23 +24,17 @@ public class GameModel {
     private float dd = 0.5f;
     private int ic = 0;
 
-    public GameModel(float x, float y, int depth) {
+    public GameModel(float x, float y, int depth, int number) {
         GameController.ARENA_WIDTH = width;
         GameController.ARENA_HEIGHT = depth;
         this.depth = depth;
         hero = new HeroModel(GameController.ARENA_WIDTH/2, GameController.ARENA_HEIGHT);
-        bat = new BatModel(GameController.ARENA_WIDTH/2,40);
-        bubble = new BubbleModel(GameController.ARENA_WIDTH/3,20);
-        //hero = new HeroModel(0.5f,0);
+        /*bat = new BatModel(GameController.ARENA_WIDTH/2,40);
+        bubble = new BubbleModel(GameController.ARENA_WIDTH/3,20);*/
         makeMap();
-        //bat = new BatModel(x,y);
+        enemies = new EnemyModel[number];
+        addEnemies(number);
     }
-
-   /*public static GameModel getInstance() {
-        if (instance == null)
-            instance = new GameModel(0,0,0);
-        return instance;
-    }*/
 
     private MapTileModel getTile(int x, int y){
         tileprob = Arrays.copyOf(tileprobfixed,tileprobfixed.length);
@@ -114,13 +109,60 @@ public class GameModel {
         }
     }
 
+    private void addEnemies(int number){
+        Random rand = new Random();
+        int bats = rand.nextInt(number - 1 + 1);
+        int bubbles = number - bats;
+        int index = 0;
+        for(int i = 3; i < map.length - 1; i += 3){
+            for(int j = 1; j < map[i].length - 1; j++){
+                if(map[i][j] != null && map[i+1][j] == null && bats > 0) {
+                    enemies[index] = new BatModel(map[i][j].getX(), map[i][j].getY() - 1);
+                    bats--;
+                    index++;
+                    break;
+                }
+                else if(map[i][j] == null && map[i+1][j] != null && bubbles > 0){
+                    enemies[index] = new BubbleModel(map[i+1][j].getX(), map[i+1][j].getY() - 1);
+                    bubbles--;
+                    index++;
+                    break;
+                }
+            }
+        }
+        /*for(int i = 0; i < number; i++){
+            for(int j = 5; j < map.length - 1; j++){
+                for(int k = 1; k < map[j].length - 1; k++){
+                    if(k + 2 < map[j].length - 1) {
+                        if (map[j][k] != null && map[j + 1][k] == null && bats > 0) {
+                            enemies[i] = new BatModel(j + 1, k);
+                            bats--;
+                            //j += 2;
+                            //break;
+                        }
+                        if (map[j][k] != null && map[j][k + 1] != null && map[j][k + 2] != null) {
+                            enemies[i] = new BubbleModel(j, k);
+                            bubbles--;
+                            //j += 2;
+                            //break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }*/
+    }
+
     public HeroModel getHeroModel(){
         return hero;
     }
-    public BatModel getBatModel() {
+
+  /*  public BatModel getBatModel() {
         return bat;
     }
-    public BubbleModel getBubbleModel() { return bubble; }
+    public BubbleModel getBubbleModel() { return bubble; }*/
+
+    public EnemyModel[] getEnemies() { return enemies; }
 
     public int getWidth(){
         return width;
