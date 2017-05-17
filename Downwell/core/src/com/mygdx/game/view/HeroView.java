@@ -13,6 +13,8 @@ public class HeroView extends ElementView {
 
     public HeroView(Downwell game){
         super(game);
+        sprite = createSprite(game);
+        animation = getAnimation();
     }
 
     @Override

@@ -15,4 +15,8 @@ public class SnailModel extends EnemyModel {
         return res;
         //(res[0], res[1], 0);
     }
+
+    public ModelType getType(){
+        return ModelType.SNAIL;
+    }
 }

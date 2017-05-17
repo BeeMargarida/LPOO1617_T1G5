@@ -7,6 +7,8 @@ public abstract class EnemyView extends ElementView {
 
     public EnemyView(Downwell game){
         super(game);
+        sprite = createSprite(game);
+        animation = getAnimation();
     }
 
     /*@Override

@@ -18,4 +18,8 @@ public class BatModel extends EnemyModel {
         return res;
         //setTransform(res[0], res[1], 0);
     }
+
+    public ModelType getType(){
+        return ModelType.BAT;
+    }
 }

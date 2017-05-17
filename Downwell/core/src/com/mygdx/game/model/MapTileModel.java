@@ -18,4 +18,19 @@ public class MapTileModel extends ElementModel {
     public TileType getTileType(){
         return tileType;
     }
+
+    public ModelType getType(){
+        switch(tileType){
+            case L_WALL:
+                return ModelType.MAPTILE_L_WALL;
+            case R_WALL:
+                return ModelType.MAPTILE_R_WALL;
+            case D_BLOCK:
+                return ModelType.MAPTILE_D_BLOCK;
+            case I_BLOCK:
+                return ModelType.MAPTILE_I_BLOCK;
+            default:
+                return  ModelType.MAPTILE_D_BLOCK;
+        }
+    }
 }

@@ -3,6 +3,8 @@ package com.mygdx.game.model;
 
 public abstract class ElementModel {
 
+    public enum ModelType {HERO, BAT, BUBBLE, SNAIL, MAPTILE_L_WALL, MAPTILE_R_WALL, MAPTILE_D_BLOCK, MAPTILE_I_BLOCK}
+
     private float x;
     private float y;
 
@@ -23,4 +25,6 @@ public abstract class ElementModel {
         this.x = x;
         this.y = y;
     }
+
+    public abstract ModelType getType();
 }

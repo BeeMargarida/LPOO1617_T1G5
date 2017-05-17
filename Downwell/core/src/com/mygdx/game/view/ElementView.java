@@ -14,12 +14,13 @@ import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
 public abstract class ElementView {
     protected Sprite sprite;
     protected Animation<TextureRegion> animation;
+    protected boolean flip = false;
 
     protected float stateTime = 0;
 
     public ElementView(Downwell game) {
-        sprite = createSprite(game);
-        animation = getAnimation();
+        //sprite = createSprite(game);
+        //animation = getAnimation();
     }
 
     public void draw(SpriteBatch batch){
