@@ -34,14 +34,5 @@ public class BatView extends EnemyView {
         return sprite;
     }
 
-    @Override
-    public void update(ElementModel model) {
-        super.update(model);
-    }
 
-    @Override
-    public void act(float delta) {
-        stateTime += delta;
-        sprite.setRegion(animation.getKeyFrame(stateTime,true));
-    }
 }

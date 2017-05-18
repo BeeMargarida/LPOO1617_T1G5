@@ -114,18 +114,20 @@ public class GameModel {
         int bats = rand.nextInt(number - 1 + 1);
         int bubbles = number - bats;
         int index = 0;
-        for(int i = 3; i < map.length - 1; i += 3){
-            for(int j = 1; j < map[i].length - 1; j++){
-                if(map[i][j] != null && map[i+1][j] == null && bats > 0) {
-                    enemies[index] = new BatModel(map[i][j].getX(), map[i][j].getY() - 1);
+        for(int i = 0; i < map.length - 1; i++){
+            for(int j = 1; j < map[i].length - 1; j++) {
+                //if((j == 1 || j == map[i].length - 1) && )
+                if (map[i][j] != null && map[i + 1][j] == null && bats > 0) {
+                    enemies[index] = new BatModel(i/*map[i][j].getX()*/, j - 1);
                     bats--;
                     index++;
+                    i++;
                     break;
-                }
-                else if(map[i][j] == null && map[i+1][j] != null && bubbles > 0){
-                    enemies[index] = new BubbleModel(map[i+1][j].getX(), map[i+1][j].getY() - 1);
+                } else if (map[i][j] == null && map[i + 1][j] != null && bubbles > 0) {
+                    enemies[index] = new BubbleModel(map[i + 1][j].getX(), map[i + 1][j].getY() - 1);
                     bubbles--;
                     index++;
+                    i++;
                     break;
                 }
             }

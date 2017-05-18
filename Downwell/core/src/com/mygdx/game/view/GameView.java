@@ -156,19 +156,9 @@ public class GameView extends ScreenAdapter{
         for(int i = 0; i < enemies.length; i++){
             ElementView view2 = ViewFactory.makeView(game, enemies[i]);
             view2.update(enemies[i]);
-            view2.act(0.6f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
+            view2.act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
             view2.draw(game.getBatch());
         }
-        /*BatModel bat = model.getBatModel();
-        ElementView view2 = ViewFactory.makeView(game, bat);
-        view2.update(bat);
-        view2.act(0.1f);
-        view2.draw(game.getBatch());
-
-        BubbleModel bubble = model.getBubbleModel();
-        ElementView view3 = ViewFactory.makeView(game, bubble);
-        view3.update(bubble);
-        view3.draw(game.getBatch());*/
     }
 
     private void drawBackground() {

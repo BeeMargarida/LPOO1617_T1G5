@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -26,7 +27,8 @@ public class GameController implements ContactListener {
     private final World world;
     private final GameModel model;
     private final HeroBody hero;
-  /*  private final BatBody bat;
+
+    /* private final BatBody bat;
     private final BubbleBody bubble;*/
     private EnemyBody enemies[];
     private final MapTileBody tile;
@@ -34,10 +36,7 @@ public class GameController implements ContactListener {
 
     public GameController(GameModel model){
         world = new World(new Vector2(0,-4f),true);
-
         hero = new HeroBody(world,model.getHeroModel());
-        /*bat = new BatBody(world,model.getBatModel());
-        bubble = new BubbleBody(world,model.getBubbleModel());*/
         enemies = new EnemyBody[model.getEnemies().length];
         tile = new MapTileBody(world,model.getMap()[0][0]);
         this.model = model;
@@ -56,21 +55,17 @@ public class GameController implements ContactListener {
         }
         for(int i = 0; i < model.getEnemies().length; i++){
             if(model.getEnemies()[i] instanceof BatModel) {
-                new BatBody(world, (BatModel) model.getEnemies()[i]);
                 enemies[i] = new BatBody(world, (BatModel) model.getEnemies()[i]);
                 System.out.println("FACK");
             }
             else if(model.getEnemies()[i] instanceof BubbleModel) {
-                new BubbleBody(world, (BubbleModel) model.getEnemies()[i]);
                 enemies[i] = new BubbleBody(world, (BubbleModel) model.getEnemies()[i]);
                 System.out.println("FACK1");
             }
             else if(model.getEnemies()[i] instanceof SnailModel) {
-                new SnailBody(world, (SnailModel) model.getEnemies()[i]);
                 enemies[i] = new SnailBody(world, (SnailModel) model.getEnemies()[i]);
                 System.out.println("FACK2");
             }
-            //System.out.println("FACK3");
         }
     }
 
@@ -99,18 +94,35 @@ public class GameController implements ContactListener {
         }
     }
 
+    public void snailbeginContact(Contact contact) {
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
+
+        if(bodyA.getUserData() instanceof SnailModel && bodyB.getUserData() instanceof MapTileModel) {
+            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
+
+            }
+        }
+        if(bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof SnailModel) {
+            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
+
+            }
+        }
+    }
+
     @Override
     public void beginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
-        if (bodyA.getUserData() instanceof HeroModel)
-            if(contact.getFixtureA() == hero.getUnder()) {
+        if (bodyA.getUserData() instanceof HeroModel) {
+            if (contact.getFixtureA().getUserData() == "down") {
                 hero.removeState();
             }
+        }
         //Tile
         if (bodyB.getUserData() instanceof MapTileModel) {
-            if(contact.getFixtureB() == tile.getAbove()) {
+            if(contact.getFixtureB().getUserData() == "up") {
                 hero.removeState();
             }
         }
@@ -123,11 +135,11 @@ public class GameController implements ContactListener {
         }*/
         //Tile
         if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
-            if(contact.getFixtureA() == hero.getUnder() && contact.getFixtureB() == tile.getAbove()) {
+            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up") {
                 hero.removeState();
             }
         if (bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof HeroModel)
-            if(contact.getFixtureB() == hero.getUnder() && contact.getFixtureA() == tile.getAbove()) {
+            if(contact.getFixtureB().getUserData() == "down" && contact.getFixtureA().getUserData() == "up") {
                 hero.removeState();
             }
         //Enemy

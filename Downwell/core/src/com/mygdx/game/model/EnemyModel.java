@@ -8,7 +8,7 @@ import com.mygdx.game.controller.HeroBody;
 
 public abstract class EnemyModel extends ElementModel {
 
-    private BehaviourModel behaviour;
+    protected BehaviourModel behaviour;
 
     public EnemyModel(float x, float y, BehaviourModel behaviour){
         super(x,y);

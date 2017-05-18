@@ -6,11 +6,19 @@ package com.mygdx.game.model;
 
 public class WallWalkerBehaviourModel extends BehaviourModel {
 
-    public WallWalkerBehaviourModel() { }
+
+    public WallWalkerBehaviourModel() {}
 
     @Override
     public float[] act(float x, float y, Object obj) {
-        float[] res = {0,0};
+        String dir = (String) obj;
+        float[] res = {x,y};
+        if(dir == "down"){
+            res[1] = y + 1;
+        }
+        else {
+            res[1] = y - 1;
+        }
         return res;
     }
 }
