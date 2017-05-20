@@ -28,16 +28,14 @@ public class GameController implements ContactListener {
     private final GameModel model;
     private final HeroBody hero;
 
-    /* private final BatBody bat;
-    private final BubbleBody bubble;*/
-    private EnemyBody enemies[];
+    private ElementBody enemies[];
     private final MapTileBody tile;
     private float accumulator;
 
     public GameController(GameModel model){
         world = new World(new Vector2(0,-4f),true);
         hero = new HeroBody(world,model.getHeroModel());
-        enemies = new EnemyBody[model.getEnemies().length];
+        enemies = new ElementBody[model.getEnemies().size()];
         tile = new MapTileBody(world,model.getMap()[0][0]);
         this.model = model;
         fillWorld();
@@ -53,25 +51,26 @@ public class GameController implements ContactListener {
                     new MapTileBody(world,map[i][j]);
             }
         }
-        for(int i = 0; i < model.getEnemies().length; i++){
-            if(model.getEnemies()[i] instanceof BatModel) {
-                enemies[i] = new BatBody(world, (BatModel) model.getEnemies()[i]);
-                System.out.println("FACK");
+        for(int i = 0; i < model.getEnemies().size(); i++){
+            if(model.getEnemies().get(i) instanceof BatModel) {
+                enemies[i] = new BatBody(world, (BatModel) model.getEnemies().get(i));
+                enemies[i].body.setGravityScale(0);
             }
-            else if(model.getEnemies()[i] instanceof BubbleModel) {
-                enemies[i] = new BubbleBody(world, (BubbleModel) model.getEnemies()[i]);
-                System.out.println("FACK1");
+            else if(model.getEnemies().get(i) instanceof BubbleModel) {
+                enemies[i] = new BubbleBody(world, (BubbleModel) model.getEnemies().get(i));
+                enemies[i].body.setGravityScale(0);
             }
-            else if(model.getEnemies()[i] instanceof SnailModel) {
-                enemies[i] = new SnailBody(world, (SnailModel) model.getEnemies()[i]);
-                System.out.println("FACK2");
+            else if(model.getEnemies().get(i) instanceof SnailModel) {
+                enemies[i] = new SnailBody(world, (SnailModel) model.getEnemies().get(i));
+                enemies[i].body.setGravityScale(0);
             }
         }
     }
 
     public void enemiesUpdate() {
-        for(int i = 0; i < model.getEnemies().length; i++){
-            float[] res = model.getEnemies()[i].update(hero);
+        System.out.println(model.getEnemies().size());
+        for(int i = 0; i < model.getEnemies().size(); i++){
+            float[] res = model.getEnemies().get(i).update(hero);
             enemies[i].setTransform(res[0],res[1],0);
         }
     }
@@ -94,26 +93,55 @@ public class GameController implements ContactListener {
         }
     }
 
-    public void snailbeginContact(Contact contact) {
+    public void snailBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
+        if(bodyA.getUserData() instanceof  SnailModel){
+            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
+                ((SnailModel) bodyA.getUserData()).changeDirection();
+            }
+            else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
+                ((SnailModel) bodyA.getUserData()).changeDirection();
+            }
+        }
+        if(bodyB.getUserData() instanceof SnailModel){
+            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
+                ((SnailModel) bodyB.getUserData()).changeDirection();
+            }
+            else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
+                ((SnailModel) bodyB.getUserData()).changeDirection();
+            }
+        }/*
         if(bodyA.getUserData() instanceof SnailModel && bodyB.getUserData() instanceof MapTileModel) {
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
+                ((SnailModel) bodyA.getUserData()).changeDirection();
+            }
+        }
+        if(bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof SnailModel) {
+            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down"){
+                ((SnailModel) bodyB.getUserData()).changeDirection();
+            }
+        }
 
+        if(bodyA.getUserData() instanceof SnailModel && bodyB.getUserData() instanceof MapTileModel) {
+            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down"){
+                ((SnailModel) bodyA.getUserData()).changeDirection();
             }
         }
         if(bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof SnailModel) {
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-
+                ((SnailModel) bodyB.getUserData()).changeDirection();
             }
-        }
+        }*/
     }
 
     @Override
     public void beginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
+
+        snailBeginContact(contact);
 
         if (bodyA.getUserData() instanceof HeroModel) {
             if (contact.getFixtureA().getUserData() == "down") {
@@ -158,7 +186,15 @@ public class GameController implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
 
+        if(bodyA.getUserData() instanceof SnailModel && bodyB.getUserData() instanceof MapTileModel) {
+                ((SnailModel) bodyA.getUserData()).changeDirection();
+        }
+        if(bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof SnailModel) {
+                ((SnailModel) bodyB.getUserData()).changeDirection();
+        }
     }
 
     @Override
@@ -201,5 +237,5 @@ public class GameController implements ContactListener {
         return world;
     }
     public HeroBody getHeroBody() { return hero; }
-    public EnemyBody[] getEnemiesBody() { return enemies; }
+    public ElementBody[] getEnemiesBody() { return enemies; }
 }

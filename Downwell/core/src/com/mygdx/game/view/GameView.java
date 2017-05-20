@@ -11,19 +11,23 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.BubbleModel;
+import com.mygdx.game.model.ElementModel;
 import com.mygdx.game.model.EnemyModel;
 import com.mygdx.game.model.GameModel;
 import com.mygdx.game.controller.GameController;
 import com.mygdx.game.model.HeroModel;
 import com.mygdx.game.model.MapTileModel;
+import com.mygdx.game.model.SnailModel;
 import com.mygdx.game.view.HeroView;
+
+import java.util.ArrayList;
 
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = false;
+    private static final boolean DEBUG_PHYSICS = true;
     public final static float PIXEL_TO_METER = 0.04f;
-    private static final float VIEWPORT_WIDTH = 10;     //66 full map; 10 zoom
+    private static final float VIEWPORT_WIDTH = 33;     //66 full map; 10 zoom
     //private static final float VIEWPORT_HEIGHT = 20;
 
     private final Downwell game;
@@ -43,13 +47,15 @@ public class GameView extends ScreenAdapter{
         loadAssets();
 
         camera = createCamera();
-        EnemyModel enemyModel[] = model.getEnemies();
-        enemyViews = new EnemyView[enemyModel.length];
-        for(int i = 0; i < enemyModel.length; i++){
-            if(enemyModel[i] instanceof BatModel)
+        ArrayList<EnemyModel> enemyModel = model.getEnemies();
+        enemyViews = new EnemyView[enemyModel.size()];
+        for(int i = 0; i < enemyModel.size(); i++){
+            if(enemyModel.get(i) instanceof BatModel)
                 enemyViews[i] = new BatView(game);
-            else if(enemyModel[i] instanceof BubbleModel)
+            else if(enemyModel.get(i) instanceof BubbleModel)
                 enemyViews[i] = new BubbleView(game);
+            else if(enemyModel.get(i) instanceof SnailModel)
+                enemyViews[i] = new SnailView(game);
         }
     }
 
@@ -97,6 +103,8 @@ public class GameView extends ScreenAdapter{
 
         this.game.getAssetManager().load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
         this.game.getAssetManager().load( "big bullet.png", Texture.class);
+        this.game.getAssetManager().load( "shooting.png", Texture.class);
+
         this.game.getAssetManager().load("dBlock.png", Texture.class);
         this.game.getAssetManager().load("sideWall.png", Texture.class);
 
@@ -165,9 +173,9 @@ public class GameView extends ScreenAdapter{
                 }
         }
 
-        EnemyModel[] enemies = model.getEnemies();
+        ArrayList<EnemyModel> enemies = model.getEnemies();
         for(int i = 0; i < enemyViews.length; i++){
-            enemyViews[i].update(enemies[i]);
+            enemyViews[i].update(enemies.get(i));
             enemyViews[i].act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
             enemyViews[i].draw(game.getBatch());
         }
@@ -178,16 +186,6 @@ public class GameView extends ScreenAdapter{
         view.act(0.1f);
         view.draw(game.getBatch());
 
-        /*BatModel bat = model.getBatModel();
-        ElementView view2 = ViewFactory.makeView(game, bat);
-        view2.update(bat);
-        view2.act(0.1f);
-        view2.draw(game.getBatch());
-
-        BubbleModel bubble = model.getBubbleModel();
-        ElementView view3 = ViewFactory.makeView(game, bubble);
-        view3.update(bubble);
-        view3.draw(game.getBatch());*/
     }
 
     private void drawBackground() {

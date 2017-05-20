@@ -23,8 +23,6 @@ public abstract class ElementBody {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
         bodyDef.position.set(model.getX(), model.getY());
-        //bodyDef.angle = model.getRotation();
-        //createExtraFixtures();
         body = world.createBody(bodyDef);
         body.setUserData(model);
     }

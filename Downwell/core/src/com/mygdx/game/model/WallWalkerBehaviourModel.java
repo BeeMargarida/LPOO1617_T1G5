@@ -14,10 +14,10 @@ public class WallWalkerBehaviourModel extends BehaviourModel {
         String dir = (String) obj;
         float[] res = {x,y};
         if(dir == "down"){
-            res[1] = y + 1;
+            res[1] = (float)(y + 0.01);
         }
         else {
-            res[1] = y - 1;
+            res[1] = (float)(y - 0.01);
         }
         return res;
     }

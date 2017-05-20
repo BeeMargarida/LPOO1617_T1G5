@@ -31,6 +31,10 @@ public class SnailModel extends EnemyModel {
         else
             dir = "up";
         float[] res = behaviour.act(this.getX(), this.getY(), dir);
+        if(res[1] < 0){
+            changeDirection();
+            res[1] = 0;
+        }
         return res;
     }
 }
