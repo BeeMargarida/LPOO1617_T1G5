@@ -16,16 +16,19 @@ public class ViewFactory {
             new HashMap<ElementModel.ModelType, ElementView>();
 
     public static ElementView makeView(Downwell game, ElementModel model) {
-        if (!cache.containsKey(model.getType())) {
+       if (!cache.containsKey(model.getType())) {
             if (model.getType() == ElementModel.ModelType.HERO) cache.put(model.getType(), new HeroView(game));
-            if (model.getType() == ElementModel.ModelType.BAT) cache.put(model.getType(), new BatView(game));
-            if (model.getType() == ElementModel.ModelType.BUBBLE) cache.put(model.getType(), new BubbleView(game));
             //if (model.getType() == ElementModel.ModelType.SNAIL) cache.put(model.getType(), new BatView(game));
             if (model.getType() == ElementModel.ModelType.MAPTILE_L_WALL) cache.put(model.getType(), new MapTileView(game, MapTileModel.TileType.L_WALL));
             if (model.getType() == ElementModel.ModelType.MAPTILE_R_WALL) cache.put(model.getType(), new MapTileView(game, MapTileModel.TileType.R_WALL));
             if (model.getType() == ElementModel.ModelType.MAPTILE_D_BLOCK) cache.put(model.getType(), new MapTileView(game, MapTileModel.TileType.D_BLOCK));
             if (model.getType() == ElementModel.ModelType.MAPTILE_I_BLOCK) cache.put(model.getType(), new MapTileView(game, MapTileModel.TileType.I_BLOCK));
-        }
+       }
+       /*
+        if (model.getType() == ElementModel.ModelType.BAT) cache.put(model.getType(), new BatView(game));
+        if (model.getType() == ElementModel.ModelType.BUBBLE) cache.put(model.getType(), new BubbleView(game));
+        */
+
         return cache.get(model.getType());
     }
 }

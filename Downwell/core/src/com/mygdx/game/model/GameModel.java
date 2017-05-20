@@ -112,6 +112,7 @@ public class GameModel {
     private void addEnemies(int number){
         Random rand = new Random();
         int bats = rand.nextInt(number - 1 + 1);
+        //bats = number;
         int bubbles = number - bats;
         int index = 0;
         for(int i = 0; i < map.length - 1; i++){

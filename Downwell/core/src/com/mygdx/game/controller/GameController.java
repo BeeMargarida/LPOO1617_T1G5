@@ -118,12 +118,14 @@ public class GameController implements ContactListener {
         if (bodyA.getUserData() instanceof HeroModel) {
             if (contact.getFixtureA().getUserData() == "down") {
                 hero.removeState();
+                model.getHeroModel().setState(HeroModel.state.STANDING);
             }
         }
         //Tile
         if (bodyB.getUserData() instanceof MapTileModel) {
             if(contact.getFixtureB().getUserData() == "up") {
                 hero.removeState();
+                model.getHeroModel().setState(HeroModel.state.STANDING);
             }
         }
         //Enemy
@@ -172,11 +174,17 @@ public class GameController implements ContactListener {
     public void moveHeroLeft(){
         //hero.setTransform(hero.getX()-1, hero.getY(),0);
         hero.body.applyForceToCenter(-20f,0,true);
+        if(model.getHeroModel().getState() != HeroModel.state.JUMPING)
+            model.getHeroModel().setState(HeroModel.state.WALKING);
+        model.getHeroModel().setFlip(true);
     }
 
     public void moveHeroRight(){
         //hero.setTransform(hero.getX()+1, hero.getY(),0);
         hero.body.applyForceToCenter(20f,0,true);
+        if(model.getHeroModel().getState() != HeroModel.state.JUMPING)
+            model.getHeroModel().setState(HeroModel.state.WALKING);
+        model.getHeroModel().setFlip(false);
     }
 
 
@@ -184,6 +192,7 @@ public class GameController implements ContactListener {
         if(!hero.getState() && hero.body.getLinearVelocity().y == 0) { //it isn't jumping or falling
             hero.setState();
             hero.body.applyForceToCenter(0,200f, true);
+            model.getHeroModel().setState(HeroModel.state.JUMPING);
         }
     }
 

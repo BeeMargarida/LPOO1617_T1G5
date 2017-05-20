@@ -33,6 +33,7 @@ public class GameView extends ScreenAdapter{
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
     private Matrix4 debugCamera;
+    private EnemyView[] enemyViews;
 
     public GameView(Downwell game, GameModel model, GameController controller) {
         this.game = game;
@@ -42,6 +43,14 @@ public class GameView extends ScreenAdapter{
         loadAssets();
 
         camera = createCamera();
+        EnemyModel enemyModel[] = model.getEnemies();
+        enemyViews = new EnemyView[enemyModel.length];
+        for(int i = 0; i < enemyModel.length; i++){
+            if(enemyModel[i] instanceof BatModel)
+                enemyViews[i] = new BatView(game);
+            else if(enemyModel[i] instanceof BubbleModel)
+                enemyViews[i] = new BubbleView(game);
+        }
     }
 
     private OrthographicCamera createCamera() {
@@ -69,6 +78,16 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "5.png" , Texture.class);
         this.game.getAssetManager().load( "6.png" , Texture.class);
         this.game.getAssetManager().load( "7.png" , Texture.class);
+
+        this.game.getAssetManager().load( "r1.png" , Texture.class);
+        this.game.getAssetManager().load( "r2.png" , Texture.class);
+        this.game.getAssetManager().load( "r3.png" , Texture.class);
+        this.game.getAssetManager().load( "r4.png" , Texture.class);
+        this.game.getAssetManager().load( "r5.png" , Texture.class);
+        this.game.getAssetManager().load( "r6.png" , Texture.class);
+        this.game.getAssetManager().load( "r7.png" , Texture.class);
+
+        this.game.getAssetManager().load( "jump.png" , Texture.class);
 
         this.game.getAssetManager().load( "bat1.png" , Texture.class);
         this.game.getAssetManager().load( "bat2.png" , Texture.class);
@@ -146,19 +165,29 @@ public class GameView extends ScreenAdapter{
                 }
         }
 
+        EnemyModel[] enemies = model.getEnemies();
+        for(int i = 0; i < enemyViews.length; i++){
+            enemyViews[i].update(enemies[i]);
+            enemyViews[i].act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
+            enemyViews[i].draw(game.getBatch());
+        }
+
         HeroModel hero = model.getHeroModel();
         ElementView view = ViewFactory.makeView(game, hero);
         view.update(hero);
         view.act(0.1f);
         view.draw(game.getBatch());
 
-        EnemyModel[] enemies = model.getEnemies();
-        for(int i = 0; i < enemies.length; i++){
-            ElementView view2 = ViewFactory.makeView(game, enemies[i]);
-            view2.update(enemies[i]);
-            view2.act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
-            view2.draw(game.getBatch());
-        }
+        /*BatModel bat = model.getBatModel();
+        ElementView view2 = ViewFactory.makeView(game, bat);
+        view2.update(bat);
+        view2.act(0.1f);
+        view2.draw(game.getBatch());
+
+        BubbleModel bubble = model.getBubbleModel();
+        ElementView view3 = ViewFactory.makeView(game, bubble);
+        view3.update(bubble);
+        view3.draw(game.getBatch());*/
     }
 
     private void drawBackground() {
