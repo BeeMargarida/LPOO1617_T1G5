@@ -20,13 +20,19 @@ import com.mygdx.game.model.MapTileModel;
 import com.mygdx.game.model.SnailModel;
 
 public class GameController implements ContactListener {
+
+    private enum mov { MS_LEFT, MS_RIGHT, MS_STOP}
+
     public static int ARENA_WIDTH;
     public static int ARENA_HEIGHT;
     public static int TILE_DIMENSIONS = 10;
 
+    public static float MAX_SPEED = -5f;
+
     private final World world;
     private final GameModel model;
     private final HeroBody hero;
+    private mov moveState;
 
     private ElementBody enemies[];
     private final MapTileBody tile;
@@ -39,6 +45,7 @@ public class GameController implements ContactListener {
         tile = new MapTileBody(world,model.getMap()[0][0]);
         this.model = model;
         fillWorld();
+        moveState = mov.MS_STOP;
         world.setContactListener(this);
     }
 
@@ -82,8 +89,27 @@ public class GameController implements ContactListener {
         accumulator += frameTime;
         while (accumulator >= 1/60f) {
             world.step(1/60f, 6, 2);
+
+            float vel = hero.body.getLinearVelocity().x;
+            float desiredVel = 0;
+            switch ( moveState )
+            {
+                case MS_LEFT:  desiredVel = -5; break;
+                case MS_STOP:  desiredVel = 0; break;
+                case MS_RIGHT: desiredVel =  5; break;
+            }
+            float velChange = desiredVel - vel;
+            float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
+            hero.body.applyForceToCenter(force,0,true);
+            moveState = mov.MS_STOP;
+
             accumulator -= 1/60f;
         }
+
+        if(hero.body.getLinearVelocity().y < MAX_SPEED)
+            hero.body.setGravityScale(0);
+        else
+            hero.body.setGravityScale(1f);
 
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
@@ -209,7 +235,17 @@ public class GameController implements ContactListener {
 
     public void moveHeroLeft(){
         //hero.setTransform(hero.getX()-1, hero.getY(),0);
-        hero.body.applyForceToCenter(-20f,0,true);
+        //hero.body.applyForceToCenter(-20f,0,true);
+        moveState = mov.MS_LEFT;
+
+        /*
+        float vel = hero.body.getLinearVelocity().x;
+        float desiredVel = -5;
+        float velChange = desiredVel - vel;
+        float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
+        hero.body.applyForceToCenter(force,0,true);
+        */
+
         if(model.getHeroModel().getState() != HeroModel.state.JUMPING)
             model.getHeroModel().setState(HeroModel.state.WALKING);
         model.getHeroModel().setFlip(true);
@@ -217,7 +253,17 @@ public class GameController implements ContactListener {
 
     public void moveHeroRight(){
         //hero.setTransform(hero.getX()+1, hero.getY(),0);
-        hero.body.applyForceToCenter(20f,0,true);
+        //hero.body.applyForceToCenter(20f,0,true);
+        moveState = mov.MS_RIGHT;
+
+        /*
+        float vel = hero.body.getLinearVelocity().x;
+        float desiredVel = 5;
+        float velChange = desiredVel - vel;
+        float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
+        hero.body.applyForceToCenter(force,0,true);
+        */
+
         if(model.getHeroModel().getState() != HeroModel.state.JUMPING)
             model.getHeroModel().setState(HeroModel.state.WALKING);
         model.getHeroModel().setFlip(false);
