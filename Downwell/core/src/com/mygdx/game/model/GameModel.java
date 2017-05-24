@@ -141,12 +141,11 @@ public class GameModel {
         return hero;
     }
 
-  /*  public BatModel getBatModel() {
-        return bat;
-    }
-    public BubbleModel getBubbleModel() { return bubble; }*/
-
     public ArrayList<EnemyModel> getEnemies() { return enemies; }
+
+    public void remove(EnemyModel model) {
+        enemies.remove(model);
+    }
 
     public int getWidth(){
         return width;

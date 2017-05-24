@@ -84,6 +84,7 @@ public class GameController implements ContactListener {
     public void update(float delta){
         enemiesUpdate();
 
+
         float frameTime = Math.min(delta, 0.25f);
         accumulator += frameTime;
         while (accumulator >= 1/60f) {
@@ -162,7 +163,7 @@ public class GameController implements ContactListener {
 
         if(bodyA.getUserData() instanceof  BatModel && bodyB.getUserData() instanceof HeroModel){
             if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                //erase enemy
+                ((BatModel) bodyA.getUserData()).setForRemoval();
             }
             else {
                 //damage hero
@@ -199,7 +200,6 @@ public class GameController implements ContactListener {
             }
         }
     }
-
 
     @Override
     public void beginContact(Contact contact) {
@@ -238,7 +238,6 @@ public class GameController implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-        System.out.println("FACK");
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
@@ -258,6 +257,17 @@ public class GameController implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    public void remove() {
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (Body body : bodies) {
+            if (((EnemyModel)body.getUserData()).getForRemoval()) {
+                model.remove((EnemyModel)body.getUserData());
+                world.destroyBody(body);
+            }
+        }
     }
 
     public void moveHeroLeft(){

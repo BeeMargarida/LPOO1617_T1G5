@@ -9,10 +9,20 @@ import com.mygdx.game.controller.HeroBody;
 public abstract class EnemyModel extends ElementModel {
 
     protected BehaviourModel behaviour;
+    protected boolean flagForRemoval;
 
     public EnemyModel(float x, float y, BehaviourModel behaviour){
         super(x,y);
         this.behaviour = behaviour;
+        flagForRemoval = false;
+    }
+
+    public void setForRemoval() {
+        flagForRemoval = true;
+    }
+
+    public boolean getForRemoval() {
+        return flagForRemoval;
     }
 
     public float[] update(HeroBody hero){
