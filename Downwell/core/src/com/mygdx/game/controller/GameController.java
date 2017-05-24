@@ -75,7 +75,6 @@ public class GameController implements ContactListener {
     }
 
     public void enemiesUpdate() {
-        System.out.println(model.getEnemies().size());
         for(int i = 0; i < model.getEnemies().size(); i++){
             float[] res = model.getEnemies().get(i).update(hero);
             enemies[i].setTransform(res[0],res[1],0);
@@ -138,29 +137,69 @@ public class GameController implements ContactListener {
             else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
                 ((SnailModel) bodyB.getUserData()).changeDirection();
             }
-        }/*
-        if(bodyA.getUserData() instanceof SnailModel && bodyB.getUserData() instanceof MapTileModel) {
+        }
+        if(bodyA.getUserData() instanceof  SnailModel && bodyB.getUserData() instanceof HeroModel){
+            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
+                //erase enemy
+            }
+            else {
+                //damage hero
+            }
+        }
+        if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof SnailModel){
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                ((SnailModel) bodyA.getUserData()).changeDirection();
+                //erase enemy
+            }
+            else {
+                //damage hero
             }
         }
-        if(bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof SnailModel) {
-            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down"){
-                ((SnailModel) bodyB.getUserData()).changeDirection();
-            }
-        }
-
-        if(bodyA.getUserData() instanceof SnailModel && bodyB.getUserData() instanceof MapTileModel) {
-            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down"){
-                ((SnailModel) bodyA.getUserData()).changeDirection();
-            }
-        }
-        if(bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof SnailModel) {
-            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                ((SnailModel) bodyB.getUserData()).changeDirection();
-            }
-        }*/
     }
+
+    public void batBeginContact(Contact contact) {
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
+
+        if(bodyA.getUserData() instanceof  BatModel && bodyB.getUserData() instanceof HeroModel){
+            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
+                //erase enemy
+            }
+            else {
+                //damage hero
+            }
+        }
+        if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BatModel){
+            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
+                //erase enemy
+            }
+            else {
+                //damage hero
+            }
+        }
+    }
+
+    public void bubbleBeginContact(Contact contact) {
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
+
+        if(bodyA.getUserData() instanceof  BubbleModel && bodyB.getUserData() instanceof HeroModel){
+            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
+                //erase enemy
+            }
+            else {
+                //damage hero
+            }
+        }
+        if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BubbleModel){
+            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
+                //erase enemy
+            }
+            else {
+                //damage hero
+            }
+        }
+    }
+
 
     @Override
     public void beginContact(Contact contact) {
@@ -168,6 +207,8 @@ public class GameController implements ContactListener {
         Body bodyB = contact.getFixtureB().getBody();
 
         snailBeginContact(contact);
+        batBeginContact(contact);
+        bubbleBeginContact(contact);
 
         if (bodyA.getUserData() instanceof HeroModel) {
             if (contact.getFixtureA().getUserData() == "down") {
@@ -182,13 +223,7 @@ public class GameController implements ContactListener {
                 model.getHeroModel().setState(HeroModel.state.STANDING);
             }
         }
-        //Enemy
-        /*if(bodyB.getUserData() instanceof EnemyModel) {
-            if(contact.getFixtureB() == bat.getAbove()) {
-                System.out.println("HIT1!");
-                //destroys enemy
-            }
-        }*/
+
         //Tile
         if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up") {
@@ -199,19 +234,11 @@ public class GameController implements ContactListener {
                 hero.removeState();
             }
         //Enemy
-       /* if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof EnemyModel)
-            if(contact.getFixtureA() == hero.getUnder() && contact.getFixtureB() == bat.getAbove()) {
-                System.out.println("HIT2!");
-            }
-        if (bodyA.getUserData() instanceof EnemyModel && bodyB.getUserData() instanceof HeroModel)
-            if(contact.getFixtureB() == hero.getUnder() && contact.getFixtureA() == bat.getAbove()) {
-                System.out.println("HIT3!");
-            }
-         */
     }
 
     @Override
     public void endContact(Contact contact) {
+        System.out.println("FACK");
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 

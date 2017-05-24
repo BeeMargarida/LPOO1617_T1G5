@@ -111,51 +111,30 @@ public class GameModel {
         Random rand = new Random();
         for(int i = 0; i < map.length - 1; i++) {
             for (int j = 1; j < map[i].length - 1; j++) {
-                if(number == 0) {
+                if (number == 0) {
                     return;
                 }
                 int n = rand.nextInt(2 + 1);
-                if(en[n] == 'b' && map[i][j] != null && map[i + 1][j] == null){
+                if (en[n] == 'b' && map[i][j] != null && map[i + 1][j] == null) {
                     enemies.add(new BatModel(map[i][j].getX(), map[i][j].getY() - 1));
                     number--;
                     i += 4;
-                }
-                else if(en[n]== 'u' && map[i][j] == null && map[i + 1][j] != null){
+                } else if (en[n] == 'u' && map[i][j] == null && map[i + 1][j] != null) {
                     enemies.add(new BubbleModel(map[i + 1][j].getX(), map[i + 1][j].getY() - 1));
                     number--;
                     i += 4;
-                }
-                else if(en[n] == 's' && map[i][j] == null && map[i + 1][j] == null && map[i][j - 1] != null && i > 8 ){
-                    enemies.add(new SnailModel(map[i][j - 1].getX() + 1, map[i][j - 1].getY()));
+                } else if (en[n] == 's' && i > 8) {
+                    if (j == 1 && map[i][j] == null) {
+                        enemies.add(new SnailModel((float) (map[i][j - 1].getX() + 1), map[i][j - 1].getY()));
+                    } else if (j == map[i].length - 1 && map[i][j] == null) {
+                        enemies.add(new SnailModel((float) (map[i][j - 1].getX() - 1), map[i][j - 1].getY()));
+                    } else
+                        break;
                     number--;
                     i += 4;
                 }
             }
         }
-        /*
-        int bats = rand.nextInt(number - 1 + 1);
-        int bubbles = rand.nextInt((number - bats) - 1 + 1);
-        int snails = number - bats - bubbles;
-        for(int i = 0; i < map.length - 1; i++) {
-            for (int j = 1; j < map[i].length - 1; j++) {
-                if (map[i][j] != null && map[i + 1][j] == null && bats > 0) {
-                    enemies.add(new BatModel(map[i][j].getX(), map[i][j].getY() - 1));
-                    bats--;
-                    i += 3;
-                    break;
-                } else if (map[i][j] == null && map[i + 1][j] != null && bubbles > 0) {
-                    enemies.add(new BubbleModel(map[i + 1][j].getX(), map[i + 1][j].getY() - 1));
-                    bubbles--;
-                    i += 3;
-                    break;
-                } else if (map[i][j] == null && map[i + 1][j] == null && map[i][j - 1] != null && i > 8 && snails > 0) {
-                    enemies.add(new SnailModel(map[i][j - 1].getX() + 1, map[i][j - 1].getY()));
-                    snails--;
-                    i += 3;
-                    break;
-                }
-            }
-        }*/
     }
 
     public HeroModel getHeroModel(){
