@@ -3,6 +3,8 @@ exclude:
 - /Lab02/src/dkeep/.*
 - /Lab03/src/dkeep/.*
 - /Lab04/src/dkeep/.*
+- /Lab05/src/dkeep/.*
+- /HelloWorld/.*
 component_depth: 1
 languages:
 - java
