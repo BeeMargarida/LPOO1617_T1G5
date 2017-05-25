@@ -75,11 +75,13 @@ public class GameController implements ContactListener {
     }
 
     public void enemiesUpdate() {
+        int j = 0;
         for(int i = 0; i < model.getEnemies().size(); i++){
             float[] res;
             if(model.getEnemies().get(i) != null) {
                 res = model.getEnemies().get(i).update(hero);
-                enemies.get(i).setTransform(res[0], res[1], 0);
+                enemies.get(j).setTransform(res[0], res[1], 0);
+                j++;
             }
         }
     }
@@ -269,9 +271,14 @@ public class GameController implements ContactListener {
             if (bodies.get(i).getUserData() instanceof EnemyModel) {
                 if (((EnemyModel) bodies.get(i).getUserData()).getForRemoval()) {
                     model.remove((EnemyModel) bodies.get(i).getUserData());
-                    System.out.println(enemies.size());
-                    enemies.remove(bodies.get(i));
-                    System.out.println(enemies.size());
+                    //System.out.println(enemies.size());
+                    for(int j = 0; j < enemies.size(); j++){
+                        if((EnemyModel) enemies.get(j).body.getUserData() == (EnemyModel) bodies.get(i).getUserData()) {
+                            enemies.remove(j);
+                            break;
+                        }
+                    }
+                    //System.out.println(enemies.size());
                     world.destroyBody(bodies.get(i));
                 }
             }

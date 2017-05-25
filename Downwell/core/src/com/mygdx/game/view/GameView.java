@@ -174,10 +174,22 @@ public class GameView extends ScreenAdapter{
         }
 
         ArrayList<EnemyModel> enemies = model.getEnemies();
-        for(int i = 0; i < enemyViews.size(); i++){
+        /*
+        for(int j = 0; j < enemies.size(); j++){
+            if(enemies.get(j) != null)
+                System.out.println(enemies.get(j).getX());
+        }
+        System.out.print("\n");
+        */
+
+        System.out.println(enemies.size());
+        System.out.println(enemyViews.size());
+        for(int i = 0; i < enemies.size(); i++){
             if(enemies.get(i) == null){
                 enemyViews.remove(i);
                 enemies.remove(i);
+                i--;
+                continue;
             }
             enemyViews.get(i).update(enemies.get(i));
             enemyViews.get(i).act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
