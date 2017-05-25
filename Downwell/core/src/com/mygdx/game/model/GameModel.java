@@ -133,6 +133,8 @@ public class GameModel {
                     number--;
                     i += 4;
                 }
+                if(i > map.length - 1)
+                    return;
             }
         }
     }
@@ -144,7 +146,7 @@ public class GameModel {
     public ArrayList<EnemyModel> getEnemies() { return enemies; }
 
     public void remove(EnemyModel model) {
-        enemies.remove(model);
+        enemies.set(enemies.indexOf(model), null);
     }
 
     public int getWidth(){

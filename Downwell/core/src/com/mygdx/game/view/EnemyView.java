@@ -14,6 +14,7 @@ public abstract class EnemyView extends ElementView {
 
     @Override
     public void update(ElementModel model) {
+
         super.update(model);
     }
 

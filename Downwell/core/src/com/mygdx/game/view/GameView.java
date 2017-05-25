@@ -37,7 +37,7 @@ public class GameView extends ScreenAdapter{
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
     private Matrix4 debugCamera;
-    private EnemyView[] enemyViews;
+    private ArrayList<EnemyView> enemyViews;
 
     public GameView(Downwell game, GameModel model, GameController controller) {
         this.game = game;
@@ -48,14 +48,14 @@ public class GameView extends ScreenAdapter{
 
         camera = createCamera();
         ArrayList<EnemyModel> enemyModel = model.getEnemies();
-        enemyViews = new EnemyView[enemyModel.size()];
+        enemyViews = new ArrayList<EnemyView>();
         for(int i = 0; i < enemyModel.size(); i++){
             if(enemyModel.get(i) instanceof BatModel)
-                enemyViews[i] = new BatView(game);
+                enemyViews.add(new BatView(game));
             else if(enemyModel.get(i) instanceof BubbleModel)
-                enemyViews[i] = new BubbleView(game);
+                enemyViews.add(new BubbleView(game));
             else if(enemyModel.get(i) instanceof SnailModel)
-                enemyViews[i] = new SnailView(game);
+                enemyViews.add(new SnailView(game));
         }
     }
 
@@ -175,10 +175,14 @@ public class GameView extends ScreenAdapter{
         }
 
         ArrayList<EnemyModel> enemies = model.getEnemies();
-        for(int i = 0; i < enemyViews.length; i++){
-            enemyViews[i].update(enemies.get(i));
-            enemyViews[i].act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
-            enemyViews[i].draw(game.getBatch());
+        for(int i = 0; i < enemyViews.size(); i++){
+            if(enemies.get(i) == null){
+                enemyViews.remove(i);
+                enemies.remove(i);
+            }
+            enemyViews.get(i).update(enemies.get(i));
+            enemyViews.get(i).act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
+            enemyViews.get(i).draw(game.getBatch());
         }
 
         HeroModel hero = model.getHeroModel();

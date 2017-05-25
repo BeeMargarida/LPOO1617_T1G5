@@ -76,8 +76,11 @@ public class GameController implements ContactListener {
 
     public void enemiesUpdate() {
         for(int i = 0; i < model.getEnemies().size(); i++){
-            float[] res = model.getEnemies().get(i).update(hero);
-            enemies[i].setTransform(res[0],res[1],0);
+            float[] res;
+            if(model.getEnemies().get(i) != null) {
+                res = model.getEnemies().get(i).update(hero);
+                enemies[i].setTransform(res[0], res[1], 0);
+            }
         }
     }
 
@@ -141,7 +144,7 @@ public class GameController implements ContactListener {
         }
         if(bodyA.getUserData() instanceof  SnailModel && bodyB.getUserData() instanceof HeroModel){
             if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                //erase enemy
+                ((SnailModel) bodyA.getUserData()).setForRemoval();
             }
             else {
                 //damage hero
@@ -149,7 +152,7 @@ public class GameController implements ContactListener {
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof SnailModel){
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                //erase enemy
+                ((SnailModel) bodyB.getUserData()).setForRemoval();
             }
             else {
                 //damage hero
@@ -171,7 +174,7 @@ public class GameController implements ContactListener {
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BatModel){
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                //erase enemy
+                ((BatModel) bodyB.getUserData()).setForRemoval();
             }
             else {
                 //damage hero
@@ -185,7 +188,7 @@ public class GameController implements ContactListener {
 
         if(bodyA.getUserData() instanceof  BubbleModel && bodyB.getUserData() instanceof HeroModel){
             if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                //erase enemy
+                ((BubbleModel) bodyA.getUserData()).setForRemoval();
             }
             else {
                 //damage hero
@@ -193,7 +196,7 @@ public class GameController implements ContactListener {
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BubbleModel){
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                //erase enemy
+                ((BubbleModel) bodyB.getUserData()).setForRemoval();
             }
             else {
                 //damage hero
@@ -263,9 +266,11 @@ public class GameController implements ContactListener {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
         for (Body body : bodies) {
-            if (((EnemyModel)body.getUserData()).getForRemoval()) {
-                model.remove((EnemyModel)body.getUserData());
-                world.destroyBody(body);
+            if (body.getUserData() instanceof EnemyModel) {
+                if (((EnemyModel) body.getUserData()).getForRemoval()) {
+                    model.remove((EnemyModel) body.getUserData());
+                    world.destroyBody(body);
+                }
             }
         }
     }
