@@ -147,6 +147,7 @@ public class GameModel {
 
     public void remove(EnemyModel model) {
         enemies.set(enemies.indexOf(model), null);
+        //enemies.remove(model);
     }
 
     public int getWidth(){

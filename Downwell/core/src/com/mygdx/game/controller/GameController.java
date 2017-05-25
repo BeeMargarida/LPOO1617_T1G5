@@ -19,6 +19,8 @@ import com.mygdx.game.model.HeroModel;
 import com.mygdx.game.model.MapTileModel;
 import com.mygdx.game.model.SnailModel;
 
+import java.util.ArrayList;
+
 public class GameController implements ContactListener {
 
     private enum mov { MS_LEFT, MS_RIGHT, MS_STOP}
@@ -34,15 +36,13 @@ public class GameController implements ContactListener {
     private final HeroBody hero;
     private mov moveState;
 
-    private ElementBody enemies[];
-    private final MapTileBody tile;
+    private ArrayList<ElementBody> enemies;
     private float accumulator;
 
     public GameController(GameModel model){
         world = new World(new Vector2(0,-4f),true);
         hero = new HeroBody(world,model.getHeroModel());
-        enemies = new ElementBody[model.getEnemies().size()];
-        tile = new MapTileBody(world,model.getMap()[0][0]);
+        enemies = new ArrayList<ElementBody>();
         this.model = model;
         fillWorld();
         moveState = mov.MS_STOP;
@@ -60,16 +60,16 @@ public class GameController implements ContactListener {
         }
         for(int i = 0; i < model.getEnemies().size(); i++){
             if(model.getEnemies().get(i) instanceof BatModel) {
-                enemies[i] = new BatBody(world, (BatModel) model.getEnemies().get(i));
-                enemies[i].body.setGravityScale(0);
+                enemies.add(new BatBody(world, (BatModel) model.getEnemies().get(i)));
+                enemies.get(i).body.setGravityScale(0);
             }
             else if(model.getEnemies().get(i) instanceof BubbleModel) {
-                enemies[i] = new BubbleBody(world, (BubbleModel) model.getEnemies().get(i));
-                enemies[i].body.setGravityScale(0);
+                enemies.add(new BubbleBody(world, (BubbleModel) model.getEnemies().get(i)));
+                enemies.get(i).body.setGravityScale(0);
             }
             else if(model.getEnemies().get(i) instanceof SnailModel) {
-                enemies[i] = new SnailBody(world, (SnailModel) model.getEnemies().get(i));
-                enemies[i].body.setGravityScale(0);
+                enemies.add(new SnailBody(world, (SnailModel) model.getEnemies().get(i)));
+                enemies.get(i).body.setGravityScale(0);
             }
         }
     }
@@ -79,14 +79,14 @@ public class GameController implements ContactListener {
             float[] res;
             if(model.getEnemies().get(i) != null) {
                 res = model.getEnemies().get(i).update(hero);
-                enemies[i].setTransform(res[0], res[1], 0);
+                enemies.get(i).setTransform(res[0], res[1], 0);
             }
         }
     }
 
     public void update(float delta){
+        remove();
         enemiesUpdate();
-
 
         float frameTime = Math.min(delta, 0.25f);
         accumulator += frameTime;
@@ -265,11 +265,14 @@ public class GameController implements ContactListener {
     public void remove() {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
-        for (Body body : bodies) {
-            if (body.getUserData() instanceof EnemyModel) {
-                if (((EnemyModel) body.getUserData()).getForRemoval()) {
-                    model.remove((EnemyModel) body.getUserData());
-                    world.destroyBody(body);
+        for (int i = 0; i < bodies.size; i++) {
+            if (bodies.get(i).getUserData() instanceof EnemyModel) {
+                if (((EnemyModel) bodies.get(i).getUserData()).getForRemoval()) {
+                    model.remove((EnemyModel) bodies.get(i).getUserData());
+                    System.out.println(enemies.size());
+                    enemies.remove(bodies.get(i));
+                    System.out.println(enemies.size());
+                    world.destroyBody(bodies.get(i));
                 }
             }
         }
@@ -325,5 +328,5 @@ public class GameController implements ContactListener {
         return world;
     }
     public HeroBody getHeroBody() { return hero; }
-    public ElementBody[] getEnemiesBody() { return enemies; }
+    public ArrayList<ElementBody> getEnemiesBody() { return enemies; }
 }

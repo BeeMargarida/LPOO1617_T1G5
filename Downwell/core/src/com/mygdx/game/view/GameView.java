@@ -139,7 +139,6 @@ public class GameView extends ScreenAdapter{
     public void render(float delta) {
         handleInputs(delta);
 
-        controller.remove();
         controller.update(delta);
 
         camera.position.set(GameController.ARENA_WIDTH/2f / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
