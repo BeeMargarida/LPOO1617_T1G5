@@ -13,7 +13,6 @@ public class BatBody extends ElementBody {
         float density = 1f, friction = 0.4f, restitution = 0f;
         float width = 0.4f, height = 0.4f;
         //int dimension = GameController.TILE_DIMENSIONS;
-        createRectangleFixture(body,width,height,density,friction,restitution);
-
+        createRectangleFixture(body,width,height,density,friction,restitution,true);
     }
 }

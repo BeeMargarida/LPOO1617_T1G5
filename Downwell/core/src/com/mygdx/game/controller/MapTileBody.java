@@ -16,6 +16,6 @@ public class MapTileBody extends ElementBody {
         float density = 1f, friction = 0f, restitution = 0;
         float width = 0.5f, height = 0.5f;
 
-        createRectangleFixture(body,width,height,density,friction,restitution);
+        createRectangleFixture(body,width,height,density,friction,restitution,true);
     }
 }

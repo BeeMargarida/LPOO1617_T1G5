@@ -8,11 +8,21 @@ public class MapTileModel extends ElementModel {
 
     public enum TileType {L_WALL, R_WALL, WALL, D_BLOCK, I_BLOCK}
 
+    private boolean flagForRemoval;
     private TileType tileType;
 
     MapTileModel(float x, float y, TileType tileType){
         super(x,y);
         this.tileType = tileType;
+        flagForRemoval = false;
+    }
+
+    public void setForRemoval() {
+        flagForRemoval = true;
+    }
+
+    public boolean getForRemoval() {
+        return flagForRemoval;
     }
 
     public TileType getTileType(){

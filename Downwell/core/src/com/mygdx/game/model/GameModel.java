@@ -160,6 +160,14 @@ public class GameModel {
 
     public ArrayList<EnemyModel> getEnemies() { return enemies; }
 
+    public void removeTile(MapTileModel model){
+        for(int i = 0; i < depth; i++){
+            for(int j = 0; j < map[i].length; j++){
+                if(map[i][j] == model)
+                    map[i][j] = null;
+            }
+        }
+    }
     public void removeEnemy(EnemyModel model) {
         enemies.set(enemies.indexOf(model), null);
         //enemies.remove(model);

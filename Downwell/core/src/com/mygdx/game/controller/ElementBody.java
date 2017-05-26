@@ -53,7 +53,7 @@ public abstract class ElementBody {
         polygon.dispose();
     }
 
-    final void createRectangleFixture(Body body, float width, float height, float density, float friction, float restitution){
+    final void createRectangleFixture(Body body, float width, float height, float density, float friction, float restitution, boolean sensors){
         PolygonShape rectangle = new PolygonShape();
         rectangle.setAsBox(width, height);
 
@@ -67,7 +67,8 @@ public abstract class ElementBody {
         body.createFixture(fixtureDef);
         body.setFixedRotation(true);
 
-        createExtraFixtures();
+        if(sensors)
+            createExtraFixtures();
 
         rectangle.dispose();
     }

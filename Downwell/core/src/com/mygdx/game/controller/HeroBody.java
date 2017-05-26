@@ -14,7 +14,7 @@ public class HeroBody extends ElementBody {
         float density = 1f, friction = 0, restitution = 0;
         float width = 0.4f, height = 0.4f;
 
-        createRectangleFixture(body,width,height,density,friction,restitution);
+        createRectangleFixture(body,width,height,density,friction,restitution,true);
     }
 
     public void setState() { Jumping = true;}

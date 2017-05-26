@@ -15,9 +15,9 @@ public class BulletBody extends ElementBody {
     public BulletBody(World world, BulletModel model){
         super(world,model, BodyDef.BodyType.DynamicBody);
         float density = 1f, friction = 0, restitution = 0;
-        float width = 0.05f, height = 0.05f;
+        float width = 0.1f, height = 0.1f;
 
-        createRectangleFixture(body,width,height,density,friction,restitution);
+        createRectangleFixture(body,width,height,density,friction,restitution,false);
         body.setGravityScale(0);
         body.setLinearVelocity(0, -BULLET_SPEED);
     }

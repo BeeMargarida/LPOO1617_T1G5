@@ -107,6 +107,8 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "shooting.png", Texture.class);
 
         this.game.getAssetManager().load("dBlock.png", Texture.class);
+        this.game.getAssetManager().load("iBlock.png", Texture.class);
+
         this.game.getAssetManager().load("sideWall.png", Texture.class);
 
         this.game.getAssetManager().finishLoading();

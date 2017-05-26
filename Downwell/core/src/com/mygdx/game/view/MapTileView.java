@@ -33,7 +33,7 @@ public class MapTileView extends ElementView {
         else if(this.tileType == MapTileModel.TileType.D_BLOCK)
             texture = game.getAssetManager().get("dBlock.png");
         else if(this.tileType == MapTileModel.TileType.I_BLOCK)
-            texture = game.getAssetManager().get("dBlock.png");
+            texture = game.getAssetManager().get("iBlock.png");
         else {
             texture = game.getAssetManager().get("dBlock.png");
         }
