@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.BubbleModel;
+import com.mygdx.game.model.BulletModel;
 import com.mygdx.game.model.ElementModel;
 import com.mygdx.game.model.EnemyModel;
 import com.mygdx.game.model.GameModel;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = true;
+    private static final boolean DEBUG_PHYSICS = false;
     public final static float PIXEL_TO_METER = 0.04f;
     private static final float VIEWPORT_WIDTH = 33;     //66 full map; 10 zoom
     //private static final float VIEWPORT_HEIGHT = 20;
@@ -188,6 +189,13 @@ public class GameView extends ScreenAdapter{
             enemyViews.get(i).update(enemies.get(i));
             enemyViews.get(i).act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
             enemyViews.get(i).draw(game.getBatch());
+        }
+
+        ArrayList<BulletModel> bullets = model.getBullets();
+        for(int i = 0; i < bullets.size(); i++){
+            ElementView view = ViewFactory.makeView(game, bullets.get(i));
+            view.update(bullets.get(i));
+            view.draw(game.getBatch());
         }
 
         HeroModel hero = model.getHeroModel();

@@ -174,7 +174,7 @@ public class GameModel {
         BulletModel bullet = bulletPool.obtain();
 
         bullet.setForRemoval(false);
-        bullet.setPosition(hero.getX(), hero.getY()-0.2f);
+        bullet.setPosition(hero.getX(), hero.getY()-0.7f);
         bullet.setRotation(0);
         bullet.setTimeToLive(.5f);
 
