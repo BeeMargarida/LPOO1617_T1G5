@@ -21,13 +21,11 @@ public class GameModel {
     private float dd = 0.5f;
     private int ic = 0;
 
-    public GameModel(float x, float y, int depth, int number) {
+    public GameModel(int depth, int number) {
         GameController.ARENA_WIDTH = width;
         GameController.ARENA_HEIGHT = depth;
         this.depth = depth;
         hero = new HeroModel(GameController.ARENA_WIDTH/2, GameController.ARENA_HEIGHT);
-        /*bat = new BatModel(GameController.ARENA_WIDTH/2,40);
-        bubble = new BubbleModel(GameController.ARENA_WIDTH/3,20);*/
         makeMap();
         enemies = new ArrayList<EnemyModel>();
         addEnemies(number);
@@ -114,6 +112,8 @@ public class GameModel {
                 if (number == 0) {
                     return;
                 }
+                if(i >= map.length)
+                    return;
                 int n = rand.nextInt(2 + 1);
                 if (en[n] == 'b' && map[i][j] != null && map[i + 1][j] == null) {
                     enemies.add(new BatModel(map[i][j].getX(), map[i][j].getY() - 1));
@@ -133,7 +133,7 @@ public class GameModel {
                     number--;
                     i += 4;
                 }
-                if(i > map.length - 1)
+                if(i >= map.length)
                     return;
             }
         }

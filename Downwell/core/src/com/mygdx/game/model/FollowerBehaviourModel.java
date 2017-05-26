@@ -17,12 +17,12 @@ public class FollowerBehaviourModel extends BehaviourModel {
         HeroBody hero = (HeroBody) obj;
         double dist = Math.sqrt(Math.pow(x - hero.getX(),2) + Math.pow(y-hero.getY(),2));
         if(dist < 5) {
-            float distX = (float) ((x - hero.getX()) * 0.01);
-            float distY = (float) ((y - hero.getY()) * 0.01);
-            float[] res = {x - distX, y - distY};
+            float distX = x-hero.getX();
+            float distY = y-hero.getY();
+            float[] res = {(float)(distX * (2 / dist)),(float)(distY*(2/dist))};
             return res;
         }
-        float[] res = new float[]{x, y};
+        float[] res = new float[]{0, 0};
         return res;
     }
 }

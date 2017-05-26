@@ -174,16 +174,7 @@ public class GameView extends ScreenAdapter{
         }
 
         ArrayList<EnemyModel> enemies = model.getEnemies();
-        /*
-        for(int j = 0; j < enemies.size(); j++){
-            if(enemies.get(j) != null)
-                System.out.println(enemies.get(j).getX());
-        }
-        System.out.print("\n");
-        */
 
-        System.out.println(enemies.size());
-        System.out.println(enemyViews.size());
         for(int i = 0; i < enemies.size(); i++){
             if(enemies.get(i) == null){
                 enemyViews.remove(i);

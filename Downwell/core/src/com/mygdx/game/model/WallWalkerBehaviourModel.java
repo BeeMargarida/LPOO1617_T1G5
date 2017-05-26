@@ -12,7 +12,7 @@ public class WallWalkerBehaviourModel extends BehaviourModel {
     @Override
     public float[] act(float x, float y, Object obj) {
         String dir = (String) obj;
-        float[] res = {x,y};
+        float[] res = {0,0};
         if(dir == "down"){
             res[1] = (float)(y + 0.01);
         }

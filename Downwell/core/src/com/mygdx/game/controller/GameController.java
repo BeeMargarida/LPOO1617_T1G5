@@ -80,7 +80,14 @@ public class GameController implements ContactListener {
             float[] res;
             if(model.getEnemies().get(i) != null) {
                 res = model.getEnemies().get(i).update(hero);
-                enemies.get(j).setTransform(res[0], res[1], 0);
+                if(model.getEnemies().get(i) instanceof SnailModel){
+                    enemies.get(j).body.setLinearVelocity(0, ((SnailModel) model.getEnemies().get(i)).getDirection());
+                }
+                if(res[1] != 0 && res[0] != 0) {
+                   /* Vector2 vector = new Vector2((float) (enemies.get(j).body.getMass() * -res[0]), (float) (enemies.get(j).body.getMass() * -res[1]));
+                    enemies.get(j).body.applyForceToCenter(vector, true);*/
+                    enemies.get(j).body.setLinearVelocity(-res[0],-res[1]);
+                }
                 j++;
             }
         }

@@ -4,11 +4,11 @@ import com.mygdx.game.controller.HeroBody;
 
 public class SnailModel extends EnemyModel {
 
-    int direction; //0 is down, 1 is up
+    int direction; //-1 is down, 1 is up
 
     public SnailModel(float x, float y){
         super(x,y,new WallWalkerBehaviourModel());
-        direction = 0;
+        direction = -1;
     }
 
     public ModelType getType(){
@@ -18,10 +18,10 @@ public class SnailModel extends EnemyModel {
     public int getDirection() { return direction; }
 
     public void changeDirection() {
-        if(direction == 0)
+        if(direction == -1)
             direction = 1;
         else
-            direction = 0;
+            direction = -1;
     }
 
     public float[] update(HeroBody hero){
