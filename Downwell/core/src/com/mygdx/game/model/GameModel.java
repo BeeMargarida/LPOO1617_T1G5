@@ -123,7 +123,7 @@ public class GameModel {
                 if (number == 0) {
                     return;
                 }
-                if(i >= map.length)
+                if(i > map.length - 2)
                     return;
                 int n = rand.nextInt(2 + 1);
                 if (en[n] == 'b' && map[i][j] != null && map[i + 1][j] == null) {

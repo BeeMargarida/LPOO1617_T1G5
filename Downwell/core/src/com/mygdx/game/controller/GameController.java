@@ -100,8 +100,6 @@ public class GameController implements ContactListener {
                     enemies.get(j).body.setLinearVelocity(0, ((SnailModel) model.getEnemies().get(i)).getDirection());
                 }
                 if(res[1] != 0 && res[0] != 0) {
-                   /* Vector2 vector = new Vector2((float) (enemies.get(j).body.getMass() * -res[0]), (float) (enemies.get(j).body.getMass() * -res[1]));
-                    enemies.get(j).body.applyForceToCenter(vector, true);*/
                     enemies.get(j).body.setLinearVelocity(-res[0],-res[1]);
                 }
                 j++;
@@ -333,24 +331,6 @@ public class GameController implements ContactListener {
         bubbleBeginContact(contact);
         bulletBeginContact(contact);
 
-        /*
-        if (bodyA.getUserData() instanceof HeroModel) {
-            if (contact.getFixtureA().getUserData() == "down") {
-                hero.removeState();
-                model.getHeroModel().setState(HeroModel.state.STANDING);
-                System.out.println("cond 1");
-            }
-        }
-        //Tile
-        if (bodyB.getUserData() instanceof MapTileModel) {
-            if(contact.getFixtureB().getUserData() == "up") {
-                hero.removeState();
-                model.getHeroModel().setState(HeroModel.state.STANDING);
-                System.out.println("cond 2");
-            }
-        }
-        */
-
         //Tile
         if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up") {
@@ -409,14 +389,12 @@ public class GameController implements ContactListener {
             if (bodies.get(i).getUserData() instanceof EnemyModel) {
                 if (((EnemyModel) bodies.get(i).getUserData()).getForRemoval()) {
                     model.removeEnemy((EnemyModel) bodies.get(i).getUserData());
-                    //System.out.println(enemies.size());
                     for(int j = 0; j < enemies.size(); j++){
                         if((EnemyModel) enemies.get(j).body.getUserData() == (EnemyModel) bodies.get(i).getUserData()) {
                             enemies.remove(j);
                             break;
                         }
                     }
-                    //System.out.println(enemies.size());
                     world.destroyBody(bodies.get(i));
                 }
             }

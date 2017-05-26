@@ -17,7 +17,7 @@ public abstract class ElementBody {
     protected Body body;
 
     protected Fixture above;
-    private Fixture under;
+    protected Fixture under;
 
     public ElementBody(World world, ElementModel model, BodyDef.BodyType bodyType) {
         BodyDef bodyDef = new BodyDef();
@@ -76,8 +76,8 @@ public abstract class ElementBody {
     public void createExtraFixtures() {
         PolygonShape rectangle = new PolygonShape();
         Vector2 v = body.getLocalCenter();
-        v.set((float)(v.x),(float)(v.y+0.4));
-        rectangle.setAsBox(0.4f, 0.1f,v,0);
+        v.set(v.x,(float)(v.y + 0.4));
+        rectangle.setAsBox(0.35f, 0.1f,v,0);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = rectangle;
@@ -89,19 +89,11 @@ public abstract class ElementBody {
         above = body.createFixture(fixtureDef);
         above.setUserData("up");
 
-        v.set((float)(v.x),(float)(v.y-0.7));
+        v.set(v.x,(float)(v.y - 0.7));
         rectangle.setAsBox(0.3f, 0.1f, v,0);
         fixtureDef.shape = rectangle;
         under = body.createFixture(fixtureDef);
         under.setUserData("down");
-
-        /*left = body.createFixture(fixtureDef);
-        right = body.createFixture(fixtureDef);*/
-
-        /*body.setUserData(above);
-        body.setUserData(under);
-        body.setUserData(left);
-        body.setUserData(right);*/
     }
 
     public Fixture getAbove() { return above;}
