@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
+import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.ElementModel;
 
 public class BatView extends EnemyView {
@@ -34,5 +35,8 @@ public class BatView extends EnemyView {
         return sprite;
     }
 
-
+    public void update(ElementModel model) {
+        super.update(model);
+        flip = ((BatModel) model).getFlip();
+    }
 }

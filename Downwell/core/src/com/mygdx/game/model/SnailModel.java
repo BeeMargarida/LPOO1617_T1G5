@@ -9,6 +9,8 @@ public class SnailModel extends EnemyModel {
     public SnailModel(float x, float y){
         super(x,y,new WallWalkerBehaviourModel());
         direction = -1;
+        if(x < 5)
+            flip = true;
     }
 
     public ModelType getType(){

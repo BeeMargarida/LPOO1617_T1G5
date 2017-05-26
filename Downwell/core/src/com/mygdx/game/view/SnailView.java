@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.ElementModel;
+import com.mygdx.game.model.SnailModel;
 
 /**
  * Created by mc-guida on 18-05-2017.
@@ -32,6 +33,7 @@ public class SnailView extends EnemyView {
     @Override
     public void update(ElementModel model) {
         super.update(model);
+        flip = ((SnailModel) model).getFlip();
     }
 
     @Override

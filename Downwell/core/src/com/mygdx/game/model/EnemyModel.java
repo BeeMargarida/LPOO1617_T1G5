@@ -10,6 +10,7 @@ public abstract class EnemyModel extends ElementModel {
 
     protected BehaviourModel behaviour;
     protected boolean flagForRemoval;
+    protected boolean flip = false;
 
     public EnemyModel(float x, float y, BehaviourModel behaviour){
         super(x,y);
@@ -23,6 +24,10 @@ public abstract class EnemyModel extends ElementModel {
 
     public boolean getForRemoval() {
         return flagForRemoval;
+    }
+
+    public boolean getFlip(){
+        return flip;
     }
 
     public float[] update(HeroBody hero){

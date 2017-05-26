@@ -30,6 +30,7 @@ public class GameController implements ContactListener {
     public static int TILE_DIMENSIONS = 10;
 
     public static float MAX_SPEED = -5f;
+    public static float BOUNCE_SPEED = 3f;
 
     private final World world;
     private final GameModel model;
@@ -131,6 +132,13 @@ public class GameController implements ContactListener {
         }
     }
 
+    private void bounceHero(){
+        float velChange = BOUNCE_SPEED - hero.body.getLinearVelocity().y;
+        float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
+        hero.body.applyForceToCenter(0,force, true);
+    }
+
+
     public void snailBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
@@ -154,6 +162,7 @@ public class GameController implements ContactListener {
         if(bodyA.getUserData() instanceof  SnailModel && bodyB.getUserData() instanceof HeroModel){
             if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
                 ((SnailModel) bodyA.getUserData()).setForRemoval();
+                bounceHero();
             }
             else {
                 //damage hero
@@ -162,6 +171,7 @@ public class GameController implements ContactListener {
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof SnailModel){
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
                 ((SnailModel) bodyB.getUserData()).setForRemoval();
+                bounceHero();
             }
             else {
                 //damage hero
@@ -176,6 +186,7 @@ public class GameController implements ContactListener {
         if(bodyA.getUserData() instanceof  BatModel && bodyB.getUserData() instanceof HeroModel){
             if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
                 ((BatModel) bodyA.getUserData()).setForRemoval();
+                bounceHero();
             }
             else {
                 //damage hero
@@ -184,6 +195,7 @@ public class GameController implements ContactListener {
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BatModel){
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
                 ((BatModel) bodyB.getUserData()).setForRemoval();
+                bounceHero();
             }
             else {
                 //damage hero
@@ -198,6 +210,7 @@ public class GameController implements ContactListener {
         if(bodyA.getUserData() instanceof  BubbleModel && bodyB.getUserData() instanceof HeroModel){
             if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
                 ((BubbleModel) bodyA.getUserData()).setForRemoval();
+                bounceHero();
             }
             else {
                 //damage hero
@@ -206,6 +219,7 @@ public class GameController implements ContactListener {
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BubbleModel){
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
                 ((BubbleModel) bodyB.getUserData()).setForRemoval();
+                bounceHero();
             }
             else {
                 //damage hero
@@ -226,6 +240,7 @@ public class GameController implements ContactListener {
             if (contact.getFixtureA().getUserData() == "down") {
                 hero.removeState();
                 model.getHeroModel().setState(HeroModel.state.STANDING);
+
             }
         }
         //Tile
@@ -240,10 +255,12 @@ public class GameController implements ContactListener {
         if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up") {
                 hero.removeState();
+                model.getHeroModel().setState(HeroModel.state.STANDING);
             }
         if (bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof HeroModel)
             if(contact.getFixtureB().getUserData() == "down" && contact.getFixtureA().getUserData() == "up") {
                 hero.removeState();
+                model.getHeroModel().setState(HeroModel.state.STANDING);
             }
         //Enemy
     }

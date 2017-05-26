@@ -22,5 +22,6 @@ public abstract class EnemyView extends ElementView {
     public void act(float delta) {
         stateTime += delta;
         sprite.setRegion(animation.getKeyFrame(stateTime,true));
+        sprite.setFlip(flip,false);
     }
 }
