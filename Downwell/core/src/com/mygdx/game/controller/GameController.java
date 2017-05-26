@@ -39,6 +39,7 @@ public class GameController implements ContactListener {
     private static final float PUSH_SPEED = 10f;
     private static final float BOUNCE_SPEED = 3f;
     public static final float BULLET_SPEED = 10f;
+    public static final int MAX_SHOTS = 5;
     private static final float TIME_BETWEEN_SHOTS = .3f;
 
     private final World world;
@@ -49,6 +50,7 @@ public class GameController implements ContactListener {
     private ArrayList<ElementBody> enemies;
     private float accumulator;
     private float timeToNextShoot;
+    private int shots;
 
     public GameController(GameModel model){
         //world = new World(new Vector2(0,-4f),true);
@@ -59,6 +61,7 @@ public class GameController implements ContactListener {
         fillWorld();
         moveState = mov.MS_STOP;
         timeToNextShoot = 0;
+        shots = MAX_SHOTS;
         world.setContactListener(this);
     }
 
@@ -353,6 +356,7 @@ public class GameController implements ContactListener {
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up") {
                 hero.removeState();
                 model.getHeroModel().setState(HeroModel.state.STANDING);
+                shots = MAX_SHOTS;
                 //System.out.println("cond 3");
             }
             else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
@@ -365,6 +369,7 @@ public class GameController implements ContactListener {
             if(contact.getFixtureB().getUserData() == "down" && contact.getFixtureA().getUserData() == "up") {
                 hero.removeState();
                 model.getHeroModel().setState(HeroModel.state.STANDING);
+                shots = MAX_SHOTS;
                 //System.out.println("cond 4");
             }
             else if(contact.getFixtureB().getUserData() == "up" && contact.getFixtureA().getUserData() == "down") {
@@ -483,12 +488,13 @@ public class GameController implements ContactListener {
 
     public void shootHero() {
         if(hero.getState() || hero.body.getLinearVelocity().y != 0) { //it isn't jumping or falling
-            if(timeToNextShoot < 0) {
+            if(timeToNextShoot < 0 && shots > 0) {
                 BulletModel bullet = model.createBullet(model.getHeroModel());
                 BulletBody body = new BulletBody(world, bullet);
                 //body.setLinearVelocity(BULLET_SPEED);
                 timeToNextShoot = TIME_BETWEEN_SHOTS;
                 bounceHero();
+                shots--;
             }
         }
     }
