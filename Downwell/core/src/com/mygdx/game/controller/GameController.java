@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.controller.HeroBody;
 import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.BubbleModel;
+import com.mygdx.game.model.BulletModel;
 import com.mygdx.game.model.ElementModel;
 import com.mygdx.game.model.EnemyModel;
 import com.mygdx.game.model.GameModel;
@@ -20,6 +21,10 @@ import com.mygdx.game.model.MapTileModel;
 import com.mygdx.game.model.SnailModel;
 
 import java.util.ArrayList;
+
+import static com.mygdx.game.model.HeroModel.state.JUMPING;
+import static com.mygdx.game.model.HeroModel.state.STANDING;
+import static com.mygdx.game.model.HeroModel.state.WALKING;
 
 public class GameController implements ContactListener {
 
@@ -31,6 +36,7 @@ public class GameController implements ContactListener {
 
     public static float MAX_SPEED = -5f;
     public static float BOUNCE_SPEED = 3f;
+    public static float BULLET_SPEED = 10f;
 
     private final World world;
     private final GameModel model;
@@ -94,9 +100,20 @@ public class GameController implements ContactListener {
         }
     }
 
+    public void bulletsUpdate(float delta){
+        ArrayList<BulletModel> bullets = model.getBullets();
+        for(int i = 0; i < bullets.size(); i++){
+            if(bullets.get(i).decreaseTimeToLive(delta)){
+                bullets.get(i).setForRemoval(true);
+            }
+        }
+    }
+
+
     public void update(float delta){
         remove();
         enemiesUpdate();
+        bulletsUpdate(delta);
 
         float frameTime = Math.min(delta, 0.25f);
         accumulator += frameTime;
@@ -119,6 +136,17 @@ public class GameController implements ContactListener {
             accumulator -= 1/60f;
         }
 
+        if(Math.abs(hero.body.getLinearVelocity().y) > 0.2)
+            model.getHeroModel().setState(JUMPING);
+
+        if(model.getHeroModel().getState() != JUMPING){
+            if(hero.body.getLinearVelocity().x == 0)
+                model.getHeroModel().setState(STANDING);
+            else
+                model.getHeroModel().setState(WALKING);
+
+        }
+
         if(hero.body.getLinearVelocity().y < MAX_SPEED)
             hero.body.setGravityScale(0);
         else
@@ -137,7 +165,6 @@ public class GameController implements ContactListener {
         float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
         hero.body.applyForceToCenter(0,force, true);
     }
-
 
     public void snailBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
@@ -236,11 +263,12 @@ public class GameController implements ContactListener {
         batBeginContact(contact);
         bubbleBeginContact(contact);
 
+        /*
         if (bodyA.getUserData() instanceof HeroModel) {
             if (contact.getFixtureA().getUserData() == "down") {
                 hero.removeState();
                 model.getHeroModel().setState(HeroModel.state.STANDING);
-
+                System.out.println("cond 1");
             }
         }
         //Tile
@@ -248,19 +276,23 @@ public class GameController implements ContactListener {
             if(contact.getFixtureB().getUserData() == "up") {
                 hero.removeState();
                 model.getHeroModel().setState(HeroModel.state.STANDING);
+                System.out.println("cond 2");
             }
         }
+        */
 
         //Tile
         if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up") {
                 hero.removeState();
                 model.getHeroModel().setState(HeroModel.state.STANDING);
+                System.out.println("cond 3");
             }
         if (bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof HeroModel)
             if(contact.getFixtureB().getUserData() == "down" && contact.getFixtureA().getUserData() == "up") {
                 hero.removeState();
                 model.getHeroModel().setState(HeroModel.state.STANDING);
+                System.out.println("cond 4");
             }
         //Enemy
     }
@@ -294,7 +326,7 @@ public class GameController implements ContactListener {
         for (int i = 0; i < bodies.size; i++) {
             if (bodies.get(i).getUserData() instanceof EnemyModel) {
                 if (((EnemyModel) bodies.get(i).getUserData()).getForRemoval()) {
-                    model.remove((EnemyModel) bodies.get(i).getUserData());
+                    model.removeEnemy((EnemyModel) bodies.get(i).getUserData());
                     //System.out.println(enemies.size());
                     for(int j = 0; j < enemies.size(); j++){
                         if((EnemyModel) enemies.get(j).body.getUserData() == (EnemyModel) bodies.get(i).getUserData()) {
@@ -306,6 +338,14 @@ public class GameController implements ContactListener {
                     world.destroyBody(bodies.get(i));
                 }
             }
+
+            if(bodies.get(i).getUserData() instanceof BulletModel){
+                if(((BulletModel) bodies.get(i).getUserData()).getForRemoval()){
+                    model.removeBullet((BulletModel) bodies.get(i).getUserData());
+                    world.destroyBody(bodies.get(i));
+                }
+            }
+
         }
     }
 
@@ -322,8 +362,10 @@ public class GameController implements ContactListener {
         hero.body.applyForceToCenter(force,0,true);
         */
 
-        if(model.getHeroModel().getState() != HeroModel.state.JUMPING)
+        /*
+        if(model.getHeroModel().getState() != JUMPING)
             model.getHeroModel().setState(HeroModel.state.WALKING);
+            */
         model.getHeroModel().setFlip(true);
     }
 
@@ -340,20 +382,29 @@ public class GameController implements ContactListener {
         hero.body.applyForceToCenter(force,0,true);
         */
 
-        if(model.getHeroModel().getState() != HeroModel.state.JUMPING)
+        /*
+        if(model.getHeroModel().getState() != JUMPING)
             model.getHeroModel().setState(HeroModel.state.WALKING);
+            */
         model.getHeroModel().setFlip(false);
     }
 
-
-    public void jumpHero(){
+    public void jumpHero() {
         if(!hero.getState() && hero.body.getLinearVelocity().y == 0) { //it isn't jumping or falling
             hero.setState();
             hero.body.applyForceToCenter(0,200f, true);
-            model.getHeroModel().setState(HeroModel.state.JUMPING);
+            model.getHeroModel().setState(JUMPING);
         }
     }
 
+    public void shootHero() {
+        if(hero.getState() && hero.body.getLinearVelocity().y != 0) { //it isn't jumping or falling
+            BulletModel bullet = model.createBullet(model.getHeroModel());
+            BulletBody body = new BulletBody(world, bullet);
+            //body.setLinearVelocity(BULLET_SPEED);
+            //timeToNextShoot = TIME_BETWEEN_SHOTS;
+        }
+    }
 
     public World getWorld() {
         return world;

@@ -10,7 +10,6 @@ import com.mygdx.game.model.ElementModel;
 import com.mygdx.game.model.HeroModel;
 
 import static com.mygdx.game.model.HeroModel.state.JUMPING;
-import static com.mygdx.game.model.HeroModel.state.STANDING;
 
 public class HeroView extends ElementView {
 

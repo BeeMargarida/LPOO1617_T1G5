@@ -133,6 +133,9 @@ public class GameView extends ScreenAdapter{
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
             controller.jumpHero();
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.K)){
+            controller.shootHero();
+        }
     }
 
     @Override

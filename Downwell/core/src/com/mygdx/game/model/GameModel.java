@@ -1,5 +1,6 @@
 package com.mygdx.game.model;
 
+import com.badlogic.gdx.utils.Pool;
 import com.mygdx.game.controller.GameController;
 
 import java.util.ArrayList;
@@ -10,6 +11,15 @@ import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameModel {
     private HeroModel hero;
+
+    private ArrayList<BulletModel> bullets;
+
+    Pool<BulletModel> bulletPool = new Pool<BulletModel>() {
+        protected BulletModel newObject() {
+            return new BulletModel(0, 0, 0);
+        }
+    };
+
     private ArrayList<EnemyModel> enemies;
     private MapTileModel map[][];
     private int width = 11;
@@ -26,6 +36,7 @@ public class GameModel {
         GameController.ARENA_HEIGHT = depth;
         this.depth = depth;
         hero = new HeroModel(GameController.ARENA_WIDTH/2, GameController.ARENA_HEIGHT);
+        bullets = new ArrayList<BulletModel>();
         makeMap();
         enemies = new ArrayList<EnemyModel>();
         addEnemies(number);
@@ -143,11 +154,33 @@ public class GameModel {
         return hero;
     }
 
+    public ArrayList<BulletModel> getBullets() {
+        return bullets;
+    }
+
     public ArrayList<EnemyModel> getEnemies() { return enemies; }
 
-    public void remove(EnemyModel model) {
+    public void removeEnemy(EnemyModel model) {
         enemies.set(enemies.indexOf(model), null);
         //enemies.remove(model);
+    }
+
+    public void removeBullet(BulletModel bullet){
+        bullets.remove(bullet);
+        bulletPool.free(bullet);
+    }
+
+    public BulletModel createBullet(HeroModel hero) {
+        BulletModel bullet = bulletPool.obtain();
+
+        bullet.setForRemoval(false);
+        bullet.setPosition(hero.getX(), hero.getY()-0.2f);
+        bullet.setRotation(0);
+        bullet.setTimeToLive(.5f);
+
+        bullets.add(bullet);
+
+        return bullet;
     }
 
     public int getWidth(){
