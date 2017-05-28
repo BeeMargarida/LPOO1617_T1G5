@@ -5,7 +5,7 @@ import static com.mygdx.game.model.HeroModel.state.JUMPING;
 
 public class HeroModel extends ElementModel {
 
-    public enum state {STANDING, WALKING, JUMPING, SHOOTING}
+    public enum state {STANDING, WALKING, JUMPING, ROLLING, SHOOTING}
 
     private state heroState;
     private boolean flip;

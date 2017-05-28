@@ -17,6 +17,7 @@ public class HeroView extends ElementView {
 
     private Animation<TextureRegion> standingAnimation;
     private Animation<TextureRegion> walkingAnimation;
+    private Animation<TextureRegion> rollingAnimation;
     private Texture jumpingFrame;
     private HeroModel.state lastState;
 
@@ -67,7 +68,26 @@ public class HeroView extends ElementView {
 
         walkingAnimation = new Animation<TextureRegion>(.5f,walkingFrames);
 
-       jumpingFrame = game.getAssetManager().get("jump.png");
+        Texture texture15 = game.getAssetManager().get("jr1.png");
+        Texture texture16 = game.getAssetManager().get("jr2.png");
+        Texture texture17 = game.getAssetManager().get("jr3.png");
+        Texture texture18 = game.getAssetManager().get("jr4.png");
+        Texture texture19 = game.getAssetManager().get("jr5.png");
+        Texture texture20 = game.getAssetManager().get("jr6.png");
+        Texture texture21 = game.getAssetManager().get("jr7.png");
+
+        TextureRegion[] rollingFrames = new TextureRegion[7];
+        rollingFrames[0] = new TextureRegion(texture15);
+        rollingFrames[1] = new TextureRegion(texture16);
+        rollingFrames[2] = new TextureRegion(texture17);
+        rollingFrames[3] = new TextureRegion(texture18);
+        rollingFrames[4] = new TextureRegion(texture19);
+        rollingFrames[5] = new TextureRegion(texture20);
+        rollingFrames[6] = new TextureRegion(texture21);
+
+        rollingAnimation = new Animation<TextureRegion>(0.35f, rollingFrames);
+
+        jumpingFrame = game.getAssetManager().get("jump.png");
 
         //animation = standingAnimation;
         //sprite = new Sprite(animation.getKeyFrame(0));
@@ -83,7 +103,9 @@ public class HeroView extends ElementView {
 
         flip = ((HeroModel) model).getFlip();
 
+
         HeroModel.state currState = ((HeroModel) model).getState();
+        //System.out.println(currState);
         if(currState != lastState) {
             switch (((HeroModel) model).getState()) {
                 case STANDING:
@@ -98,6 +120,10 @@ public class HeroView extends ElementView {
                     System.out.println("Jump");
                     animation = null;
                     sprite.setRegion(jumpingFrame);
+                    break;
+                case ROLLING:
+                    animation = rollingAnimation;
+                    sprite.setRegion(animation.getKeyFrame(0));
                     break;
             }
             lastState = currState;

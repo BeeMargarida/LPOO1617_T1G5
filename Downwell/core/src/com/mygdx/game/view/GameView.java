@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = true;
+    private static final boolean DEBUG_PHYSICS = false;
     public final static float PIXEL_TO_METER = 0.04f;
     private static final float VIEWPORT_WIDTH = 33;     //66 full map; 10 zoom
     //private static final float VIEWPORT_HEIGHT = 20;
@@ -94,6 +94,14 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "r6.png" , Texture.class);
         this.game.getAssetManager().load( "r7.png" , Texture.class);
 
+        this.game.getAssetManager().load( "jr1.png" , Texture.class);
+        this.game.getAssetManager().load( "jr2.png" , Texture.class);
+        this.game.getAssetManager().load( "jr3.png" , Texture.class);
+        this.game.getAssetManager().load( "jr4.png" , Texture.class);
+        this.game.getAssetManager().load( "jr5.png" , Texture.class);
+        this.game.getAssetManager().load( "jr6.png" , Texture.class);
+        this.game.getAssetManager().load( "jr7.png" , Texture.class);
+
         this.game.getAssetManager().load( "jump.png" , Texture.class);
 
         this.game.getAssetManager().load( "bat1.png" , Texture.class);
@@ -101,6 +109,8 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "bat3.png" , Texture.class);
         this.game.getAssetManager().load( "bat4.png" , Texture.class);
         this.game.getAssetManager().load( "bat5.png" , Texture.class);
+
+        this.game.getAssetManager().load( "snail.png", Texture.class);
 
         this.game.getAssetManager().load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
         this.game.getAssetManager().load( "big bullet.png", Texture.class);
