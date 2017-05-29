@@ -22,16 +22,6 @@ public class SnailView extends EnemyView {
 
     @Override
     public Sprite createSprite(Downwell game) {
-        /*
-        Texture texture1 = game.getAssetManager().get("shooting.png");
-
-        TextureRegion[] frames = new TextureRegion[1];
-        frames[0] = new TextureRegion(texture1);
-
-        animation = new Animation<TextureRegion>(.5f,frames);
-        sprite = new Sprite(animation.getKeyFrame(0));
-        return sprite;
-        */
         Texture texture = game.getAssetManager().get("snail.png");
         animation = null;
         sprite = new Sprite(texture);

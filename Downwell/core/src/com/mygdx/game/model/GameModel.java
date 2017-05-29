@@ -30,6 +30,7 @@ public class GameModel {
     private int tilecounter[] = {0,0,0};
     private float dd = 0.5f;
     private int ic = 0;
+    public static final float BULLET_ANG_VARIATION = 5;
 
     private boolean gameOver;
 
@@ -189,7 +190,9 @@ public class GameModel {
 
         bullet.setForRemoval(false);
         bullet.setPosition(hero.getX(), hero.getY()-0.7f);
-        bullet.setRotation(0);
+        float rotation = random.nextInt()%BULLET_ANG_VARIATION -90;
+        rotation *= Math.PI / 180.0;
+        bullet.setRotation(rotation);
         bullet.setTimeToLive(.5f);
 
         bullets.add(bullet);

@@ -21,9 +21,11 @@ public class BulletModel extends ElementModel {
         this.rotation = rotation;
     }
 
+    public float getRotation() { return rotation; }
+
     public boolean decreaseTimeToLive(float delta) {
         timeToLive -= delta;
-        return  timeToLive < 0;
+        return timeToLive < 0;
     }
 
     public void setTimeToLive(float timeToLive) {

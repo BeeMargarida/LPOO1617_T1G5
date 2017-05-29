@@ -7,9 +7,11 @@ public class HeroModel extends ElementModel {
 
     public enum state {STANDING, WALKING, JUMPING, ROLLING, SHOOTING}
 
+    private static final float INVIC_TIME = 2f;
     private state heroState;
     private boolean flip;
     private boolean invincible;
+    private float invincibleTime;
     private int hp;
 
     public HeroModel(float x, float y) {
@@ -17,6 +19,7 @@ public class HeroModel extends ElementModel {
         heroState = JUMPING;
         flip = false;
         invincible = false;
+        invincibleTime = INVIC_TIME;
         hp = 4;
     }
 
@@ -42,6 +45,24 @@ public class HeroModel extends ElementModel {
 
     public void setInvincible(boolean flag){
         invincible = flag;
+    }
+
+    private boolean decreaseInvincibleTime(float delta){
+        invincibleTime -= delta;
+        if(invincibleTime  < 0)
+            return true;
+        else
+            return false;
+    }
+
+    public void update(float delta){
+        if(invincible){
+            if(decreaseInvincibleTime(delta)){
+                invincible = false;
+                invincibleTime = INVIC_TIME;
+            }
+        }
+        System.out.println(hp);
     }
 
     public boolean getInvincible(){

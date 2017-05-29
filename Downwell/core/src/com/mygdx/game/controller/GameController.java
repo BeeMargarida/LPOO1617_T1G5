@@ -37,11 +37,11 @@ public class GameController implements ContactListener {
 
     private static final float MOV_SPEED = 5f;
     private static final float MAX_SPEED = -9f;    //-5f
-    private static final float PUSH_SPEED = 10f;
+    private static final float PUSH_SPEED = 5f;
     private static final float BOUNCE_SPEED = 3f;
     public static final float BULLET_SPEED = 10f;
-    public static final int MAX_SHOTS = 5;
-    private static final float TIME_BETWEEN_SHOTS = .3f;
+    public static final int MAX_SHOTS = 8;
+    private static final float TIME_BETWEEN_SHOTS = .15f;
 
     private final World world;
     private final GameModel model;
@@ -92,6 +92,10 @@ public class GameController implements ContactListener {
         }
     }
 
+    public void heroUpdate(float delta){
+        model.getHeroModel().update(delta);
+    }
+
     public void enemiesUpdate() {
         int j = 0;
         for(int i = 0; i < model.getEnemies().size(); i++){
@@ -119,12 +123,12 @@ public class GameController implements ContactListener {
     }
 
     public void update(float delta){
-        //System.out.println(model.getHeroModel().getHp());
         if(hero.getX() >= ARENA_HEIGHT){
             model.setGameOver();
             return;
         }
         remove();
+        heroUpdate(delta);
         enemiesUpdate();
         bulletsUpdate(delta);
 
@@ -227,26 +231,14 @@ public class GameController implements ContactListener {
             }
         }
         if(bodyA.getUserData() instanceof  SnailModel && bodyB.getUserData() instanceof HeroModel){
-            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                ((SnailModel) bodyA.getUserData()).setForRemoval();
-                bounceHero(false);
-                shots = MAX_SHOTS;
-            }
-            else {
-                ((HeroModel) bodyB.getUserData()).damage();
-                ((HeroModel) bodyB.getUserData()).setInvincible(true);
-            }
+            ((HeroModel) bodyB.getUserData()).damage();
+            ((HeroModel) bodyB.getUserData()).setInvincible(true);
+            pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((SnailModel) bodyA.getUserData()).getX(), ((SnailModel) bodyA.getUserData()).getY());
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof SnailModel){
-            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                ((SnailModel) bodyB.getUserData()).setForRemoval();
-                bounceHero(false);
-                shots = MAX_SHOTS;
-            }
-            else {
-                ((HeroModel) bodyA.getUserData()).damage();
-                ((HeroModel) bodyA.getUserData()).setInvincible(true);
-            }
+            ((HeroModel) bodyA.getUserData()).damage();
+            ((HeroModel) bodyA.getUserData()).setInvincible(true);
+            pushHero(((HeroModel) bodyA.getUserData()).getX(), ((HeroModel) bodyA.getUserData()).getY(), ((SnailModel) bodyB.getUserData()).getX(), ((SnailModel) bodyB.getUserData()).getY());
         }
     }
 
@@ -263,6 +255,7 @@ public class GameController implements ContactListener {
             else {
                 ((HeroModel) bodyB.getUserData()).damage();
                 //pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((BatModel) bodyA.getUserData()).getX(), ((BatModel) bodyA.getUserData()).getY());
+                ((HeroModel) bodyB.getUserData()).setInvincible(true);
             }
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BatModel){
@@ -274,6 +267,7 @@ public class GameController implements ContactListener {
             else {
                 ((HeroModel) bodyA.getUserData()).damage();
                 //pushHero(((HeroModel) bodyA.getUserData()).getX(), ((HeroModel) bodyA.getUserData()).getY(), ((BatModel) bodyB.getUserData()).getX(), ((BatModel) bodyB.getUserData()).getY());
+                ((HeroModel) bodyA.getUserData()).setInvincible(true);
             }
         }
     }
@@ -291,6 +285,7 @@ public class GameController implements ContactListener {
             else {
                 ((HeroModel) bodyB.getUserData()).damage();
                 //pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((BubbleModel) bodyA.getUserData()).getX(), ((BubbleModel) bodyA.getUserData()).getY());
+                ((HeroModel) bodyB.getUserData()).setInvincible(true);
             }
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BubbleModel){
@@ -302,6 +297,7 @@ public class GameController implements ContactListener {
             else {
                 ((HeroModel) bodyA.getUserData()).damage();
                 //pushHero(((HeroModel) bodyA.getUserData()).getX(), ((HeroModel) bodyA.getUserData()).getY(), ((BubbleModel) bodyB.getUserData()).getX(), ((BubbleModel) bodyB.getUserData()).getY());
+                ((HeroModel) bodyA.getUserData()).setInvincible(true);
             }
         }
     }
@@ -361,7 +357,6 @@ public class GameController implements ContactListener {
                 //System.out.println("cond 3");
             }
             else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                System.out.println("cond 3");
                 if(((MapTileModel) bodyB.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK)
                     ((MapTileModel) bodyB.getUserData()).setForRemoval();
             }
@@ -375,7 +370,6 @@ public class GameController implements ContactListener {
                 //System.out.println("cond 4");
             }
             else if(contact.getFixtureB().getUserData() == "up" && contact.getFixtureA().getUserData() == "down") {
-                System.out.println("cond 4");
                 if(((MapTileModel) bodyA.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK)
                     ((MapTileModel) bodyA.getUserData()).setForRemoval();
             }

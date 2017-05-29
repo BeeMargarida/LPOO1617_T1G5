@@ -10,6 +10,7 @@ import com.mygdx.game.model.ElementModel;
 import com.mygdx.game.model.HeroModel;
 
 import static com.mygdx.game.model.HeroModel.state.JUMPING;
+import static com.mygdx.game.model.HeroModel.state.ROLLING;
 
 public class HeroView extends ElementView {
 
@@ -20,6 +21,7 @@ public class HeroView extends ElementView {
     private Animation<TextureRegion> rollingAnimation;
     private Texture jumpingFrame;
     private HeroModel.state lastState;
+    private float alpha = 1f;
 
     public HeroView(Downwell game){
         super(game);
@@ -101,11 +103,16 @@ public class HeroView extends ElementView {
     public void update(ElementModel model) {
         super.update(model);
 
-        flip = ((HeroModel) model).getFlip();
-
+        if(((HeroModel) model).getInvincible())
+            alpha = 0.5f;
+        else
+            alpha = 1f;
 
         HeroModel.state currState = ((HeroModel) model).getState();
-        //System.out.println(currState);
+
+        if(currState != ROLLING)
+            flip = ((HeroModel) model).getFlip();
+
         if(currState != lastState) {
             switch (((HeroModel) model).getState()) {
                 case STANDING:
@@ -137,6 +144,10 @@ public class HeroView extends ElementView {
         if(lastState != JUMPING)
             sprite.setRegion(animation.getKeyFrame(stateTime,true));
         sprite.setFlip(flip,false);
+    }
+
+    public void draw(SpriteBatch batch){
+        sprite.draw((batch), alpha);
     }
 
     /*

@@ -19,6 +19,8 @@ public class BulletBody extends ElementBody {
 
         createRectangleFixture(body,width,height,density,friction,restitution,false);
         body.setGravityScale(0);
-        body.setLinearVelocity(0, -BULLET_SPEED);
+        float velx = (float )Math.cos(model.getRotation())*BULLET_SPEED;
+        float vely = (float )Math.sin(model.getRotation())*BULLET_SPEED;
+        body.setLinearVelocity(velx, vely);
     }
 }
