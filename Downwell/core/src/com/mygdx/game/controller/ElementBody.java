@@ -76,8 +76,8 @@ public abstract class ElementBody {
     public void createExtraFixtures() {
         PolygonShape rectangle = new PolygonShape();
         Vector2 v = body.getLocalCenter();
-        v.set(v.x,(float)(v.y + 0.4));
-        rectangle.setAsBox(0.35f, 0.1f,v,0);
+        v.set(v.x,(float)(v.y + 0.35));
+        rectangle.setAsBox(0.35f, 0.2f,v,0);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = rectangle;
@@ -89,7 +89,7 @@ public abstract class ElementBody {
         above = body.createFixture(fixtureDef);
         above.setUserData("up");
 
-        v.set(v.x,(float)(v.y - 0.7));
+        v.set(v.x,(float)(v.y - 0.8));
         rectangle.setAsBox(0.3f, 0.1f, v,0);
         fixtureDef.shape = rectangle;
         under = body.createFixture(fixtureDef);

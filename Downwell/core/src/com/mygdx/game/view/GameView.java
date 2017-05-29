@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = false;
+    private static final boolean DEBUG_PHYSICS = true;
     public final static float PIXEL_TO_METER = 0.04f;
     private static final float VIEWPORT_WIDTH = 33;     //66 full map; 10 zoom
     //private static final float VIEWPORT_HEIGHT = 20;
@@ -156,6 +156,9 @@ public class GameView extends ScreenAdapter{
         handleInputs(delta);
 
         controller.update(delta);
+        if(model.getGameOver()){
+            return;
+        }
 
         camera.position.set(GameController.ARENA_WIDTH/2f / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
 

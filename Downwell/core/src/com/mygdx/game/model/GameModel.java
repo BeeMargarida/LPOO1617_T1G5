@@ -31,6 +31,8 @@ public class GameModel {
     private float dd = 0.5f;
     private int ic = 0;
 
+    private boolean gameOver;
+
     public GameModel(int depth, int number) {
         GameController.ARENA_WIDTH = width;
         GameController.ARENA_HEIGHT = depth;
@@ -39,8 +41,12 @@ public class GameModel {
         bullets = new ArrayList<BulletModel>();
         makeMap();
         enemies = new ArrayList<EnemyModel>();
+        gameOver = false;
         addEnemies(number);
     }
+
+    public void setGameOver() { gameOver = true; }
+    public boolean getGameOver() { return gameOver; }
 
     private MapTileModel getTile(int x, int y){
         tileprob = Arrays.copyOf(tileprobfixed,tileprobfixed.length);

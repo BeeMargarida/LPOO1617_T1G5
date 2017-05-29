@@ -52,10 +52,10 @@ public class GameController implements ContactListener {
     private float accumulator;
     private float timeToNextShoot;
     private int shots;
+
     //private boolean jump = false;
 
     public GameController(GameModel model){
-        //world = new World(new Vector2(0,-4f),true);
         world = new World(new Vector2(0,-15f),true);
         hero = new HeroBody(world,model.getHeroModel());
         enemies = new ArrayList<ElementBody>();
@@ -120,6 +120,10 @@ public class GameController implements ContactListener {
 
     public void update(float delta){
         //System.out.println(model.getHeroModel().getHp());
+        if(hero.getX() >= ARENA_HEIGHT){
+            model.setGameOver();
+            return;
+        }
         remove();
         enemiesUpdate();
         bulletsUpdate(delta);
@@ -229,7 +233,8 @@ public class GameController implements ContactListener {
                 shots = MAX_SHOTS;
             }
             else {
-                //damage hero
+                ((HeroModel) bodyB.getUserData()).damage();
+                ((HeroModel) bodyB.getUserData()).setInvincible(true);
             }
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof SnailModel){
@@ -239,7 +244,8 @@ public class GameController implements ContactListener {
                 shots = MAX_SHOTS;
             }
             else {
-                //damage hero
+                ((HeroModel) bodyA.getUserData()).damage();
+                ((HeroModel) bodyA.getUserData()).setInvincible(true);
             }
         }
     }
@@ -377,7 +383,7 @@ public class GameController implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-        Body bodyA = contact.getFixtureA().getBody();
+        /*Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
         if(bodyA.getUserData() instanceof SnailModel && bodyB.getUserData() instanceof MapTileModel) {
@@ -385,7 +391,7 @@ public class GameController implements ContactListener {
         }
         if(bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof SnailModel) {
                 ((SnailModel) bodyB.getUserData()).changeDirection();
-        }
+        }*/
     }
 
     @Override
@@ -475,7 +481,7 @@ public class GameController implements ContactListener {
         if(!hero.getState() && hero.body.getLinearVelocity().y == 0) { //it isn't jumping or falling
             hero.setState();
             //hero.body.applyForceToCenter(0,200f, true);
-            hero.body.applyForceToCenter(0,300f, true);
+            hero.body.applyForceToCenter(0,500f, true);
             if(Math.abs(hero.body.getLinearVelocity().x) > 0.2)
                 model.getHeroModel().setState(ROLLING);
             else
