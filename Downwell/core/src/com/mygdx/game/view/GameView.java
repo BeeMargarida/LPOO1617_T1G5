@@ -157,6 +157,8 @@ public class GameView extends ScreenAdapter{
 
         controller.update(delta);
         if(model.getGameOver()){
+            System.out.println("FACK");
+            game.startGame();
             return;
         }
 

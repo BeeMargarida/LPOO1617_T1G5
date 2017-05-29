@@ -123,10 +123,7 @@ public class GameController implements ContactListener {
     }
 
     public void update(float delta){
-        if(hero.getX() >= ARENA_HEIGHT){
-            model.setGameOver();
-            return;
-        }
+        model.checkGameOver();
         remove();
         heroUpdate(delta);
         enemiesUpdate();

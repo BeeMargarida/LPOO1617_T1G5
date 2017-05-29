@@ -47,7 +47,17 @@ public class GameModel {
     }
 
     public void setGameOver() { gameOver = true; }
+
     public boolean getGameOver() { return gameOver; }
+
+    public void checkGameOver() {
+        System.out.println(hero.getY());
+        System.out.println(depth);
+        if(hero.getY() <= 0){
+            setGameOver();
+            return;
+        }
+    }
 
     private MapTileModel getTile(int x, int y){
         tileprob = Arrays.copyOf(tileprobfixed,tileprobfixed.length);

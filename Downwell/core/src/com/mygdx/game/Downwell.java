@@ -26,13 +26,9 @@ public class Downwell extends Game {
 		startGame();
 	}
 
-	private void startGame() {
+	public void startGame() {
 		GameModel model = new GameModel(50, 8);
 		setScreen(new GameView(this, model, new GameController(model)));
-		if(model.getGameOver()){
-			MenuModel menuModel = new MenuModel(30,50);
-			setScreen(new MenuView(this,menuModel,new MenuController(menuModel)));
-		}
 		/*MenuModel model = new MenuModel(30,50);
 		setScreen(new MenuView(this,model,new MenuController(model)));*/
 	}
