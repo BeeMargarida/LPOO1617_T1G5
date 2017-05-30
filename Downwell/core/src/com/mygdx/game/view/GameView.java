@@ -121,6 +121,11 @@ public class GameView extends ScreenAdapter{
 
         this.game.getAssetManager().load("sideWall.png", Texture.class);
 
+        this.game.getAssetManager().load("lifebar1.png", Texture.class);
+        this.game.getAssetManager().load("lifebar2.png", Texture.class);
+        this.game.getAssetManager().load("lifebar3.png", Texture.class);
+        this.game.getAssetManager().load("lifebar4.png", Texture.class);
+
         this.game.getAssetManager().finishLoading();
     }
 
@@ -157,7 +162,6 @@ public class GameView extends ScreenAdapter{
 
         controller.update(delta);
         if(model.getGameOver()){
-            System.out.println("FACK");
             game.startGame();
             return;
         }
@@ -167,7 +171,7 @@ public class GameView extends ScreenAdapter{
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
 
-        Gdx.gl.glClearColor( 103/255f, 69/255f, 117/255f, 1 );
+        Gdx.gl.glClearColor( 1/255f, 1/255f, 1/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
         game.getBatch().begin();
@@ -220,6 +224,10 @@ public class GameView extends ScreenAdapter{
         view.update(hero);
         view.act(0.1f);
         view.draw(game.getBatch());
+
+        switch (hero.getHp()){
+            case 1:
+        }
 
     }
 
