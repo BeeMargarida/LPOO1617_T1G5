@@ -12,6 +12,7 @@ import com.mygdx.game.controller.MenuController;
 import com.mygdx.game.model.GameModel;
 import com.mygdx.game.model.MenuModel;
 import com.mygdx.game.view.GameView;
+import com.mygdx.game.view.MainMenuScreen;
 import com.mygdx.game.view.MenuView;
 
 public class Downwell extends Game {
@@ -28,7 +29,8 @@ public class Downwell extends Game {
 
 	public void startGame() {
 		GameModel model = new GameModel(50, 8);
-		setScreen(new GameView(this, model, new GameController(model)));
+		setScreen(new MainMenuScreen(this));
+		//setScreen(new GameView(this, model, new GameController(model)));
 		/*MenuModel model = new MenuModel(30,50);
 		setScreen(new MenuView(this,model,new MenuController(model)));*/
 	}
