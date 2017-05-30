@@ -19,8 +19,6 @@ public abstract class ElementView {
     protected float stateTime = 0;
 
     public ElementView(Downwell game) {
-        //sprite = createSprite(game);
-        //animation = getAnimation();
     }
 
     public void draw(SpriteBatch batch){
@@ -31,7 +29,7 @@ public abstract class ElementView {
     public Animation<TextureRegion> getAnimation() { return animation;}
 
     public void update(ElementModel model) {
-        sprite.setCenter(model.getX() / PIXEL_TO_METER, model.getY() / PIXEL_TO_METER);
+        sprite.setCenter(model.getX()/PIXEL_TO_METER, model.getY()/PIXEL_TO_METER);
     }
 
     public abstract void act(float delta);

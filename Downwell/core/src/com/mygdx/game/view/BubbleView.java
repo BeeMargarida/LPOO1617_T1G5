@@ -37,7 +37,6 @@ public class BubbleView extends EnemyView {
 
     @Override
     public void act(float delta) {
-        //stateTime += delta;
-        //sprite.setRegion(animation.getKeyFrame(stateTime,true));
+
     }
 }

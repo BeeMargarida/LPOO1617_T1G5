@@ -51,8 +51,6 @@ public class GameModel {
     public boolean getGameOver() { return gameOver; }
 
     public void checkGameOver() {
-        System.out.println(hero.getY());
-        System.out.println(depth);
         if(hero.getY() <= 0){
             setGameOver();
             return;
@@ -70,7 +68,6 @@ public class GameModel {
         int probCounter = 0;
         int value = random.nextInt()% 100;
         value = Math.abs(value);
-        //System.out.println(value);
         int i;
         for(i = 0; i < tiles.length; i++){
             if(probCounter+tileprob[i] == probCounter)
