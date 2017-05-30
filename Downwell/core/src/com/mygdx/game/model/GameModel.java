@@ -51,6 +51,11 @@ public class GameModel {
     public boolean getGameOver() { return gameOver; }
 
     public void checkGameOver() {
+        if(hero.getHp().getHp() <= 0){
+            setGameOver();
+            System.out.println("You are DEAD!");
+            return;
+        }
         if(hero.getY() <= 0){
             setGameOver();
             return;

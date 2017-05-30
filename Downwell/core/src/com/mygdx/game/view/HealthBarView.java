@@ -20,12 +20,11 @@ public class HealthBarView extends ElementView {
         tex2 = game.getAssetManager().get("lifebar2.png");
         tex3 = game.getAssetManager().get("lifebar3.png");
         tex4 = game.getAssetManager().get("lifebar4.png");
-        sprite = createSprite(game);
+        createSprite(game);
     }
 
     @Override
     public Sprite createSprite(Downwell game) {
-
         animation = null;
         sprite = new Sprite(tex4);
         return sprite;
@@ -33,17 +32,21 @@ public class HealthBarView extends ElementView {
 
     @Override
     public void update(ElementModel model) {
-        super.update(model);
         switch(((HealthBarModel) model).getHp()){
             case 1:
-                this.sprite = new Sprite(tex1);
+                System.out.println("A: 1");
+                sprite.setRegion(tex1);
+                break;
             case 2:
-                this.sprite = new Sprite(tex2);
+                System.out.println("A: 2");
+                sprite.setRegion(tex2);
+                break;
             case 3:
-                this.sprite = new Sprite(tex3);
-            case 4:
-                this.sprite = new Sprite(tex4);
+                System.out.println("A: 3");
+                sprite.setRegion(tex3);
+                break;
         }
+        super.update(model);
     }
 
     @Override

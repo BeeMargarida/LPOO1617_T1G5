@@ -225,7 +225,6 @@ public class GameView extends ScreenAdapter{
         view.act(0.1f);
         view.draw(game.getBatch());
 
-
         ElementView healthBar = ViewFactory.makeView(game, hero.getHp());
         healthBar.update(hero.getHp());
         healthBar.draw(game.getBatch());

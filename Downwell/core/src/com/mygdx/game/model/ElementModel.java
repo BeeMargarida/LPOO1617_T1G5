@@ -5,8 +5,8 @@ public abstract class ElementModel {
 
     public enum ModelType {HERO, BAT, BUBBLE, SNAIL, MAPTILE_L_WALL, MAPTILE_R_WALL, MAPTILE_D_BLOCK, MAPTILE_I_BLOCK, HEALTHBAR, BULLET}
 
-    private float x;
-    private float y;
+    protected float x;
+    protected float y;
 
     public ElementModel(float x, float y){
         this.x = x;

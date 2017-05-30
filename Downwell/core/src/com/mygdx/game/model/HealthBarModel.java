@@ -9,8 +9,9 @@ public class HealthBarModel extends ElementModel {
         this.hp = hp;
     }
 
-    public void gotDamage() { hp--; }
+    public void gotDamage() { hp -= 1; }
     public int getHp() { return hp; }
+    public void udpate(float y) { this.y = y + 10; }
 
     @Override
     public ModelType getType() {

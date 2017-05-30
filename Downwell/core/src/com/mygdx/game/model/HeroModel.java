@@ -20,7 +20,7 @@ public class HeroModel extends ElementModel {
         flip = false;
         invincible = false;
         invincibleTime = INVIC_TIME;
-        this.hp = new HealthBarModel(x,y,4);
+        hp = new HealthBarModel(-3,y,4);
     }
 
     public ModelType getType(){
@@ -62,16 +62,14 @@ public class HeroModel extends ElementModel {
                 invincibleTime = INVIC_TIME;
             }
         }
-        //System.out.println(hp);
+        hp.udpate(this.y);
     }
 
     public boolean getInvincible(){
         return invincible;
     }
 
-    public HealthBarModel getHp(){
-        return hp;
-    }
+    public HealthBarModel getHp(){  return hp; }
 
     public boolean damage(){
         if(invincible)

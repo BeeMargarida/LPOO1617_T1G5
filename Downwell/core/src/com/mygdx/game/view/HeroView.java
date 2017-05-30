@@ -124,7 +124,6 @@ public class HeroView extends ElementView {
                     sprite.setRegion(animation.getKeyFrame(0));
                     break;
                 case JUMPING:
-                    System.out.println("Jump");
                     animation = null;
                     sprite.setRegion(jumpingFrame);
                     break;
