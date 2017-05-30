@@ -19,7 +19,7 @@ public class BubbleView extends EnemyView {
 
     @Override
     public Sprite createSprite(Downwell game) {
-        Texture texture1 = game.getAssetManager().get("big bullet.png");
+        Texture texture1 = game.getAssetManager().get("bubble.png");
 
         TextureRegion[] frames = new TextureRegion[5];
         frames[0] = new TextureRegion(texture1);

@@ -111,6 +111,7 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "bat5.png" , Texture.class);
 
         this.game.getAssetManager().load( "snail.png", Texture.class);
+        this.game.getAssetManager().load( "bubble.png", Texture.class);
 
         this.game.getAssetManager().load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
         this.game.getAssetManager().load( "big bullet.png", Texture.class);
