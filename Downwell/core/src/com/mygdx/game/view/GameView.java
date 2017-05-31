@@ -6,8 +6,10 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.BubbleModel;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = false;
+    private static final boolean DEBUG_PHYSICS = true;
     public final static float PIXEL_TO_METER = 0.04f;
     private static final float VIEWPORT_WIDTH = 33;     //66 full map; 10 zoom
     //private static final float VIEWPORT_HEIGHT = 20;
@@ -34,6 +36,8 @@ public class GameView extends ScreenAdapter{
     private final Downwell game;
     private final GameModel model;
     private final GameController controller;
+
+    private HealthBarView healthBar;
 
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
@@ -46,6 +50,8 @@ public class GameView extends ScreenAdapter{
         this.controller = controller;
 
         loadAssets();
+
+        this.healthBar = new HealthBarView(game);
 
         camera = createCamera();
         ArrayList<EnemyModel> enemyModel = model.getEnemies();
@@ -166,7 +172,6 @@ public class GameView extends ScreenAdapter{
             game.startGame();
             return;
         }
-
         camera.position.set(GameController.ARENA_WIDTH/2f / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
 
         camera.update();
@@ -178,7 +183,10 @@ public class GameView extends ScreenAdapter{
         game.getBatch().begin();
         drawBackground();
         drawEntities();
+        healthBar.update(model.getHeroModel());
+        healthBar.draw();
         game.getBatch().end();
+
 
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
@@ -225,10 +233,6 @@ public class GameView extends ScreenAdapter{
         view.update(hero);
         view.act(0.1f);
         view.draw(game.getBatch());
-
-        ElementView healthBar = ViewFactory.makeView(game, hero.getHp());
-        healthBar.update(hero.getHp());
-        healthBar.draw(game.getBatch());
 
     }
 

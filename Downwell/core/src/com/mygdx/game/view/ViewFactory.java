@@ -18,7 +18,7 @@ public class ViewFactory {
     public static ElementView makeView(Downwell game, ElementModel model) {
        if (!cache.containsKey(model.getType())) {
             if (model.getType() == ElementModel.ModelType.HERO) cache.put(model.getType(), new HeroView(game));
-            if (model.getType() == ElementModel.ModelType.HEALTHBAR) cache.put(model.getType(), new HealthBarView(game));
+            //if (model.getType() == ElementModel.ModelType.HEALTHBAR) cache.put(model.getType(), new HealthBarView(game));
             if (model.getType() == ElementModel.ModelType.BULLET) cache.put(model.getType(), new BulletView(game));
             if (model.getType() == ElementModel.ModelType.MAPTILE_L_WALL) cache.put(model.getType(), new MapTileView(game, MapTileModel.TileType.L_WALL));
             if (model.getType() == ElementModel.ModelType.MAPTILE_R_WALL) cache.put(model.getType(), new MapTileView(game, MapTileModel.TileType.R_WALL));

@@ -472,7 +472,7 @@ public class GameController implements ContactListener {
         if(!hero.getState() && hero.body.getLinearVelocity().y == 0) { //it isn't jumping or falling
             hero.setState();
             //hero.body.applyForceToCenter(0,200f, true);
-            hero.body.applyForceToCenter(0,500f, true);
+            hero.body.applyForceToCenter(0,700f, true);
             if(Math.abs(hero.body.getLinearVelocity().x) > 0.2)
                 model.getHeroModel().setState(ROLLING);
             else

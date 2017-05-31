@@ -89,7 +89,7 @@ public abstract class ElementBody {
         above = body.createFixture(fixtureDef);
         above.setUserData("up");
 
-        v.set(v.x,(float)(v.y - 0.8));
+        v.set(v.x,(float)(v.y - 0.75));
         rectangle.setAsBox(0.3f, 0.1f, v,0);
         fixtureDef.shape = rectangle;
         under = body.createFixture(fixtureDef);
