@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.BubbleModel;
@@ -25,13 +27,14 @@ import com.mygdx.game.view.HeroView;
 
 import java.util.ArrayList;
 
+import javax.swing.text.View;
+
 
 public class GameView extends ScreenAdapter{
 
     private static final boolean DEBUG_PHYSICS = true;
     public final static float PIXEL_TO_METER = 0.04f;
     private static final float VIEWPORT_WIDTH = 33;     //66 full map; 10 zoom
-    //private static final float VIEWPORT_HEIGHT = 20;
 
     private final Downwell game;
     private final GameModel model;
@@ -39,6 +42,7 @@ public class GameView extends ScreenAdapter{
 
     private HealthBarView healthBar;
 
+    //private final Viewport viewport;
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
     private Matrix4 debugCamera;
@@ -53,7 +57,11 @@ public class GameView extends ScreenAdapter{
 
         this.healthBar = new HealthBarView(game);
 
+        /*float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+        viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio);*/
         camera = createCamera();
+
+
         ArrayList<EnemyModel> enemyModel = model.getEnemies();
         enemyViews = new ArrayList<EnemyView>();
         for(int i = 0; i < enemyModel.size(); i++){
@@ -68,10 +76,8 @@ public class GameView extends ScreenAdapter{
 
     private OrthographicCamera createCamera() {
         OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
-        //OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_HEIGHT / PIXEL_TO_METER );
 
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        //camera.position.set(0,0,0);
+        camera.position.set(camera.viewportHeight / 2f, camera.viewportHeight / 2f , 0);
         camera.update();
 
         if (DEBUG_PHYSICS) {
@@ -172,20 +178,20 @@ public class GameView extends ScreenAdapter{
             game.startGame();
             return;
         }
-        camera.position.set(GameController.ARENA_WIDTH/2f / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
-
-        camera.update();
-        game.getBatch().setProjectionMatrix(camera.combined);
 
         Gdx.gl.glClearColor( 1/255f, 1/255f, 1/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+        camera.position.set(GameController.ARENA_WIDTH/2f / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
+        camera.update();
+        game.getBatch().setProjectionMatrix(camera.combined);
 
         game.getBatch().begin();
         drawBackground();
         drawEntities();
+        game.getBatch().end();
+
         healthBar.update(model.getHeroModel());
         healthBar.draw();
-        game.getBatch().end();
 
 
         if (DEBUG_PHYSICS) {
@@ -203,6 +209,7 @@ public class GameView extends ScreenAdapter{
                 if (map[i][j] != null) {
                     ElementView view = ViewFactory.makeView(game, map[i][j]);
                     view.update(map[i][j]);
+                    //stage.addActor(view);
                     view.draw(game.getBatch());
                 }
         }
@@ -219,6 +226,7 @@ public class GameView extends ScreenAdapter{
             enemyViews.get(i).update(enemies.get(i));
             enemyViews.get(i).act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
             enemyViews.get(i).draw(game.getBatch());
+            //stage.addActor(enemyViews.get(i));
         }
 
         ArrayList<BulletModel> bullets = model.getBullets();
@@ -226,6 +234,7 @@ public class GameView extends ScreenAdapter{
             ElementView view = ViewFactory.makeView(game, bullets.get(i));
             view.update(bullets.get(i));
             view.draw(game.getBatch());
+            //stage.addActor(view);
         }
 
         HeroModel hero = model.getHeroModel();
@@ -233,6 +242,7 @@ public class GameView extends ScreenAdapter{
         view.update(hero);
         view.act(0.1f);
         view.draw(game.getBatch());
+        //stage.addActor(view);
 
     }
 
