@@ -4,6 +4,7 @@ import com.mygdx.game.controller.HeroBody;
 
 public class SnailModel extends EnemyModel {
 
+    private static final int POINTS = 100;
     int direction; //-1 is down, 1 is up
 
     public SnailModel(float x, float y){
@@ -11,6 +12,7 @@ public class SnailModel extends EnemyModel {
         direction = -1;
         if(x > 5)
             flip = true;
+        points = POINTS;
     }
 
     public ModelType getType(){

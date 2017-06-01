@@ -5,12 +5,15 @@ import com.mygdx.game.controller.HeroBody;
 
 public class BatModel extends EnemyModel {
 
+    private static final int POINTS = 50;
+
     public BatModel(float x, float y) {
         super(x,y,new FollowerBehaviourModel());
         if(x > 5)
             flip = false;
         else
             flip = true;
+        points = POINTS;
     }
 
     public ModelType getType(){
@@ -25,5 +28,9 @@ public class BatModel extends EnemyModel {
         else
             flip = false;
         return res;
+    }
+
+    public boolean isSleeping(){
+        return !((FollowerBehaviourModel) behaviour).isActive();
     }
 }

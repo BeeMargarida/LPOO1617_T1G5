@@ -3,11 +3,9 @@ package com.mygdx.game.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Downwell;
-import com.mygdx.game.controller.GameController;
 
 /**
  * Created by Utilizador on 30/05/2017.
@@ -19,16 +17,18 @@ public class MainMenuScreen implements Screen {
     private final static int OPTION_WIDTH = 150;
     private final static int optionWidth = 245;
     private final int optionHeight[] = {198, 158};
-    private Downwell game;
     private int option = -1;
+    //private int
     private int posX = -1;
     private int posY = -1;
     private boolean controlMethod = true;
+    private Downwell game;
 
     public MainMenuScreen(Downwell game){
         this.game = game;
         loadAssets();
     }
+
     @Override
     public void render(float delta) {
         //super.render(delta);;
@@ -71,6 +71,7 @@ public class MainMenuScreen implements Screen {
             option = -1;
         }
     }
+
     private void drawEntities() {
         if(option == -1)
             return;
@@ -100,6 +101,16 @@ public class MainMenuScreen implements Screen {
                 option = 0;
             }
         }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
+            if(!controlMethod) {
+                if(option == 0)
+                    game.setGameScreen();
+                    //handler.setResultsScreen();
+                else if(option == 1)
+                    System.exit(0);
+                    //game.exit();
+            }
+        }
 
         int newX = Gdx.input.getX();
         int newY = Gdx.input.getY();
@@ -113,31 +124,31 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        //super.resize(width, height);
+
     }
 
     @Override
     public void show() {
-        //super.show();
+
     }
 
     @Override
     public void hide() {
-        //super.hide();
+
     }
 
     @Override
     public void pause() {
-        //super.pause();
+
     }
 
     @Override
     public void resume() {
-        //super.resume();
+
     }
 
     @Override
     public void dispose() {
-        //super.dispose();
+
     }
 }

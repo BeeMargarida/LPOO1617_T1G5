@@ -10,6 +10,7 @@ import java.util.Random;
 import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameModel {
+    private GameStats stats;
     private HeroModel hero;
 
     private ArrayList<BulletModel> bullets;
@@ -24,6 +25,7 @@ public class GameModel {
     private MapTileModel map[][];
     private int width = 11;
     private int depth;
+    private int totalDepth;
     private char tiles[] = {'e','d','i'};
     private int tileprobfixed[] = {90, 8, 2};
     private int tileprob[] = {90, 8, 2};
@@ -31,33 +33,42 @@ public class GameModel {
     private float dd = 0.5f;
     private int ic = 0;
     public static final float BULLET_ANG_VARIATION = 5;
+    public static final int INIT_MAP_DEPTH = 20;
+    public static final int FINAL_MAP_DEPTH = 20;
+    public static final int HERO_POS_OFFSET = 10;
 
     private boolean gameOver;
+    private boolean nextLevel;
 
-    public GameModel(int depth, int number) {
-        GameController.ARENA_WIDTH = width;
-        GameController.ARENA_HEIGHT = depth;
+    public GameModel(int depth, int number, GameStats stats) {
+        this.stats = stats;
         this.depth = depth;
-        hero = new HeroModel(GameController.ARENA_WIDTH/2, GameController.ARENA_HEIGHT);
+        this.totalDepth = depth+INIT_MAP_DEPTH+FINAL_MAP_DEPTH;
+        GameController.ARENA_WIDTH = width;
+        GameController.ARENA_HEIGHT = totalDepth;
+        hero = new HeroModel(GameController.ARENA_WIDTH/2, GameController.ARENA_HEIGHT-HERO_POS_OFFSET, stats.getHeroHp());
         bullets = new ArrayList<BulletModel>();
         makeMap();
         enemies = new ArrayList<EnemyModel>();
         gameOver = false;
+        nextLevel = false;
         addEnemies(number);
     }
 
-    public void setGameOver() { gameOver = true; }
+   // public void setGameOver() { gameOver = true; }
 
     public boolean getGameOver() { return gameOver; }
 
-    public void checkGameOver() {
+    public boolean getNextLevel() { return nextLevel; }
+
+    public void checkGameStatus(){
         if(hero.getHp() <= 0){
-            setGameOver();
+            gameOver = true;
             System.out.println("You are DEAD!");
             return;
         }
-        if(hero.getY() <= 0){
-            setGameOver();
+        if(hero.getY() <= HERO_POS_OFFSET){
+            nextLevel = true;
             return;
         }
     }
@@ -104,13 +115,13 @@ public class GameModel {
 
     private void makeMap() {
         //random.setSeed();
-        map = new MapTileModel[depth][width];
-        int ts, y = GameController.ARENA_HEIGHT, x;
-        for (int i = 0; i < depth; i++) {
+        map = new MapTileModel[totalDepth][width];
+        int ts, y = totalDepth, x;
+        for (int i = 0; i < totalDepth; i++) {
             ic = 0;
             x = 0;
             y--;
-            if (i < 5) {
+            if (i < INIT_MAP_DEPTH || i > (totalDepth-FINAL_MAP_DEPTH)) {
                 for (int j = 0; j < width; j++) {
                     if (j == 0)
                         map[i][j] = new MapTileModel(((float) x)+dd, ((float) y)+dd, MapTileModel.TileType.L_WALL);
@@ -180,13 +191,14 @@ public class GameModel {
     public ArrayList<EnemyModel> getEnemies() { return enemies; }
 
     public void removeTile(MapTileModel model){
-        for(int i = 0; i < depth; i++){
+        for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[i].length; j++){
                 if(map[i][j] == model)
                     map[i][j] = null;
             }
         }
     }
+
     public void removeEnemy(EnemyModel model) {
         enemies.set(enemies.indexOf(model), null);
         //enemies.remove(model);
@@ -217,10 +229,12 @@ public class GameModel {
     }
 
     public int getDepth(){
-        return depth;
+        return totalDepth;
     }
 
     public MapTileModel[][] getMap(){
         return map;
     }
+
+    public GameStats getStats() { return stats; }
 }

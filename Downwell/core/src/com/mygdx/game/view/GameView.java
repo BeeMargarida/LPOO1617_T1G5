@@ -32,7 +32,7 @@ import javax.swing.text.View;
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = true;
+    private static final boolean DEBUG_PHYSICS = false;
     public final static float PIXEL_TO_METER = 0.04f;
     private static final float VIEWPORT_WIDTH = 33;     //66 full map; 10 zoom
 
@@ -116,6 +116,7 @@ public class GameView extends ScreenAdapter{
 
         this.game.getAssetManager().load( "jump.png" , Texture.class);
 
+        this.game.getAssetManager().load( "sleepbat.png", Texture.class);
         this.game.getAssetManager().load( "bat1.png" , Texture.class);
         this.game.getAssetManager().load( "bat2.png" , Texture.class);
         this.game.getAssetManager().load( "bat3.png" , Texture.class);
@@ -123,7 +124,14 @@ public class GameView extends ScreenAdapter{
         this.game.getAssetManager().load( "bat5.png" , Texture.class);
 
         this.game.getAssetManager().load( "snail.png", Texture.class);
-        this.game.getAssetManager().load( "bubble.png", Texture.class);
+
+        this.game.getAssetManager().load( "b1.png", Texture.class);
+        this.game.getAssetManager().load( "b2.png", Texture.class);
+        this.game.getAssetManager().load( "b3.png", Texture.class);
+        this.game.getAssetManager().load( "b4.png", Texture.class);
+        this.game.getAssetManager().load( "b5.png", Texture.class);
+        this.game.getAssetManager().load( "b6.png", Texture.class);
+        this.game.getAssetManager().load( "b7.png", Texture.class);
 
         this.game.getAssetManager().load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
         this.game.getAssetManager().load( "big bullet.png", Texture.class);
@@ -170,12 +178,26 @@ public class GameView extends ScreenAdapter{
     }
 
     @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        camera.viewportWidth = VIEWPORT_WIDTH / PIXEL_TO_METER;
+        camera.viewportHeight =  VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
+        camera.update();
+    }
+
+    @Override
     public void render(float delta) {
         handleInputs(delta);
 
         controller.update(delta);
-        if(model.getGameOver()){
+        if(model.getNextLevel()){
+            model.getStats().incLevel();
+            model.getStats().setHeroHp(model.getHeroModel().getHp());
             game.startGame();
+            return;
+        }
+        if(model.getGameOver()){
+            game.setResultsScreen();
             return;
         }
 

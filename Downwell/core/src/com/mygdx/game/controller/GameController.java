@@ -123,7 +123,7 @@ public class GameController implements ContactListener {
     }
 
     public void update(float delta){
-        model.checkGameOver();
+        model.checkGameStatus();
         remove();
         heroUpdate(delta);
         enemiesUpdate();
@@ -177,6 +177,11 @@ public class GameController implements ContactListener {
         for(Body body : bodies){
             ((ElementModel) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
         }
+    }
+
+    private void updateStats(int points){
+        model.getStats().incScore(points);
+        model.getStats().incKills();
     }
 
     private void bounceHero(boolean shot){
@@ -248,6 +253,7 @@ public class GameController implements ContactListener {
                 ((BatModel) bodyA.getUserData()).setForRemoval();
                 bounceHero(false);
                 shots = MAX_SHOTS;
+                updateStats(((BatModel) bodyA.getUserData()).getPoints());
             }
             else {
                 ((HeroModel) bodyB.getUserData()).damage();
@@ -260,6 +266,7 @@ public class GameController implements ContactListener {
                 ((BatModel) bodyB.getUserData()).setForRemoval();
                 bounceHero(false);
                 shots = MAX_SHOTS;
+                updateStats(((BatModel) bodyB.getUserData()).getPoints());
             }
             else {
                 ((HeroModel) bodyA.getUserData()).damage();
@@ -278,6 +285,7 @@ public class GameController implements ContactListener {
                 ((BubbleModel) bodyA.getUserData()).setForRemoval();
                 bounceHero(false);
                 shots = MAX_SHOTS;
+                updateStats(((BubbleModel) bodyA.getUserData()).getPoints());
             }
             else {
                 ((HeroModel) bodyB.getUserData()).damage();
@@ -290,6 +298,7 @@ public class GameController implements ContactListener {
                 ((BubbleModel) bodyB.getUserData()).setForRemoval();
                 bounceHero(false);
                 shots = MAX_SHOTS;
+                updateStats(((BubbleModel) bodyB.getUserData()).getPoints());
             }
             else {
                 ((HeroModel) bodyA.getUserData()).damage();
@@ -305,8 +314,10 @@ public class GameController implements ContactListener {
 
         if(bodyA.getUserData() instanceof BulletModel) {
             if (bodyB.getUserData() instanceof EnemyModel) {
-                if(((EnemyModel) bodyB.getUserData()).damage())
+                if(((EnemyModel) bodyB.getUserData()).damage()) {
                     ((EnemyModel) bodyB.getUserData()).setForRemoval();
+                    updateStats(((EnemyModel)bodyB.getUserData()).getPoints());
+                }
                 ((BulletModel) bodyA.getUserData()).setForRemoval(true);
             }
             else if(bodyB.getUserData() instanceof MapTileModel){
@@ -320,8 +331,10 @@ public class GameController implements ContactListener {
 
         if(bodyB.getUserData() instanceof BulletModel) {
             if (bodyA.getUserData() instanceof EnemyModel) {
-                if(((EnemyModel) bodyA.getUserData()).damage())
+                if(((EnemyModel) bodyA.getUserData()).damage()) {
                     ((EnemyModel) bodyA.getUserData()).setForRemoval();
+                    updateStats(((EnemyModel) bodyA.getUserData()).getPoints());
+                }
                 ((BulletModel) bodyB.getUserData()).setForRemoval(true);
             }
             else if(bodyA.getUserData() instanceof MapTileModel){

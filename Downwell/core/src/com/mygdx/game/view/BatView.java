@@ -10,33 +10,56 @@ import com.mygdx.game.model.ElementModel;
 
 public class BatView extends EnemyView {
 
+    private Texture sleepingFrame;
+    private Animation<TextureRegion> flyingAnimation;
+    private boolean sleeping = true;
+
     public BatView(Downwell game){
         super(game);
     }
 
     @Override
     public Sprite createSprite(Downwell game) {
+
+        sleepingFrame = game.getAssetManager().get("sleepbat.png");
+
         Texture texture1 = game.getAssetManager().get("bat1.png");
         Texture texture2 = game.getAssetManager().get("bat2.png");
         Texture texture3 = game.getAssetManager().get("bat3.png");
         Texture texture4 = game.getAssetManager().get("bat4.png");
         Texture texture5 = game.getAssetManager().get("bat5.png");
 
-        TextureRegion[] frames = new TextureRegion[5];
-        frames[0] = new TextureRegion(texture1);
-        frames[1] = new TextureRegion(texture2);
-        frames[2] = new TextureRegion(texture3);
-        frames[3] = new TextureRegion(texture4);
-        frames[4] = new TextureRegion(texture5);
+        TextureRegion[] flyingFrames = new TextureRegion[5];
+        flyingFrames[0] = new TextureRegion(texture1);
+        flyingFrames[1] = new TextureRegion(texture2);
+        flyingFrames[2] = new TextureRegion(texture3);
+        flyingFrames[3] = new TextureRegion(texture4);
+        flyingFrames[4] = new TextureRegion(texture5);
 
-        animation = new Animation<TextureRegion>(.5f,frames);
-        sprite = new Sprite(animation.getKeyFrame(0));
+        flyingAnimation = new Animation<TextureRegion>(.5f,flyingFrames);
 
+        animation = null;
+        sprite = new Sprite(sleepingFrame);
         return sprite;
     }
 
     public void update(ElementModel model) {
         super.update(model);
         flip = ((BatModel) model).getFlip();
+
+        if(sleeping) {
+            sleeping = ((BatModel) model).isSleeping();
+            if(!sleeping){
+                animation = flyingAnimation;
+                sprite.setRegion(animation.getKeyFrame(0));
+            }
+        }
+    }
+
+
+    @Override
+    public void act(float delta) {
+        if(!sleeping)
+            super.act(delta);
     }
 }

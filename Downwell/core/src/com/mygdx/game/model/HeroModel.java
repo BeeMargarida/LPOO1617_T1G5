@@ -1,6 +1,8 @@
 package com.mygdx.game.model;
 
 
+import com.mygdx.game.Downwell;
+
 import static com.mygdx.game.model.HeroModel.state.JUMPING;
 
 public class HeroModel extends ElementModel {
@@ -14,13 +16,13 @@ public class HeroModel extends ElementModel {
     private float invincibleTime;
     private int hp;
 
-    public HeroModel(float x, float y) {
+    public HeroModel(float x, float y, int hp) {
         super(x,y);
         heroState = JUMPING;
         flip = false;
         invincible = false;
         invincibleTime = INVIC_TIME;
-        hp = 4;
+        this.hp = hp;
     }
 
     public ModelType getType(){

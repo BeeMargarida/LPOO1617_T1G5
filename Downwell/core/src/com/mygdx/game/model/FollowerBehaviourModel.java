@@ -8,6 +8,9 @@ import com.mygdx.game.controller.HeroBody;
 
 public class FollowerBehaviourModel extends BehaviourModel {
 
+    private static final float ACTIVE_DISTANCE = 5f;
+    private boolean active = false;
+
     public FollowerBehaviourModel() {
 
     }
@@ -16,7 +19,9 @@ public class FollowerBehaviourModel extends BehaviourModel {
     public float[] act(float x, float y, Object obj) {
         HeroBody hero = (HeroBody) obj;
         double dist = Math.sqrt(Math.pow(x - hero.getX(),2) + Math.pow(y-hero.getY(),2));
-        if(dist < 5) {
+        if(dist < ACTIVE_DISTANCE) {
+            if(!active)
+                active = true;
             float distX = x-hero.getX();
             float distY = y-hero.getY();
             float[] res = {(float)(distX * (2 / dist)),(float)(distY*(2/dist))};
@@ -24,5 +29,9 @@ public class FollowerBehaviourModel extends BehaviourModel {
         }
         float[] res = new float[]{0, 0};
         return res;
+    }
+
+    public boolean isActive(){
+        return active;
     }
 }
