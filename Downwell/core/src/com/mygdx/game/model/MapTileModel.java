@@ -11,7 +11,7 @@ public class MapTileModel extends ElementModel {
     private boolean flagForRemoval;
     private TileType tileType;
 
-    MapTileModel(float x, float y, TileType tileType){
+    public MapTileModel(float x, float y, TileType tileType){
         super(x,y);
         this.tileType = tileType;
         flagForRemoval = false;

@@ -5,11 +5,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.controller.HeroBody;
 import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.BubbleModel;
 import com.mygdx.game.model.BulletModel;
@@ -31,9 +29,11 @@ public class GameController implements ContactListener {
 
     private enum mov { MS_LEFT, MS_RIGHT, MS_STOP}
 
+    /*
     public static int ARENA_WIDTH;
     public static int ARENA_HEIGHT;
-    public static int TILE_DIMENSIONS = 10;
+    */
+    //public static int TILE_DIMENSIONS = 10;
 
     private static final float MOV_SPEED = 5f;
     private static final float MAX_SPEED = -9f;    //-5f

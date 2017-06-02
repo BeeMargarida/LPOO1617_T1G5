@@ -1,7 +1,6 @@
 package com.mygdx.game.model;
 
 import com.badlogic.gdx.utils.Pool;
-import com.mygdx.game.controller.GameController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,9 +43,9 @@ public class GameModel {
         this.stats = stats;
         this.depth = depth;
         this.totalDepth = depth+INIT_MAP_DEPTH+FINAL_MAP_DEPTH;
-        GameController.ARENA_WIDTH = width;
-        GameController.ARENA_HEIGHT = totalDepth;
-        hero = new HeroModel(GameController.ARENA_WIDTH/2, GameController.ARENA_HEIGHT-HERO_POS_OFFSET, stats.getHeroHp());
+        //GameController.ARENA_WIDTH = width;
+        //GameController.ARENA_HEIGHT = totalDepth;
+        hero = new HeroModel((float) width/2+dd, totalDepth-HERO_POS_OFFSET, stats.getHeroHp());
         bullets = new ArrayList<BulletModel>();
         makeMap();
         enemies = new ArrayList<EnemyModel>();
