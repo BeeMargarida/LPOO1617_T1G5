@@ -4,12 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
 
 /**
@@ -18,16 +24,27 @@ import com.mygdx.game.Downwell;
 
 public class ResultsScreen implements Screen {
 
+    private static final float VIEWPORT_WIDTH = 1280;//888;//630;
+    private static final float VIEWPORT_HEIGHT = 720;//500;//524;
     private Downwell game;
     private Stage stage;
     private float timerToContinue;
-    private static final int RESULTS_WIDTH = 350;
+    private static final int RESULTS_WIDTH = (int) (VIEWPORT_WIDTH/2);
     private static final float TIME_TO_CONTINUE = 3f;
+    private Viewport viewport;
+    private OrthographicCamera camera;
 
     public ResultsScreen(Downwell game, int score, int level, int kills){
         this.game = game;
-        this.stage = new Stage(new ScreenViewport());
         loadAssets();
+
+        float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+        camera = new OrthographicCamera();
+        viewport = new StretchViewport(VIEWPORT_WIDTH * ratio, VIEWPORT_HEIGHT, camera);
+        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
+        camera.update();
+        this.stage = new Stage(viewport);
+
         addBackgroundImage();
         addLevelLabel(level);
         addScoreLabel(score);
@@ -40,6 +57,7 @@ public class ResultsScreen implements Screen {
         update(delta);
         Gdx.gl.glClearColor( 1/255f, 1/255f, 1/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+        game.getBatch().setProjectionMatrix(camera.combined);
         stage.act();
         stage.draw();
     }
@@ -51,46 +69,49 @@ public class ResultsScreen implements Screen {
 
     private void loadAssets(){
         this.game.getAssetManager().load("MenuImage.jpg", Texture.class);
+        this.game.getAssetManager().load("scoreImage_2.jpg", Texture.class);
         this.game.getAssetManager().finishLoading();
     }
 
     private void addBackgroundImage(){
-        Image image = new Image(game.getAssetManager().get(("MenuImage.jpg"), Texture.class));
-        image.setWidth(Gdx.graphics.getWidth()/3f);
-        image.setHeight(Gdx.graphics.getHeight());
-        image.setPosition(Gdx.graphics.getWidth()/2f-image.getWidth()/2f,0);
+        Image image = new Image(game.getAssetManager().get(("scoreImage_2.jpg"), Texture.class));
+        image.setPosition(0,0);
         stage.addActor(image);
     }
 
     private void addLevelLabel(int level){
         Label label = new Label("Level: "+level, new Skin(Gdx.files.internal("uiskin.json")));
-        label.setWidth(20);
-        label.setHeight(20);
-        label.setPosition(RESULTS_WIDTH,300);
+        label.setWidth(40);
+        label.setHeight(40);
+        label.scaleBy(2);
+        label.setPosition(RESULTS_WIDTH,500/*300*/);
         stage.addActor(label);
     }
 
     private void addScoreLabel(int score){
         Label label = new Label("Score: "+score, new Skin(Gdx.files.internal("uiskin.json")));
-        label.setWidth(20);
-        label.setHeight(20);
-        label.setPosition(RESULTS_WIDTH,275);
+        label.setWidth(40);
+        label.setHeight(40);
+        label.scaleBy(2);
+        label.setPosition(RESULTS_WIDTH,475/*275*/);
         stage.addActor(label);
     }
 
     private void addKillsLabel(int kills){
         Label label = new Label("Kills: "+kills, new Skin(Gdx.files.internal("uiskin.json")));
-        label.setWidth(20);
-        label.setHeight(20);
-        label.setPosition(RESULTS_WIDTH,250);
+        label.setWidth(40);
+        label.setHeight(40);
+        label.scaleBy(2);
+        label.setPosition(RESULTS_WIDTH,450/*250*/);
         stage.addActor(label);
     }
 
     private void addContinueLabel(){
         Label label = new Label("Press Enter to continue", new Skin(Gdx.files.internal("uiskin.json")));
-        label.setWidth(50);
-        label.setHeight(20);
-        label.setPosition(RESULTS_WIDTH,200);
+        label.setWidth(100);
+        label.setHeight(40);
+        label.scaleBy(2);
+        label.setPosition(RESULTS_WIDTH,400/*200*/);
         stage.addActor(label);
     }
 
@@ -131,6 +152,7 @@ public class ResultsScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width,height);
+        camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
     }
 }

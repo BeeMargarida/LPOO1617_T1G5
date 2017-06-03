@@ -361,10 +361,8 @@ public class GameController implements ContactListener {
         if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
             if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up") {
                 hero.removeState();
-                //jump = false;
                 model.getHeroModel().setState(HeroModel.state.STANDING);
                 shots = MAX_SHOTS;
-                //System.out.println("cond 3");
             }
             else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
                 if(((MapTileModel) bodyB.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK)

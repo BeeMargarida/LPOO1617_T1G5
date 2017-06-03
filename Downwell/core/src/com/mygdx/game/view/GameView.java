@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.controller.GameController;
 import com.mygdx.game.model.BatModel;
@@ -24,9 +28,9 @@ import java.util.ArrayList;
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = false;
+    private static final boolean DEBUG_PHYSICS = true;
     public final static float PIXEL_TO_METER = 0.04f;
-    private static final float VIEWPORT_WIDTH = 33;     //66 full map; 10 zoom
+    private static final float VIEWPORT_WIDTH = 600;     //66 full map; 10 zoom
 
     private final Downwell game;
     private final GameModel model;
@@ -34,7 +38,7 @@ public class GameView extends ScreenAdapter{
 
     private HealthBarView healthBar;
 
-    //private final Viewport viewport;
+    private final Viewport viewport;
     private final OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
     private Matrix4 debugCamera;
@@ -49,9 +53,12 @@ public class GameView extends ScreenAdapter{
 
         this.healthBar = new HealthBarView(game);
 
-        /*float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
-        viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio);*/
         camera = createCamera();
+        float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+        viewport = new StretchViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, camera);
+        camera.position.set(camera.viewportHeight / 2f, camera.viewportHeight / 2f , 0);
+        camera.update();
+        viewport.apply();
 
 
         ArrayList<EnemyModel> enemyModel = model.getEnemies();
@@ -67,10 +74,7 @@ public class GameView extends ScreenAdapter{
     }
 
     private OrthographicCamera createCamera() {
-        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
-
-        camera.position.set(camera.viewportHeight / 2f, camera.viewportHeight / 2f , 0);
-        camera.update();
+        OrthographicCamera camera = new OrthographicCamera();
 
         if (DEBUG_PHYSICS) {
             debugRenderer = new Box2DDebugRenderer();
@@ -171,10 +175,11 @@ public class GameView extends ScreenAdapter{
 
     @Override
     public void resize(int width, int height) {
-        super.resize(width, height);
-        camera.viewportWidth = VIEWPORT_WIDTH / PIXEL_TO_METER;
+        //super.resize(width, height);
+        viewport.update(width, height);
+        /*camera.viewportWidth = VIEWPORT_WIDTH / PIXEL_TO_METER;
         camera.viewportHeight =  VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
-        camera.update();
+        camera.update();*/
     }
 
     @Override
@@ -195,6 +200,7 @@ public class GameView extends ScreenAdapter{
 
         Gdx.gl.glClearColor( 1/255f, 1/255f, 1/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+
         camera.position.set(model.getWidth()/2f / PIXEL_TO_METER, model.getHeroModel().getY() / PIXEL_TO_METER, 0);
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
@@ -206,7 +212,6 @@ public class GameView extends ScreenAdapter{
 
         healthBar.update(model.getHeroModel());
         healthBar.draw();
-
 
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();

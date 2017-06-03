@@ -44,12 +44,6 @@ public class Downwell extends Game {
 
 	public void setMainMenuScreen(){
         resetGameStats();
-		/*
-		System.out.println(stats.getHeroHp());
-		System.out.println(stats.getKills());
-		System.out.println(stats.getLevel());
-		System.out.println(stats.getLevel());
-		*/
 		setScreen(new MainMenuScreen(this));
 	}
 

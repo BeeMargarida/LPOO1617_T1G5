@@ -28,6 +28,7 @@ public class HealthBarView {
     private Texture tex2;
     private Texture tex3;
     private Texture tex4;
+    private final float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
 
     public HealthBarView(Downwell game){
         tex1 = game.getAssetManager().get("lifebar1.png");
@@ -36,12 +37,11 @@ public class HealthBarView {
         tex4 = game.getAssetManager().get("lifebar4.png");
         this.game = game;
 
-        float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
         Viewport viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth())));
         this.stage = new Stage(viewport,game.getBatch());
 
         img = new Image(tex4);
-        img.setPosition(5,600);
+        img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
         img.scaleBy(1);
         stage.addActor(img);
     }
@@ -58,25 +58,29 @@ public class HealthBarView {
         switch(((HeroModel) model).getHp()){
             case 1:
                 img = new Image(tex1);
-                img.setPosition(5,600);
+                //img.setPosition(5,600);
+                img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
                 img.scaleBy(1);
                 stage.addActor(img);
                 break;
             case 2:
                 img = new Image(tex2);
-                img.setPosition(5,600);
+                //img.setPosition(5,600);
+                img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
                 img.scaleBy(1);
                 stage.addActor(img);
                 break;
             case 3:
                 img = new Image(tex3);
-                img.setPosition(5,600);
+                //img.setPosition(5,600);
+                img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
                 img.scaleBy(1);
                 stage.addActor(img);
                 break;
             case 4:
                 img = new Image(tex4);
-                img.setPosition(5,600);
+                //img.setPosition(5,600);
+                img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
                 img.scaleBy(1);
                 stage.addActor(img);
                 break;
