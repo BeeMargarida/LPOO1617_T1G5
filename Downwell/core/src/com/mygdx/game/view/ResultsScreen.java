@@ -3,9 +3,13 @@ package com.mygdx.game.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -17,6 +21,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
+
+import sun.font.TrueTypeFont;
 
 /**
  * Created by Utilizador on 01/06/2017.
@@ -34,6 +40,8 @@ public class ResultsScreen implements Screen {
     private Viewport viewport;
     private OrthographicCamera camera;
 
+    private BitmapFont font;
+
     public ResultsScreen(Downwell game, int score, int level, int kills){
         this.game = game;
         loadAssets();
@@ -44,6 +52,12 @@ public class ResultsScreen implements Screen {
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         this.stage = new Stage(viewport);
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("5x5.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 32;
+        font = generator.generateFont(parameter);
+        generator.dispose();
 
         addBackgroundImage();
         addLevelLabel(level);
@@ -80,7 +94,7 @@ public class ResultsScreen implements Screen {
     }
 
     private void addLevelLabel(int level){
-        Label label = new Label("Level: "+level, new Skin(Gdx.files.internal("uiskin.json")));
+        Label label = new Label("Level: "+level,new Label.LabelStyle(font, Color.WHITE));
         label.setWidth(40);
         label.setHeight(40);
         label.scaleBy(2);
@@ -89,29 +103,29 @@ public class ResultsScreen implements Screen {
     }
 
     private void addScoreLabel(int score){
-        Label label = new Label("Score: "+score, new Skin(Gdx.files.internal("uiskin.json")));
+        Label label = new Label("Score: "+score,new Label.LabelStyle(font, Color.WHITE));
         label.setWidth(40);
         label.setHeight(40);
         label.scaleBy(2);
-        label.setPosition(RESULTS_WIDTH,475/*275*/);
+        label.setPosition(RESULTS_WIDTH,450/*275*/);
         stage.addActor(label);
     }
 
     private void addKillsLabel(int kills){
-        Label label = new Label("Kills: "+kills, new Skin(Gdx.files.internal("uiskin.json")));
+        Label label = new Label("Kills: "+kills,new Label.LabelStyle(font, Color.WHITE));
         label.setWidth(40);
         label.setHeight(40);
         label.scaleBy(2);
-        label.setPosition(RESULTS_WIDTH,450/*250*/);
+        label.setPosition(RESULTS_WIDTH,400/*250*/);
         stage.addActor(label);
     }
 
     private void addContinueLabel(){
-        Label label = new Label("Press Enter to continue", new Skin(Gdx.files.internal("uiskin.json")));
+        Label label = new Label("Press  Enter",new Label.LabelStyle(font, Color.WHITE));
         label.setWidth(100);
         label.setHeight(40);
         label.scaleBy(2);
-        label.setPosition(RESULTS_WIDTH,400/*200*/);
+        label.setPosition(RESULTS_WIDTH,300/*200*/);
         stage.addActor(label);
     }
 
