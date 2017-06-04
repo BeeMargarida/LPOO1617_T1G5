@@ -13,16 +13,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
-
-import sun.font.TrueTypeFont;
 
 /**
  * Created by Utilizador on 01/06/2017.
@@ -44,8 +37,6 @@ public class ResultsScreen implements Screen {
 
     public ResultsScreen(Downwell game, int score, int level, int kills){
         this.game = game;
-        loadAssets();
-
         float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
         camera = new OrthographicCamera();
         viewport = new StretchViewport(VIEWPORT_WIDTH * ratio, VIEWPORT_HEIGHT, camera);
@@ -79,12 +70,6 @@ public class ResultsScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-    }
-
-    private void loadAssets(){
-        this.game.getAssetManager().load("MenuImage.jpg", Texture.class);
-        this.game.getAssetManager().load("scoreImage_2.jpg", Texture.class);
-        this.game.getAssetManager().finishLoading();
     }
 
     private void addBackgroundImage(){

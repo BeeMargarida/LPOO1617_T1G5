@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
@@ -28,7 +26,7 @@ import java.util.ArrayList;
 
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = true;
+    private static final boolean DEBUG_PHYSICS = false;
     public final static float PIXEL_TO_METER = 0.04f;
     private static final float VIEWPORT_WIDTH = 600;     //66 full map; 10 zoom
 
@@ -37,6 +35,7 @@ public class GameView extends ScreenAdapter{
     private final GameController controller;
 
     private HealthBarView healthBar;
+    private LevelView levelView;
 
     private final Viewport viewport;
     private final OrthographicCamera camera;
@@ -49,9 +48,8 @@ public class GameView extends ScreenAdapter{
         this.model = model;
         this.controller = controller;
 
-        loadAssets();
-
         this.healthBar = new HealthBarView(game);
+        levelView = new LevelView(game, model);
 
         camera = createCamera();
         float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
@@ -83,67 +81,6 @@ public class GameView extends ScreenAdapter{
         }
 
         return camera;
-    }
-
-    private void loadAssets() {
-        this.game.getAssetManager().load( "1.png" , Texture.class);
-        this.game.getAssetManager().load( "2.png" , Texture.class);
-        this.game.getAssetManager().load( "3.png" , Texture.class);
-        this.game.getAssetManager().load( "4.png" , Texture.class);
-        this.game.getAssetManager().load( "5.png" , Texture.class);
-        this.game.getAssetManager().load( "6.png" , Texture.class);
-        this.game.getAssetManager().load( "7.png" , Texture.class);
-
-        this.game.getAssetManager().load( "r1.png" , Texture.class);
-        this.game.getAssetManager().load( "r2.png" , Texture.class);
-        this.game.getAssetManager().load( "r3.png" , Texture.class);
-        this.game.getAssetManager().load( "r4.png" , Texture.class);
-        this.game.getAssetManager().load( "r5.png" , Texture.class);
-        this.game.getAssetManager().load( "r6.png" , Texture.class);
-        this.game.getAssetManager().load( "r7.png" , Texture.class);
-
-        this.game.getAssetManager().load( "jr1.png" , Texture.class);
-        this.game.getAssetManager().load( "jr2.png" , Texture.class);
-        this.game.getAssetManager().load( "jr3.png" , Texture.class);
-        this.game.getAssetManager().load( "jr4.png" , Texture.class);
-        this.game.getAssetManager().load( "jr5.png" , Texture.class);
-        this.game.getAssetManager().load( "jr6.png" , Texture.class);
-        this.game.getAssetManager().load( "jr7.png" , Texture.class);
-
-        this.game.getAssetManager().load( "jump.png" , Texture.class);
-
-        this.game.getAssetManager().load( "sleepbat.png", Texture.class);
-        this.game.getAssetManager().load( "bat1.png" , Texture.class);
-        this.game.getAssetManager().load( "bat2.png" , Texture.class);
-        this.game.getAssetManager().load( "bat3.png" , Texture.class);
-        this.game.getAssetManager().load( "bat4.png" , Texture.class);
-        this.game.getAssetManager().load( "bat5.png" , Texture.class);
-
-        this.game.getAssetManager().load( "snail.png", Texture.class);
-
-        this.game.getAssetManager().load( "b1.png", Texture.class);
-        this.game.getAssetManager().load( "b2.png", Texture.class);
-        this.game.getAssetManager().load( "b3.png", Texture.class);
-        this.game.getAssetManager().load( "b4.png", Texture.class);
-        this.game.getAssetManager().load( "b5.png", Texture.class);
-        this.game.getAssetManager().load( "b6.png", Texture.class);
-        this.game.getAssetManager().load( "b7.png", Texture.class);
-
-        this.game.getAssetManager().load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
-        this.game.getAssetManager().load( "big bullet.png", Texture.class);
-        this.game.getAssetManager().load( "shooting.png", Texture.class);
-
-        this.game.getAssetManager().load("dBlock.png", Texture.class);
-        this.game.getAssetManager().load("iBlock.png", Texture.class);
-
-        this.game.getAssetManager().load("sideWall.png", Texture.class);
-
-        this.game.getAssetManager().load("lifebar1.png", Texture.class);
-        this.game.getAssetManager().load("lifebar2.png", Texture.class);
-        this.game.getAssetManager().load("lifebar3.png", Texture.class);
-        this.game.getAssetManager().load("lifebar4.png", Texture.class);
-
-        this.game.getAssetManager().finishLoading();
     }
 
     private void handleInputs(float delta) {
@@ -205,8 +142,11 @@ public class GameView extends ScreenAdapter{
         camera.update();
         game.getBatch().setProjectionMatrix(camera.combined);
 
+
+
         game.getBatch().begin();
-        drawBackground();
+        levelView.draw();
+        //drawBackground();
         drawEntities();
         game.getBatch().end();
 

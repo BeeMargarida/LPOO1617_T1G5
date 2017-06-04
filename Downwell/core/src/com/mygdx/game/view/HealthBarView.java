@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -21,7 +20,6 @@ public class HealthBarView {
     static final int VIEWPORT_WIDTH = 900;
 
     private Stage stage;
-    private Downwell game;
     protected Sprite sprite;
     protected Image img;
     private Texture tex1;
@@ -35,7 +33,6 @@ public class HealthBarView {
         tex2 = game.getAssetManager().get("lifebar2.png");
         tex3 = game.getAssetManager().get("lifebar3.png");
         tex4 = game.getAssetManager().get("lifebar4.png");
-        this.game = game;
 
         Viewport viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth())));
         this.stage = new Stage(viewport,game.getBatch());

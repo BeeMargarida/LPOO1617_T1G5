@@ -6,10 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
 
@@ -36,15 +33,12 @@ public class MainMenuScreen implements Screen {
 
     public MainMenuScreen(Downwell game){
         this.game = game;
-        loadAssets();
-
         float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
         camera = new OrthographicCamera();
         viewport = new FitViewport(VIEWPORT_WIDTH * ratio, VIEWPORT_HEIGHT, camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
-
     }
 
     @Override
@@ -63,17 +57,8 @@ public class MainMenuScreen implements Screen {
         game.getBatch().end();
     }
 
-
-    private void loadAssets(){
-        this.game.getAssetManager().load( "sBox.png" , Texture.class);
-        this.game.getAssetManager().load( "mainMenuBackground.png" , Texture.class);
-        this.game.getAssetManager().load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
-        this.game.getAssetManager().finishLoading();
-    }
-
     private void drawBackground() {
         Texture background = game.getAssetManager().get("mainMenuBackground.png", Texture.class);
-        //game.getBatch().draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.getBatch().draw(background,VIEWPORT_WIDTH/8,0);
     }
 

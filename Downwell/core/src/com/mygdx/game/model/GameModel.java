@@ -31,27 +31,25 @@ public class GameModel {
     private int tilecounter[] = {0,0,0};
     private float dd = 0.5f;
     private int ic = 0;
-    public static final float BULLET_ANG_VARIATION = 5;
-    public static final int INIT_MAP_DEPTH = 20;
+    private static final float BULLET_ANG_VARIATION = 5;
+    public static final int INIT_MAP_DEPTH = 30;
     public static final int FINAL_MAP_DEPTH = 20;
     public static final int HERO_POS_OFFSET = 10;
 
     private boolean gameOver;
     private boolean nextLevel;
 
-    public GameModel(int depth, int number, GameStats stats) {
+    public GameModel(GameConfig config, GameStats stats) {
         this.stats = stats;
-        this.depth = depth;
+        this.depth = config.getLevelDepth();
         this.totalDepth = depth+INIT_MAP_DEPTH+FINAL_MAP_DEPTH;
-        //GameController.ARENA_WIDTH = width;
-        //GameController.ARENA_HEIGHT = totalDepth;
         hero = new HeroModel((float) width/2+dd, totalDepth-HERO_POS_OFFSET, stats.getHeroHp());
         bullets = new ArrayList<BulletModel>();
         makeMap();
         enemies = new ArrayList<EnemyModel>();
         gameOver = false;
         nextLevel = false;
-        addEnemies(number);
+        addEnemies(config.getEnemiesNumber());
     }
 
    // public void setGameOver() { gameOver = true; }
