@@ -210,7 +210,7 @@ public class GameModel {
         BulletModel bullet = bulletPool.obtain();
 
         bullet.setForRemoval(false);
-        bullet.setPosition(hero.getX(), hero.getY()-0.7f);
+        bullet.setPosition(hero.getX(), hero.getY()-0.8f);
         float rotation = random.nextInt()%BULLET_ANG_VARIATION -90;
         rotation *= Math.PI / 180.0;
         bullet.setRotation(rotation);

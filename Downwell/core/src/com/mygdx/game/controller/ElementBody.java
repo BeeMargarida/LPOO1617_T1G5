@@ -67,15 +67,15 @@ public abstract class ElementBody {
         body.createFixture(fixtureDef);
         body.setFixedRotation(true);
         if(sensors)
-            createExtraFixtures(width);
+            createExtraFixtures(width,height);
 
         rectangle.dispose();
     }
 
-    public void createExtraFixtures(float width) {
+    public void createExtraFixtures(float width, float height) {
         PolygonShape rectangle = new PolygonShape();
         Vector2 v = body.getLocalCenter();
-        v.set(v.x,(float)(v.y + 0.35));
+        v.set(v.x,(float)(v.y + height - 0.1));
         rectangle.setAsBox(width, 0.2f,v,0);
 
         FixtureDef fixtureDef = new FixtureDef();
@@ -88,8 +88,8 @@ public abstract class ElementBody {
         above = body.createFixture(fixtureDef);
         above.setUserData("up");
 
-        v.set(v.x,(float)(v.y - 0.79));
-        rectangle.setAsBox(0.4f, 0.1f, v,0);
+        v.set(v.x,(float)(v.y - 2*height + 0.2));
+        rectangle.setAsBox(0.4f, 0.2f, v,0);
         fixtureDef.shape = rectangle;
         under = body.createFixture(fixtureDef);
         under.setUserData("down");
