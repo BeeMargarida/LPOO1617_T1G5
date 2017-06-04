@@ -15,18 +15,12 @@ import com.mygdx.game.model.HeroModel;
 import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
 
 
-public class HealthBarView {
+public class HealthBarView extends  StatusElementsView {
 
-    static final int VIEWPORT_WIDTH = 900;
-
-    private Stage stage;
-    protected Sprite sprite;
-    protected Image img;
     private Texture tex1;
     private Texture tex2;
     private Texture tex3;
     private Texture tex4;
-    private final float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
 
     public HealthBarView(Downwell game){
         tex1 = game.getAssetManager().get("lifebar1.png");
@@ -34,61 +28,48 @@ public class HealthBarView {
         tex3 = game.getAssetManager().get("lifebar3.png");
         tex4 = game.getAssetManager().get("lifebar4.png");
 
-        Viewport viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth())));
+        camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ratio);
+        this.viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, camera);
         this.stage = new Stage(viewport,game.getBatch());
+        //camera.position.set(camera.viewportHeight / 2f, camera.viewportHeight / 2f , 0);
+        camera.update();
+        viewport.apply();
+
 
         img = new Image(tex4);
-        img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
+        img.setPosition(0,VIEWPORT_WIDTH*ratio - VIEWPORT_WIDTH*ratio/10);
         img.scaleBy(1);
         stage.addActor(img);
     }
 
-    public Sprite createSprite() {
-        sprite = new Sprite(tex4);
-        return sprite;
-    }
-
-    public Stage getStage() { return stage; }
-
-    public void update(ElementModel model) {
+    public void update(Object obj) {
+        HeroModel hero = (HeroModel) obj;
         stage.unfocus(img);
-        switch(((HeroModel) model).getHp()){
+        switch(hero.getHp()){
             case 1:
                 img = new Image(tex1);
-                //img.setPosition(5,600);
-                img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
+                img.setPosition(0,VIEWPORT_WIDTH*ratio -VIEWPORT_WIDTH*ratio/10);
                 img.scaleBy(1);
                 stage.addActor(img);
                 break;
             case 2:
                 img = new Image(tex2);
-                //img.setPosition(5,600);
-                img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
+                img.setPosition(0,VIEWPORT_WIDTH*ratio -VIEWPORT_WIDTH*ratio/10);
                 img.scaleBy(1);
                 stage.addActor(img);
                 break;
             case 3:
                 img = new Image(tex3);
-                //img.setPosition(5,600);
-                img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
+                img.setPosition(0,VIEWPORT_WIDTH*ratio - VIEWPORT_WIDTH*ratio/10);
                 img.scaleBy(1);
                 stage.addActor(img);
                 break;
             case 4:
                 img = new Image(tex4);
-                //img.setPosition(5,600);
-                img.setPosition(5,VIEWPORT_WIDTH*ratio - 50);
+                img.setPosition(0,VIEWPORT_WIDTH*ratio - VIEWPORT_WIDTH*ratio/10);
                 img.scaleBy(1);
                 stage.addActor(img);
                 break;
         }
-    }
-
-    public void draw() {
-        /*stage.getBatch().begin();
-        stage.draw();
-        stage.getBatch().end();*/
-        //img.draw(game.getBatch(),1);
-        stage.draw();
     }
 }

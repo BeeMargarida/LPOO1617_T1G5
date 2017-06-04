@@ -518,7 +518,7 @@ public class GameController implements ContactListener {
     }
     public boolean getJump() { return jump; }
     */
-
+    public int getShots() {  return shots; }
     public World getWorld() {
         return world;
     }

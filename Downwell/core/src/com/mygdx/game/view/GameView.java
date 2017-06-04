@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
@@ -35,6 +36,7 @@ public class GameView extends ScreenAdapter{
     private final GameController controller;
 
     private HealthBarView healthBar;
+    private BulletBarView bulletBar;
     private LevelView levelView;
 
     private final Viewport viewport;
@@ -49,11 +51,12 @@ public class GameView extends ScreenAdapter{
         this.controller = controller;
 
         this.healthBar = new HealthBarView(game);
+        this.bulletBar = new BulletBarView(game);
         levelView = new LevelView(game, model);
 
         camera = createCamera();
         float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
-        viewport = new StretchViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, camera);
+        viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, camera);
         camera.position.set(camera.viewportHeight / 2f, camera.viewportHeight / 2f , 0);
         camera.update();
         viewport.apply();
@@ -72,7 +75,7 @@ public class GameView extends ScreenAdapter{
     }
 
     private OrthographicCamera createCamera() {
-        OrthographicCamera camera = new OrthographicCamera();
+        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
 
         if (DEBUG_PHYSICS) {
             debugRenderer = new Box2DDebugRenderer();
@@ -112,11 +115,17 @@ public class GameView extends ScreenAdapter{
 
     @Override
     public void resize(int width, int height) {
-        //super.resize(width, height);
         viewport.update(width, height);
-        /*camera.viewportWidth = VIEWPORT_WIDTH / PIXEL_TO_METER;
-        camera.viewportHeight =  VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth());
-        camera.update();*/
+        healthBar.resize(width,height);
+        bulletBar.resize(width,height);
+        camera.update();
+
+    }
+
+    @Override
+    public void dispose() {
+        healthBar.dispose();
+        bulletBar.dispose();
     }
 
     @Override
@@ -152,6 +161,8 @@ public class GameView extends ScreenAdapter{
 
         healthBar.update(model.getHeroModel());
         healthBar.draw();
+        bulletBar.update(controller);
+        bulletBar.draw();
 
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
@@ -168,7 +179,6 @@ public class GameView extends ScreenAdapter{
                 if (map[i][j] != null) {
                     ElementView view = ViewFactory.makeView(game, map[i][j]);
                     view.update(map[i][j]);
-                    //stage.addActor(view);
                     view.draw(game.getBatch());
                 }
         }
@@ -183,9 +193,8 @@ public class GameView extends ScreenAdapter{
                 continue;
             }
             enemyViews.get(i).update(enemies.get(i));
-            enemyViews.get(i).act(0.1f); //pq 0.3 e nao outro...0.4 fica mt rapido na mesma
+            enemyViews.get(i).act(0.1f);
             enemyViews.get(i).draw(game.getBatch());
-            //stage.addActor(enemyViews.get(i));
         }
 
         ArrayList<BulletModel> bullets = model.getBullets();
@@ -193,7 +202,6 @@ public class GameView extends ScreenAdapter{
             ElementView view = ViewFactory.makeView(game, bullets.get(i));
             view.update(bullets.get(i));
             view.draw(game.getBatch());
-            //stage.addActor(view);
         }
 
         HeroModel hero = model.getHeroModel();
@@ -201,7 +209,6 @@ public class GameView extends ScreenAdapter{
         view.update(hero);
         view.act(0.1f);
         view.draw(game.getBatch());
-        //stage.addActor(view);
 
     }
 
