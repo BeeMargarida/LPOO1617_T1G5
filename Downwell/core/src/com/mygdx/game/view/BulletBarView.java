@@ -1,25 +1,14 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.controller.GameController;
-import com.mygdx.game.model.ElementModel;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
-
-/**
- * Created by MC-Guida on 04/06/2017.
- */
 
 public class BulletBarView extends StatusElementsView{
 
@@ -29,7 +18,6 @@ public class BulletBarView extends StatusElementsView{
         camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ratio);
         this.viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, camera);
         this.stage = new Stage(viewport,game.getBatch());
-        //camera.position.set(camera.viewportHeight / 2f, camera.viewportHeight / 2f , 0);
         camera.update();
         viewport.apply();
 
@@ -45,8 +33,7 @@ public class BulletBarView extends StatusElementsView{
         bar[8] = game.getAssetManager().get("wb8.png");
 
         img = new Image(bar[8]);
-        img.setPosition(VIEWPORT_WIDTH - VIEWPORT_WIDTH/5,(VIEWPORT_WIDTH*ratio)/100);
-        img.scaleBy(5/10);
+        img.setPosition(VIEWPORT_WIDTH - VIEWPORT_WIDTH/4,(VIEWPORT_WIDTH*ratio)/100);
         stage.addActor(img);
     }
 
@@ -55,8 +42,7 @@ public class BulletBarView extends StatusElementsView{
         GameController controller = (GameController) obj;
         stage.unfocus(img);
         img = new Image(bar[controller.getShots()]);
-        img.setPosition(VIEWPORT_WIDTH - VIEWPORT_WIDTH/5,(VIEWPORT_WIDTH*ratio)/100);
-        img.scaleBy(5/10);
+        img.setPosition(VIEWPORT_WIDTH - VIEWPORT_WIDTH/4,(VIEWPORT_WIDTH*ratio)/100);
         stage.addActor(img);
     }
 }

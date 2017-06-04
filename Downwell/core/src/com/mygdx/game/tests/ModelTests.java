@@ -16,9 +16,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-/**
- * Created by Utilizador on 02/06/2017.
- */
 
 public class ModelTests extends GameTest{
 

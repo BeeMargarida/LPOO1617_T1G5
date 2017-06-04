@@ -4,9 +4,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.model.MapTileModel;
 
-/**
- * Created by Utilizador on 27/04/2017.
- */
 
 public class MapTileBody extends ElementBody {
 

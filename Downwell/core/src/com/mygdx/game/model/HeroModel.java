@@ -1,8 +1,5 @@
 package com.mygdx.game.model;
 
-
-import com.mygdx.game.Downwell;
-
 import static com.mygdx.game.model.HeroModel.state.JUMPING;
 
 public class HeroModel extends ElementModel {

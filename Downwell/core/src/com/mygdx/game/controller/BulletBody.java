@@ -6,11 +6,6 @@ import com.mygdx.game.model.BulletModel;
 
 import static com.mygdx.game.controller.GameController.BULLET_SPEED;
 
-
-/**
- * Created by Utilizador on 26/05/2017.
- */
-
 public class BulletBody extends ElementBody {
     public BulletBody(World world, BulletModel model){
         super(world,model, BodyDef.BodyType.DynamicBody);

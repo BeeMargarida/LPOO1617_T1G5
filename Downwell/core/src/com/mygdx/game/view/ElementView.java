@@ -11,8 +11,6 @@ import com.mygdx.game.model.ElementModel;
 
 import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
 
-
-
 public abstract class ElementView extends Actor {
     protected Sprite sprite;
     protected Animation<TextureRegion> animation;
@@ -25,7 +23,6 @@ public abstract class ElementView extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        //super.draw(batch, parentAlpha);
         sprite.draw((batch));
     }
 

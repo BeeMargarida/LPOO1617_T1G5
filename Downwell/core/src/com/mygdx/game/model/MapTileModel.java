@@ -1,12 +1,8 @@
 package com.mygdx.game.model;
 
-/**
- * Created by Utilizador on 27/04/2017.
- */
-
 public class MapTileModel extends ElementModel {
 
-    public enum TileType {L_WALL, R_WALL, WALL, D_BLOCK, I_BLOCK}
+    public enum TileType {L_WALL, R_WALL, D_BLOCK, I_BLOCK}
 
     private boolean flagForRemoval;
     private TileType tileType;

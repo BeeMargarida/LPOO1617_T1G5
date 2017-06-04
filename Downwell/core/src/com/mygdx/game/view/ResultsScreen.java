@@ -17,14 +17,10 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
 
-/**
- * Created by Utilizador on 01/06/2017.
- */
-
 public class ResultsScreen implements Screen {
 
-    private static final float VIEWPORT_WIDTH = 1280;//888;//630;
-    private static final float VIEWPORT_HEIGHT = 720;//500;//524;
+    private static final float VIEWPORT_WIDTH = 1280;
+    private static final float VIEWPORT_HEIGHT = 720;
     private Downwell game;
     private Stage stage;
     private float timerToContinue;
@@ -37,9 +33,9 @@ public class ResultsScreen implements Screen {
 
     public ResultsScreen(Downwell game, int score, int level, int kills){
         this.game = game;
-        float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+        //float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
         camera = new OrthographicCamera();
-        viewport = new StretchViewport(VIEWPORT_WIDTH * ratio, VIEWPORT_HEIGHT, camera);
+        viewport = new StretchViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         this.stage = new Stage(viewport);

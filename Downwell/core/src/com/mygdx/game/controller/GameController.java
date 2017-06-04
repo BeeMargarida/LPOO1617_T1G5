@@ -29,14 +29,8 @@ public class GameController implements ContactListener {
 
     private enum mov { MS_LEFT, MS_RIGHT, MS_STOP}
 
-    /*
-    public static int ARENA_WIDTH;
-    public static int ARENA_HEIGHT;
-    */
-    //public static int TILE_DIMENSIONS = 10;
-
     private static final float MOV_SPEED = 5f;
-    private static final float MAX_SPEED = -9f;    //-5f
+    private static final float MAX_SPEED = -9f;
     private static final float PUSH_SPEED = 5f;
     private static final float BOUNCE_SPEED = 3f;
     public static final float BULLET_SPEED = 10f;
@@ -52,8 +46,6 @@ public class GameController implements ContactListener {
     private float accumulator;
     private float timeToNextShoot;
     private int shots;
-
-    //private boolean jump = false;
 
     public GameController(GameModel model){
         world = new World(new Vector2(0,-15f),true);
@@ -204,10 +196,10 @@ public class GameController implements ContactListener {
         float vely = normy*PUSH_SPEED;
 
         float velChange = velx - hero.body.getLinearVelocity().x;
-        float forceX = hero.body.getMass() * velChange / (1/60f); //f = mv/t
+        float forceX = hero.body.getMass() * velChange / (1/60f);
 
         velChange = vely - hero.body.getLinearVelocity().y;
-        float forceY = hero.body.getMass() * velChange / (1/60f); //f = mv/t
+        float forceY = hero.body.getMass() * velChange / (1/60f);
 
         hero.body.applyForceToCenter(forceX,forceY,true);
     }
@@ -372,10 +364,8 @@ public class GameController implements ContactListener {
         if (bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof HeroModel)
             if(contact.getFixtureB().getUserData() == "down" && contact.getFixtureA().getUserData() == "up") {
                 hero.removeState();
-                //jump = false;
                 model.getHeroModel().setState(HeroModel.state.STANDING);
                 shots = MAX_SHOTS;
-                //System.out.println("cond 4");
             }
             else if(contact.getFixtureB().getUserData() == "up" && contact.getFixtureA().getUserData() == "down") {
                 if(((MapTileModel) bodyA.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK)
@@ -385,15 +375,7 @@ public class GameController implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-        /*Body bodyA = contact.getFixtureA().getBody();
-        Body bodyB = contact.getFixtureB().getBody();
 
-        if(bodyA.getUserData() instanceof SnailModel && bodyB.getUserData() instanceof MapTileModel) {
-                ((SnailModel) bodyA.getUserData()).changeDirection();
-        }
-        if(bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof SnailModel) {
-                ((SnailModel) bodyB.getUserData()).changeDirection();
-        }*/
     }
 
     @Override
@@ -414,7 +396,7 @@ public class GameController implements ContactListener {
                 if (((EnemyModel) bodies.get(i).getUserData()).getForRemoval()) {
                     model.removeEnemy((EnemyModel) bodies.get(i).getUserData());
                     for(int j = 0; j < enemies.size(); j++){
-                        if((EnemyModel) enemies.get(j).body.getUserData() == (EnemyModel) bodies.get(i).getUserData()) {
+                        if(enemies.get(j).body.getUserData() == bodies.get(i).getUserData()) {
                             enemies.remove(j);
                             break;
                         }
@@ -440,49 +422,18 @@ public class GameController implements ContactListener {
     }
 
     public void moveHeroLeft(){
-        //hero.setTransform(hero.getX()-1, hero.getY(),0);
-        //hero.body.applyForceToCenter(-20f,0,true);
         moveState = mov.MS_LEFT;
-
-        /*
-        float vel = hero.body.getLinearVelocity().x;
-        float desiredVel = -5;
-        float velChange = desiredVel - vel;
-        float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
-        hero.body.applyForceToCenter(force,0,true);
-        */
-
-        /*
-        if(model.getHeroModel().getState() != JUMPING)
-            model.getHeroModel().setState(HeroModel.state.WALKING);
-            */
         model.getHeroModel().setFlip(true);
     }
 
     public void moveHeroRight(){
-        //hero.setTransform(hero.getX()+1, hero.getY(),0);
-        //hero.body.applyForceToCenter(20f,0,true);
         moveState = mov.MS_RIGHT;
-
-        /*
-        float vel = hero.body.getLinearVelocity().x;
-        float desiredVel = 5;
-        float velChange = desiredVel - vel;
-        float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
-        hero.body.applyForceToCenter(force,0,true);
-        */
-
-        /*
-        if(model.getHeroModel().getState() != JUMPING)
-            model.getHeroModel().setState(HeroModel.state.WALKING);
-            */
         model.getHeroModel().setFlip(false);
     }
 
     public void jumpHero() {
         if(!hero.getState() && hero.body.getLinearVelocity().y == 0) { //it isn't jumping or falling
             hero.setState();
-            //hero.body.applyForceToCenter(0,200f, true);
             hero.body.applyForceToCenter(0,700f, true);
             if(Math.abs(hero.body.getLinearVelocity().x) > 0.2)
                 model.getHeroModel().setState(ROLLING);
@@ -496,7 +447,6 @@ public class GameController implements ContactListener {
             if(timeToNextShoot < 0 && shots > 0) {
                 BulletModel bullet = model.createBullet(model.getHeroModel());
                 BulletBody body = new BulletBody(world, bullet);
-                //body.setLinearVelocity(BULLET_SPEED);
                 timeToNextShoot = TIME_BETWEEN_SHOTS;
                 bounceHero(true);
                 shots--;
@@ -504,24 +454,8 @@ public class GameController implements ContactListener {
         }
     }
 
-    /*
-    public void actionHero(){
-        if(jump)
-            shootHero();
-        jumpHero();
-    }
-    */
-
-    /*
-    public void setJump(){
-        jump = true;
-    }
-    public boolean getJump() { return jump; }
-    */
     public int getShots() {  return shots; }
     public World getWorld() {
         return world;
     }
-    public HeroBody getHeroBody() { return hero; }
-    public ArrayList<ElementBody> getEnemiesBody() { return enemies; }
 }

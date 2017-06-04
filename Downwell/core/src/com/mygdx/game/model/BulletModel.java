@@ -2,9 +2,6 @@ package com.mygdx.game.model;
 
 import static com.mygdx.game.model.ElementModel.ModelType.BULLET;
 
-/**
- * Created by Utilizador on 26/05/2017.
- */
 
 public class BulletModel extends ElementModel {
 

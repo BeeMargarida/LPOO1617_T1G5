@@ -123,9 +123,18 @@ public class Downwell extends Game {
 		assetManager.load("lifebar3.png", Texture.class);
 		assetManager.load("lifebar4.png", Texture.class);
 
+		assetManager.load("wb0.png", Texture.class);
+		assetManager.load("wb1.png", Texture.class);
+		assetManager.load("wb2.png", Texture.class);
+		assetManager.load("wb3.png", Texture.class);
+		assetManager.load("wb4.png", Texture.class);
+		assetManager.load("wb5.png", Texture.class);
+		assetManager.load("wb6.png", Texture.class);
+		assetManager.load("wb7.png", Texture.class);
+		assetManager.load("wb8.png", Texture.class);
+
+
 		assetManager.load("scoreImage_2.jpg", Texture.class);
-
-
 
 		assetManager.finishLoading();
 	}

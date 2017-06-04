@@ -1,16 +1,11 @@
 package com.mygdx.game.view;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.ElementModel;
 import com.mygdx.game.model.SnailModel;
 
-/**
- * Created by mc-guida on 18-05-2017.
- */
 
 public class SnailView extends EnemyView {
 
@@ -41,7 +36,5 @@ public class SnailView extends EnemyView {
     @Override
     public void act(float delta) {
         sprite.setFlip(flip, vflip);
-        //stateTime += delta;
-        //sprite.setRegion(animation.getKeyFrame(stateTime,true));
     }
 }

@@ -21,7 +21,7 @@ public class MainMenuScreen implements Screen {
 
     private final static int OPTION_HEIGHT = 40;
     private final static int OPTION_WIDTH = 150;
-    private final static int optionWidth = (int) VIEWPORT_WIDTH/8 + 80;
+    private final static int optionWidth = (int) VIEWPORT_WIDTH/4 + 80;
     private final int optionHeight[] = {(int) VIEWPORT_HEIGHT/2 - 45, (int) VIEWPORT_HEIGHT/2 - 90};
     private int option = -1;
     private int posX = -1;
@@ -34,11 +34,11 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(Downwell game){
         this.game = game;
         float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
-        camera = new OrthographicCamera();
-        viewport = new FitViewport(VIEWPORT_WIDTH * ratio, VIEWPORT_HEIGHT, camera);
-        viewport.apply();
+        camera = new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
+        viewport.apply();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class MainMenuScreen implements Screen {
 
     private void drawBackground() {
         Texture background = game.getAssetManager().get("mainMenuBackground.png", Texture.class);
-        game.getBatch().draw(background,VIEWPORT_WIDTH/8,0);
+        game.getBatch().draw(background,VIEWPORT_WIDTH/4,0);
     }
 
     private void update(){
@@ -80,7 +80,6 @@ public class MainMenuScreen implements Screen {
         if(option == -1)
             return;
         Texture box = game.getAssetManager().get("sBox.png", Texture.class);
-        //System.out.println(Gdx.graphics.getWidth()/2-box.getWidth()/2);
         game.getBatch().draw(box, optionWidth, optionHeight[option]);
     }
 
@@ -130,6 +129,7 @@ public class MainMenuScreen implements Screen {
     public void resize(int width, int height) {
         viewport.update(width, height);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
+        camera.update();
     }
 
     @Override

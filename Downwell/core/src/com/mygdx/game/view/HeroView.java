@@ -14,8 +14,6 @@ import static com.mygdx.game.model.HeroModel.state.ROLLING;
 
 public class HeroView extends ElementView {
 
-    //public enum state {STANDING, WALKING, JUMPING, SHOOTING}
-
     private Animation<TextureRegion> standingAnimation;
     private Animation<TextureRegion> walkingAnimation;
     private Animation<TextureRegion> rollingAnimation;
@@ -91,8 +89,6 @@ public class HeroView extends ElementView {
 
         jumpingFrame = game.getAssetManager().get("jump.png");
 
-        //animation = standingAnimation;
-        //sprite = new Sprite(animation.getKeyFrame(0));
         animation = null;
         sprite = new Sprite(jumpingFrame);
 
@@ -149,20 +145,4 @@ public class HeroView extends ElementView {
         sprite.draw((batch), alpha);
     }
 
-    /*
-    public void setAnimation(state state){
-        if(state == STANDING) {
-            animation = standingAnimation;
-            sprite = new Sprite(animation.getKeyFrame(0));
-        }
-        else if(state == WALKING){
-            animation = walkingAnimation;
-            sprite = new Sprite(animation.getKeyFrame(0));
-        }
-        else if(state == JUMPING){
-            animation = null;
-            sprite = new Sprite(jumpingFrame);
-        }
-    }
-    */
 }

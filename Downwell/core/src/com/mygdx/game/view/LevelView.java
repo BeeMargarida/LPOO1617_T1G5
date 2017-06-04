@@ -8,9 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.GameModel;
 
-/**
- * Created by Utilizador on 03/06/2017.
- */
 
 public class LevelView {
 

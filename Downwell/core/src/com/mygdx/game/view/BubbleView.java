@@ -7,9 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.ElementModel;
 
-/**
- * Created by mc-guida on 04-05-2017.
- */
 
 public class BubbleView extends EnemyView {
 
@@ -47,10 +44,4 @@ public class BubbleView extends EnemyView {
         super.update(model);
     }
 
-    /*
-    @Override
-    public void act(float delta) {
-
-    }
-    */
 }

@@ -7,10 +7,6 @@ import com.mygdx.game.model.MapTileModel;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Utilizador on 04/05/2017.
- */
-
 public class ViewFactory {
     private static Map<ElementModel.ModelType, ElementView> cache =
             new HashMap<ElementModel.ModelType, ElementView>();

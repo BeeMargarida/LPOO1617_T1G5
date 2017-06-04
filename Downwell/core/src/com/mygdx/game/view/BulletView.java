@@ -2,14 +2,8 @@ package com.mygdx.game.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Downwell;
 
-import static com.mygdx.game.model.HeroModel.state.JUMPING;
-
-/**
- * Created by Utilizador on 26/05/2017.
- */
 
 public class BulletView extends ElementView {
     public BulletView(Downwell game){
@@ -26,9 +20,6 @@ public class BulletView extends ElementView {
     }
 
     public void act(float delta) {
-        /*
-            sprite.setRegion(animation.getKeyFrame(stateTime,true));
-        sprite.setFlip(flip,false);
-        */
+
     }
 }

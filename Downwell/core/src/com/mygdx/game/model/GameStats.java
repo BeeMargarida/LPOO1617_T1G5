@@ -1,8 +1,5 @@
 package com.mygdx.game.model;
 
-/**
- * Created by Utilizador on 01/06/2017.
- */
 
 public class GameStats {
     private int score;

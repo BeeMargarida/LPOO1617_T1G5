@@ -52,8 +52,6 @@ public class GameModel {
         addEnemies(config.getEnemiesNumber());
     }
 
-   // public void setGameOver() { gameOver = true; }
-
     public boolean getGameOver() { return gameOver; }
 
     public boolean getNextLevel() { return nextLevel; }
@@ -111,7 +109,6 @@ public class GameModel {
     }
 
     private void makeMap() {
-        //random.setSeed();
         map = new MapTileModel[totalDepth][width];
         int ts, y = totalDepth, x;
         for (int i = 0; i < totalDepth; i++) {
@@ -163,9 +160,9 @@ public class GameModel {
                     i += 4;
                 } else if (en[n] == 's' && i > 8) {
                     if (j == 1 && map[i][j] == null) {
-                        enemies.add(new SnailModel((float) (map[i][j - 1].getX() + 1), map[i][j - 1].getY()));
+                        enemies.add(new SnailModel((map[i][j - 1].getX() + 1), map[i][j - 1].getY()));
                     } else if (j == map[i].length - 1 && map[i][j] == null) {
-                        enemies.add(new SnailModel((float) (map[i][j - 1].getX() - 1), map[i][j - 1].getY()));
+                        enemies.add(new SnailModel((map[i][j - 1].getX() - 1), map[i][j - 1].getY()));
                     } else
                         break;
                     number--;
@@ -198,7 +195,6 @@ public class GameModel {
 
     public void removeEnemy(EnemyModel model) {
         enemies.set(enemies.indexOf(model), null);
-        //enemies.remove(model);
     }
 
     public void removeBullet(BulletModel bullet){

@@ -6,9 +6,6 @@ import com.mygdx.game.Downwell;
 import com.mygdx.game.model.ElementModel;
 import com.mygdx.game.model.MapTileModel;
 
-/**
- * Created by Utilizador on 04/05/2017.
- */
 
 public class MapTileView extends ElementView {
 

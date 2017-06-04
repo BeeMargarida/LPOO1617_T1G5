@@ -31,7 +31,6 @@ public class HealthBarView extends  StatusElementsView {
         camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ratio);
         this.viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, camera);
         this.stage = new Stage(viewport,game.getBatch());
-        //camera.position.set(camera.viewportHeight / 2f, camera.viewportHeight / 2f , 0);
         camera.update();
         viewport.apply();
 

@@ -2,10 +2,6 @@ package com.mygdx.game.model;
 
 import com.mygdx.game.controller.HeroBody;
 
-/**
- * Created by mc-guida on 27-04-2017.
- */
-
 public abstract class EnemyModel extends ElementModel {
 
     protected BehaviourModel behaviour;
@@ -31,10 +27,6 @@ public abstract class EnemyModel extends ElementModel {
 
     public boolean getFlip(){
         return flip;
-    }
-
-    public int getHp(){
-        return hp;
     }
 
     public boolean damage(){

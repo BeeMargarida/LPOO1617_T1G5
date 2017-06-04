@@ -1,8 +1,5 @@
 package com.mygdx.game.model;
 
-/**
- * Created by Utilizador on 03/06/2017.
- */
 
 public class GameConfig {
     private int levelDepth;

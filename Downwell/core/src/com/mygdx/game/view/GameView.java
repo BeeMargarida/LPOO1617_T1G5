@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.controller.GameController;
@@ -29,7 +28,7 @@ public class GameView extends ScreenAdapter{
 
     private static final boolean DEBUG_PHYSICS = true;
     public final static float PIXEL_TO_METER = 0.04f;
-    private static final float VIEWPORT_WIDTH = 600;     //66 full map; 10 zoom
+    private static final float VIEWPORT_WIDTH = 600;
 
     private final Downwell game;
     private final GameModel model;
@@ -75,8 +74,7 @@ public class GameView extends ScreenAdapter{
     }
 
     private OrthographicCamera createCamera() {
-        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
-
+        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER* ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()) );
         if (DEBUG_PHYSICS) {
             debugRenderer = new Box2DDebugRenderer();
             debugCamera = camera.combined.cpy();
@@ -118,6 +116,7 @@ public class GameView extends ScreenAdapter{
         viewport.update(width, height);
         healthBar.resize(width,height);
         bulletBar.resize(width,height);
+        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2,0);
         camera.update();
 
     }

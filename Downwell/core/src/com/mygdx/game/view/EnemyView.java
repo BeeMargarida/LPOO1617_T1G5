@@ -1,6 +1,5 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.ElementModel;
 
@@ -14,7 +13,6 @@ public abstract class EnemyView extends ElementView {
 
     @Override
     public void update(ElementModel model) {
-
         super.update(model);
     }
 

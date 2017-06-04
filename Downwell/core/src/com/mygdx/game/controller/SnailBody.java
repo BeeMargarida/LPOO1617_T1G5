@@ -11,7 +11,6 @@ public class SnailBody extends ElementBody {
 
         float density = 1f, friction = 0.4f, restitution = 0f;
         float width = 0.45f, height = 0.5f;
-        //int dimension = GameController.TILE_DIMENSIONS;
         createRectangleFixture(body,width,height,density,friction,restitution,true);
     }
 }
