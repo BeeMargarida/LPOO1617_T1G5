@@ -2,11 +2,14 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.controller.GameController;
 import com.mygdx.game.model.GameConfig;
 import com.mygdx.game.model.GameModel;
+import com.mygdx.game.model.GameSoundFX;
 import com.mygdx.game.model.GameStats;
 import com.mygdx.game.view.GameView;
 import com.mygdx.game.view.MainMenuScreen;
@@ -18,6 +21,8 @@ public class Downwell extends Game {
 	private AssetManager assetManager;
 	private GameConfig config;
 	private GameStats stats;
+	private Music bgMusic;
+	private GameSoundFX soundFX;
 	private final static int MAX_HERO_HP = 4;
 	private final static int STARTING_DEPTH = 50;
 	private final static int STARTING_ENEMY_NO = 8;
@@ -32,13 +37,14 @@ public class Downwell extends Game {
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
 		loadAssets();
+		soundFX = new GameSoundFX(this);
 		setMainMenuScreen();
 	}
 
 	public void startGame() {
 		if(stats.getLevel()%2 == 0)
 			config.incDifficulty();
-		GameModel model = new GameModel(config, stats);
+		GameModel model = new GameModel(config, stats, soundFX);
 		setScreen(new GameView(this, model, new GameController(model)));
 	}
 
@@ -48,10 +54,14 @@ public class Downwell extends Game {
 	}
 
 	public void setGameScreen(){
+		bgMusic = assetManager.get("Artificial Intelligence Bomb.mp3");
+		bgMusic.setLooping(true);
+		bgMusic.play();
 		this.startGame();
 	}
 
 	public void setResultsScreen(){
+		bgMusic.stop();
 		setScreen(new ResultsScreen(this,stats.getScore(),stats.getLevel(),stats.getKills()));
 	}
 
@@ -135,6 +145,18 @@ public class Downwell extends Game {
 
 
 		assetManager.load("scoreImage_2.jpg", Texture.class);
+
+
+		assetManager.load("Artificial Intelligence Bomb.mp3", Music.class);
+		assetManager.load("bexplosion.wav", Sound.class);
+		assetManager.load("eexplosion.wav", Sound.class);
+		assetManager.load("hit.wav", Sound.class);
+		assetManager.load("hitbullet.wav", Sound.class);
+		assetManager.load("jump.wav", Sound.class);
+		assetManager.load("land.wav", Sound.class);
+		assetManager.load("shoot.wav", Sound.class);
+		assetManager.load("menuselect.wav", Sound.class);
+		assetManager.load("gamestart.ogg", Sound.class);
 
 		assetManager.finishLoading();
 	}

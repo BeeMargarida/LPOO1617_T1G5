@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -84,11 +85,11 @@ public class GameController implements ContactListener {
         }
     }
 
-    public void heroUpdate(float delta){
+    private void heroUpdate(float delta){
         model.getHeroModel().update(delta);
     }
 
-    public void enemiesUpdate() {
+    private void enemiesUpdate() {
         int j = 0;
         for(int i = 0; i < model.getEnemies().size(); i++){
             float[] res;
@@ -105,7 +106,7 @@ public class GameController implements ContactListener {
         }
     }
 
-    public void bulletsUpdate(float delta){
+    private void bulletsUpdate(float delta){
         ArrayList<BulletModel> bullets = model.getBullets();
         for(int i = 0; i < bullets.size(); i++){
             if(bullets.get(i).decreaseTimeToLive(delta)){
@@ -204,173 +205,180 @@ public class GameController implements ContactListener {
         hero.body.applyForceToCenter(forceX,forceY,true);
     }
 
-    public void snailBeginContact(Contact contact) {
-        Body bodyA = contact.getFixtureA().getBody();
-        Body bodyB = contact.getFixtureB().getBody();
+    private void handleSnailHeroContact(Fixture snail, Fixture hero){
+        Body bodyA = snail.getBody();
+        Body bodyB = hero.getBody();
 
-        if(bodyA.getUserData() instanceof  SnailModel){
-            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                ((SnailModel) bodyA.getUserData()).changeDirection();
-            }
-            else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                ((SnailModel) bodyA.getUserData()).changeDirection();
-            }
+        ((HeroModel) bodyB.getUserData()).damage();
+        ((HeroModel) bodyB.getUserData()).setInvincible(true);
+        pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((SnailModel) bodyA.getUserData()).getX(), ((SnailModel) bodyA.getUserData()).getY());
+        if(!((HeroModel) bodyB.getUserData()).getInvincible())
+            model.getSoundFX().playHeroDamageSound();
+    }
+
+    private void handleSnailMapContact(Fixture snail, Fixture other){
+        Body bodyA = snail.getBody();
+
+        if(snail.getUserData() == "down" && other.getUserData() == "up"){
+            ((SnailModel) bodyA.getUserData()).changeDirection();
         }
-        if(bodyB.getUserData() instanceof SnailModel){
-            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                ((SnailModel) bodyB.getUserData()).changeDirection();
-            }
-            else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                ((SnailModel) bodyB.getUserData()).changeDirection();
-            }
-        }
-        if(bodyA.getUserData() instanceof  SnailModel && bodyB.getUserData() instanceof HeroModel){
-            ((HeroModel) bodyB.getUserData()).damage();
-            ((HeroModel) bodyB.getUserData()).setInvincible(true);
-            pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((SnailModel) bodyA.getUserData()).getX(), ((SnailModel) bodyA.getUserData()).getY());
-        }
-        if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof SnailModel){
-            ((HeroModel) bodyA.getUserData()).damage();
-            ((HeroModel) bodyA.getUserData()).setInvincible(true);
-            pushHero(((HeroModel) bodyA.getUserData()).getX(), ((HeroModel) bodyA.getUserData()).getY(), ((SnailModel) bodyB.getUserData()).getX(), ((SnailModel) bodyB.getUserData()).getY());
+        else if(snail.getUserData() == "up" && other.getUserData() == "down") {
+            ((SnailModel) bodyA.getUserData()).changeDirection();
         }
     }
 
-    public void batBeginContact(Contact contact) {
+    private void snailBeginContact(Contact contact) {
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
+
+        if(bodyA.getUserData() instanceof  SnailModel)
+            handleSnailMapContact(contact.getFixtureA(), contact.getFixtureB());
+        if(bodyB.getUserData() instanceof SnailModel)
+            handleSnailMapContact(contact.getFixtureB(), contact.getFixtureA());
+
+        if(bodyA.getUserData() instanceof  SnailModel && bodyB.getUserData() instanceof HeroModel)
+            handleSnailHeroContact(contact.getFixtureA(), contact.getFixtureB());
+        if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof SnailModel)
+            handleSnailHeroContact(contact.getFixtureB(), contact.getFixtureA());
+    }
+
+    private void handleBatHeroContact(Fixture bat, Fixture hero){
+        Body bodyA = bat.getBody();
+        Body bodyB = hero.getBody();
+
+        if(bat.getUserData() == "up" && hero.getUserData() == "down") {
+            ((BatModel) bodyA.getUserData()).setForRemoval();
+            bounceHero(false);
+            shots = MAX_SHOTS;
+            updateStats(((BatModel) bodyA.getUserData()).getPoints());
+            model.getSoundFX().playEnemyExplosionSound();
+        }
+        else {
+            ((HeroModel) bodyB.getUserData()).damage();
+            //pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((BatModel) bodyA.getUserData()).getX(), ((BatModel) bodyA.getUserData()).getY());
+            ((HeroModel) bodyB.getUserData()).setInvincible(true);
+            if(!((HeroModel) bodyB.getUserData()).getInvincible())
+                model.getSoundFX().playHeroDamageSound();
+        }
+    }
+
+    private void batBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
         if(bodyA.getUserData() instanceof  BatModel && bodyB.getUserData() instanceof HeroModel){
-            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                ((BatModel) bodyA.getUserData()).setForRemoval();
-                bounceHero(false);
-                shots = MAX_SHOTS;
-                updateStats(((BatModel) bodyA.getUserData()).getPoints());
-            }
-            else {
-                ((HeroModel) bodyB.getUserData()).damage();
-                //pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((BatModel) bodyA.getUserData()).getX(), ((BatModel) bodyA.getUserData()).getY());
-                ((HeroModel) bodyB.getUserData()).setInvincible(true);
-            }
+            handleBatHeroContact(contact.getFixtureA(), contact.getFixtureB());
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BatModel){
-            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                ((BatModel) bodyB.getUserData()).setForRemoval();
-                bounceHero(false);
-                shots = MAX_SHOTS;
-                updateStats(((BatModel) bodyB.getUserData()).getPoints());
-            }
-            else {
-                ((HeroModel) bodyA.getUserData()).damage();
-                //pushHero(((HeroModel) bodyA.getUserData()).getX(), ((HeroModel) bodyA.getUserData()).getY(), ((BatModel) bodyB.getUserData()).getX(), ((BatModel) bodyB.getUserData()).getY());
-                ((HeroModel) bodyA.getUserData()).setInvincible(true);
-            }
+            handleBatHeroContact(contact.getFixtureB(), contact.getFixtureA());
         }
     }
 
-    public void bubbleBeginContact(Contact contact) {
+    private void handleBubbleHeroContact(Fixture bubble, Fixture hero){
+        Body bodyA = bubble.getBody();
+        Body bodyB = hero.getBody();
+
+        if(bubble.getUserData() == "up" && hero.getUserData() == "down") {
+            ((BubbleModel) bodyA.getUserData()).setForRemoval();
+            bounceHero(false);
+            shots = MAX_SHOTS;
+            updateStats(((BubbleModel) bodyA.getUserData()).getPoints());
+            model.getSoundFX().playEnemyExplosionSound();
+        }
+        else {
+            if(((HeroModel) bodyB.getUserData()).damage());
+                model.getSoundFX().playHeroDamageSound();
+            //pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((BubbleModel) bodyA.getUserData()).getX(), ((BubbleModel) bodyA.getUserData()).getY());
+            ((HeroModel) bodyB.getUserData()).setInvincible(true);
+        }
+    }
+
+    private void bubbleBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
         if(bodyA.getUserData() instanceof  BubbleModel && bodyB.getUserData() instanceof HeroModel){
-            if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                ((BubbleModel) bodyA.getUserData()).setForRemoval();
-                bounceHero(false);
-                shots = MAX_SHOTS;
-                updateStats(((BubbleModel) bodyA.getUserData()).getPoints());
-            }
-            else {
-                ((HeroModel) bodyB.getUserData()).damage();
-                //pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((BubbleModel) bodyA.getUserData()).getX(), ((BubbleModel) bodyA.getUserData()).getY());
-                ((HeroModel) bodyB.getUserData()).setInvincible(true);
-            }
+            handleBubbleHeroContact(contact.getFixtureA(), contact.getFixtureB());
         }
         if(bodyA.getUserData() instanceof  HeroModel && bodyB.getUserData() instanceof BubbleModel){
-            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up"){
-                ((BubbleModel) bodyB.getUserData()).setForRemoval();
-                bounceHero(false);
-                shots = MAX_SHOTS;
-                updateStats(((BubbleModel) bodyB.getUserData()).getPoints());
-            }
-            else {
-                ((HeroModel) bodyA.getUserData()).damage();
-                //pushHero(((HeroModel) bodyA.getUserData()).getX(), ((HeroModel) bodyA.getUserData()).getY(), ((BubbleModel) bodyB.getUserData()).getX(), ((BubbleModel) bodyB.getUserData()).getY());
-                ((HeroModel) bodyA.getUserData()).setInvincible(true);
-            }
+            handleBubbleHeroContact(contact.getFixtureB(), contact.getFixtureA());
         }
     }
 
-    public void bulletBeginContact(Contact contact) {
-        Body bodyA = contact.getFixtureA().getBody();
-        Body bodyB = contact.getFixtureB().getBody();
+    private void handleBulletContact(Fixture bullet, Fixture other){
+        Body bodyA = bullet.getBody();
+        Body bodyB = other.getBody();
 
         if(bodyA.getUserData() instanceof BulletModel) {
             if (bodyB.getUserData() instanceof EnemyModel) {
                 if(((EnemyModel) bodyB.getUserData()).damage()) {
                     ((EnemyModel) bodyB.getUserData()).setForRemoval();
                     updateStats(((EnemyModel)bodyB.getUserData()).getPoints());
+                    model.getSoundFX().playEnemyExplosionSound();
                 }
                 ((BulletModel) bodyA.getUserData()).setForRemoval(true);
             }
             else if(bodyB.getUserData() instanceof MapTileModel){
-                if(((MapTileModel) bodyB.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK)
+                if(((MapTileModel) bodyB.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK) {
                     ((MapTileModel) bodyB.getUserData()).setForRemoval();
-                    ((BulletModel) bodyA.getUserData()).setForRemoval(true);
+                    model.getSoundFX().playBlockExplosionSound();
+                }
+                ((BulletModel) bodyA.getUserData()).setForRemoval(true);
             }
             else if(! (bodyB.getUserData() instanceof BulletModel))
                 ((BulletModel) bodyA.getUserData()).setForRemoval(true);
+            model.getSoundFX().playBulletHitSound();
+        }
+    }
+
+    private void bulletBeginContact(Contact contact) {
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
+
+        if(bodyA.getUserData() instanceof BulletModel) {
+            handleBulletContact(contact.getFixtureA(), contact.getFixtureB());
         }
 
         if(bodyB.getUserData() instanceof BulletModel) {
-            if (bodyA.getUserData() instanceof EnemyModel) {
-                if(((EnemyModel) bodyA.getUserData()).damage()) {
-                    ((EnemyModel) bodyA.getUserData()).setForRemoval();
-                    updateStats(((EnemyModel) bodyA.getUserData()).getPoints());
-                }
-                ((BulletModel) bodyB.getUserData()).setForRemoval(true);
-            }
-            else if(bodyA.getUserData() instanceof MapTileModel){
-                if(((MapTileModel) bodyA.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK)
-                    ((MapTileModel) bodyA.getUserData()).setForRemoval();
-                ((BulletModel) bodyB.getUserData()).setForRemoval(true);
-            }
-            else if(! (bodyA.getUserData() instanceof BulletModel))
-                ((BulletModel) bodyB.getUserData()).setForRemoval(true);
+            handleBulletContact(contact.getFixtureB(), contact.getFixtureA());
         }
+    }
+
+    private void handleMapTileHeroContact(Fixture mapTile, Fixture hero){
+        Body bodyA = mapTile.getBody();
+
+        if(hero.getUserData() == "down" && mapTile.getUserData() == "up") {
+            this.hero.removeState();
+            model.getHeroModel().setState(HeroModel.state.STANDING);
+            shots = MAX_SHOTS;
+            model.getSoundFX().playLandSound();
+        }
+        else if(hero.getUserData() == "up" && mapTile.getUserData() == "down") {
+            if(((MapTileModel) bodyA.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK) {
+                ((MapTileModel) bodyA.getUserData()).setForRemoval();
+                model.getSoundFX().playBlockExplosionSound();
+            }
+        }
+    }
+
+    public void mapTileBeginContact(Contact contact){
+        Body bodyA = contact.getFixtureA().getBody();
+        Body bodyB = contact.getFixtureB().getBody();
+
+        if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
+            handleMapTileHeroContact(contact.getFixtureB(), contact.getFixtureA());
+
+        if (bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof HeroModel)
+            handleMapTileHeroContact(contact.getFixtureA(), contact.getFixtureB());
     }
 
     @Override
     public void beginContact(Contact contact) {
-        Body bodyA = contact.getFixtureA().getBody();
-        Body bodyB = contact.getFixtureB().getBody();
-
         snailBeginContact(contact);
         batBeginContact(contact);
         bubbleBeginContact(contact);
         bulletBeginContact(contact);
-
-        //Tile
-        if (bodyA.getUserData() instanceof HeroModel && bodyB.getUserData() instanceof MapTileModel)
-            if(contact.getFixtureA().getUserData() == "down" && contact.getFixtureB().getUserData() == "up") {
-                hero.removeState();
-                model.getHeroModel().setState(HeroModel.state.STANDING);
-                shots = MAX_SHOTS;
-            }
-            else if(contact.getFixtureA().getUserData() == "up" && contact.getFixtureB().getUserData() == "down") {
-                if(((MapTileModel) bodyB.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK)
-                    ((MapTileModel) bodyB.getUserData()).setForRemoval();
-            }
-
-        if (bodyA.getUserData() instanceof MapTileModel && bodyB.getUserData() instanceof HeroModel)
-            if(contact.getFixtureB().getUserData() == "down" && contact.getFixtureA().getUserData() == "up") {
-                hero.removeState();
-                model.getHeroModel().setState(HeroModel.state.STANDING);
-                shots = MAX_SHOTS;
-            }
-            else if(contact.getFixtureB().getUserData() == "up" && contact.getFixtureA().getUserData() == "down") {
-                if(((MapTileModel) bodyA.getUserData()).getTileType() == MapTileModel.TileType.D_BLOCK)
-                    ((MapTileModel) bodyA.getUserData()).setForRemoval();
-            }
+        mapTileBeginContact(contact);
     }
 
     @Override
@@ -439,6 +447,7 @@ public class GameController implements ContactListener {
                 model.getHeroModel().setState(ROLLING);
             else
                 model.getHeroModel().setState(JUMPING);
+            model.getSoundFX().playJumpSound();
         }
     }
 
@@ -446,10 +455,11 @@ public class GameController implements ContactListener {
         if(hero.getState() || hero.body.getLinearVelocity().y != 0) {
             if(timeToNextShoot < 0 && shots > 0) {
                 BulletModel bullet = model.createBullet(model.getHeroModel());
-                BulletBody body = new BulletBody(world, bullet);
+                new BulletBody(world, bullet);
                 timeToNextShoot = TIME_BETWEEN_SHOTS;
                 bounceHero(true);
                 shots--;
+                model.getSoundFX().playShootSound();
             }
         }
     }

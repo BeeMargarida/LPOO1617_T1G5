@@ -3,6 +3,7 @@ package com.mygdx.game.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,22 +24,26 @@ public class MainMenuScreen implements Screen {
     private final static int OPTION_WIDTH = 150;
     private final static int optionWidth = (int) VIEWPORT_WIDTH/4 + 80;
     private final int optionHeight[] = {(int) VIEWPORT_HEIGHT/2 - 45, (int) VIEWPORT_HEIGHT/2 - 90};
-    private int option = -1;
-    private int posX = -1;
-    private int posY = -1;
-    private boolean controlMethod = true;
+    private int option = 0;
     private Downwell game;
     private Viewport viewport;
     private OrthographicCamera camera;
+    private Sound menuSound;
+    private Sound startGameSound;
 
     public MainMenuScreen(Downwell game){
         this.game = game;
-        float ratio = ((float) Gdx.graphics.getHeight() / (float) Gdx.graphics.getWidth());
+        loadSoundFX();
         camera = new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0);
         camera.update();
         viewport.apply();
+    }
+
+    private void loadSoundFX() {
+        menuSound = game.getAssetManager().get("menuselect.wav");
+        startGameSound = game.getAssetManager().get("gamestart.ogg");
     }
 
     @Override
@@ -64,16 +69,6 @@ public class MainMenuScreen implements Screen {
 
     private void update(){
         camera.update();
-        if(controlMethod) {
-            int posY = Gdx.graphics.getHeight()-this.posY;
-            for (int i = 0; i < optionHeight.length; i++) {
-                if (posX < (optionWidth + OPTION_WIDTH) && posX > optionWidth && posY < (optionHeight[i] + OPTION_HEIGHT) && posY > optionHeight[i]) {
-                    option = i;
-                    return;
-                }
-            }
-            option = -1;
-        }
     }
 
     private void drawEntities() {
@@ -85,45 +80,35 @@ public class MainMenuScreen implements Screen {
 
     private void handleInputs(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            if(!controlMethod) {
-                if (option > 0)
-                    option--;
-            }
-            else{
-                controlMethod = false;
-                option = 0;
+            if (option > 0) {
+                option--;
+                menuSound.play();
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-            if(!controlMethod) {
-                if (option < 1)
-                    option++;
-            }
-            else{
-                controlMethod = false;
-                option = 0;
+            if (option < 1) {
+                option++;
+                menuSound.play();
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-            if(!controlMethod) {
-                if(option == 0)
-                    game.setGameScreen();
-                    //handler.setResultsScreen();
-                else if(option == 1)
-                    System.exit(0);
-                    //game.exit();
+            if(option == 0) {
+                startGameSound.play();
+                game.setGameScreen();
             }
+                //handler.setResultsScreen();
+            else if(option == 1)
+                System.exit(0);
+                //game.exit();
         }
-
-        int newX = Gdx.input.getX();
-        int newY = Gdx.input.getY();
-        if(posX != newX || posY != newY){
-            controlMethod = true;
-            option = -1;
-        }
-        posX = newX;
-        posY = newY;
     }
+
+    /*
+    private void playMenuSFX(){
+        Sound sound = game.getAssetManager().get("menuselect.wav");
+        sound.play()
+    }
+    */
 
     @Override
     public void resize(int width, int height) {
@@ -154,6 +139,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        menuSound.dispose();
     }
 }

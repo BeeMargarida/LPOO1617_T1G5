@@ -10,6 +10,7 @@ import static com.badlogic.gdx.math.MathUtils.random;
 
 public class GameModel {
     private GameStats stats;
+    private GameSoundFX soundFX;
     private HeroModel hero;
 
     private ArrayList<BulletModel> bullets;
@@ -39,8 +40,9 @@ public class GameModel {
     private boolean gameOver;
     private boolean nextLevel;
 
-    public GameModel(GameConfig config, GameStats stats) {
+    public GameModel(GameConfig config, GameStats stats, GameSoundFX soundFX) {
         this.stats = stats;
+        this.soundFX = soundFX;
         this.depth = config.getLevelDepth();
         this.totalDepth = depth+INIT_MAP_DEPTH+FINAL_MAP_DEPTH;
         hero = new HeroModel((float) width/2+dd, totalDepth-HERO_POS_OFFSET, stats.getHeroHp());
@@ -230,4 +232,8 @@ public class GameModel {
     }
 
     public GameStats getStats() { return stats; }
+
+    public GameSoundFX getSoundFX(){
+        return soundFX;
+    }
 }
