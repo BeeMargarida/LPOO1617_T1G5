@@ -26,6 +26,9 @@ import static com.mygdx.game.model.HeroModel.state.ROLLING;
 import static com.mygdx.game.model.HeroModel.state.STANDING;
 import static com.mygdx.game.model.HeroModel.state.WALKING;
 
+/**
+ * 
+ */
 public class GameController implements ContactListener {
 
     private enum mov { MS_LEFT, MS_RIGHT, MS_STOP}

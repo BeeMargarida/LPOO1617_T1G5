@@ -6,7 +6,17 @@ import com.mygdx.game.model.BulletModel;
 
 import static com.mygdx.game.controller.GameController.BULLET_SPEED;
 
+/**
+ * BulletBody is a class that contains the information about with the physics body of the bullets.
+ * @see ElementBody
+ */
 public class BulletBody extends ElementBody {
+    /**
+     * Constructor that creates the fixture for the Bullet. It has no gravity and it is set with a particular velocity, based on
+     * it's model rotation and a fixed speed.
+     * @param world the physics world
+     * @param model the model of the bullet to be used in the super class constructor and to get the rotation
+     */
     public BulletBody(World world, BulletModel model){
         super(world,model, BodyDef.BodyType.DynamicBody);
         float density = 1f, friction = 0, restitution = 0;
