@@ -26,8 +26,7 @@ import static com.mygdx.game.model.HeroModel.state.STANDING;
 import static com.mygdx.game.model.HeroModel.state.WALKING;
 
 /**
- * GameController class controls everything related to the physics of the game. It controls all collisions between
- * bodies and updates their status and positions.
+ * 
  */
 public class GameController implements ContactListener {
 
@@ -38,7 +37,7 @@ public class GameController implements ContactListener {
     private static final float PUSH_SPEED = 5f;
     private static final float BOUNCE_SPEED = 3f;
     public static final float BULLET_SPEED = 10f;
-    private static final int MAX_SHOTS = 8;
+    public static final int MAX_SHOTS = 8;
     private static final float TIME_BETWEEN_SHOTS = .15f;
 
     private final World world;
@@ -51,11 +50,6 @@ public class GameController implements ContactListener {
     private float timeToNextShoot;
     private int shots;
 
-    /**
-     * Constructor that fill the physics world with the bodies of the game entities, given by the GameModel.
-     * @param model GameModel that contain all the models of the game entities
-     * @see GameController#fillWorld()
-     */
     public GameController(GameModel model){
         world = new World(new Vector2(0,-15f),true);
         hero = new HeroBody(world,model.getHeroModel());
@@ -68,10 +62,7 @@ public class GameController implements ContactListener {
         world.setContactListener(this);
     }
 
-    /**
-     * Fills the world with all the entities of the game, contained in the GameModel. It adds to the world the
-     * map tiles and the enemies, giving them 0 in gravity.
-     */
+
     private void fillWorld(){
         MapTileModel map[][] = model.getMap();
         for(int i = 0; i < map.length; i++){
@@ -96,11 +87,11 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Goes through all the enemies, calls their method of update and updates their velocity with the result of that call.
-     * For the Snail Enemy, it sets it's linear velocity according to the direction it is going.
-     */
-    private void enemiesUpdate() {
+    public void heroUpdate(float delta){
+        model.getHeroModel().update(delta);
+    }
+
+    public void enemiesUpdate() {
         int j = 0;
         for(int i = 0; i < model.getEnemies().size(); i++){
             float[] res;
@@ -117,11 +108,7 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Updates the bullets, decreasing their time of live and, if that time has ended, set the bullet for removal.
-     * @param delta time interval
-     */
-    private void bulletsUpdate(float delta){
+    public void bulletsUpdate(float delta){
         ArrayList<BulletModel> bullets = model.getBullets();
         for(int i = 0; i < bullets.size(); i++){
             if(bullets.get(i).decreaseTimeToLive(delta)){
@@ -130,15 +117,10 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Updates all the entities of game, makes a step on the world, updates the velocities of the hero and it's direction,
-     * updates the state of the hero and the positions in the world of every body in it.
-     * @param delta time interval
-     */
     public void update(float delta){
         model.checkGameStatus();
         remove();
-        model.getHeroModel().update(delta);
+        heroUpdate(delta);
         enemiesUpdate();
         bulletsUpdate(delta);
 
@@ -192,24 +174,14 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Updates the stats of the kills and score of the level.
-     * @param points number of points to be added to the score
-     */
     private void updateStats(int points){
         model.getStats().incScore(points);
         model.getStats().incKills();
     }
 
-    /**
-     * Applies to the hero a positive vertical force whenever the hero shoots a bullet or collides with a enemy with a kill blow.
-     * If the variable shot is true (when the hero shot a bullet), the hero state changes to jumping. When it
-     * is false (collision with a enemy for a kill blow), the hero state changes to rolling.
-     * @param shot variable that tells if the hero shot a bullet or if it collided with a enemy for a kill blow
-     */
     private void bounceHero(boolean shot){
         float velChange = BOUNCE_SPEED - hero.body.getLinearVelocity().y;
-        float force = hero.body.getMass() * velChange / (1/60f);
+        float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
         hero.body.applyForceToCenter(0,force, true);
         if(shot)
             model.getHeroModel().setState(JUMPING);
@@ -217,13 +189,6 @@ public class GameController implements ContactListener {
             model.getHeroModel().setState(ROLLING);
     }
 
-    /**
-     * Calculates the velocity to be applied to the hero when it collides with a enemy, and applies it to it's body.
-     * @param posXHero x coordinate of the hero
-     * @param posYHero y coordinate of the hero
-     * @param posXEnemy x coordinate of the enemy the hero collided with
-     * @param posYEnemy y coordinate of the enemy the hero collided with
-     */
     private void pushHero(float posXHero, float posYHero, float posXEnemy, float posYEnemy){
         float diffx = posXHero - posXEnemy;
         float diffy = posYHero - posYEnemy;
@@ -242,13 +207,7 @@ public class GameController implements ContactListener {
         hero.body.applyForceToCenter(forceX,forceY,true);
     }
 
-    /**
-     * Verifies if the collision is between the Snail and the Hero or between the Snail and some other body.
-     * If the collision is verified, the snail changes it's direction. If the collision is with the hero,
-     * the hero takes damage, gets invincible and is pushed.
-     * @param contact contains information about the contact, including the bodies
-     */
-    private void snailBeginContact(Contact contact) {
+    public void snailBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
@@ -280,14 +239,7 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Verifies if the collision is between the Bat and the Hero. If the collision if verified, it checks which
-     * parts of the body collided. If the bottom of the hero collides with the top of the Bat, the Bat will be set
-     * for removal, the shots of the Hero will be set to maximum and the stats (score) will be update. If that is not
-     * the case, the hero will suffer damage and enter invincible mode.
-     * @param contact contains information about the contact, including the bodies
-     */
-    private void batBeginContact(Contact contact) {
+    public void batBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
@@ -319,14 +271,7 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Verifies if the collision is between the Bubble and the Hero. If the collision if verified, it checks which
-     * parts of the body collided. If the bottom of the hero collides with the top of the Bubble, the Bubble will be set
-     * for removal, the shots of the Hero will be set to maximum and the stats (score) will be update. If that is not
-     * the case, the hero will suffer damage and enter invincible mode.
-     * @param contact contains information about the contact, including the bodies
-     */
-    private void bubbleBeginContact(Contact contact) {
+    public void bubbleBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
@@ -358,13 +303,7 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Verifies if the collision is between a Bullet and a Enemy or a MapTileModel that is destroyable. If it is
-     * with a enemy, that enemy and the bullet will be set for removal and the stats (score) will be updated. If it
-     * is with a MapTile that is destroyable, the MapTile and the bullet will be set for removal.
-     * @param contact contains information about the contact, including the bodies
-     */
-    private void bulletBeginContact(Contact contact) {
+    public void bulletBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
@@ -403,14 +342,6 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Calls all the methods that verify collision between enemies and bullets and checks collisions between the
-     * hero and the MapTiles. If that collision happens between the bottom of the hero and the top of the MapTile,
-     * the hero jumping state is updated, the bullet shots number is back to it's maximum and the hero state is set
-     * to be standing. It the collision happens between the top of the hero and the bottom of a destroyable MapTile,
-     * the MapTile is set for removal.
-     * @param contact contains information about the contact, including the bodies
-     */
     @Override
     public void beginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
@@ -445,39 +376,21 @@ public class GameController implements ContactListener {
             }
     }
 
-    /**
-     * ContactListener implementation method. Not used.
-     * @param contact contains information about the contact, including the bodies
-     */
     @Override
     public void endContact(Contact contact) {
 
     }
 
-    /**
-     * ContactListener implementation method. Not used.
-     * @param contact contains information about the contact, including the bodies
-     * @param oldManifold manifold
-     */
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
 
     }
 
-    /**
-     * ContactListener implementation method. Not used.
-     * @param contact contains information about the contact, including the bodies
-     * @param impulse manifold
-     */
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
     }
 
-    /**
-     * Goes through all the bodies in the world and check if they are set for removal. If that
-     * is the case, their bodies and the respective model will be erased.
-     */
     public void remove() {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
@@ -494,6 +407,7 @@ public class GameController implements ContactListener {
                     world.destroyBody(bodies.get(i));
                 }
             }
+
             if(bodies.get(i).getUserData() instanceof BulletModel){
                 if(((BulletModel) bodies.get(i).getUserData()).getForRemoval()){
                     model.removeBullet((BulletModel) bodies.get(i).getUserData());
@@ -510,28 +424,18 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Sets the state of the hero to moving left and having the animation flip.
-     */
     public void moveHeroLeft(){
         moveState = mov.MS_LEFT;
         model.getHeroModel().setFlip(true);
     }
 
-    /**
-     * Sets the state of the hero to moving right and having the animation flip.
-     */
     public void moveHeroRight(){
         moveState = mov.MS_RIGHT;
         model.getHeroModel().setFlip(false);
     }
 
-    /**
-     * Verifies if the hero isn't already jumping and, if that isn't the case, applies a force to the hero
-     * and changes the state of the hero according to it's linear velocity in x.
-     */
     public void jumpHero() {
-        if(!hero.getState() && hero.body.getLinearVelocity().y == 0) {
+        if(!hero.getState() && hero.body.getLinearVelocity().y == 0) { //it isn't jumping or falling
             hero.setState();
             hero.body.applyForceToCenter(0,700f, true);
             if(Math.abs(hero.body.getLinearVelocity().x) > 0.2)
@@ -541,16 +445,11 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * If the hero is jumping, the time for next shoot is set, the number of shots is decreased, the hero
-     * is applied a force and a bullet is created.
-     * @see GameController#bounceHero(boolean)
-     */
     public void shootHero() {
         if(hero.getState() || hero.body.getLinearVelocity().y != 0) {
             if(timeToNextShoot < 0 && shots > 0) {
                 BulletModel bullet = model.createBullet(model.getHeroModel());
-                new BulletBody(world, bullet);
+                BulletBody body = new BulletBody(world, bullet);
                 timeToNextShoot = TIME_BETWEEN_SHOTS;
                 bounceHero(true);
                 shots--;
@@ -558,16 +457,7 @@ public class GameController implements ContactListener {
         }
     }
 
-    /**
-     * Returns the number os shots left to be given.
-     * @return number of shots
-     */
     public int getShots() {  return shots; }
-
-    /**
-     * Returns the world.
-     * @return the variable world
-     */
     public World getWorld() {
         return world;
     }

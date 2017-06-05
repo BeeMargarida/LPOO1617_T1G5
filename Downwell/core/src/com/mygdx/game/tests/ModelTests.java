@@ -7,6 +7,7 @@ import com.mygdx.game.model.GameConfig;
 import com.mygdx.game.model.GameModel;
 import com.mygdx.game.model.GameStats;
 import com.mygdx.game.model.MapTileModel;
+import com.mygdx.game.model.NullGameSoundFX;
 
 import org.junit.Test;
 
@@ -49,7 +50,8 @@ public class ModelTests extends GameTest{
     public void testScoreIncrease() {
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         createTestArena(model);
         addTestEnemy(new BatModel(6,model.getDepth()-14), model);
         GameController controller = new GameController(model);
@@ -68,7 +70,7 @@ public class ModelTests extends GameTest{
     public void testEnemyDeletedAfterKilled(){
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         createTestArena(model);
         addTestEnemy(new BatModel(6,model.getDepth()-14), model);
         if(model.getEnemies().contains(null)) {
@@ -96,7 +98,7 @@ public class ModelTests extends GameTest{
     public void testBlockDeletedAfterDestroyed(){
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         createTestArena(model);
         addTestBlock(6,14,model);
         if(model.getEnemies().contains(null)) {
@@ -116,7 +118,7 @@ public class ModelTests extends GameTest{
     public void testHeroDamage() {
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         createTestArena(model);
         BatModel bat =  new BatModel(8, model.getDepth()-14);
         addTestEnemy(bat, model);
@@ -135,7 +137,7 @@ public class ModelTests extends GameTest{
     public void generateCorrectNumberOfEnemies(){
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         assertTrue(model.getEnemies().size() <= 20);
     }
 
@@ -143,7 +145,7 @@ public class ModelTests extends GameTest{
     public void testHeroInBounds(){
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         createTestArena(model);
         GameController controller = new GameController(model);
         int timeout = 100, i;
@@ -160,7 +162,7 @@ public class ModelTests extends GameTest{
     public void testHeroDestroysEnemyWithBullets(){
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         createTestArena(model);
         addTestEnemy(new BatModel(6,model.getDepth()-14), model);
         if(model.getEnemies().contains(null)) {
@@ -184,7 +186,7 @@ public class ModelTests extends GameTest{
     public void testEnemyFollowsHero(){
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         createTestArena(model);
         BatModel bat =  new BatModel(8, model.getDepth()-14);
         addTestEnemy(bat, model);
@@ -209,7 +211,7 @@ public class ModelTests extends GameTest{
     public void testGameOver(){
         GameStats stats = new GameStats(1,1);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         createTestArena(model);
         addTestEnemy(new BatModel(8,model.getDepth()-14), model);
         GameController controller = new GameController(model);
@@ -230,7 +232,7 @@ public class ModelTests extends GameTest{
     public void testCorrectMapLayout(){
         GameStats stats = new GameStats(1,4);
         GameConfig config = new GameConfig(50,0);
-        GameModel model = new GameModel(config,stats);
+        GameModel model = new GameModel(config,stats,new NullGameSoundFX());
         MapTileModel map[][] = model.getMap();
         for(int i = 0; i < map.length; i++) {
             if (i < GameModel.INIT_MAP_DEPTH || i > GameModel.INIT_MAP_DEPTH+50){
