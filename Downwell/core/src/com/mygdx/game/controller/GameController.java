@@ -244,6 +244,12 @@ public class GameController implements ContactListener {
         hero.body.applyForceToCenter(forceX,forceY,true);
     }
 
+    /**
+     * Handles the contact between the hero and the snail, giving damage to the hero if that is not in the invincible mode.
+     * It then sets the hero with the invincible mode and push it away from the snail.
+     * @param snail fixture of the snail
+     * @param hero fixture of the hero
+     */
     private void handleSnailHeroContact(Fixture snail, Fixture hero){
         Body bodyA = snail.getBody();
         Body bodyB = hero.getBody();
@@ -255,6 +261,12 @@ public class GameController implements ContactListener {
         pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((SnailModel) bodyA.getUserData()).getX(), ((SnailModel) bodyA.getUserData()).getY());
     }
 
+    /**
+     * Handles the snail contact width anything, making the snail change directions if that contact is between the upper of bottom
+     * part of its fixture.
+     * @param snail fixture of the snail
+     * @param other fixture of the other entity
+     */
     private void handleSnailMapContact(Fixture snail, Fixture other){
         Body bodyA = snail.getBody();
 
@@ -268,9 +280,10 @@ public class GameController implements ContactListener {
 
     /**
      * Verifies if the collision is between the Snail and the Hero or between the Snail and some other body.
-     * If the collision is verified, the snail changes it's direction. If the collision is with the hero,
-     * the hero takes damage, gets invincible and is pushed.
+     * It then calls the methods to deal with those situations.
      * @param contact contains information about the contact, including the bodies
+     * @see GameController#handleSnailMapContact(Fixture, Fixture)
+     * @see GameController#handleSnailHeroContact(Fixture, Fixture)
      */
     private void snailBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
@@ -287,7 +300,13 @@ public class GameController implements ContactListener {
             handleSnailHeroContact(contact.getFixtureB(), contact.getFixtureA());
     }
 
-
+    /**
+     * Handles the collision between Hero and Bat. If the bottom of the hero collides with the top of the Bat, the Bat will be set
+     * for removal, the shots of the Hero will be set to maximum and the stats (score) will be update. If that is not
+     * the case, the hero will suffer damage and enter invincible mode. It also applies the sound specific to the situation.
+     * @param bat bat fixture
+     * @param hero hero fixture
+     */
     private void handleBatHeroContact(Fixture bat, Fixture hero){
         Body bodyA = bat.getBody();
         Body bodyB = hero.getBody();
@@ -303,17 +322,15 @@ public class GameController implements ContactListener {
             ((HeroModel) bodyB.getUserData()).damage();
             if(!((HeroModel) bodyB.getUserData()).getInvincible())
                 model.getSoundFX().playHeroDamageSound();
-            //pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((BatModel) bodyA.getUserData()).getX(), ((BatModel) bodyA.getUserData()).getY());
             ((HeroModel) bodyB.getUserData()).setInvincible(true);
         }
     }
 
     /**
      * Verifies if the collision is between the Bat and the Hero. If the collision if verified, it checks which
-     * parts of the body collided. If the bottom of the hero collides with the top of the Bat, the Bat will be set
-     * for removal, the shots of the Hero will be set to maximum and the stats (score) will be update. If that is not
-     * the case, the hero will suffer damage and enter invincible mode.
+     * parts of the body collided, calling for a method to verify that.
      * @param contact contains information about the contact, including the bodies
+     * @see GameController#handleBatHeroContact(Fixture, Fixture)
      */
     private void batBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
@@ -327,6 +344,13 @@ public class GameController implements ContactListener {
         }
     }
 
+    /**
+     * Handles the collision between Hero and Bubble. If the bottom of the hero collides with the top of the Bubble, the Bubble will be set
+     * for removal, the shots of the Hero will be set to maximum and the stats (score) will be update. If that is not
+     * the case, the hero will suffer damage and enter invincible mode. It also applies the sound specific to the situation.
+     * @param bubble bubble fixture
+     * @param hero hero fixture
+     */
     private void handleBubbleHeroContact(Fixture bubble, Fixture hero){
         Body bodyA = bubble.getBody();
         Body bodyB = hero.getBody();
@@ -342,18 +366,15 @@ public class GameController implements ContactListener {
             ((HeroModel) bodyB.getUserData()).damage();
             if(!((HeroModel) bodyB.getUserData()).getInvincible())
                 model.getSoundFX().playHeroDamageSound();
-            //pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((BubbleModel) bodyA.getUserData()).getX(), ((BubbleModel) bodyA.getUserData()).getY());
             ((HeroModel) bodyB.getUserData()).setInvincible(true);
         }
     }
 
-
     /**
      * Verifies if the collision is between the Bubble and the Hero. If the collision if verified, it checks which
-     * parts of the body collided. If the bottom of the hero collides with the top of the Bubble, the Bubble will be set
-     * for removal, the shots of the Hero will be set to maximum and the stats (score) will be update. If that is not
-     * the case, the hero will suffer damage and enter invincible mode.
+     * parts of the body collided.
      * @param contact contains information about the contact, including the bodies
+     * @see GameController#handleBubbleHeroContact(Fixture, Fixture)
      */
     private void bubbleBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
@@ -367,6 +388,13 @@ public class GameController implements ContactListener {
         }
     }
 
+    /**
+     * Verifies if the collision is between a Bullet and a Enemy or a MapTileModel that is destroyable. If it is
+     * with a enemy, that enemy and the bullet will be set for removal and the stats (score) will be updated. If it
+     * is with a MapTile that is destroyable, the MapTile and the bullet will be set for removal.
+     * @param bullet bullet fixture
+     * @param other other entity fixture
+     */
     private void handleBulletContact(Fixture bullet, Fixture other){
         Body bodyA = bullet.getBody();
         Body bodyB = other.getBody();
@@ -394,10 +422,9 @@ public class GameController implements ContactListener {
     }
 
     /**
-     * Verifies if the collision is between a Bullet and a Enemy or a MapTileModel that is destroyable. If it is
-     * with a enemy, that enemy and the bullet will be set for removal and the stats (score) will be updated. If it
-     * is with a MapTile that is destroyable, the MapTile and the bullet will be set for removal.
+     * Verifies if the collision happened with a bullet as one of the bodies. If it is, calls the appropriate method.
      * @param contact contains information about the contact, including the bodies
+     * @see GameController#handleBulletContact(Fixture, Fixture)
      */
     private void bulletBeginContact(Contact contact) {
         Body bodyA = contact.getFixtureA().getBody();
@@ -412,6 +439,14 @@ public class GameController implements ContactListener {
         }
     }
 
+    /**
+     * Handles the collision between the hero and the destroyable map tiles. If that collision happens between the bottom of the hero and the top of the MapTile,
+     * the hero jumping state is updated, the bullet shots number is back to it's maximum and the hero state is set
+     * to be standing. It the collision happens between the top of the hero and the bottom of a destroyable MapTile,
+     * the MapTile is set for removal.
+     * @param mapTile mapTile fixture
+     * @param hero hero fixture
+     */
     private void handleMapTileHeroContact(Fixture mapTile, Fixture hero){
         Body bodyA = mapTile.getBody();
 
@@ -429,6 +464,11 @@ public class GameController implements ContactListener {
         }
     }
 
+    /**
+     * Checks if the collision is between the hero and a map tile and calls the appropriated method.
+     * @param contact contains information about the contact, including the bodies
+     * @see GameController#bubbleBeginContact(Contact)
+     */
     public void mapTileBeginContact(Contact contact){
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
@@ -441,12 +481,13 @@ public class GameController implements ContactListener {
     }
 
     /**
-     * Calls all the methods that verify collision between enemies and bullets and checks collisions between the
-     * hero and the MapTiles. If that collision happens between the bottom of the hero and the top of the MapTile,
-     * the hero jumping state is updated, the bullet shots number is back to it's maximum and the hero state is set
-     * to be standing. It the collision happens between the top of the hero and the bottom of a destroyable MapTile,
-     * the MapTile is set for removal.
+     * Calls all the methods that verify collision between entities.
      * @param contact contains information about the contact, including the bodies
+     * @see GameController#snailBeginContact(Contact)
+     * @see GameController#batBeginContact(Contact)
+     * @see GameController#bubbleBeginContact(Contact)
+     * @see GameController#bulletBeginContact(Contact)
+     * @see GameController#mapTileBeginContact(Contact)
      */
     @Override
     public void beginContact(Contact contact) {

@@ -1,5 +1,6 @@
 package com.mygdx.game.model;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Pool;
 
 import java.util.ArrayList;
@@ -8,6 +9,11 @@ import java.util.Random;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
+/**
+ * GameModel class deals with the construction of all the entities that make the game, such as the map, the enemies,
+ * the hero, the stats, the sound and the game configuration. It has methods that check the state of the game, the
+ * removal of entities that were set for removal and the creation of bullets.
+ */
 public class GameModel {
     private GameStats stats;
     private GameSoundFX soundFX;
@@ -40,6 +46,12 @@ public class GameModel {
     private boolean gameOver;
     private boolean nextLevel;
 
+    /**
+     * Constructor of the class, creates all the entities of the level, such has hero, map, and fills the map with enemies.
+     * @param config configuration of the level, such has depth and number of enemies
+     * @param stats score of the game
+     * @param soundFX sound of the game
+     */
     public GameModel(GameConfig config, GameStats stats, GameSoundFX soundFX) {
         this.stats = stats;
         this.soundFX = soundFX;
@@ -54,14 +66,25 @@ public class GameModel {
         addEnemies(config.getEnemiesNumber());
     }
 
+    /**
+     * Returns the flag gameOver.
+     * @return true if the game ended, false if not
+     */
     public boolean getGameOver() { return gameOver; }
 
+    /**
+     * Returns the flag nextLevel
+     * @return true if the next step is to go to other level, false if not
+     */
     public boolean getNextLevel() { return nextLevel; }
 
+    /**
+     * Checks the state of game over. If the hero has lost all its health points, the game is definitely over.
+     * If the hero has passed the end of the level, a next level will follow.
+     */
     public void checkGameStatus(){
         if(hero.getHp() <= 0){
             gameOver = true;
-            System.out.println("You are DEAD!");
             return;
         }
         if(hero.getY() <= HERO_POS_OFFSET){
@@ -70,6 +93,13 @@ public class GameModel {
         }
     }
 
+    /**
+     * Returns a type of MapTileModel after calculations made based on the probabilities (tileprobfixed) of each type, including not having a block
+     * att all.
+     * @param x x coordinate of the position we want to fill
+     * @param y y coordinate of the position we want fo fill
+     * @return null if there will be no block in that position or MapTileModel of specific kind
+     */
     private MapTileModel getTile(int x, int y){
         tileprob = Arrays.copyOf(tileprobfixed,tileprobfixed.length);
 
@@ -110,6 +140,11 @@ public class GameModel {
             return null;
     }
 
+    /**
+     * Goes through all the positions of the map, fills the borders with indestructible tiles and the middle with empty spaces or two
+     * different types of tiles, destroyable or not.
+     * @see GameModel#getTile(int, int)
+     */
     private void makeMap() {
         map = new MapTileModel[totalDepth][width];
         int ts, y = totalDepth, x;
@@ -141,6 +176,11 @@ public class GameModel {
         }
     }
 
+    /**
+     * Fills the map with different types of enemies according to certain areas. The bats and bubble always appear under a block, and the
+     * snails appear near the border wall.
+     * @param number number of enemies to be created
+     */
     private void addEnemies(int number){
         char en[] = {'b', 'u', 's'};
         Random rand = new Random();
@@ -176,16 +216,32 @@ public class GameModel {
         }
     }
 
+    /**
+     * Returns the hero model.
+     * @return hero model
+     */
     public HeroModel getHeroModel(){
         return hero;
     }
 
+    /**
+     * Returns a ArrayList with all the bullets.
+     * @return ArrayList of bullets
+     */
     public ArrayList<BulletModel> getBullets() {
         return bullets;
     }
 
+    /**
+     * Returns a ArrayList with all the enemies.
+     * @return ArrayList of enemies
+     */
     public ArrayList<EnemyModel> getEnemies() { return enemies; }
 
+    /**
+     * Goes through all the map and removes (equals to null) the tile equal to the one given as parameter.
+     * @param model tile we want to remove
+     */
     public void removeTile(MapTileModel model){
         for(int i = 0; i < map.length; i++){
             for(int j = 0; j < map[i].length; j++){
@@ -195,15 +251,28 @@ public class GameModel {
         }
     }
 
+    /**
+     * Remove a enemy from the ArrayList of enemies.
+     * @param model model of the enemy we want to erase
+     */
     public void removeEnemy(EnemyModel model) {
         enemies.set(enemies.indexOf(model), null);
     }
 
+    /**
+     * Removes a bullet from the ArrayList of bullets and from the pool.
+     * @param bullet model of the bullet we want to erase
+     */
     public void removeBullet(BulletModel bullet){
         bullets.remove(bullet);
         bulletPool.free(bullet);
     }
 
+    /**
+     * Creates a bullet under the hero, with a random rotation between a limit. It is added to the ArrayList of bullets.
+     * @param hero model of the hero to get the position of the bullet
+     * @return model of bullet created
+     */
     public BulletModel createBullet(HeroModel hero) {
         BulletModel bullet = bulletPool.obtain();
 
@@ -219,21 +288,39 @@ public class GameModel {
         return bullet;
     }
 
+    /**
+     * Returns the width of the map.
+     * @return width of the map
+     */
     public int getWidth(){
         return width;
     }
 
+    /**
+     * Returns the height (depth) of the map.
+     * @return depth of the map
+     */
     public int getDepth(){
         return totalDepth;
     }
 
+    /**
+     * Returns the map of the level.
+     * @return map of the level
+     */
     public MapTileModel[][] getMap(){
         return map;
     }
 
+    /**
+     * Return the stats of the game.
+     * @return stats of the game
+     */
     public GameStats getStats() { return stats; }
 
-    public GameSoundFX getSoundFX(){
-        return soundFX;
-    }
+    /**
+     * Return the sound of the level.
+     * @return sound of the level
+     */
+    public GameSoundFX getSoundFX() {  return soundFX; }
 }
