@@ -1,11 +1,13 @@
 package com.mygdx.game.model;
 
 /**
- * Created by Utilizador on 05/06/2017.
+ * NullGameSoundFX is a class that serves as a null GameSoundFX, no playing any sound. It always returns null.
  */
-
 public class NullGameSoundFX extends GameSoundFX {
-
+    /**
+     * Always returns true.
+     * @return true
+     */
     @Override
     public boolean isNull() {
         return true;

@@ -10,10 +10,17 @@ import com.mygdx.game.controller.GameController;
 
 import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
 
+/**
+ *
+ */
 public class BulletBarView extends StatusElementsView{
 
     private Texture[] bar;
 
+    /**
+     *
+     * @param game
+     */
     public BulletBarView(Downwell game) {
         camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ratio);
         this.viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_WIDTH * ratio, camera);
@@ -37,6 +44,10 @@ public class BulletBarView extends StatusElementsView{
         stage.addActor(img);
     }
 
+    /**
+     * 
+     * @param obj
+     */
     @Override
     public void update(Object obj) {
         GameController controller = (GameController) obj;

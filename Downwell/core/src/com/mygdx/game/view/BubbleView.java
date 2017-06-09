@@ -7,13 +7,23 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.ElementModel;
 
-
+/**
+ * BubbleView is a class that contains the animation of the bubble enemy.
+ */
 public class BubbleView extends EnemyView {
-
+    /**
+     * Class constructor.
+     * @param game Downwell game
+     */
     public BubbleView(Downwell game) {
         super(game);
     }
 
+    /**
+     * Gets the resources needed to construct the animation of the bubble.
+     * @param game Downwell game, needed to access the assets
+     * @return sprite of the first frame of the animation
+     */
     @Override
     public Sprite createSprite(Downwell game) {
         Texture texture1 = game.getAssetManager().get("b1.png");
@@ -38,10 +48,4 @@ public class BubbleView extends EnemyView {
 
         return sprite;
     }
-
-    @Override
-    public void update(ElementModel model) {
-        super.update(model);
-    }
-
 }

@@ -16,6 +16,10 @@ public abstract class EnemyView extends ElementView {
         super.update(model);
     }
 
+    /**
+     * Changes the frame of the animation.
+     * @param delta time interval
+     */
     @Override
     public void act(float delta) {
         stateTime += delta;

@@ -8,16 +8,30 @@ import com.mygdx.game.Downwell;
 import com.mygdx.game.model.BatModel;
 import com.mygdx.game.model.ElementModel;
 
+/**
+ * BatView is a class that contains the animations of the bat, and the methods to update them.
+ * @see EnemyView
+ */
 public class BatView extends EnemyView {
 
     private Texture sleepingFrame;
     private Animation<TextureRegion> flyingAnimation;
     private boolean sleeping = true;
 
+    /**
+     * Constructor of the class.
+     * @param game Downwell game
+     */
     public BatView(Downwell game){
         super(game);
     }
 
+    /**
+     * This method gets the resources already loaded and saves them in textures, also creating an animation
+     * for the fly of the bat.
+     * @param game Downwell game
+     * @return starting sprite of the bat, the sleeping one
+     */
     @Override
     public Sprite createSprite(Downwell game) {
 
@@ -43,6 +57,11 @@ public class BatView extends EnemyView {
         return sprite;
     }
 
+    /**
+     * Updates the sprite with the facing of it and checks if the bat is still sleeping. If it isn't, starts
+     * the animation of the flight.
+     * @param model
+     */
     public void update(ElementModel model) {
         super.update(model);
         flip = ((BatModel) model).getFlip();
@@ -56,7 +75,11 @@ public class BatView extends EnemyView {
         }
     }
 
-
+    /**
+     * If the bat isn't sleeping (just one sprite), it calls the super method to change the frame of the animation
+     * of the flight.
+     * @param delta time interval
+     */
     @Override
     public void act(float delta) {
         if(!sleeping)
