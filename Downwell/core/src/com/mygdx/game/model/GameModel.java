@@ -1,6 +1,5 @@
 package com.mygdx.game.model;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.utils.Pool;
 
 import java.util.ArrayList;

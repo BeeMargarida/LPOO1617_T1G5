@@ -59,7 +59,7 @@ public abstract class ElementBody {
         body.createFixture(fixtureDef);
         body.setFixedRotation(true);
         if(sensors)
-            createExtraFixtures(width,height);
+            createExtraFixtures(width-0.01f,height);
 
         rectangle.dispose();
     }

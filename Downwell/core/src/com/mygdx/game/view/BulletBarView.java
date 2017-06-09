@@ -17,6 +17,8 @@ import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
 public class BulletBarView extends StatusElementsView{
 
     private Texture[] bar;
+    private Image[] imgBar;
+    private Image currImage;
 
     /**
      * Constructor of the class, it sets he camera, viewport, saves the textures needed, makes and image and sets it
@@ -30,6 +32,7 @@ public class BulletBarView extends StatusElementsView{
         camera.update();
         viewport.apply();
 
+        imgBar = new Image[9];
         bar = new Texture[9];
         bar[0] = game.getAssetManager().get("wb0.png");
         bar[1] = game.getAssetManager().get("wb1.png");
@@ -41,9 +44,13 @@ public class BulletBarView extends StatusElementsView{
         bar[7] = game.getAssetManager().get("wb7.png");
         bar[8] = game.getAssetManager().get("wb8.png");
 
-        img = new Image(bar[8]);
-        img.setPosition(VIEWPORT_WIDTH - VIEWPORT_WIDTH/4,(VIEWPORT_WIDTH*ratio)/100);
-        stage.addActor(img);
+        for(int i = 0; i < bar.length; i++){
+            imgBar[i] = new Image(bar[i]);
+        }
+
+        currImage = imgBar[8];
+        currImage.setPosition(VIEWPORT_WIDTH - VIEWPORT_WIDTH/4,(VIEWPORT_WIDTH*ratio)/100);
+        stage.addActor(currImage);
     }
 
     /**
@@ -53,9 +60,11 @@ public class BulletBarView extends StatusElementsView{
     @Override
     public void update(Object obj) {
         GameController controller = (GameController) obj;
-        stage.unfocus(img);
-        img = new Image(bar[controller.getShots()]);
-        img.setPosition(VIEWPORT_WIDTH - VIEWPORT_WIDTH/4,(VIEWPORT_WIDTH*ratio)/100);
-        stage.addActor(img);
+        if(currImage != imgBar[controller.getShots()]){
+            currImage.remove();
+            currImage = imgBar[controller.getShots()];
+            currImage.setPosition(VIEWPORT_WIDTH - VIEWPORT_WIDTH/4,(VIEWPORT_WIDTH*ratio)/100);
+            stage.addActor(currImage);
+        }
     }
 }

@@ -16,10 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Downwell;
+import com.mygdx.game.model.GameStats;
 
-/**
- * ResultsScreen is a class that deals with the view of the stats at the end of the game.
- */
+import java.util.concurrent.TimeUnit;
+
 public class ResultsScreen implements Screen {
 
     private static final float VIEWPORT_WIDTH = 1280;
@@ -34,15 +34,7 @@ public class ResultsScreen implements Screen {
 
     private BitmapFont font;
 
-    /**
-     * Constructor of the class, it creates a viewport, a camera and a stage. It also creates a font and adds all the entities
-     * (background, level, score and kills, the lsat three represented as labels) to the stage created.
-     * @param game
-     * @param score
-     * @param level
-     * @param kills
-     */
-    public ResultsScreen(Downwell game, int score, int level, int kills){
+    public ResultsScreen(Downwell game, GameStats stats, long time){
         this.game = game;
         camera = new OrthographicCamera();
         viewport = new StretchViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);
@@ -57,16 +49,13 @@ public class ResultsScreen implements Screen {
         generator.dispose();
 
         addBackgroundImage();
-        addLevelLabel(level);
-        addScoreLabel(score);
-        addKillsLabel(kills);
+        addLevelLabel(stats.getLevel());
+        addScoreLabel(stats.getScore());
+        addKillsLabel(stats.getKills());
+        addTimeLabel(time);
         timerToContinue = 0;
     }
 
-    /**
-     * Updates the view and draws all the entities.
-     * @param delta time interval
-     */
     @Override
     public void render(float delta) {
         update(delta);
@@ -77,79 +66,68 @@ public class ResultsScreen implements Screen {
         stage.draw();
     }
 
-    /**
-     * Disposes of the stage.
-     */
     @Override
     public void dispose() {
         stage.dispose();
     }
 
-    /**
-     * Gets the background image, sets its position and adds it to the stage.
-     */
     private void addBackgroundImage(){
         Image image = new Image(game.getAssetManager().get(("scoreImage_2.jpg"), Texture.class));
         image.setPosition(0,0);
         stage.addActor(image);
     }
 
-    /**
-     * Adds to the stage a label with the number of the level reached.
-     * @param level number of the level reached
-     */
     private void addLevelLabel(int level){
-        Label label = new Label("Level: "+level,new Label.LabelStyle(font, Color.WHITE));
+        Label label = new Label("Level  "+level,new Label.LabelStyle(font, Color.WHITE));
         label.setWidth(40);
         label.setHeight(40);
         label.scaleBy(2);
-        label.setPosition(RESULTS_WIDTH,500);
+        label.setPosition(RESULTS_WIDTH,500/*300*/);
         stage.addActor(label);
     }
 
-    /**
-     * Adds to the stage a label with the score acquired.
-     * @param score score acquired through thr game
-     */
     private void addScoreLabel(int score){
-        Label label = new Label("Score: "+score,new Label.LabelStyle(font, Color.WHITE));
+        Label label = new Label("Score  "+score,new Label.LabelStyle(font, Color.WHITE));
         label.setWidth(40);
         label.setHeight(40);
         label.scaleBy(2);
-        label.setPosition(RESULTS_WIDTH,450);
+        label.setPosition(RESULTS_WIDTH,450/*275*/);
         stage.addActor(label);
     }
 
-    /**
-     * Adds to the stage a label with the number of kills made.
-     * @param kills number of kills made through the game
-     */
     private void addKillsLabel(int kills){
-        Label label = new Label("Kills: "+kills,new Label.LabelStyle(font, Color.WHITE));
+        Label label = new Label("Kills  "+kills,new Label.LabelStyle(font, Color.WHITE));
         label.setWidth(40);
         label.setHeight(40);
         label.scaleBy(2);
-        label.setPosition(RESULTS_WIDTH,400);
+        label.setPosition(RESULTS_WIDTH,400/*250*/);
         stage.addActor(label);
     }
 
-    /**
-     * Adds to the stage a label with the information to press Enter to continue.
-     */
+    private void addTimeLabel(long time){
+        long mins = TimeUnit.MINUTES.convert(time, TimeUnit.NANOSECONDS);
+        long timeS = TimeUnit.SECONDS.convert(time, TimeUnit.NANOSECONDS);
+        long timeMili = TimeUnit.MILLISECONDS.convert(time, TimeUnit.NANOSECONDS);
+        long secs = timeS-mins*60;
+        long milis = timeMili-(mins*60*1000+secs*1000);
+
+        String separator = new String("  ");
+        Label label = new Label("Time  "+ String.format("%02d",mins) +separator+ String.format("%02d",secs)+separator+String.format("%03d",milis),new Label.LabelStyle(font, Color.WHITE));
+        label.setWidth(100);
+        label.setHeight(40);
+        label.scaleBy(2);
+        label.setPosition(RESULTS_WIDTH,350/*200*/);
+        stage.addActor(label);
+    }
     private void addContinueLabel(){
         Label label = new Label("Press  Enter",new Label.LabelStyle(font, Color.WHITE));
         label.setWidth(100);
         label.setHeight(40);
         label.scaleBy(2);
-        label.setPosition(RESULTS_WIDTH,300);
+        label.setPosition(RESULTS_WIDTH,250/*200*/);
         stage.addActor(label);
     }
 
-    /**
-     * If the timeToContinue has passed, a label will be showed to inform the user that it can press Enter to continue to the MainMenu.
-     * It then handles the inputs. If the timeToContinue hasn't passed, it will be incremented with the delta.
-     * @param delta time interval
-     */
     private void update(float delta){
         if(timerToContinue >= TIME_TO_CONTINUE) {
             addContinueLabel();
@@ -159,56 +137,35 @@ public class ResultsScreen implements Screen {
             timerToContinue += delta;
     }
 
-    /**
-     * If the Enter key was pressed, a request is made to the game to forward to the Main Menu.
-     */
     private void handleInputs(){
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
             game.setMainMenuScreen();
         }
     }
 
-    /**
-     * Override method, not used.
-     */
     @Override
     public void show() {
 
     }
 
-    /**
-     * Override method, not used.
-     */
     @Override
     public void hide() {
 
     }
 
-    /**
-     * Override method, not used.
-     */
     @Override
     public void pause() {
 
     }
 
-    /**
-     * Override method, not used.
-     */
     @Override
     public void resume() {
 
     }
 
-    /**
-     * Resize the viewport with the new dimensions and updates the camera to center it.
-     * @param width new width
-     * @param height new height
-     */
     @Override
     public void resize(int width, int height) {
         viewport.update(width,height);
         camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
-        camera.update();
     }
 }

@@ -26,4 +26,20 @@ public class NullGameSoundFX extends GameSoundFX {
     public void playEnemyExplosionSound() {}
 
     public void playBulletHitSound() {}
+
+    public void randomize(){}
+
+    public void playBackGroundMusic(){}
+
+    public void stopBackGroundMusic(){}
+
+    public void playGameOverMusic(){}
+
+    public void stopGameOverMusic(){}
+
+    public void playTitleScreenMusic(){}
+
+    public void stopTitleScreenMusic(){}
+
+    public void dispose(){}
 }

@@ -130,10 +130,9 @@ public class HeroModel extends ElementModel {
     public boolean damage(){
         if(invincible)
             return false;
-        hp--;
-        if(hp <= 0)
+        else {
+            hp--;
             return true;
-        else
-            return false;
+        }
     }
 }

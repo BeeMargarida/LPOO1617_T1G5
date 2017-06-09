@@ -19,6 +19,7 @@ import com.mygdx.game.model.HeroModel;
 import com.mygdx.game.model.MapTileModel;
 import com.mygdx.game.model.SnailModel;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import static com.mygdx.game.model.HeroModel.state.JUMPING;
@@ -32,7 +33,7 @@ import static com.mygdx.game.model.HeroModel.state.WALKING;
  */
 public class GameController implements ContactListener {
 
-    private enum mov { MS_LEFT, MS_RIGHT, MS_STOP}
+    private enum mov { MS_LEFT, MS_RIGHT, MS_STOP, RECOVERY}
 
     private static final float MOV_SPEED = 5f;
     private static final float MAX_SPEED = -9f;
@@ -41,6 +42,7 @@ public class GameController implements ContactListener {
     public static final float BULLET_SPEED = 10f;
     public static final int MAX_SHOTS = 8;
     private static final float TIME_BETWEEN_SHOTS = .15f;
+    private static final float RECOVERY_TIME = 0.1f;
 
     private final World world;
     private final GameModel model;
@@ -50,6 +52,7 @@ public class GameController implements ContactListener {
     private ArrayList<ElementBody> enemies;
     private float accumulator;
     private float timeToNextShoot;
+    private float timeToRecover;
     private int shots;
 
     /**
@@ -65,6 +68,7 @@ public class GameController implements ContactListener {
         fillWorld();
         moveState = mov.MS_STOP;
         timeToNextShoot = 0;
+        timeToRecover = 0;
         shots = MAX_SHOTS;
         world.setContactListener(this);
     }
@@ -146,11 +150,21 @@ public class GameController implements ContactListener {
         if(timeToNextShoot >= 0)
             timeToNextShoot -= delta;
 
-        System.out.println(delta);
+        if(timeToRecover >= 0) {
+            timeToRecover -= delta;
+            if(timeToRecover < 0)
+                moveState = mov.MS_STOP;
+        }
+
+        //System.out.println(delta);
         float frameTime = Math.min(delta, 0.25f);
         accumulator += frameTime;
         while (accumulator >= 1/60f) {
             world.step(1/60f, 6, 2);
+            accumulator -= 1/60f;
+
+            if(moveState == mov.RECOVERY)
+                continue;
 
             float vel = hero.body.getLinearVelocity().x;
             float desiredVel = 0;
@@ -164,8 +178,6 @@ public class GameController implements ContactListener {
             float force = hero.body.getMass() * velChange / (1/60f); //f = mv/t
             hero.body.applyForceToCenter(force,0,true);
             moveState = mov.MS_STOP;
-
-            accumulator -= 1/60f;
         }
 
         if(Math.abs(hero.body.getLinearVelocity().y) > 0.2) {
@@ -221,14 +233,13 @@ public class GameController implements ContactListener {
 
     /**
      * Calculates the velocity to be applied to the hero when it collides with a enemy, and applies it to it's body.
-     * @param posXHero x coordinate of the hero
-     * @param posYHero y coordinate of the hero
-     * @param posXEnemy x coordinate of the enemy the hero collided with
-     * @param posYEnemy y coordinate of the enemy the hero collided with
+     * @param heroPos coordinates of the hero
+     * @param enemyPos coordinates of the enemy the hero collided with
      */
-    private void pushHero(float posXHero, float posYHero, float posXEnemy, float posYEnemy){
-        float diffx = posXHero - posXEnemy;
-        float diffy = posYHero - posYEnemy;
+    private void pushHero(Point2D heroPos, Point2D enemyPos){
+        Point2D p =  new Point2D.Float(0,0);
+        float diffx = (float) heroPos.getX() - (float) enemyPos.getX();
+        float diffy = (float) heroPos.getY() - (float) enemyPos.getY();
         double norm = Math.sqrt(diffx*diffx + diffy*diffy);
         float normx = diffx/(float) norm;
         float normy = diffy/(float) norm;
@@ -244,6 +255,11 @@ public class GameController implements ContactListener {
         hero.body.applyForceToCenter(forceX,forceY,true);
     }
 
+    private void recoverHero(){
+        moveState = mov.RECOVERY;
+        timeToRecover = RECOVERY_TIME;
+    }
+
     /**
      * Handles the contact between the hero and the snail, giving damage to the hero if that is not in the invincible mode.
      * It then sets the hero with the invincible mode and push it away from the snail.
@@ -254,11 +270,14 @@ public class GameController implements ContactListener {
         Body bodyA = snail.getBody();
         Body bodyB = hero.getBody();
 
-        ((HeroModel) bodyB.getUserData()).damage();
-        if(!((HeroModel) bodyB.getUserData()).getInvincible())
+        if(((HeroModel) bodyB.getUserData()).damage()){
             model.getSoundFX().playHeroDamageSound();
+            Point2D heroPos = ((HeroModel) bodyB.getUserData()).getPos();
+            Point2D enemyPos = ((SnailModel) bodyA.getUserData()).getPos();
+            pushHero(heroPos, enemyPos);
+            recoverHero();
+        }
         ((HeroModel) bodyB.getUserData()).setInvincible(true);
-        pushHero(((HeroModel) bodyB.getUserData()).getX(), ((HeroModel) bodyB.getUserData()).getY(), ((SnailModel) bodyA.getUserData()).getX(), ((SnailModel) bodyA.getUserData()).getY());
     }
 
     /**
@@ -319,9 +338,13 @@ public class GameController implements ContactListener {
             model.getSoundFX().playEnemyExplosionSound();
         }
         else {
-            ((HeroModel) bodyB.getUserData()).damage();
-            if(!((HeroModel) bodyB.getUserData()).getInvincible())
+            if(((HeroModel) bodyB.getUserData()).damage()) {
                 model.getSoundFX().playHeroDamageSound();
+                Point2D heroPos = ((HeroModel) bodyB.getUserData()).getPos();
+                Point2D enemyPos = ((BatModel) bodyA.getUserData()).getPos();
+                pushHero(heroPos, enemyPos);
+                recoverHero();
+            }
             ((HeroModel) bodyB.getUserData()).setInvincible(true);
         }
     }
@@ -363,9 +386,13 @@ public class GameController implements ContactListener {
             model.getSoundFX().playEnemyExplosionSound();
         }
         else {
-            ((HeroModel) bodyB.getUserData()).damage();
-            if(!((HeroModel) bodyB.getUserData()).getInvincible())
+            if(((HeroModel) bodyB.getUserData()).damage()) {
                 model.getSoundFX().playHeroDamageSound();
+                Point2D heroPos = ((HeroModel) bodyB.getUserData()).getPos();
+                Point2D enemyPos = ((BubbleModel) bodyA.getUserData()).getPos();
+                pushHero(heroPos, enemyPos);
+                recoverHero();
+            }
             ((HeroModel) bodyB.getUserData()).setInvincible(true);
         }
     }
@@ -430,13 +457,11 @@ public class GameController implements ContactListener {
         Body bodyA = contact.getFixtureA().getBody();
         Body bodyB = contact.getFixtureB().getBody();
 
-        if(bodyA.getUserData() instanceof BulletModel) {
+        if(bodyA.getUserData() instanceof BulletModel)
             handleBulletContact(contact.getFixtureA(), contact.getFixtureB());
-        }
 
-        if(bodyB.getUserData() instanceof BulletModel) {
+        if(bodyB.getUserData() instanceof BulletModel)
             handleBulletContact(contact.getFixtureB(), contact.getFixtureA());
-        }
     }
 
     /**
@@ -568,6 +593,8 @@ public class GameController implements ContactListener {
      * Sets the state of the hero to moving left and having the animation flip.
      */
     public void moveHeroLeft(){
+        if(moveState == mov.RECOVERY)
+            return;
         moveState = mov.MS_LEFT;
         model.getHeroModel().setFlip(true);
     }
@@ -576,6 +603,8 @@ public class GameController implements ContactListener {
      * Sets the state of the hero to moving right and having the animation flip.
      */
     public void moveHeroRight(){
+        if(moveState == mov.RECOVERY)
+            return;
         moveState = mov.MS_RIGHT;
         model.getHeroModel().setFlip(false);
     }

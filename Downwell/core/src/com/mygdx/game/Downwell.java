@@ -25,8 +25,8 @@ public class Downwell extends Game {
 	private AssetManager assetManager;
 	private GameConfig config;
 	private GameStats stats;
-	private Music bgMusic;
 	private GameSoundFX soundFX;
+	private long start;
 	private final static int MAX_HERO_HP = 4;
 	private final static int STARTING_DEPTH = 50;
 	private final static int STARTING_ENEMY_NO = 8;
@@ -56,6 +56,8 @@ public class Downwell extends Game {
 	 * new gameView.
 	 */
 	public void startGame() {
+		soundFX.randomize();
+		soundFX.playBackGroundMusic();
 		if(stats.getLevel()%2 == 0)
 			config.incDifficulty();
 		GameModel model = new GameModel(config, stats, soundFX);
@@ -66,6 +68,8 @@ public class Downwell extends Game {
 	 * Resets the stats of the game and sets the screen to the Main Menu.
 	 */
 	public void setMainMenuScreen(){
+		soundFX.stopGameOverMusic();
+		soundFX.playTitleScreenMusic();
         resetGameStats();
 		setScreen(new MainMenuScreen(this));
 	}
@@ -74,9 +78,8 @@ public class Downwell extends Game {
 	 * Starts the game's music and start's the game, with new screen and model.
 	 */
 	public void setGameScreen(){
-		bgMusic = assetManager.get("Artificial Intelligence Bomb.mp3");
-		bgMusic.setLooping(true);
-		bgMusic.play();
+		soundFX.stopTitleScreenMusic();
+		start = System.nanoTime();
 		this.startGame();
 	}
 
@@ -84,8 +87,11 @@ public class Downwell extends Game {
 	 * Stops the game's music and sets the screen to the results one.
 	 */
 	public void setResultsScreen(){
-		bgMusic.stop();
-		setScreen(new ResultsScreen(this,stats.getScore(),stats.getLevel(),stats.getKills()));
+		soundFX.stopBackGroundMusic();
+		soundFX.playGameOverMusic();
+		long end = System.nanoTime();
+		long timeDiff = end-start;
+		setScreen(new ResultsScreen(this,stats,timeDiff));
 	}
 
 	/**
@@ -93,9 +99,9 @@ public class Downwell extends Game {
 	 */
 	@Override
 	public void dispose() {
+		soundFX.dispose();
         batch.dispose();
 		assetManager.dispose();
-		bgMusic.dispose();
 	}
 
 	/**
@@ -176,6 +182,9 @@ public class Downwell extends Game {
 
 
 		assetManager.load("Artificial Intelligence Bomb.mp3", Music.class);
+		assetManager.load("devil1.mp3", Music.class);
+		assetManager.load("gameover.mp3", Music.class);
+		assetManager.load("mainmenu.mp3", Music.class);
 		assetManager.load("bexplosion.wav", Sound.class);
 		assetManager.load("eexplosion.wav", Sound.class);
 		assetManager.load("hit.wav", Sound.class);
@@ -204,5 +213,4 @@ public class Downwell extends Game {
 	public SpriteBatch getBatch() {
 		return batch;
 	}
-
 }

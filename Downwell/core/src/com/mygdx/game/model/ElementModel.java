@@ -1,5 +1,7 @@
 package com.mygdx.game.model;
 
+import java.awt.geom.Point2D;
+
 /**
  * ElementModel is a class that contain the coordinates of the element, methods to update its position and the types of object the element
  * can be.
@@ -39,6 +41,10 @@ public abstract class ElementModel {
         return  y;
     }
 
+
+    public Point2D getPos(){
+        return new Point2D.Float(x,y);
+    }
     /**
      * Sets the position of the element to the coordinates given.
      * @param x new x coordinate of the element
