@@ -9,6 +9,7 @@ import com.mygdx.game.model.ElementModel;
 
 /**
  * BubbleView is a class that contains the animation of the bubble enemy.
+ * @see EnemyView
  */
 public class BubbleView extends EnemyView {
     /**

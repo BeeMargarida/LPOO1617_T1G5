@@ -12,6 +12,7 @@ import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
 
 /**
  * BulletBarView is a class that deals with the textures of the bullet bar.
+ * @see StatusElementsView
  */
 public class BulletBarView extends StatusElementsView{
 

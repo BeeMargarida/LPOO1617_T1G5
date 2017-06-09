@@ -15,6 +15,10 @@ import com.mygdx.game.view.GameView;
 import com.mygdx.game.view.MainMenuScreen;
 import com.mygdx.game.view.ResultsScreen;
 
+/**
+ * Downwell class deals with everything regarding the many screens of the game, the reset of stats and configurations, the loading of
+ * assets and means to load them.
+ */
 public class Downwell extends Game {
 
 	private SpriteBatch batch;
@@ -27,11 +31,17 @@ public class Downwell extends Game {
 	private final static int STARTING_DEPTH = 50;
 	private final static int STARTING_ENEMY_NO = 8;
 
+	/**
+	 * Puts the game stats and config to the root ones.
+	 */
 	private void resetGameStats(){
 		stats = new GameStats(1, MAX_HERO_HP);
 		config = new GameConfig(STARTING_DEPTH, STARTING_ENEMY_NO);
 	}
 
+	/**
+	 * Creates a SpriteBatch, a AssetManager, loads the assets, sound a sets the main menu screen.
+	 */
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
@@ -41,6 +51,10 @@ public class Downwell extends Game {
 		setMainMenuScreen();
 	}
 
+	/**
+	 * Increases the difficulty every two levels, sets a new GameModel with the new information and sets the screen to a
+	 * new gameView.
+	 */
 	public void startGame() {
 		if(stats.getLevel()%2 == 0)
 			config.incDifficulty();
@@ -48,11 +62,17 @@ public class Downwell extends Game {
 		setScreen(new GameView(this, model, new GameController(model)));
 	}
 
+	/**
+	 * Resets the stats of the game and sets the screen to the Main Menu.
+	 */
 	public void setMainMenuScreen(){
         resetGameStats();
 		setScreen(new MainMenuScreen(this));
 	}
 
+	/**
+	 * Starts the game's music and start's the game, with new screen and model.
+	 */
 	public void setGameScreen(){
 		bgMusic = assetManager.get("Artificial Intelligence Bomb.mp3");
 		bgMusic.setLooping(true);
@@ -60,18 +80,27 @@ public class Downwell extends Game {
 		this.startGame();
 	}
 
+	/**
+	 * Stops the game's music and sets the screen to the results one.
+	 */
 	public void setResultsScreen(){
 		bgMusic.stop();
 		setScreen(new ResultsScreen(this,stats.getScore(),stats.getLevel(),stats.getKills()));
 	}
 
-
+	/**
+	 * Disposes of the resources when they are no longer needed.
+	 */
 	@Override
 	public void dispose() {
         batch.dispose();
 		assetManager.dispose();
+		bgMusic.dispose();
 	}
 
+	/**
+	 * Loads all the resources needed for the game, such as all the images and sounds.
+	 */
 	private void loadAssets(){
 		assetManager.load( "sBox.png" , Texture.class);
 		assetManager.load( "mainMenuBackground.png" , Texture.class);
@@ -119,7 +148,6 @@ public class Downwell extends Game {
 		assetManager.load( "b6.png", Texture.class);
 		assetManager.load( "b7.png", Texture.class);
 
-		assetManager.load( "berserk-mark-brand-of-sacrifice_1.jpg", Texture.class);
 		assetManager.load( "big bullet.png", Texture.class);
 		assetManager.load( "shooting.png", Texture.class);
 
@@ -161,10 +189,18 @@ public class Downwell extends Game {
 		assetManager.finishLoading();
 	}
 
+	/**
+	 * Returns the asset manager.
+	 * @return asset manager
+	 */
 	public AssetManager getAssetManager() {
 		return assetManager;
 	}
 
+	/**
+	 * Returns the batch.
+	 * @return batch
+	 */
 	public SpriteBatch getBatch() {
 		return batch;
 	}

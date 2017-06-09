@@ -7,10 +7,19 @@ import com.mygdx.game.model.MapTileModel;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * ViewFactory is a implementation of the Factory Design Pattern, returning a view according to the type of element given.
+ */
 public class ViewFactory {
     private static Map<ElementModel.ModelType, ElementView> cache =
             new HashMap<ElementModel.ModelType, ElementView>();
 
+    /**
+     * Returns the view correspondent to the model given.
+     * @param game Downwell game, has the assets
+     * @param model model that contains information about the type of object
+     * @return the view correspondent to the model
+     */
     public static ElementView makeView(Downwell game, ElementModel model) {
        if (!cache.containsKey(model.getType())) {
             if (model.getType() == ElementModel.ModelType.HERO) cache.put(model.getType(), new HeroView(game));

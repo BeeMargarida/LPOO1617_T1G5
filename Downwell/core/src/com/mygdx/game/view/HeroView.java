@@ -12,6 +12,10 @@ import com.mygdx.game.model.HeroModel;
 import static com.mygdx.game.model.HeroModel.state.JUMPING;
 import static com.mygdx.game.model.HeroModel.state.ROLLING;
 
+/**
+ * HeroView is a class that deals with all the animations of the hero, checking its status to choose which of the animations to use.
+ * @see ElementView
+ */
 public class HeroView extends ElementView {
 
     private Animation<TextureRegion> standingAnimation;
@@ -21,15 +25,87 @@ public class HeroView extends ElementView {
     private HeroModel.state lastState;
     private float alpha = 1f;
 
+    /**
+     * Constructor of the class, calls the methods to create the animations and set the state to JUMPING.
+     * @param game Downwell game, has the assets
+     */
     public HeroView(Downwell game){
-        super(game);
         sprite = createSprite(game);
         animation = getAnimation();
         lastState = JUMPING;
     }
 
+    /**
+     * Creates the animations to all the states and sets the current sprite to the one correspondent to the jump.
+     * @param game Downwell game, has the assets
+     * @return sprite of the jump
+     */
     @Override
     public Sprite createSprite(Downwell game) {
+        getStandingAnimation(game);
+        getWalkingAnimation(game);
+        getRollingAnimation(game);
+        jumpingFrame = game.getAssetManager().get("jump.png");
+        animation = null;
+        sprite = new Sprite(jumpingFrame);
+        return sprite;
+    }
+
+    /**
+     * Creates the animation of the rolling when jumping.
+     * @param game Downwell game, has the assets
+     */
+    private void getRollingAnimation(Downwell game) {
+        Texture texture1 = game.getAssetManager().get("jr1.png");
+        Texture texture2 = game.getAssetManager().get("jr2.png");
+        Texture texture3 = game.getAssetManager().get("jr3.png");
+        Texture texture4 = game.getAssetManager().get("jr4.png");
+        Texture texture5 = game.getAssetManager().get("jr5.png");
+        Texture texture6 = game.getAssetManager().get("jr6.png");
+        Texture texture7 = game.getAssetManager().get("jr7.png");
+
+        TextureRegion[] rollingFrames = new TextureRegion[7];
+        rollingFrames[0] = new TextureRegion(texture1);
+        rollingFrames[1] = new TextureRegion(texture2);
+        rollingFrames[2] = new TextureRegion(texture3);
+        rollingFrames[3] = new TextureRegion(texture4);
+        rollingFrames[4] = new TextureRegion(texture5);
+        rollingFrames[5] = new TextureRegion(texture6);
+        rollingFrames[6] = new TextureRegion(texture7);
+
+        rollingAnimation = new Animation<TextureRegion>(0.35f, rollingFrames);
+    }
+
+    /**
+     * Creates the animation of walking, that is, when the user inputs to walk to the right or left.
+     * @param game Downwell game, has the assets
+     */
+    private void getWalkingAnimation(Downwell game) {
+        Texture texture1 = game.getAssetManager().get("1.png");
+        Texture texture2 = game.getAssetManager().get("2.png");
+        Texture texture3 = game.getAssetManager().get("3.png");
+        Texture texture4 = game.getAssetManager().get("4.png");
+        Texture texture5 = game.getAssetManager().get("5.png");
+        Texture texture6 = game.getAssetManager().get("6.png");
+        Texture texture7 = game.getAssetManager().get("7.png");
+
+        TextureRegion[] walkingFrames = new TextureRegion[7];
+        walkingFrames[0] = new TextureRegion(texture1);
+        walkingFrames[1] = new TextureRegion(texture2);
+        walkingFrames[2] = new TextureRegion(texture3);
+        walkingFrames[3] = new TextureRegion(texture4);
+        walkingFrames[4] = new TextureRegion(texture5);
+        walkingFrames[5] = new TextureRegion(texture6);
+        walkingFrames[6] = new TextureRegion(texture7);
+
+        walkingAnimation = new Animation<TextureRegion>(.5f,walkingFrames);
+    }
+
+    /**
+     * Creates the animation of standing, when the game receives no input.
+     * @param game Downwell game, has the assets
+     */
+    private void getStandingAnimation(Downwell game) {
         Texture texture1 = game.getAssetManager().get("r1.png");
         Texture texture2 = game.getAssetManager().get("r2.png");
         Texture texture3 = game.getAssetManager().get("r3.png");
@@ -48,53 +124,13 @@ public class HeroView extends ElementView {
         standingFrames[6] = new TextureRegion(texture7);
 
         standingAnimation = new Animation<TextureRegion>(.5f,standingFrames);
-
-        Texture texture8 = game.getAssetManager().get("1.png");
-        Texture texture9 = game.getAssetManager().get("2.png");
-        Texture texture10 = game.getAssetManager().get("3.png");
-        Texture texture11 = game.getAssetManager().get("4.png");
-        Texture texture12 = game.getAssetManager().get("5.png");
-        Texture texture13 = game.getAssetManager().get("6.png");
-        Texture texture14 = game.getAssetManager().get("7.png");
-
-        TextureRegion[] walkingFrames = new TextureRegion[7];
-        walkingFrames[0] = new TextureRegion(texture8);
-        walkingFrames[1] = new TextureRegion(texture9);
-        walkingFrames[2] = new TextureRegion(texture10);
-        walkingFrames[3] = new TextureRegion(texture11);
-        walkingFrames[4] = new TextureRegion(texture12);
-        walkingFrames[5] = new TextureRegion(texture13);
-        walkingFrames[6] = new TextureRegion(texture14);
-
-        walkingAnimation = new Animation<TextureRegion>(.5f,walkingFrames);
-
-        Texture texture15 = game.getAssetManager().get("jr1.png");
-        Texture texture16 = game.getAssetManager().get("jr2.png");
-        Texture texture17 = game.getAssetManager().get("jr3.png");
-        Texture texture18 = game.getAssetManager().get("jr4.png");
-        Texture texture19 = game.getAssetManager().get("jr5.png");
-        Texture texture20 = game.getAssetManager().get("jr6.png");
-        Texture texture21 = game.getAssetManager().get("jr7.png");
-
-        TextureRegion[] rollingFrames = new TextureRegion[7];
-        rollingFrames[0] = new TextureRegion(texture15);
-        rollingFrames[1] = new TextureRegion(texture16);
-        rollingFrames[2] = new TextureRegion(texture17);
-        rollingFrames[3] = new TextureRegion(texture18);
-        rollingFrames[4] = new TextureRegion(texture19);
-        rollingFrames[5] = new TextureRegion(texture20);
-        rollingFrames[6] = new TextureRegion(texture21);
-
-        rollingAnimation = new Animation<TextureRegion>(0.35f, rollingFrames);
-
-        jumpingFrame = game.getAssetManager().get("jump.png");
-
-        animation = null;
-        sprite = new Sprite(jumpingFrame);
-
-        return sprite;
     }
 
+    /**
+     * Depending the state of the hero, sets the according animation to it. It also diminishes the alpha if the hero is on invincible
+     * mode.
+     * @param model model of the element, has its coordinates
+     */
     @Override
     public void update(ElementModel model) {
         super.update(model);
@@ -133,6 +169,10 @@ public class HeroView extends ElementView {
 
     }
 
+    /**
+     * Goes to the next frame of the animation and sets the respective flip.
+     * @param delta
+     */
     @Override
     public void act(float delta) {
         stateTime += delta;
@@ -141,6 +181,10 @@ public class HeroView extends ElementView {
         sprite.setFlip(flip,false);
     }
 
+    /**
+     * Used to draw the sprite.
+     * @param batch used to draw
+     */
     public void draw(SpriteBatch batch){
         sprite.draw((batch), alpha);
     }

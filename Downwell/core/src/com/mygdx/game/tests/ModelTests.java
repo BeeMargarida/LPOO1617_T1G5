@@ -8,11 +8,8 @@ import com.mygdx.game.model.GameModel;
 import com.mygdx.game.model.GameStats;
 import com.mygdx.game.model.MapTileModel;
 import com.mygdx.game.model.NullGameSoundFX;
-
 import org.junit.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
