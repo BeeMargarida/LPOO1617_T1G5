@@ -11,15 +11,16 @@ import com.mygdx.game.controller.GameController;
 import static com.mygdx.game.view.GameView.PIXEL_TO_METER;
 
 /**
- *
+ * BulletBarView is a class that deals with the textures of the bullet bar.
  */
 public class BulletBarView extends StatusElementsView{
 
     private Texture[] bar;
 
     /**
-     *
-     * @param game
+     * Constructor of the class, it sets he camera, viewport, saves the textures needed, makes and image and sets it
+     * in correct position.
+     * @param game Downwell game, needed to get the assets
      */
     public BulletBarView(Downwell game) {
         camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ratio);
@@ -45,8 +46,8 @@ public class BulletBarView extends StatusElementsView{
     }
 
     /**
-     * 
-     * @param obj
+     * Gets the texture correspondent to the number of bullets still in the hero's possession and shows it.
+     * @param obj GameController, needed to get the number of shots still not used.
      */
     @Override
     public void update(Object obj) {
