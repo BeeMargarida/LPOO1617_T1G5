@@ -244,8 +244,6 @@ public class GameView extends ScreenAdapter{
         }
 
         HeroModel hero = model.getHeroModel();
-        //HeroView view = new HeroView(game);
-        //ElementView view = ViewFactory.makeView(game, hero);
         heroView.update(hero);
         heroView.act(0.1f);
         heroView.draw(game.getBatch());

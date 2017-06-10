@@ -7,15 +7,22 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
 
 /**
- * Created by MC-Guida on 10/06/2017.
+ * HeroStateWalking is a class that deals with the animations of the hero when an action has been performed for it to walk.
  */
-
 public class HeroStateWalking extends HeroState {
-
+    /**
+     * Calls the method to get the needed assets and create the animation and sprite.
+     * @param game Downwell game, has the assets
+     */
     public HeroStateWalking(Downwell game) {
         createSprite(game);
     }
 
+    /**
+     * Gets the resources needed and creates an animation and sprite with them.
+     * @param game Downwell game, has the assets
+     * @return sprite of the first frame of the animation
+     */
     @Override
     public Sprite createSprite(Downwell game) {
         Texture texture1 = game.getAssetManager().get("1.png");
