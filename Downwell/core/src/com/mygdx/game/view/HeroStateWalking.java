@@ -36,9 +36,7 @@ public class HeroStateWalking extends HeroState {
         walkingFrames[6] = new TextureRegion(texture7);
 
         animation = new Animation<TextureRegion>(.5f,walkingFrames);
-        sprite = new Sprite(texture1);
-        //sprite.setRegion(animation.getKeyFrame(0));
-        //sprite = new Sprite(animation.getKeyFrame(0));
+        sprite = new Sprite(animation.getKeyFrame(0));
         return sprite;
     }
 }

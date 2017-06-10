@@ -1,10 +1,6 @@
 package com.mygdx.game.view;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.Downwell;
 import com.mygdx.game.model.ElementModel;
 import com.mygdx.game.model.HeroModel;
@@ -147,17 +143,13 @@ public class HeroView /*extends ElementView*/ {
      */
 
     public void update(ElementModel model) {
-        currentState.update(model);
-
         if(((HeroModel) model).getInvincible())
             currentState.setAlpha(0.5f);
         else
             currentState.setAlpha(1f);
 
         HeroModel.state currState = ((HeroModel) model).getState();
-
-        if(currState != ROLLING)
-            currentState.flip = ((HeroModel) model).getFlip();
+        //System.out.println(currState);
 
         if(currState != lastState) {
             switch (((HeroModel) model).getState()) {
@@ -172,10 +164,18 @@ public class HeroView /*extends ElementView*/ {
                     break;
                 case ROLLING:
                     currentState = rollingState;
+                    currentState.flip = ((HeroModel) model).getFlip();
                     break;
             }
+            System.out.println("Atualizou");
             lastState = currState;
+            currentState.resetTime();
         }
+
+        if(currState != ROLLING)
+            currentState.flip = ((HeroModel) model).getFlip();
+
+        currentState.update(model);
     }
 
     /**

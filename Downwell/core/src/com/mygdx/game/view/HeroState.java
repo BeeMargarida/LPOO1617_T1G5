@@ -9,6 +9,7 @@ public abstract class HeroState extends ElementView{
     @Override
     public void act(float delta) {
         stateTime += delta;
+        System.out.println(stateTime);
         sprite.setRegion(animation.getKeyFrame(stateTime,true));
         sprite.setFlip(flip,false);
     }
@@ -18,5 +19,9 @@ public abstract class HeroState extends ElementView{
     @Override
     public void draw(SpriteBatch batch) {
         sprite.draw(batch, alpha);
+    }
+
+    public void resetTime(){
+        stateTime = 0;
     }
 }

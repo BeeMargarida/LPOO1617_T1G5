@@ -596,7 +596,8 @@ public class GameController implements ContactListener {
         if(moveState == mov.RECOVERY)
             return;
         moveState = mov.MS_LEFT;
-        model.getHeroModel().setFlip(true);
+        if(model.getHeroModel().getState() != ROLLING)
+            model.getHeroModel().setFlip(true);
     }
 
     /**
@@ -606,7 +607,8 @@ public class GameController implements ContactListener {
         if(moveState == mov.RECOVERY)
             return;
         moveState = mov.MS_RIGHT;
-        model.getHeroModel().setFlip(false);
+        if(model.getHeroModel().getState() != ROLLING)
+            model.getHeroModel().setFlip(false);
     }
 
     /**

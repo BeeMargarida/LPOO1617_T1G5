@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -20,6 +19,7 @@ import com.mygdx.game.model.GameModel;
 import com.mygdx.game.model.HeroModel;
 import com.mygdx.game.model.MapTileModel;
 import com.mygdx.game.model.SnailModel;
+
 import java.util.ArrayList;
 
 /**
@@ -45,6 +45,7 @@ public class GameView extends ScreenAdapter{
     private Box2DDebugRenderer debugRenderer;
     private Matrix4 debugCamera;
     private ArrayList<EnemyView> enemyViews;
+    private HeroView heroView;
 
     /**
      * Constructor of the class, it creates a healthBarView, a bulletBarView, a LevelView, sets the viewport and camera and fills the
@@ -70,6 +71,7 @@ public class GameView extends ScreenAdapter{
         viewport.apply();
 
         addEnemiesView();
+        heroView = new HeroView(game);
     }
 
     /**
@@ -242,11 +244,11 @@ public class GameView extends ScreenAdapter{
         }
 
         HeroModel hero = model.getHeroModel();
-        HeroView view = new HeroView(game);
+        //HeroView view = new HeroView(game);
         //ElementView view = ViewFactory.makeView(game, hero);
-        view.update(hero);
-        view.act(0.1f);
-        view.draw(game.getBatch());
+        heroView.update(hero);
+        heroView.act(0.1f);
+        heroView.draw(game.getBatch());
 
     }
 }

@@ -36,8 +36,6 @@ public class HeroStateRolling extends HeroState {
         rollingFrames[6] = new TextureRegion(texture7);
 
         animation = new Animation<TextureRegion>(0.35f, rollingFrames);
-        //sprite = new Sprite(texture1);
-        //sprite.setRegion(animation.getKeyFrame(0));
         sprite = new Sprite(animation.getKeyFrame(0));
         return sprite;
     }
