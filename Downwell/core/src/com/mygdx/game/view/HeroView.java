@@ -16,23 +16,37 @@ import static com.mygdx.game.model.HeroModel.state.ROLLING;
  * HeroView is a class that deals with all the animations of the hero, checking its status to choose which of the animations to use.
  * @see ElementView
  */
-public class HeroView extends ElementView {
+public class HeroView /*extends ElementView*/ {
 
-    private Animation<TextureRegion> standingAnimation;
+   /* private Animation<TextureRegion> standingAnimation;
     private Animation<TextureRegion> walkingAnimation;
     private Animation<TextureRegion> rollingAnimation;
     private Texture jumpingFrame;
     private HeroModel.state lastState;
-    private float alpha = 1f;
+    private float alpha = 1f;*/
+    private HeroStateJumping jumpingState;
+    private HeroStateWalking walkingState;
+    private HeroStateRolling rollingState;
+    private HeroStateStanding standingState;
+    private HeroState currentState;
+    private HeroModel.state lastState;
+    //private float alpha = 1f;
+
 
     /**
      * Constructor of the class, calls the methods to create the animations and set the state to JUMPING.
      * @param game Downwell game, has the assets
      */
     public HeroView(Downwell game){
-        sprite = createSprite(game);
-        animation = getAnimation();
+        jumpingState = new HeroStateJumping(game);
+        walkingState = new HeroStateWalking(game);
+        rollingState = new HeroStateRolling(game);
+        standingState = new HeroStateStanding(game);
+        currentState = jumpingState;
         lastState = JUMPING;
+        /*sprite = createSprite(game);
+        animation = getAnimation();
+        lastState = JUMPING;*/
     }
 
     /**
@@ -40,7 +54,7 @@ public class HeroView extends ElementView {
      * @param game Downwell game, has the assets
      * @return sprite of the jump
      */
-    @Override
+    /*@Override
     public Sprite createSprite(Downwell game) {
         getStandingAnimation(game);
         getWalkingAnimation(game);
@@ -49,13 +63,13 @@ public class HeroView extends ElementView {
         animation = null;
         sprite = new Sprite(jumpingFrame);
         return sprite;
-    }
+    }*/
 
     /**
      * Creates the animation of the rolling when jumping.
      * @param game Downwell game, has the assets
      */
-    private void getRollingAnimation(Downwell game) {
+    /* void getRollingAnimation(Downwell game) {
         Texture texture1 = game.getAssetManager().get("jr1.png");
         Texture texture2 = game.getAssetManager().get("jr2.png");
         Texture texture3 = game.getAssetManager().get("jr3.png");
@@ -74,13 +88,13 @@ public class HeroView extends ElementView {
         rollingFrames[6] = new TextureRegion(texture7);
 
         rollingAnimation = new Animation<TextureRegion>(0.35f, rollingFrames);
-    }
+    }*/
 
     /**
      * Creates the animation of walking, that is, when the user inputs to walk to the right or left.
      * @param game Downwell game, has the assets
      */
-    private void getWalkingAnimation(Downwell game) {
+    /*private void getWalkingAnimation(Downwell game) {
         Texture texture1 = game.getAssetManager().get("1.png");
         Texture texture2 = game.getAssetManager().get("2.png");
         Texture texture3 = game.getAssetManager().get("3.png");
@@ -99,13 +113,13 @@ public class HeroView extends ElementView {
         walkingFrames[6] = new TextureRegion(texture7);
 
         walkingAnimation = new Animation<TextureRegion>(.5f,walkingFrames);
-    }
+    }*/
 
     /**
      * Creates the animation of standing, when the game receives no input.
      * @param game Downwell game, has the assets
      */
-    private void getStandingAnimation(Downwell game) {
+   /* private void getStandingAnimation(Downwell game) {
         Texture texture1 = game.getAssetManager().get("r1.png");
         Texture texture2 = game.getAssetManager().get("r2.png");
         Texture texture3 = game.getAssetManager().get("r3.png");
@@ -124,61 +138,52 @@ public class HeroView extends ElementView {
         standingFrames[6] = new TextureRegion(texture7);
 
         standingAnimation = new Animation<TextureRegion>(.5f,standingFrames);
-    }
+    }*/
 
     /**
      * Depending the state of the hero, sets the according animation to it. It also diminishes the alpha if the hero is on invincible
      * mode.
      * @param model model of the element, has its coordinates
      */
-    @Override
+
     public void update(ElementModel model) {
-        super.update(model);
+        currentState.update(model);
 
         if(((HeroModel) model).getInvincible())
-            alpha = 0.5f;
+            currentState.setAlpha(0.5f);
         else
-            alpha = 1f;
+            currentState.setAlpha(1f);
 
         HeroModel.state currState = ((HeroModel) model).getState();
 
         if(currState != ROLLING)
-            flip = ((HeroModel) model).getFlip();
+            currentState.flip = ((HeroModel) model).getFlip();
 
         if(currState != lastState) {
             switch (((HeroModel) model).getState()) {
                 case STANDING:
-                    animation = standingAnimation;
-                    sprite.setRegion(animation.getKeyFrame(0));
+                    currentState = standingState;
                     break;
                 case WALKING:
-                    animation = walkingAnimation;
-                    sprite.setRegion(animation.getKeyFrame(0));
+                    currentState = walkingState;
                     break;
                 case JUMPING:
-                    animation = null;
-                    sprite.setRegion(jumpingFrame);
+                    currentState = jumpingState;
                     break;
                 case ROLLING:
-                    animation = rollingAnimation;
-                    sprite.setRegion(animation.getKeyFrame(0));
+                    currentState = rollingState;
                     break;
             }
             lastState = currState;
         }
-
     }
 
     /**
      * Goes to the next frame of the animation and sets the respective flip.
      * @param delta
      */
-    @Override
     public void act(float delta) {
-        stateTime += delta;
-        if(lastState != JUMPING)
-            sprite.setRegion(animation.getKeyFrame(stateTime,true));
-        sprite.setFlip(flip,false);
+        currentState.act(delta);
     }
 
     /**
@@ -186,7 +191,7 @@ public class HeroView extends ElementView {
      * @param batch used to draw
      */
     public void draw(SpriteBatch batch){
-        sprite.draw((batch), alpha);
+        currentState.draw((batch));
     }
 
 }

@@ -27,7 +27,7 @@ public abstract class ElementView extends Actor {
      */
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        sprite.draw((batch));
+        sprite.draw((batch),parentAlpha);
     }
 
     /**
