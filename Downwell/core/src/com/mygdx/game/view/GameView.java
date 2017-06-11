@@ -28,7 +28,7 @@ import java.util.ArrayList;
  */
 public class GameView extends ScreenAdapter{
 
-    private static final boolean DEBUG_PHYSICS = false;
+    private static final boolean DEBUG_PHYSICS = true;
     public final static float PIXEL_TO_METER = 0.04f;
     private static final float VIEWPORT_WIDTH = 600;
 

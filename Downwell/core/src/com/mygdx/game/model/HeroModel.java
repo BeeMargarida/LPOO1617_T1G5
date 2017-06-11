@@ -8,7 +8,7 @@ import static com.mygdx.game.model.HeroModel.state.JUMPING;
  */
 public class HeroModel extends ElementModel {
 
-    public enum state {STANDING, WALKING, JUMPING, ROLLING, SHOOTING}
+    public enum state {STANDING, WALKING, JUMPING, ROLLING} /**Possible states of the hero*/
 
     private static final float INVIC_TIME = 2f;
     private state heroState;
