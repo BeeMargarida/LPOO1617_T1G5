@@ -1,4 +1,4 @@
-# Downwell
+# Downwell Lite
 ### Entrega Final
 O nosso projeto consiste no jogo Downwell, um vertical scroller. O objetivo deste é chegar ao final de cada nível sem perder totalmente os pontos de vida e tentar fazer o máximo de score, que consiste em matar mais monstros. Cada nível tem uma profundidade variável e é gerado aleatoriamente, assim como os inimigos, com algumas restrições. O herói possui uma arma, a qual só pode usar quando esta a saltar. O jogo contém 3 inimigos: o Morcego (Bat), que tem movimento estático quando se encontra longe do herói mas, a partir de uma certa distância, começa a seguir o herói; o Caracol (Snail) que tem um movimento constante a subir e a descer paredes; a Bolha (Bubble) que tem o mesmo comportamento que o Morcego. 
 
