@@ -1,13 +1,13 @@
 # Downwell
-
 ### Entrega Final
 O nosso projeto consiste no jogo Downwell, um vertical scroller. O objetivo deste é chegar ao final de cada nível sem perder totalmente os pontos de vida e tentar fazer o máximo de score, que consiste em matar mais monstros. Cada nível tem uma profundidade variável e é gerado aleatoriamente, assim como os inimigos, com algumas restrições. O herói possui uma arma, a qual só pode usar quando esta a saltar. O jogo contém 3 inimigos: o Morcego (Bat), que tem movimento estático quando se encontra longe do herói mas, a partir de uma certa distância, começa a seguir o herói; o Caracol (Snail) que tem um movimento constante a subir e a descer paredes; a Bolha (Bubble) que tem o mesmo comportamento que o Morcego. 
+
 ---
 
 ## Guia de Instalação
 Relativamente ao ambiente de desenvolvimento, é necessário fazer pull do projeto pelo git, ir às definições do projeto e mudar o Working Directory para "[pasta onde esta o código]\Downwell\android\assets".
 Relativamente ao ficheiro jar, é somente necessário executar. Aconselhámos que não corra no Ambiente de Trabalho.
----
+
 ---
 ## Documentação/Diagramas
 
@@ -51,28 +51,32 @@ Este padrão é usado para gerir o ciclo de vida das balas geradas.
 
 #### Observer Pattern
 Este padrão é usado pelo Screen do LibGDX. A ApplicationListener (aplicação de diferentes módulos/plataformas) é o sujeito e qualquer ecrã (Screen) que se cria é o observador. Então, o Screen é a interface usada para comunicar entre elas.
+
 ---
 
 ### Decisões Importantes
 Escolhemos fazer a criação do mapa e a colocação de inimigos aleatória, pois o jogo não tem fim.
 Utilizámos stages para a visualização da barra de vida e das balas do herói. 
+
 ---
 
 ### Dificuldades
 Uma das dificuldades que sentimos foi a criação do algoritmo de geração aleatória do mapa e da colocação de inimigos.
 Para além dessa, a dificuldade com as dimensões e colisões das fixtures. No geral, toda a aprendizagem relacionada com o Box2D
 foi uma dificuldade sentida neste projeto.
+
 ---
 
 ### Tempo Total Utilizado no Desenvolvimento
-Ana Margarida : Entre 100 e 110 horas.
-Bruno Piedade : Entre 100 e 110 horas.
-Total : Entre 200 e 220 horas.
+- Ana Margarida : Entre 100 e 110 horas.
+- Bruno Piedade : Entre 100 e 110 horas.
+- Total : Entre 200 e 220 horas.
+
 ---
 
 ### Distribuição de Trabalho pelos Membros do Grupo
 O trabalho foi distribuído igualmente por ambos os elementos do grupo, ficando 50% para cada um.
----
+
 ---
 
 ## Manual do Utilizador
@@ -111,6 +115,7 @@ Navegação: Carregar Enter para sair deste menu e regressar ao menu principal.
 
 ##### Heroi 
 * HP: 4
+
 O herói tem a capacidade de saltar e disparar so enquanto esta no ar.
 Apenas pode disparar 8 projeteis no maximo antes de tocar numa superfície ou saltar por cima de um inimigo para recuperar os disparos.
 
@@ -146,6 +151,7 @@ Para todos, os projéteis apenas fazem um ponto de dano.
 * Tipo: Vermelho
 * Pontos: 100
 * Comportamento: desloca-se pela parede, mudando a sua direção quando encontra um objeto. 
+
 Só pode ser destruido através de projéteis.
 
 ![alt text](https://user-images.githubusercontent.com/25725586/27011431-3f45f554-4eb3-11e7-86a1-b79d7be2d54c.png)
@@ -160,6 +166,7 @@ O mapa é composto por dois tipos distintos de blocos (tiles): um bloco destrut�
 No topo esquerdo do ecrã (à esquerda da área de jogo) econtra-se a barra de vida do herói que indica a vida atual do mesmo. 
 
 ![alt text](https://user-images.githubusercontent.com/25725586/27011425-3f2e7cd0-4eb3-11e7-9a0c-c4e10816350f.png)
+
 No lado direito da área de jogo encontra-se a barra de disparos que indica o número de disparos restantes para o herói.
 
 ![alt text](https://user-images.githubusercontent.com/25725586/27011426-3f2eb510-4eb3-11e7-8d76-f24a61551ed5.png)
