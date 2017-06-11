@@ -19,9 +19,6 @@ public class MainMenuScreen implements Screen {
 
     private static final float VIEWPORT_WIDTH = 638;
     private static final float VIEWPORT_HEIGHT = 543;
-
-    private final static int OPTION_HEIGHT = 40;
-    private final static int OPTION_WIDTH = 150;
     private final static int optionWidth = (int) VIEWPORT_WIDTH/4 + 80;
     private final int optionHeight[] = {(int) VIEWPORT_HEIGHT/2 - 45, (int) VIEWPORT_HEIGHT/2 - 90};
     private int option = 0;
@@ -112,19 +109,10 @@ public class MainMenuScreen implements Screen {
                 startGameSound.play();
                 game.setGameScreen();
             }
-                //handler.setResultsScreen();
             else if(option == 1)
-                System.exit(0);
-                //game.exit();
+                Gdx.app.exit();
         }
     }
-
-    /*
-    private void playMenuSFX(){
-        Sound sound = game.getAssetManager().get("menuselect.wav");
-        sound.play()
-    }
-    */
 
     /**
      * Resize the viewport with the new dimensions and updates the camera to center it.
